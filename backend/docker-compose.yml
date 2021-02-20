@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  gobarber-2.0_postgres:
+    image: postgres
+    container_name: gobarber-2.0_postgres
+    environment:
+      POSTGRES_PASSWORD: docker
