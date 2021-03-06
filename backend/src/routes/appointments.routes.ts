@@ -1,5 +1,4 @@
 import { GraphQLServer } from 'graphql-yoga';
-import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 
 import AppointmentsRepository from '../repositories/AppointmentsRepository';

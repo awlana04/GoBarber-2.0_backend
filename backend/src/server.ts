@@ -1,19 +1,12 @@
 import { ApolloServer } from 'apollo-server';
-import { buildSchema } from 'type-graphql';
 
-import routes from './routes';
-import './database';
+// import routes from './routes';
 
-import AppointmentResolver from './schemas/resolver';
+import schema from './schemas/index';
+import { createContext } from './context';
 
-async function main() {
-  const schema = await buildSchema({
-    resolvers: [AppointmentResolver]
-  });
+const app = new ApolloServer({ schema, context: createContext })
 
-  const app = new ApolloServer({ schema });
-
-  app.listen().then(() => console.log('🚀 Server started on port 3333!'));
-}
+app.listen().then(({ port }) => console.log(`🚀 Server started on port ${port}`));
 
 // app.use(routes);

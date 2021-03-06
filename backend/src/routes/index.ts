@@ -1,9 +1,8 @@
-import { GraphQLServer } from 'graphql-yoga';
+import { ApolloServer } from 'apollo-server';
 
 import AppointmentsRouter from './appointments.routes';
 
-const routes = new GraphQLServer({});
+const routes = new ApolloServer({});
 
-routes.use('/appointments', AppointmentsRouter);
 
 export default routes;
