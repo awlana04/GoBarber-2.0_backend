@@ -1,8 +1,8 @@
-import { Router } from 'express';
+import { GraphQLServer } from 'graphql-yoga';
 
 import AppointmentsRouter from './appointments.routes';
 
-const routes = Router();
+const routes = new GraphQLServer({});
 
 routes.use('/appointments', AppointmentsRouter);
 

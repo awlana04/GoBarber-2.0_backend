@@ -1,11 +1,19 @@
-import express from 'express';
+import { ApolloServer } from 'apollo-server';
+import { buildSchema } from 'type-graphql';
 
 import routes from './routes';
 import './database';
 
-const app = express();
+import AppointmentResolver from './schemas/resolver';
 
-app.use(express.json());
-app.use(routes);
+async function main() {
+  const schema = await buildSchema({
+    resolvers: [AppointmentResolver]
+  });
 
-app.listen(3333, () => console.log('🚀 Server started on port 3333!'));
+  const app = new ApolloServer({ schema });
+
+  app.listen().then(() => console.log('🚀 Server started on port 3333!'));
+}
+
+// app.use(routes);

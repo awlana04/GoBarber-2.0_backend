@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { GraphQLServer } from 'graphql-yoga';
 import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
 
-const appointmentsRouter = Router();
+const appointmentsRouter = new GraphQLServer({});
 
 appointmentsRouter.get('/', async (request, response) => {
   const appointmentRepository = getCustomRepository(AppointmentsRepository);
