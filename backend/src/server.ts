@@ -1,11 +1,12 @@
-import express from 'express';
+import { ApolloServer } from 'apollo-server';
 
-import routes from './routes';
-import './database';
+// import routes from './routes';
 
-const app = express();
+import schema from './schemas/index';
+import { createContext } from './context';
 
-app.use(express.json());
-app.use(routes);
+const app = new ApolloServer({ schema, context: createContext })
 
-app.listen(3333, () => console.log('🚀 Server started on port 3333!'));
+app.listen().then(({ port }) => console.log(`🚀 Server started on port ${port}`));
+
+// app.use(routes);
