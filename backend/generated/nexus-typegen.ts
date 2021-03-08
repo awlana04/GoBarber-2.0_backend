@@ -3,8 +3,8 @@
  * Do not make changes to this file directly
  */
 
-import * as prisma from "./../node_modules/.prisma/client/index"
-import { Context } from "./../src/context"
+
+import { Context } from "./../src/shared/infra/http/context"
 import { core, connectionPluginCore } from "nexus"
 
 declare global {
@@ -33,25 +33,310 @@ declare global {
 
 export interface NexusGenInputs {
   AppointmentCreateInput: { // input type
+    barber: NexusGenInputs['BarberCreateNestedOneWithoutAppointmentInput']; // BarberCreateNestedOneWithoutAppointmentInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     date: NexusGenScalars['DateTime']; // DateTime!
-    provider: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['UserCreateNestedOneWithoutAppointmentInput']; // UserCreateNestedOneWithoutAppointmentInput!
+  }
+  AppointmentCreateNestedManyWithoutBarberInput: { // input type
+    connect?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['AppointmentCreateOrConnectWithoutBarberInput'][] | null; // [AppointmentCreateOrConnectWithoutBarberInput!]
+    create?: NexusGenInputs['AppointmentCreateWithoutBarberInput'][] | null; // [AppointmentCreateWithoutBarberInput!]
+  }
+  AppointmentCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['AppointmentCreateOrConnectWithoutUserInput'][] | null; // [AppointmentCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['AppointmentCreateWithoutUserInput'][] | null; // [AppointmentCreateWithoutUserInput!]
+  }
+  AppointmentCreateOrConnectWithoutBarberInput: { // input type
+    create: NexusGenInputs['AppointmentCreateWithoutBarberInput']; // AppointmentCreateWithoutBarberInput!
+    where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+  }
+  AppointmentCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['AppointmentCreateWithoutUserInput']; // AppointmentCreateWithoutUserInput!
+    where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+  }
+  AppointmentCreateWithoutBarberInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    date: NexusGenScalars['DateTime']; // DateTime!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['UserCreateNestedOneWithoutAppointmentInput']; // UserCreateNestedOneWithoutAppointmentInput!
+  }
+  AppointmentCreateWithoutUserInput: { // input type
+    barber: NexusGenInputs['BarberCreateNestedOneWithoutAppointmentInput']; // BarberCreateNestedOneWithoutAppointmentInput!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    date: NexusGenScalars['DateTime']; // DateTime!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  AppointmentScalarWhereInput: { // input type
+    AND?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
+    NOT?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
+    OR?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
+    barberId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    date?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
   AppointmentUpdateInput: { // input type
+    barber?: NexusGenInputs['BarberUpdateOneRequiredWithoutAppointmentInput'] | null; // BarberUpdateOneRequiredWithoutAppointmentInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    provider?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutAppointmentInput'] | null; // UserUpdateOneRequiredWithoutAppointmentInput
+  }
+  AppointmentUpdateManyMutationInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  AppointmentUpdateManyWithWhereWithoutBarberInput: { // input type
+    data: NexusGenInputs['AppointmentUpdateManyMutationInput']; // AppointmentUpdateManyMutationInput!
+    where: NexusGenInputs['AppointmentScalarWhereInput']; // AppointmentScalarWhereInput!
+  }
+  AppointmentUpdateManyWithWhereWithoutUserInput: { // input type
+    data: NexusGenInputs['AppointmentUpdateManyMutationInput']; // AppointmentUpdateManyMutationInput!
+    where: NexusGenInputs['AppointmentScalarWhereInput']; // AppointmentScalarWhereInput!
+  }
+  AppointmentUpdateManyWithoutBarberInput: { // input type
+    connect?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['AppointmentCreateOrConnectWithoutBarberInput'][] | null; // [AppointmentCreateOrConnectWithoutBarberInput!]
+    create?: NexusGenInputs['AppointmentCreateWithoutBarberInput'][] | null; // [AppointmentCreateWithoutBarberInput!]
+    delete?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
+    disconnect?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    set?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    update?: NexusGenInputs['AppointmentUpdateWithWhereUniqueWithoutBarberInput'][] | null; // [AppointmentUpdateWithWhereUniqueWithoutBarberInput!]
+    updateMany?: NexusGenInputs['AppointmentUpdateManyWithWhereWithoutBarberInput'][] | null; // [AppointmentUpdateManyWithWhereWithoutBarberInput!]
+    upsert?: NexusGenInputs['AppointmentUpsertWithWhereUniqueWithoutBarberInput'][] | null; // [AppointmentUpsertWithWhereUniqueWithoutBarberInput!]
+  }
+  AppointmentUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['AppointmentCreateOrConnectWithoutUserInput'][] | null; // [AppointmentCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['AppointmentCreateWithoutUserInput'][] | null; // [AppointmentCreateWithoutUserInput!]
+    delete?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
+    disconnect?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    set?: NexusGenInputs['AppointmentWhereUniqueInput'][] | null; // [AppointmentWhereUniqueInput!]
+    update?: NexusGenInputs['AppointmentUpdateWithWhereUniqueWithoutUserInput'][] | null; // [AppointmentUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['AppointmentUpdateManyWithWhereWithoutUserInput'][] | null; // [AppointmentUpdateManyWithWhereWithoutUserInput!]
+    upsert?: NexusGenInputs['AppointmentUpsertWithWhereUniqueWithoutUserInput'][] | null; // [AppointmentUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  AppointmentUpdateWithWhereUniqueWithoutBarberInput: { // input type
+    data: NexusGenInputs['AppointmentUpdateWithoutBarberInput']; // AppointmentUpdateWithoutBarberInput!
+    where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+  }
+  AppointmentUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['AppointmentUpdateWithoutUserInput']; // AppointmentUpdateWithoutUserInput!
+    where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+  }
+  AppointmentUpdateWithoutBarberInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutAppointmentInput'] | null; // UserUpdateOneRequiredWithoutAppointmentInput
+  }
+  AppointmentUpdateWithoutUserInput: { // input type
+    barber?: NexusGenInputs['BarberUpdateOneRequiredWithoutAppointmentInput'] | null; // BarberUpdateOneRequiredWithoutAppointmentInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  AppointmentUpsertWithWhereUniqueWithoutBarberInput: { // input type
+    create: NexusGenInputs['AppointmentCreateWithoutBarberInput']; // AppointmentCreateWithoutBarberInput!
+    update: NexusGenInputs['AppointmentUpdateWithoutBarberInput']; // AppointmentUpdateWithoutBarberInput!
+    where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+  }
+  AppointmentUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['AppointmentCreateWithoutUserInput']; // AppointmentCreateWithoutUserInput!
+    update: NexusGenInputs['AppointmentUpdateWithoutUserInput']; // AppointmentUpdateWithoutUserInput!
+    where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
   }
   AppointmentWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
+  BarberCreateInput: { // input type
+    appointment?: NexusGenInputs['AppointmentCreateNestedManyWithoutBarberInput'] | null; // AppointmentCreateNestedManyWithoutBarberInput
+    barberLocation: string; // String!
+    barberName: string; // String!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    openOnWeekends: boolean; // Boolean!
+    photos?: NexusGenInputs['BarberCreatephotosInput'] | null; // BarberCreatephotosInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  BarberCreateNestedOneWithoutAppointmentInput: { // input type
+    connect?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['BarberCreateOrConnectWithoutAppointmentInput'] | null; // BarberCreateOrConnectWithoutAppointmentInput
+    create?: NexusGenInputs['BarberCreateWithoutAppointmentInput'] | null; // BarberCreateWithoutAppointmentInput
+  }
+  BarberCreateOrConnectWithoutAppointmentInput: { // input type
+    create: NexusGenInputs['BarberCreateWithoutAppointmentInput']; // BarberCreateWithoutAppointmentInput!
+    where: NexusGenInputs['BarberWhereUniqueInput']; // BarberWhereUniqueInput!
+  }
+  BarberCreateWithoutAppointmentInput: { // input type
+    barberLocation: string; // String!
+    barberName: string; // String!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    openOnWeekends: boolean; // Boolean!
+    photos?: NexusGenInputs['BarberCreatephotosInput'] | null; // BarberCreatephotosInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  BarberCreatephotosInput: { // input type
+    set?: string[] | null; // [String!]
+  }
+  BarberUpdateInput: { // input type
+    appointment?: NexusGenInputs['AppointmentUpdateManyWithoutBarberInput'] | null; // AppointmentUpdateManyWithoutBarberInput
+    barberLocation?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    barberName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    openOnWeekends?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    photos?: NexusGenInputs['BarberUpdatephotosInput'] | null; // BarberUpdatephotosInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  BarberUpdateOneRequiredWithoutAppointmentInput: { // input type
+    connect?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['BarberCreateOrConnectWithoutAppointmentInput'] | null; // BarberCreateOrConnectWithoutAppointmentInput
+    create?: NexusGenInputs['BarberCreateWithoutAppointmentInput'] | null; // BarberCreateWithoutAppointmentInput
+    update?: NexusGenInputs['BarberUpdateWithoutAppointmentInput'] | null; // BarberUpdateWithoutAppointmentInput
+    upsert?: NexusGenInputs['BarberUpsertWithoutAppointmentInput'] | null; // BarberUpsertWithoutAppointmentInput
+  }
+  BarberUpdateWithoutAppointmentInput: { // input type
+    barberLocation?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    barberName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    openOnWeekends?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    photos?: NexusGenInputs['BarberUpdatephotosInput'] | null; // BarberUpdatephotosInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  BarberUpdatephotosInput: { // input type
+    set?: string[] | null; // [String!]
+  }
+  BarberUpsertWithoutAppointmentInput: { // input type
+    create: NexusGenInputs['BarberCreateWithoutAppointmentInput']; // BarberCreateWithoutAppointmentInput!
+    update: NexusGenInputs['BarberUpdateWithoutAppointmentInput']; // BarberUpdateWithoutAppointmentInput!
+  }
+  BarberWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  BoolFieldUpdateOperationsInput: { // input type
+    set?: boolean | null; // Boolean
+  }
   DateTimeFieldUpdateOperationsInput: { // input type
     set?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  DateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  IntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NestedDateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  NestedIntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NullableStringFieldUpdateOperationsInput: { // input type
+    set?: string | null; // String
+  }
   StringFieldUpdateOperationsInput: { // input type
     set?: string | null; // String
+  }
+  UserCreateInput: { // input type
+    appointment?: NexusGenInputs['AppointmentCreateNestedManyWithoutUserInput'] | null; // AppointmentCreateNestedManyWithoutUserInput
+    avatar?: string | null; // String
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    name: string; // String!
+    password: string; // String!
+    type?: boolean | null; // Boolean
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserCreateNestedOneWithoutAppointmentInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutAppointmentInput'] | null; // UserCreateOrConnectWithoutAppointmentInput
+    create?: NexusGenInputs['UserCreateWithoutAppointmentInput'] | null; // UserCreateWithoutAppointmentInput
+  }
+  UserCreateOrConnectWithoutAppointmentInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutAppointmentInput']; // UserCreateWithoutAppointmentInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserCreateWithoutAppointmentInput: { // input type
+    avatar?: string | null; // String
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    name: string; // String!
+    password: string; // String!
+    type?: boolean | null; // Boolean
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserUpdateInput: { // input type
+    appointment?: NexusGenInputs['AppointmentUpdateManyWithoutUserInput'] | null; // AppointmentUpdateManyWithoutUserInput
+    avatar?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUpdateOneRequiredWithoutAppointmentInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutAppointmentInput'] | null; // UserCreateOrConnectWithoutAppointmentInput
+    create?: NexusGenInputs['UserCreateWithoutAppointmentInput'] | null; // UserCreateWithoutAppointmentInput
+    update?: NexusGenInputs['UserUpdateWithoutAppointmentInput'] | null; // UserUpdateWithoutAppointmentInput
+    upsert?: NexusGenInputs['UserUpsertWithoutAppointmentInput'] | null; // UserUpsertWithoutAppointmentInput
+  }
+  UserUpdateWithoutAppointmentInput: { // input type
+    avatar?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    type?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUpsertWithoutAppointmentInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutAppointmentInput']; // UserCreateWithoutAppointmentInput!
+    update: NexusGenInputs['UserUpdateWithoutAppointmentInput']; // UserUpdateWithoutAppointmentInput!
+  }
+  UserWhereUniqueInput: { // input type
+    email?: string | null; // String
+    id?: number | null; // Int
   }
 }
 
@@ -68,9 +353,34 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Appointment: prisma.Appointment;
+  Appointment: { // root type
+    createdAt?: number | null; // Int
+    date?: number | null; // Int
+    id: number; // Int!
+    updatedAt?: number | null; // Int
+  }
+  Barber: { // root type
+    barberLocation: string; // String!
+    barberName: string; // String!
+    createdAt?: number | null; // Int
+    description?: string | null; // String
+    id: number; // Int!
+    openOnWeekends: boolean; // Boolean!
+    photos: string[]; // [String!]!
+    updatedAt?: number | null; // Int
+  }
   Mutation: {};
   Query: {};
+  User: { // root type
+    avatar?: string | null; // String
+    createdAt?: number | null; // Int
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    password: string; // String!
+    type: boolean; // Boolean!
+    updatedAt?: number | null; // Int
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -88,17 +398,46 @@ export interface NexusGenFieldTypes {
     createdAt: number | null; // Int
     date: number | null; // Int
     id: number; // Int!
-    provider: string; // String!
+    updatedAt: number | null; // Int
+  }
+  Barber: { // field return type
+    barberLocation: string; // String!
+    barberName: string; // String!
+    createdAt: number | null; // Int
+    description: string | null; // String
+    id: number; // Int!
+    openOnWeekends: boolean; // Boolean!
+    photos: string[]; // [String!]!
     updatedAt: number | null; // Int
   }
   Mutation: { // field return type
     createOneAppointment: NexusGenRootTypes['Appointment']; // Appointment!
+    createOneBarber: NexusGenRootTypes['Barber']; // Barber!
+    createOneUser: NexusGenRootTypes['User']; // User!
     deleteOneAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
+    deleteOneBarber: NexusGenRootTypes['Barber'] | null; // Barber
+    deleteOneUser: NexusGenRootTypes['User'] | null; // User
     updateOneAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
+    updateOneBarber: NexusGenRootTypes['Barber'] | null; // Barber
+    updateOneUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     appointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     appointments: NexusGenRootTypes['Appointment'][]; // [Appointment!]!
+    barber: NexusGenRootTypes['Barber'] | null; // Barber
+    barbers: NexusGenRootTypes['Barber'][]; // [Barber!]!
+    user: NexusGenRootTypes['User'] | null; // User
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  User: { // field return type
+    avatar: string | null; // String
+    createdAt: number | null; // Int
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    password: string; // String!
+    type: boolean; // Boolean!
+    updatedAt: number | null; // Int
   }
 }
 
@@ -107,17 +446,46 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'Int'
     date: 'Int'
     id: 'Int'
-    provider: 'String'
+    updatedAt: 'Int'
+  }
+  Barber: { // field return type name
+    barberLocation: 'String'
+    barberName: 'String'
+    createdAt: 'Int'
+    description: 'String'
+    id: 'Int'
+    openOnWeekends: 'Boolean'
+    photos: 'String'
     updatedAt: 'Int'
   }
   Mutation: { // field return type name
     createOneAppointment: 'Appointment'
+    createOneBarber: 'Barber'
+    createOneUser: 'User'
     deleteOneAppointment: 'Appointment'
+    deleteOneBarber: 'Barber'
+    deleteOneUser: 'User'
     updateOneAppointment: 'Appointment'
+    updateOneBarber: 'Barber'
+    updateOneUser: 'User'
   }
   Query: { // field return type name
     appointment: 'Appointment'
     appointments: 'Appointment'
+    barber: 'Barber'
+    barbers: 'Barber'
+    user: 'User'
+    users: 'User'
+  }
+  User: { // field return type name
+    avatar: 'String'
+    createdAt: 'Int'
+    email: 'String'
+    id: 'Int'
+    name: 'String'
+    password: 'String'
+    type: 'Boolean'
+    updatedAt: 'Int'
   }
 }
 
@@ -126,12 +494,32 @@ export interface NexusGenArgTypes {
     createOneAppointment: { // args
       data: NexusGenInputs['AppointmentCreateInput']; // AppointmentCreateInput!
     }
+    createOneBarber: { // args
+      data: NexusGenInputs['BarberCreateInput']; // BarberCreateInput!
+    }
+    createOneUser: { // args
+      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    }
     deleteOneAppointment: { // args
       where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+    }
+    deleteOneBarber: { // args
+      where: NexusGenInputs['BarberWhereUniqueInput']; // BarberWhereUniqueInput!
+    }
+    deleteOneUser: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     updateOneAppointment: { // args
       data: NexusGenInputs['AppointmentUpdateInput']; // AppointmentUpdateInput!
       where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
+    }
+    updateOneBarber: { // args
+      data: NexusGenInputs['BarberUpdateInput']; // BarberUpdateInput!
+      where: NexusGenInputs['BarberWhereUniqueInput']; // BarberWhereUniqueInput!
+    }
+    updateOneUser: { // args
+      data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
   Query: {
@@ -141,6 +529,24 @@ export interface NexusGenArgTypes {
     appointments: { // args
       after?: NexusGenInputs['AppointmentWhereUniqueInput'] | null; // AppointmentWhereUniqueInput
       before?: NexusGenInputs['AppointmentWhereUniqueInput'] | null; // AppointmentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    barber: { // args
+      where: NexusGenInputs['BarberWhereUniqueInput']; // BarberWhereUniqueInput!
+    }
+    barbers: { // args
+      after?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
+      before?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    users: { // args
+      after?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      before?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     }

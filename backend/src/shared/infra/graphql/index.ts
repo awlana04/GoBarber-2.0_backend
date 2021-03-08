@@ -2,20 +2,22 @@ import { makeSchema, connectionPlugin } from 'nexus';
 import { nexusPrisma } from 'nexus-plugin-prisma';
 import path from 'path';
 
-import { Appointment } from './types/Appointment';
+import { Appointment } from '@modules/appointments/infra/schemas/Appointment';
+import { Barber } from '@modules/barbers/infra/schemas/Barber';
+import { User } from '@modules/users/infra/schemas/User';
 
-import { Query } from './Query';
-import { Mutation } from  './Mutation';
+import { Query } from './schemas/Query';
+import { Mutation } from  './schemas/Mutation';
 
 const schema = makeSchema({
-  types: [Appointment, Query, Mutation],
+  types: [Appointment, Barber, User, Query, Mutation],
   outputs: {
-    typegen: path.join(__dirname, '..', '..', 'generated', 'nexus-typegen.ts'),
-    schema: path.join(__dirname, '..', '..', 'generated', 'schema.graphql'),
+    typegen: path.join(__dirname, '..', '..', '..', '..', 'generated', 'nexus-typegen.ts'),
+    schema: path.join(__dirname, '..', '..', '..', '..', 'generated', 'schema.graphql'),
   },
   plugins: [nexusPrisma({ experimentalCRUD: true }), connectionPlugin()],
   contextType: {
-    module: path.join(__dirname, '..', 'context.ts'),
+    module: path.join(__dirname, '..', 'http', 'context.ts'),
     export: 'Context',
   },
   sourceTypes: {
