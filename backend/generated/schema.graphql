@@ -7,7 +7,7 @@ type Appointment {
 
   """Appointment's details"""
   date: Int
-  id: Int!
+  id: String!
   updatedAt: Int
 }
 
@@ -15,6 +15,7 @@ input AppointmentCreateInput {
   barber: BarberCreateNestedOneWithoutAppointmentInput!
   createdAt: DateTime
   date: DateTime!
+  id: String
   updatedAt: DateTime
   user: UserCreateNestedOneWithoutAppointmentInput!
 }
@@ -44,6 +45,7 @@ input AppointmentCreateOrConnectWithoutUserInput {
 input AppointmentCreateWithoutBarberInput {
   createdAt: DateTime
   date: DateTime!
+  id: String
   updatedAt: DateTime
   user: UserCreateNestedOneWithoutAppointmentInput!
 }
@@ -52,6 +54,7 @@ input AppointmentCreateWithoutUserInput {
   barber: BarberCreateNestedOneWithoutAppointmentInput!
   createdAt: DateTime
   date: DateTime!
+  id: String
   updatedAt: DateTime
 }
 
@@ -59,18 +62,19 @@ input AppointmentScalarWhereInput {
   AND: [AppointmentScalarWhereInput!]
   NOT: [AppointmentScalarWhereInput!]
   OR: [AppointmentScalarWhereInput!]
-  barberId: IntFilter
+  barberId: StringFilter
   createdAt: DateTimeFilter
   date: DateTimeFilter
-  id: IntFilter
+  id: StringFilter
   updatedAt: DateTimeFilter
-  userId: IntFilter
+  userId: StringFilter
 }
 
 input AppointmentUpdateInput {
   barber: BarberUpdateOneRequiredWithoutAppointmentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAppointmentInput
 }
@@ -78,6 +82,7 @@ input AppointmentUpdateInput {
 input AppointmentUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -130,6 +135,7 @@ input AppointmentUpdateWithWhereUniqueWithoutUserInput {
 input AppointmentUpdateWithoutBarberInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAppointmentInput
 }
@@ -138,6 +144,7 @@ input AppointmentUpdateWithoutUserInput {
   barber: BarberUpdateOneRequiredWithoutAppointmentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -154,7 +161,7 @@ input AppointmentUpsertWithWhereUniqueWithoutUserInput {
 }
 
 input AppointmentWhereUniqueInput {
-  id: Int
+  id: String
 }
 
 type Barber {
@@ -163,7 +170,7 @@ type Barber {
   barberName: String!
   createdAt: Int
   description: String
-  id: Int!
+  id: String!
   openOnWeekends: Boolean!
   photos: [String!]!
   updatedAt: Int
@@ -175,6 +182,7 @@ input BarberCreateInput {
   barberName: String!
   createdAt: DateTime
   description: String
+  id: String
   openOnWeekends: Boolean!
   photos: BarberCreatephotosInput
   updatedAt: DateTime
@@ -196,6 +204,7 @@ input BarberCreateWithoutAppointmentInput {
   barberName: String!
   createdAt: DateTime
   description: String
+  id: String
   openOnWeekends: Boolean!
   photos: BarberCreatephotosInput
   updatedAt: DateTime
@@ -211,6 +220,7 @@ input BarberUpdateInput {
   barberName: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   openOnWeekends: BoolFieldUpdateOperationsInput
   photos: BarberUpdatephotosInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -229,6 +239,7 @@ input BarberUpdateWithoutAppointmentInput {
   barberName: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   openOnWeekends: BoolFieldUpdateOperationsInput
   photos: BarberUpdatephotosInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -244,7 +255,7 @@ input BarberUpsertWithoutAppointmentInput {
 }
 
 input BarberWhereUniqueInput {
-  id: Int
+  id: String
 }
 
 input BoolFieldUpdateOperationsInput {
@@ -266,17 +277,6 @@ input DateTimeFilter {
   lte: DateTime
   not: NestedDateTimeFilter
   notIn: [DateTime!]
-}
-
-input IntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntFilter
-  notIn: [Int!]
 }
 
 type Mutation {
@@ -302,15 +302,18 @@ input NestedDateTimeFilter {
   notIn: [DateTime!]
 }
 
-input NestedIntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntFilter
-  notIn: [Int!]
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 input NullableStringFieldUpdateOperationsInput {
@@ -326,8 +329,28 @@ type Query {
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
 
+enum QueryMode {
+  default
+  insensitive
+}
+
 input StringFieldUpdateOperationsInput {
   set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type User {
@@ -336,7 +359,7 @@ type User {
 
   """User's credentials"""
   email: String!
-  id: Int!
+  id: String!
   name: String!
   password: String!
 
@@ -350,6 +373,7 @@ input UserCreateInput {
   avatar: String
   createdAt: DateTime
   email: String!
+  id: String
   name: String!
   password: String!
   type: Boolean
@@ -371,6 +395,7 @@ input UserCreateWithoutAppointmentInput {
   avatar: String
   createdAt: DateTime
   email: String!
+  id: String
   name: String!
   password: String!
   type: Boolean
@@ -382,6 +407,7 @@ input UserUpdateInput {
   avatar: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
   type: BoolFieldUpdateOperationsInput
@@ -400,6 +426,7 @@ input UserUpdateWithoutAppointmentInput {
   avatar: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
   type: BoolFieldUpdateOperationsInput
@@ -413,5 +440,5 @@ input UserUpsertWithoutAppointmentInput {
 
 input UserWhereUniqueInput {
   email: String
-  id: Int
+  id: String
 }

@@ -36,6 +36,7 @@ export interface NexusGenInputs {
     barber: NexusGenInputs['BarberCreateNestedOneWithoutAppointmentInput']; // BarberCreateNestedOneWithoutAppointmentInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     date: NexusGenScalars['DateTime']; // DateTime!
+    id?: string | null; // String
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     user: NexusGenInputs['UserCreateNestedOneWithoutAppointmentInput']; // UserCreateNestedOneWithoutAppointmentInput!
   }
@@ -60,6 +61,7 @@ export interface NexusGenInputs {
   AppointmentCreateWithoutBarberInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     date: NexusGenScalars['DateTime']; // DateTime!
+    id?: string | null; // String
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     user: NexusGenInputs['UserCreateNestedOneWithoutAppointmentInput']; // UserCreateNestedOneWithoutAppointmentInput!
   }
@@ -67,29 +69,32 @@ export interface NexusGenInputs {
     barber: NexusGenInputs['BarberCreateNestedOneWithoutAppointmentInput']; // BarberCreateNestedOneWithoutAppointmentInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     date: NexusGenScalars['DateTime']; // DateTime!
+    id?: string | null; // String
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   AppointmentScalarWhereInput: { // input type
     AND?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
     NOT?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
     OR?: NexusGenInputs['AppointmentScalarWhereInput'][] | null; // [AppointmentScalarWhereInput!]
-    barberId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    barberId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     date?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   AppointmentUpdateInput: { // input type
     barber?: NexusGenInputs['BarberUpdateOneRequiredWithoutAppointmentInput'] | null; // BarberUpdateOneRequiredWithoutAppointmentInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     user?: NexusGenInputs['UserUpdateOneRequiredWithoutAppointmentInput'] | null; // UserUpdateOneRequiredWithoutAppointmentInput
   }
   AppointmentUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   AppointmentUpdateManyWithWhereWithoutBarberInput: { // input type
@@ -135,6 +140,7 @@ export interface NexusGenInputs {
   AppointmentUpdateWithoutBarberInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     user?: NexusGenInputs['UserUpdateOneRequiredWithoutAppointmentInput'] | null; // UserUpdateOneRequiredWithoutAppointmentInput
   }
@@ -142,6 +148,7 @@ export interface NexusGenInputs {
     barber?: NexusGenInputs['BarberUpdateOneRequiredWithoutAppointmentInput'] | null; // BarberUpdateOneRequiredWithoutAppointmentInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   AppointmentUpsertWithWhereUniqueWithoutBarberInput: { // input type
@@ -155,7 +162,7 @@ export interface NexusGenInputs {
     where: NexusGenInputs['AppointmentWhereUniqueInput']; // AppointmentWhereUniqueInput!
   }
   AppointmentWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   BarberCreateInput: { // input type
     appointment?: NexusGenInputs['AppointmentCreateNestedManyWithoutBarberInput'] | null; // AppointmentCreateNestedManyWithoutBarberInput
@@ -163,6 +170,7 @@ export interface NexusGenInputs {
     barberName: string; // String!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
+    id?: string | null; // String
     openOnWeekends: boolean; // Boolean!
     photos?: NexusGenInputs['BarberCreatephotosInput'] | null; // BarberCreatephotosInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -181,6 +189,7 @@ export interface NexusGenInputs {
     barberName: string; // String!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
+    id?: string | null; // String
     openOnWeekends: boolean; // Boolean!
     photos?: NexusGenInputs['BarberCreatephotosInput'] | null; // BarberCreatephotosInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -194,6 +203,7 @@ export interface NexusGenInputs {
     barberName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     openOnWeekends?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     photos?: NexusGenInputs['BarberUpdatephotosInput'] | null; // BarberUpdatephotosInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
@@ -210,6 +220,7 @@ export interface NexusGenInputs {
     barberName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     openOnWeekends?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     photos?: NexusGenInputs['BarberUpdatephotosInput'] | null; // BarberUpdatephotosInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
@@ -222,7 +233,7 @@ export interface NexusGenInputs {
     update: NexusGenInputs['BarberUpdateWithoutAppointmentInput']; // BarberUpdateWithoutAppointmentInput!
   }
   BarberWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   BoolFieldUpdateOperationsInput: { // input type
     set?: boolean | null; // Boolean
@@ -240,16 +251,6 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
-  IntFilter: { // input type
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: number[] | null; // [Int!]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    notIn?: number[] | null; // [Int!]
-  }
   NestedDateTimeFilter: { // input type
     equals?: NexusGenScalars['DateTime'] | null; // DateTime
     gt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -260,15 +261,18 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
-  NestedIntFilter: { // input type
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: number[] | null; // [Int!]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    notIn?: number[] | null; // [Int!]
+  NestedStringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
   }
   NullableStringFieldUpdateOperationsInput: { // input type
     set?: string | null; // String
@@ -276,11 +280,26 @@ export interface NexusGenInputs {
   StringFieldUpdateOperationsInput: { // input type
     set?: string | null; // String
   }
+  StringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    mode?: NexusGenEnums['QueryMode'] | null; // QueryMode
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
   UserCreateInput: { // input type
     appointment?: NexusGenInputs['AppointmentCreateNestedManyWithoutUserInput'] | null; // AppointmentCreateNestedManyWithoutUserInput
     avatar?: string | null; // String
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
+    id?: string | null; // String
     name: string; // String!
     password: string; // String!
     type?: boolean | null; // Boolean
@@ -299,6 +318,7 @@ export interface NexusGenInputs {
     avatar?: string | null; // String
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
+    id?: string | null; // String
     name: string; // String!
     password: string; // String!
     type?: boolean | null; // Boolean
@@ -309,6 +329,7 @@ export interface NexusGenInputs {
     avatar?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     type?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
@@ -325,6 +346,7 @@ export interface NexusGenInputs {
     avatar?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     type?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
@@ -336,11 +358,12 @@ export interface NexusGenInputs {
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
-    id?: number | null; // Int
+    id?: string | null; // String
   }
 }
 
 export interface NexusGenEnums {
+  QueryMode: "default" | "insensitive"
 }
 
 export interface NexusGenScalars {
@@ -356,7 +379,7 @@ export interface NexusGenObjects {
   Appointment: { // root type
     createdAt?: number | null; // Int
     date?: number | null; // Int
-    id: number; // Int!
+    id: string; // String!
     updatedAt?: number | null; // Int
   }
   Barber: { // root type
@@ -364,7 +387,7 @@ export interface NexusGenObjects {
     barberName: string; // String!
     createdAt?: number | null; // Int
     description?: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     openOnWeekends: boolean; // Boolean!
     photos: string[]; // [String!]!
     updatedAt?: number | null; // Int
@@ -375,7 +398,7 @@ export interface NexusGenObjects {
     avatar?: string | null; // String
     createdAt?: number | null; // Int
     email: string; // String!
-    id: number; // Int!
+    id: string; // String!
     name: string; // String!
     password: string; // String!
     type: boolean; // Boolean!
@@ -391,13 +414,13 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Appointment: { // field return type
     createdAt: number | null; // Int
     date: number | null; // Int
-    id: number; // Int!
+    id: string; // String!
     updatedAt: number | null; // Int
   }
   Barber: { // field return type
@@ -405,7 +428,7 @@ export interface NexusGenFieldTypes {
     barberName: string; // String!
     createdAt: number | null; // Int
     description: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     openOnWeekends: boolean; // Boolean!
     photos: string[]; // [String!]!
     updatedAt: number | null; // Int
@@ -433,7 +456,7 @@ export interface NexusGenFieldTypes {
     avatar: string | null; // String
     createdAt: number | null; // Int
     email: string; // String!
-    id: number; // Int!
+    id: string; // String!
     name: string; // String!
     password: string; // String!
     type: boolean; // Boolean!
@@ -445,7 +468,7 @@ export interface NexusGenFieldTypeNames {
   Appointment: { // field return type name
     createdAt: 'Int'
     date: 'Int'
-    id: 'Int'
+    id: 'String'
     updatedAt: 'Int'
   }
   Barber: { // field return type name
@@ -453,7 +476,7 @@ export interface NexusGenFieldTypeNames {
     barberName: 'String'
     createdAt: 'Int'
     description: 'String'
-    id: 'Int'
+    id: 'String'
     openOnWeekends: 'Boolean'
     photos: 'String'
     updatedAt: 'Int'
@@ -481,7 +504,7 @@ export interface NexusGenFieldTypeNames {
     avatar: 'String'
     createdAt: 'Int'
     email: 'String'
-    id: 'Int'
+    id: 'String'
     name: 'String'
     password: 'String'
     type: 'Boolean'
@@ -563,7 +586,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

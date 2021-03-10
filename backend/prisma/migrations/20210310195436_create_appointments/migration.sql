@@ -1,9 +1,9 @@
 -- CreateTable
 CREATE TABLE "Appointment" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "barberId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
+    "barberId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -12,7 +12,7 @@ CREATE TABLE "Appointment" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "type" BOOLEAN NOT NULL DEFAULT false,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Barber" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "barberLocation" TEXT NOT NULL,
     "barberName" TEXT NOT NULL,
     "description" TEXT,
