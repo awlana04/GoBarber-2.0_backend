@@ -17,14 +17,17 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "graphql": "^15.5.0",
     "next": "latest",
+    "next-auth": "^3.11.2",
     "nexus": "^1.0.0",
     "nexus-plugin-prisma": "^0.32.0",
+    "prisma": "^2.18.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-is": "^16.8.0",
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
+    "@types/next-auth": "^3.7.1",
     "babel-plugin-styled-components": "^1.8.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
