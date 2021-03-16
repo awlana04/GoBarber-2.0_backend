@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/next-auth": "^3.7.1",
+    "@types/styled-components": "^5.1.9",
     "babel-plugin-styled-components": "^1.8.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
