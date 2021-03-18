@@ -11,6 +11,7 @@ generator client {
 }
 
 model Appointment {
+<<<<<<< HEAD
   id String @id @default(uuid())
 
   // Appointment's details
@@ -57,4 +58,53 @@ model Barber {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+=======
+  id          Int         @id @default(autoincrement())
+
+  // Appoitment's details
+  provider    String
+  date        DateTime
+
+  user        User[]
+  barber      Barber[]
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+
+  // User's about
+  type          Boolean
+  name          String
+
+  // User's credentials
+  email         String        @unique
+  password      String
+  avatar        String?
+
+  providerId    Int
+  provider      Appointment   @relation(fields: [providerId], references: [id])
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Barber {
+  id            Int           @id @default(autoincrement())
+
+  // Barber's information
+  barberLocation    String
+  barberName        String
+  description       String?
+  photos            String[]
+  openOnWeekends    Boolean
+
+  providerId        Int
+  provider          Appointment   @relation(fields: [providerId], references: [id])
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+>>>>>>> origin/test
 }
