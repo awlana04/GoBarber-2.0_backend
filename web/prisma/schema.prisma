@@ -40,12 +40,11 @@ model Barber {
   description    String?
   photos         String[]
   openOnWeekends Boolean
-  appointment    Appointment[]
+
+  appointment Appointment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map(name: "barbers")
 }
 
 model Appointment {
@@ -61,8 +60,6 @@ model Appointment {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map(name: "appointments")
 }
 
 model Account {
@@ -70,7 +67,6 @@ model Account {
 
   compoundId        String @unique @map(name: "compound_id")
   userId            Int?   @map(name: "user_id")
-  barberId          Int?   @map(name: "barber_id")
   providerType      String @map(name: "provider_type")
   providerId        String @map(name: "provider_id")
   providerAccountId String @map(name: "provider_account_id")
@@ -85,7 +81,6 @@ model Account {
   @@index([providerAccountId], name: "providerAccountId")
   @@index([providerId], name: "providerId")
   @@index([userId], name: "userId")
-  @@index([barberId], name: "barberId")
   @@map(name: "accounts")
 }
 
@@ -93,7 +88,6 @@ model Session {
   id String @id @default(uuid())
 
   userId       Int      @map(name: "user_id")
-  barberId     Int      @map(name: "barber_id")
   expires      DateTime
   sessionToken String   @unique @map(name: "session_token")
   accessToken  String   @unique @map(name: "access_token")
