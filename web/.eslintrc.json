@@ -1,16 +1,15 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "node": true,
-    "jest": true
+    "es2021": true
   },
   "extends": [
-    "plugin:react/recommended",
     "airbnb",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -22,21 +21,8 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint",
-<<<<<<< HEAD:backend/.eslintrc.json
-    "prettier"
-  ],
-  "rules": {
-    "prettier/prettier": "error",
-    "class-methods-use-this": "off",
-    "camelcase": "off",
-    "@typescript-eslint/ban-types": "off",
-    "no-useless-constructor": "off",
-    "@typescript-eslint/no-unused-vars": ["error", {
-      "argsIgnorePattern": "_"
-    }],
-=======
     "react-hooks",
+    "@typescript-eslint",
     "prettier"
   ],
   "rules": {
@@ -46,50 +32,34 @@
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "@typescript-eslint/ban-types": "off",
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
-    "no-sequences": "off",
-    "class-methods-use-this": "off",
-    "no-useless-constructor": "off",
-    "import/no-unresolved": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "_"
-      }
-    ],
->>>>>>> origin/nextjs:web/.eslintrc.json
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "ts": "never"
+        "ts": "never",
+        "tsx": "never"
       }
-    ],
+    ]
   },
   "settings": {
     "import/resolver": {
-<<<<<<< HEAD:backend/.eslintrc.json
       "typescript": {}
-=======
-      "typescript": {
-        "alwaysTryTypes": true
-      }
     },
     "react": {
       "version": "detect"
-    },
-    "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
->>>>>>> origin/nextjs:web/.eslintrc.json
     }
   }
 }
-
