@@ -7,7 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@prisma/client": "^2.18.0",
+    "@prisma/client": "^2.19.0",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "apollo-server-micro": "^2.21.1",
     "eslint-config-airbnb": "^18.2.1",
@@ -20,10 +20,11 @@
     "next-auth": "^3.11.2",
     "nexus": "^1.0.0",
     "nexus-plugin-prisma": "^0.32.0",
-    "prisma": "^2.18.0",
+    "prisma": "^2.19.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-is": "^16.8.0",
+    "react-scripts": "^4.0.3",
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
