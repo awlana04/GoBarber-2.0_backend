@@ -43,7 +43,7 @@ CREATE TABLE "Appointment" (
 CREATE TABLE "accounts" (
     "id" TEXT NOT NULL,
     "compound_id" TEXT NOT NULL,
-    "user_id" INTEGER,
+    "user_id" INTEGER NOT NULL,
     "provider_type" TEXT NOT NULL,
     "provider_id" TEXT NOT NULL,
     "provider_account_id" TEXT NOT NULL,

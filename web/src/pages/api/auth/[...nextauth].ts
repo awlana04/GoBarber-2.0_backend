@@ -17,7 +17,5 @@ export default (request, response) => NextAuth(request, response, {
   jwt: {
     secret: process.env.JWT_SECRET,
   },
-  adapter: Adapters.Prisma.Adapter({
-    prisma
-  })
+  adapter: Adapters.Prisma.Adapter({ prisma })
 });
