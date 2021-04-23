@@ -12,12 +12,12 @@ import { Mutation } from './schemas/Mutation';
 const schema = makeSchema({
   types: [Appointment, Barber, User, Query, Mutation],
   outputs: {
-    typegen: path.join(__dirname, '..', '..', '..', 'generated', 'nexus-typegen.ts'),
-    schema: path.join(__dirname, '..', '..', '..', 'generated', 'schema.graphql'),
+    typegen: path.join(__dirname, '..', '..', '..', '..', 'generated', 'nexus-typegen.ts'),
+    schema: path.join(__dirname, '..', '..', '..', '..', 'generated', 'schema.graphql'),
   },
   plugins: [nexusPrisma({ experimentalCRUD: true }), connectionPlugin()],
   contextType: {
-    module: path.join(__dirname, '..', 'http', 'context.ts'),
+    module: path.join(__dirname, '..', 'context.ts'),
     export: 'Context',
   },
   sourceTypes: {
@@ -25,6 +25,8 @@ const schema = makeSchema({
       {
         module: path.join(
           __dirname,
+          '..',
+          '..',
           '..',
           '..',
           'node_modules',

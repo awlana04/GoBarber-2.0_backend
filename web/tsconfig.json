@@ -18,11 +18,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "paths": {
-      "@shared/*": ["pages/api/shared/*"],
-      "@modules/*": ["pages/api/modules/*"]
-
-    }
   },
   "include": [
     "next-env.d.ts",

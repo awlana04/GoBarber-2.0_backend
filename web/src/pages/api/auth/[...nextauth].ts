@@ -18,12 +18,6 @@ export default (request, response) => NextAuth(request, response, {
     secret: process.env.JWT_SECRET,
   },
   adapter: Adapters.Prisma.Adapter({
-    prisma,
-    modelMapping: {
-      User: 'user',
-      Account: 'account',
-      Session: 'session',
-      VerificationRequest: 'verificationRequest'
-    }
+    prisma
   })
 });

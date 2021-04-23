@@ -5,11 +5,11 @@ export const Appointment = objectType({
   definition(t) {
     t.model.id(),
 
-    t.int('date', {
-      description: "Appointment's details"
-    }),
+      t.int('date', {
+        description: "Appointment's details"
+      }),
 
-    t.int('createdAt'),
-    t.int('updatedAt')
+      t.int('createdAt'),
+      t.int('updatedAt')
   }
 });
