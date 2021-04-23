@@ -12,8 +12,8 @@ import { Mutation } from './schemas/Mutation';
 const schema = makeSchema({
   types: [Appointment, Barber, User, Query, Mutation],
   outputs: {
-    typegen: path.join(__dirname, '..', '..', 'generated', 'nexus-typegen.ts'),
-    schema: path.join(__dirname, '..', '..', 'generated', 'schema.graphql'),
+    typegen: path.join(__dirname, '..', '..', '..', 'generated', 'nexus-typegen.ts'),
+    schema: path.join(__dirname, '..', '..', '..', 'generated', 'schema.graphql'),
   },
   plugins: [nexusPrisma({ experimentalCRUD: true }), connectionPlugin()],
   contextType: {
