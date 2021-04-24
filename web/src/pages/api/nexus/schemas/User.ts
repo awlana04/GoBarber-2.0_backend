@@ -5,18 +5,19 @@ export const User = objectType({
   definition(t) {
     t.model.id(),
 
-    t.model.type({
-      description: "User's about"
-    })
+      t.model.type({
+        description: "User's about"
+      })
     t.model.name(),
 
-    t.model.email({
-      description: "User's credentials"
-    }),
+      t.model.email({
+        description: "User's credentials"
+      }),
+      t.model.emailVerified()
     t.model.password(),
-    t.model.avatar(),
+      t.model.image(),
 
-    t.int('createdAt'),
-    t.int('updatedAt')
+      t.int('createdAt'),
+      t.int('updatedAt')
   }
 });

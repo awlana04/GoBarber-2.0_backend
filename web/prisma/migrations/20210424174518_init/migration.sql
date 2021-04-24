@@ -5,8 +5,8 @@ CREATE TABLE "users" (
     "name" TEXT NOT NULL,
     "email" TEXT,
     "email_verified" TIMESTAMP(3),
-    "password" TEXT NOT NULL,
-    "avatar" TEXT,
+    "password" TEXT,
+    "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -43,7 +43,7 @@ CREATE TABLE "Appointment" (
 CREATE TABLE "accounts" (
     "id" TEXT NOT NULL,
     "compound_id" TEXT NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "user_id" TEXT NOT NULL,
     "provider_type" TEXT NOT NULL,
     "provider_id" TEXT NOT NULL,
     "provider_account_id" TEXT NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE "accounts" (
 -- CreateTable
 CREATE TABLE "sessions" (
     "id" TEXT NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "user_id" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
     "session_token" TEXT NOT NULL,
     "access_token" TEXT NOT NULL,

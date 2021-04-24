@@ -20,16 +20,44 @@ input AppointmentCreateInput {
   user: UserCreateNestedOneWithoutAppointmentInput!
 }
 
+input AppointmentCreateManyBarberInput {
+  createdAt: DateTime
+  date: DateTime!
+  id: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input AppointmentCreateManyBarberInputEnvelope {
+  data: [AppointmentCreateManyBarberInput!]
+  skipDuplicates: Boolean
+}
+
+input AppointmentCreateManyUserInput {
+  barberId: String!
+  createdAt: DateTime
+  date: DateTime!
+  id: String
+  updatedAt: DateTime
+}
+
+input AppointmentCreateManyUserInputEnvelope {
+  data: [AppointmentCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
 input AppointmentCreateNestedManyWithoutBarberInput {
   connect: [AppointmentWhereUniqueInput!]
   connectOrCreate: [AppointmentCreateOrConnectWithoutBarberInput!]
   create: [AppointmentCreateWithoutBarberInput!]
+  createMany: AppointmentCreateManyBarberInputEnvelope
 }
 
 input AppointmentCreateNestedManyWithoutUserInput {
   connect: [AppointmentWhereUniqueInput!]
   connectOrCreate: [AppointmentCreateOrConnectWithoutUserInput!]
   create: [AppointmentCreateWithoutUserInput!]
+  createMany: AppointmentCreateManyUserInputEnvelope
 }
 
 input AppointmentCreateOrConnectWithoutBarberInput {
@@ -100,6 +128,7 @@ input AppointmentUpdateManyWithoutBarberInput {
   connect: [AppointmentWhereUniqueInput!]
   connectOrCreate: [AppointmentCreateOrConnectWithoutBarberInput!]
   create: [AppointmentCreateWithoutBarberInput!]
+  createMany: AppointmentCreateManyBarberInputEnvelope
   delete: [AppointmentWhereUniqueInput!]
   deleteMany: [AppointmentScalarWhereInput!]
   disconnect: [AppointmentWhereUniqueInput!]
@@ -113,6 +142,7 @@ input AppointmentUpdateManyWithoutUserInput {
   connect: [AppointmentWhereUniqueInput!]
   connectOrCreate: [AppointmentCreateOrConnectWithoutUserInput!]
   create: [AppointmentCreateWithoutUserInput!]
+  createMany: AppointmentCreateManyUserInputEnvelope
   delete: [AppointmentWhereUniqueInput!]
   deleteMany: [AppointmentScalarWhereInput!]
   disconnect: [AppointmentWhereUniqueInput!]
@@ -246,6 +276,7 @@ input BarberUpdateWithoutAppointmentInput {
 }
 
 input BarberUpdatephotosInput {
+  push: String
   set: [String!]
 }
 
@@ -358,14 +389,15 @@ input StringFilter {
 }
 
 type User {
-  avatar: String
   createdAt: Int
 
   """User's credentials"""
   email: String
+  emailVerified: DateTime
   id: String!
+  image: String
   name: String!
-  password: String!
+  password: String
 
   """User's about"""
   type: Boolean!
@@ -374,13 +406,13 @@ type User {
 
 input UserCreateInput {
   appointment: AppointmentCreateNestedManyWithoutUserInput
-  avatar: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
   id: String
+  image: String
   name: String!
-  password: String!
+  password: String
   type: Boolean
   updatedAt: DateTime
 }
@@ -397,26 +429,26 @@ input UserCreateOrConnectWithoutAppointmentInput {
 }
 
 input UserCreateWithoutAppointmentInput {
-  avatar: String
   createdAt: DateTime
   email: String
   emailVerified: DateTime
   id: String
+  image: String
   name: String!
-  password: String!
+  password: String
   type: Boolean
   updatedAt: DateTime
 }
 
 input UserUpdateInput {
   appointment: AppointmentUpdateManyWithoutUserInput
-  avatar: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
   type: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -430,13 +462,13 @@ input UserUpdateOneRequiredWithoutAppointmentInput {
 }
 
 input UserUpdateWithoutAppointmentInput {
-  avatar: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: NullableStringFieldUpdateOperationsInput
   emailVerified: NullableDateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
   type: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
