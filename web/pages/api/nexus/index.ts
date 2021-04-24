@@ -2,18 +2,16 @@ import { makeSchema, connectionPlugin } from 'nexus';
 import { nexusPrisma } from 'nexus-plugin-prisma';
 import path from 'path';
 
-import { Appointment } from './schemas/Appointment';
-import { Barber } from './schemas/Barber';
 import { User } from './schemas/User';
 
 import { Query } from './schemas/Query';
 import { Mutation } from './schemas/Mutation';
 
 const schema = makeSchema({
-  types: [Appointment, Barber, User, Query, Mutation],
+  types: [User, Query, Mutation],
   outputs: {
-    typegen: path.join(__dirname, '..', '..', '..', '..', 'generated', 'nexus-typegen.ts'),
-    schema: path.join(__dirname, '..', '..', '..', '..', 'generated', 'schema.graphql'),
+    typegen: path.join(__dirname, '..', '..', 'generated', 'nexus-typegen.ts'),
+    schema: path.join(__dirname, '..', '..', 'generated', 'schema.graphql'),
   },
   plugins: [nexusPrisma({ experimentalCRUD: true }), connectionPlugin()],
   contextType: {
@@ -25,8 +23,6 @@ const schema = makeSchema({
       {
         module: path.join(
           __dirname,
-          '..',
-          '..',
           '..',
           '..',
           'node_modules',
