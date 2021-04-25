@@ -3,38 +3,40 @@ CREATE TABLE "users" (
     "id" TEXT NOT NULL,
     "type" BOOLEAN NOT NULL DEFAULT false,
     "name" TEXT NOT NULL,
-    "email" TEXT,
+    "email" TEXT NOT NULL,
     "email_verified" TIMESTAMP(3),
-    "password" TEXT,
     "image" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "comments" TEXT[],
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Barber" (
+CREATE TABLE "barbers" (
     "id" TEXT NOT NULL,
-    "barberLocation" TEXT NOT NULL,
-    "barberName" TEXT NOT NULL,
+    "barber_location" TEXT NOT NULL,
+    "barber_name" TEXT,
     "description" TEXT,
     "photos" TEXT[],
-    "openOnWeekends" BOOLEAN NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "open_on_weekends" BOOLEAN NOT NULL,
+    "star_rating" INTEGER[],
+    "comments" TEXT[],
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Appointment" (
+CREATE TABLE "appointments" (
     "id" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
-    "userId" TEXT NOT NULL,
-    "barberId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "barber_id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     PRIMARY KEY ("id")
 );
@@ -106,7 +108,7 @@ CREATE UNIQUE INDEX "sessions.access_token_unique" ON "sessions"("access_token")
 CREATE UNIQUE INDEX "verification_requests.token_unique" ON "verification_requests"("token");
 
 -- AddForeignKey
-ALTER TABLE "Appointment" ADD FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "appointments" ADD FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Appointment" ADD FOREIGN KEY ("barberId") REFERENCES "Barber"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "appointments" ADD FOREIGN KEY ("barber_id") REFERENCES "barbers"("id") ON DELETE CASCADE ON UPDATE CASCADE;

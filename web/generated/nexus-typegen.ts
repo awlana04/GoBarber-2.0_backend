@@ -193,12 +193,14 @@ export interface NexusGenInputs {
   BarberCreateInput: { // input type
     appointment?: NexusGenInputs['AppointmentCreateNestedManyWithoutBarberInput'] | null; // AppointmentCreateNestedManyWithoutBarberInput
     barberLocation: string; // String!
-    barberName: string; // String!
+    barberName?: string | null; // String
+    comments?: NexusGenInputs['BarberCreatecommentsInput'] | null; // BarberCreatecommentsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: string | null; // String
     openOnWeekends: boolean; // Boolean!
     photos?: NexusGenInputs['BarberCreatephotosInput'] | null; // BarberCreatephotosInput
+    starRating?: NexusGenInputs['BarberCreatestarRatingInput'] | null; // BarberCreatestarRatingInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   BarberCreateNestedOneWithoutAppointmentInput: { // input type
@@ -212,26 +214,36 @@ export interface NexusGenInputs {
   }
   BarberCreateWithoutAppointmentInput: { // input type
     barberLocation: string; // String!
-    barberName: string; // String!
+    barberName?: string | null; // String
+    comments?: NexusGenInputs['BarberCreatecommentsInput'] | null; // BarberCreatecommentsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: string | null; // String
     openOnWeekends: boolean; // Boolean!
     photos?: NexusGenInputs['BarberCreatephotosInput'] | null; // BarberCreatephotosInput
+    starRating?: NexusGenInputs['BarberCreatestarRatingInput'] | null; // BarberCreatestarRatingInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  BarberCreatecommentsInput: { // input type
+    set?: string[] | null; // [String!]
   }
   BarberCreatephotosInput: { // input type
     set?: string[] | null; // [String!]
   }
+  BarberCreatestarRatingInput: { // input type
+    set?: number[] | null; // [Int!]
+  }
   BarberUpdateInput: { // input type
     appointment?: NexusGenInputs['AppointmentUpdateManyWithoutBarberInput'] | null; // AppointmentUpdateManyWithoutBarberInput
     barberLocation?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    barberName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    barberName?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    comments?: NexusGenInputs['BarberUpdatecommentsInput'] | null; // BarberUpdatecommentsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     openOnWeekends?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     photos?: NexusGenInputs['BarberUpdatephotosInput'] | null; // BarberUpdatephotosInput
+    starRating?: NexusGenInputs['BarberUpdatestarRatingInput'] | null; // BarberUpdatestarRatingInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   BarberUpdateOneRequiredWithoutAppointmentInput: { // input type
@@ -243,17 +255,27 @@ export interface NexusGenInputs {
   }
   BarberUpdateWithoutAppointmentInput: { // input type
     barberLocation?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    barberName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    barberName?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    comments?: NexusGenInputs['BarberUpdatecommentsInput'] | null; // BarberUpdatecommentsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     openOnWeekends?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     photos?: NexusGenInputs['BarberUpdatephotosInput'] | null; // BarberUpdatephotosInput
+    starRating?: NexusGenInputs['BarberUpdatestarRatingInput'] | null; // BarberUpdatestarRatingInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  BarberUpdatecommentsInput: { // input type
+    push?: string | null; // String
+    set?: string[] | null; // [String!]
   }
   BarberUpdatephotosInput: { // input type
     push?: string | null; // String
     set?: string[] | null; // [String!]
+  }
+  BarberUpdatestarRatingInput: { // input type
+    push?: number | null; // Int
+    set?: number[] | null; // [Int!]
   }
   BarberUpsertWithoutAppointmentInput: { // input type
     create: NexusGenInputs['BarberCreateWithoutAppointmentInput']; // BarberCreateWithoutAppointmentInput!
@@ -326,13 +348,13 @@ export interface NexusGenInputs {
   }
   UserCreateInput: { // input type
     appointment?: NexusGenInputs['AppointmentCreateNestedManyWithoutUserInput'] | null; // AppointmentCreateNestedManyWithoutUserInput
+    comments?: NexusGenInputs['UserCreatecommentsInput'] | null; // UserCreatecommentsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    email?: string | null; // String
+    email: string; // String!
     emailVerified?: NexusGenScalars['DateTime'] | null; // DateTime
     id?: string | null; // String
     image?: string | null; // String
     name: string; // String!
-    password?: string | null; // String
     type?: boolean | null; // Boolean
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -346,25 +368,28 @@ export interface NexusGenInputs {
     where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
   }
   UserCreateWithoutAppointmentInput: { // input type
+    comments?: NexusGenInputs['UserCreatecommentsInput'] | null; // UserCreatecommentsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    email?: string | null; // String
+    email: string; // String!
     emailVerified?: NexusGenScalars['DateTime'] | null; // DateTime
     id?: string | null; // String
     image?: string | null; // String
     name: string; // String!
-    password?: string | null; // String
     type?: boolean | null; // Boolean
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  UserCreatecommentsInput: { // input type
+    set?: string[] | null; // [String!]
+  }
   UserUpdateInput: { // input type
     appointment?: NexusGenInputs['AppointmentUpdateManyWithoutUserInput'] | null; // AppointmentUpdateManyWithoutUserInput
+    comments?: NexusGenInputs['UserUpdatecommentsInput'] | null; // UserUpdatecommentsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    email?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailVerified?: NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput'] | null; // NullableDateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     image?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    password?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     type?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -376,15 +401,19 @@ export interface NexusGenInputs {
     upsert?: NexusGenInputs['UserUpsertWithoutAppointmentInput'] | null; // UserUpsertWithoutAppointmentInput
   }
   UserUpdateWithoutAppointmentInput: { // input type
+    comments?: NexusGenInputs['UserUpdatecommentsInput'] | null; // UserUpdatecommentsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    email?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailVerified?: NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput'] | null; // NullableDateTimeFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     image?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    password?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     type?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUpdatecommentsInput: { // input type
+    push?: string | null; // String
+    set?: string[] | null; // [String!]
   }
   UserUpsertWithoutAppointmentInput: { // input type
     create: NexusGenInputs['UserCreateWithoutAppointmentInput']; // UserCreateWithoutAppointmentInput!
@@ -436,7 +465,7 @@ export interface NexusGenFieldTypes {
   }
   Barber: { // field return type
     barberLocation: string; // String!
-    barberName: string; // String!
+    barberName: string | null; // String
     createdAt: number | null; // Int
     description: string | null; // String
     id: string; // String!
@@ -465,12 +494,11 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     createdAt: number | null; // Int
-    email: string | null; // String
+    email: string; // String!
     emailVerified: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
     image: string | null; // String
     name: string; // String!
-    password: string | null; // String
     type: boolean; // Boolean!
     updatedAt: number | null; // Int
   }
@@ -519,7 +547,6 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     image: 'String'
     name: 'String'
-    password: 'String'
     type: 'Boolean'
     updatedAt: 'Int'
   }

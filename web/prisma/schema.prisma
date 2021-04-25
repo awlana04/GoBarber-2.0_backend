@@ -18,15 +18,17 @@ model User {
   name String
 
   // User's credentials
-  email         String?   @unique
+  email         String    @unique
   emailVerified DateTime? @map(name: "email_verified")
-  password      String?
   image         String?
+
+  // User's action
+  comments String[]
 
   appointment Appointment[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   @@map(name: "users")
 }
@@ -35,16 +37,22 @@ model Barber {
   id String @id @default(uuid())
 
   // Barber's information
-  barberLocation String
-  barberName     String
+  barberLocation String   @map(name: "barber_location")
+  barberName     String?  @map(name: "barber_name")
   description    String?
   photos         String[]
-  openOnWeekends Boolean
+  openOnWeekends Boolean  @map(name: "open_on_weekends")
+
+  // Barber's analytics
+  starRating Int[]    @map(name: "star_rating")
+  comments   String[]
 
   appointment Appointment[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "barbers")
 }
 
 model Appointment {
@@ -53,23 +61,26 @@ model Appointment {
   // Appointment's details
   date DateTime
 
-  userId   String
+  userId   String @map(name: "user_id")
   user     User   @relation(fields: [userId], references: [id])
-  barberId String
+  barberId String @map(name: "barber_id")
   barber   Barber @relation(fields: [barberId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "appointments")
 }
 
 model Account {
-  id         String @id @default(uuid())
-  compoundId String @unique @map(name: "compound_id")
+  id String @id @default(uuid())
 
-  userId             String    @map(name: "user_id")
-  providerType       String    @map(name: "provider_type")
-  providerId         String    @map(name: "provider_id")
-  providerAccountId  String    @map(name: "provider_account_id")
+  compoundId        String @unique @map(name: "compound_id")
+  userId            String @map(name: "user_id")
+  providerType      String @map(name: "provider_type")
+  providerId        String @map(name: "provider_id")
+  providerAccountId String @map(name: "provider_account_id")
+
   refreshToken       String?   @map(name: "refresh_token")
   accessToken        String?   @map(name: "access_token")
   accessTokenExpires DateTime? @map(name: "access_token_expires")
@@ -85,7 +96,8 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(uuid())
+  id String @id @default(uuid())
+
   userId       String   @map(name: "user_id")
   expires      DateTime
   sessionToken String   @unique @map(name: "session_token")
