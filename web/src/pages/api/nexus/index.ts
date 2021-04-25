@@ -6,8 +6,8 @@ import { Appointment } from './schemas/Appointment';
 import { Barber } from './schemas/Barber';
 import { User } from './schemas/User';
 
-import { Query } from './schemas/Query';
-import { Mutation } from './schemas/Mutation';
+import { Query } from './resolvers/Query';
+import { Mutation } from './resolvers/Mutation';
 
 const schema = makeSchema({
   types: [Appointment, Barber, User, Query, Mutation],

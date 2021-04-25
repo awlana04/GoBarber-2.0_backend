@@ -13,8 +13,6 @@ export const User = objectType({
       t.model.email({
         description: "User's credentials"
       }),
-      t.model.emailVerified()
-    t.model.password(),
       t.model.image(),
 
       t.int('createdAt'),
