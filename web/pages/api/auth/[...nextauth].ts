@@ -17,13 +17,5 @@ export default (request, response) => NextAuth(request, response, {
   jwt: {
     secret: process.env.JWT_SECRET,
   },
-  adapter: Adapters.Prisma.Adapter({
-    prisma,
-    modelMapping: {
-      User: 'user',
-      Account: 'account',
-      Session: 'session',
-      VerificationRequest: 'verificationRequest'
-    }
-  })
+  adapter: Adapters.Prisma.Adapter({ prisma })
 });
