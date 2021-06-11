@@ -5,7 +5,7 @@ import { createContext } from './context';
 
 const server = new ApolloServer({ schema, context: createContext });
 
-const handler = server.createHandler({ path: "/api/graphql" });
+const handler = server.createHandler({ path: '/api/graphql' });
 
 export const config = {
   api: {

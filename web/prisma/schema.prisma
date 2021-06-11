@@ -13,17 +13,8 @@ generator client {
 model User {
   id String @id @default(uuid())
 
-  // User's about
-  type Boolean @default(false)
-  name String
-
-  // User's credentials
   email         String    @unique
   emailVerified DateTime? @map(name: "email_verified")
-  image         String?
-
-  // User's action
-  comments String[]
 
   appointment Appointment[]
 
@@ -42,10 +33,6 @@ model Barber {
   description    String?
   photos         String[]
   openOnWeekends Boolean  @map(name: "open_on_weekends")
-
-  // Barber's analytics
-  starRating Int[]    @map(name: "star_rating")
-  comments   String[]
 
   appointment Appointment[]
 

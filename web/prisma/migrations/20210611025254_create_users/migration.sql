@@ -1,12 +1,8 @@
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
-    "type" BOOLEAN NOT NULL DEFAULT false,
-    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "email_verified" TIMESTAMP(3),
-    "image" TEXT,
-    "comments" TEXT[],
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
@@ -21,8 +17,6 @@ CREATE TABLE "barbers" (
     "description" TEXT,
     "photos" TEXT[],
     "open_on_weekends" BOOLEAN NOT NULL,
-    "star_rating" INTEGER[],
-    "comments" TEXT[],
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
