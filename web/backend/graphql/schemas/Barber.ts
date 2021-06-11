@@ -4,16 +4,14 @@ export const Barber = objectType({
   name: 'Barber',
   definition(t) {
     t.model.id(),
-
-    t.model.barberLocation({
-      description: "Barber's information"
-    }),
-    t.model.barberName(),
-    t.model.description(),
-    t.model.photos(),
-    t.model.openOnWeekends(),
-
-    t.int('createdAt'),
-    t.int('updatedAt')
+      t.model.barberLocation(),
+      t.model.barberName(),
+      t.model.description(),
+      t.model.photos(),
+      t.model.openOnWeekends(),
+      t.model.user(),
+      t.model.appointment(),
+      t.model.createdAt(),
+      t.model.updatedAt()
   }
 });

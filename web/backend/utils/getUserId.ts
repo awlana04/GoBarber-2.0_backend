@@ -1,12 +1,12 @@
 import { verify } from 'jsonwebtoken';
 
-import { createContext as context } from '../context';
+import { Context } from '../context';
 
 interface Token {
   userId: string;
 }
 
-export default function getUserId(context) {
+export function getUserId(context: Context) {
   const authHeader = context.request.get('Authorization');
 
   if (authHeader) {

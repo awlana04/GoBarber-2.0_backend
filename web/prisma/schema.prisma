@@ -13,10 +13,18 @@ generator client {
 model User {
   id String @id @default(uuid())
 
+  name String?
+
   email         String    @unique
   emailVerified DateTime? @map(name: "email_verified")
 
+  image String?
+
+  profile     Profile[]
+  barber      Barber[]
   appointment Appointment[]
+  accounts    Account[]
+  sessions    Session[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
@@ -24,17 +32,34 @@ model User {
   @@map(name: "users")
 }
 
+model Profile {
+  id String @id @default(uuid())
+
+  name   String
+  avatar String?
+
+  userId String? @map(name: "user_id")
+  user   User?   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map("profiles")
+}
+
 model Barber {
   id String @id @default(uuid())
 
-  // Barber's information
   barberLocation String   @map(name: "barber_location")
   barberName     String?  @map(name: "barber_name")
   description    String?
   photos         String[]
   openOnWeekends Boolean  @map(name: "open_on_weekends")
 
-  appointment Appointment[]
+  userId String? @map(name: "user_id")
+  user   User?   @relation(fields: [userId], references: [id])
+
+  appointments Appointment[]
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
@@ -45,7 +70,6 @@ model Barber {
 model Appointment {
   id String @id @default(uuid())
 
-  // Appointment's details
   date DateTime
 
   userId   String @map(name: "user_id")
@@ -76,6 +100,7 @@ model Account {
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
 
+  User User @relation(fields: [userId], references: [id])
   @@index([providerAccountId], name: "providerAccountId")
   @@index([providerId], name: "providerId")
   @@index([userId], name: "userId")
@@ -93,6 +118,7 @@ model Session {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
+  User User @relation(fields: [userId], references: [id])
   @@map(name: "sessions")
 }
 

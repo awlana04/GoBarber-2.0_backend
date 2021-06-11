@@ -2,14 +2,14 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-interface Context {
+export interface Context {
   prisma: PrismaClient;
   request: any;
-}
+};
 
-export function createContext(request: any): Context {
+export function createContext(req: any) {
   return {
-    ...request,
-    prisma
+    ...req,
+    prisma,
   };
-}
+};
