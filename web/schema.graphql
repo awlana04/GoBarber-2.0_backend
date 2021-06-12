@@ -40,6 +40,7 @@ input BarberWhereUniqueInput {
 scalar DateTime
 
 type Mutation {
+  signin(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!): AuthPayload
 }
 

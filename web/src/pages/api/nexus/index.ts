@@ -25,7 +25,7 @@ const schemaWithPermissions = makeSchema({
   },
   plugins: [nexusPrisma({ experimentalCRUD: true }), connectionPlugin()],
   contextType: {
-    module: path.join(__dirname, '..', 'context.ts'),
+    module: require.resolve('../context.ts'),
     export: 'Context',
   },
   sourceTypes: {

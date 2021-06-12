@@ -8,11 +8,25 @@ const rules = {
     const userId = getUserId(context);
 
     return Boolean(userId);
-  })
+  }),
+
+  // isPostOwner: rule()(async (_parent, args, context) => {
+  //   const userId = getUserId(context);
+
+  //   const author = await context.prisma.tweet
+  //     .findUnique({
+  //       where: {
+  //         id: String(args.id),
+  //       },
+  //     })
+  //     .author()
+
+  //   return userId === author.id;
+  // }),
 }
 
 export const permissions = shield({
   Query: {
-    me: rules.isAuthenticatedUser
-  }
+    me: rules.isAuthenticatedUser,
+  },
 })
