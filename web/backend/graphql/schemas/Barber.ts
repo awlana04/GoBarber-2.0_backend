@@ -10,7 +10,7 @@ export const Barber = objectType({
       t.model.photos(),
       t.model.openOnWeekends(),
       t.model.user(),
-      t.model.appointment(),
+      t.model.appointments(),
       t.model.createdAt(),
       t.model.updatedAt()
   }

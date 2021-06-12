@@ -1,20 +1,34 @@
-import { mutationType } from 'nexus';
+import { objectType, nonNull, stringArg } from 'nexus';
+import { compare, hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
-export const Mutation = mutationType({
+import { Context } from '../../context';
+import { getUserId } from '../../utils/getUserId';
+
+export const Mutation = objectType({
+  name: 'Mutation',
   definition(t) {
-    // Appointments
-    t.crud.createOneAppointment(),
-    t.crud.updateOneAppointment(),
-    t.crud.deleteOneAppointment(),
+    t.field('signup', {
+      type: 'AuthPayload',
+      args: {
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+      },
+      resolve: async (_parent, args, context: Context) => {
+        const hashedPassword = await hash(args.password, 10);
 
-    // Users
-    t.crud.createOneUser(),
-    t.crud.updateOneUser(),
-    t.crud.deleteOneUser(),
+        const user = await context.prisma.user.create({
+          data: {
+            email: args.email,
+            password: hashedPassword,
+          },
+        })
 
-    // Barbers
-    t.crud.createOneBarber(),
-    t.crud.updateOneBarber(),
-    t.crud.deleteOneBarber()
+        return {
+          token: sign({ userId: user.id }, process.env.APP_SECRET),
+          user,
+        }
+      },
+    })
   }
-});
+})

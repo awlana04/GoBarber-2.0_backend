@@ -1,17 +1,71 @@
-import { queryType } from 'nexus';
+import { objectType } from 'nexus';
 
-export const Query = queryType({
+import { Context } from '../../context';
+import { getUserId } from '../../utils/getUserId';
+
+export const Query = objectType({
+  name: 'Query',
   definition(t) {
-    // Appointments
-    t.crud.appointment(),
-    t.crud.appointments(),
+    t.field('me', {
+      type: 'User',
+      resolve: (_parent, args, context: Context) => {
+        const userId = getUserId(context);
 
-    // Users
-    t.crud.user(),
-    t.crud.users(),
+        return context.prisma.user.findUnique({
+          where: {
+            id: String(userId),
+          }
+        })
+      }
+    })
 
-    // Barbers
-    t.crud.barber(),
-    t.crud.barbers()
+    t.field('barber', {
+      type: 'Barber',
+      resolve: (_parent, args, context: Context) => {
+        const userId = getUserId(context);
+
+        return context.prisma.barber.findUnique({
+          where: {
+            ...args,
+            user: { connect: { id: String(userId) } },
+          }
+        })
+      }
+    })
+
+    // t.list.field('allBarbers', {
+    //   type: 'Barber',
+    //   resolve: (_parent, _args, context: Context) => {
+    //     return context.prisma.barber.findMany();
+    //   }
+    // })
+
+    t.field('appointment', {
+      type: 'Appointment',
+      resolve: (_parent, args, context: Context) => {
+        const userId = getUserId(context);
+
+        return context.prisma.appointment.findUnique({
+          where: {
+            ...args,
+            user: { connect: { id: String(userId) } },
+          }
+        })
+      }
+    })
+
+    t.field('allAppointments', {
+      type: 'Appointment',
+      resolve: (_parent, args, context: Context) => {
+        const userId = getUserId(context);
+
+        return context.prisma.appointment.findMany({
+          where: {
+            ...args,
+            barber: { connect: { id: String(userId) } },
+          }
+        })
+      }
+    })
   }
-});
+})
