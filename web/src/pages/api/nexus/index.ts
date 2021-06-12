@@ -20,12 +20,12 @@ export const DateTime = asNexusMethod(DateTimeResolver, 'date');
 const schemaWithPermissions = makeSchema({
   types: [User, Barber, Profile, Appointment, Query, Mutation, AuthPayload],
   outputs: {
-    schema: path.join(__dirname, '..', '..', 'schema.graphql'),
-    typegen: path.join(__dirname, '..', '..', 'generated', 'nexus.ts'),
+    schema: path.join(__dirname, '..', '..', '..', '..', 'schema.graphql'),
+    typegen: path.join(__dirname, '..', '..', '..', '..', 'generated', 'nexus.ts'),
   },
   plugins: [nexusPrisma({ experimentalCRUD: true }), connectionPlugin()],
   contextType: {
-    module: require.resolve('../context'),
+    module: path.join(__dirname, '..', 'context.ts'),
     export: 'Context',
   },
   sourceTypes: {

@@ -25,7 +25,7 @@ export const Mutation = objectType({
         })
 
         return {
-          token: sign({ userId: user.id }, process.env.APP_SECRET),
+          token: sign({ userId: user.id }, process.env.APP_SECRET as string),
           user,
         }
       },

@@ -4,7 +4,7 @@
  */
 
 
-import { Context } from "./../backend/context"
+import { Context } from "./../src/pages/api/context"
 import { core, connectionPluginCore } from "nexus"
 
 declare global {
@@ -91,6 +91,7 @@ export interface NexusGenObjects {
     id: string; // String!
     image?: string | null; // String
     name?: string | null; // String
+    password?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -142,7 +143,10 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    allBarbers: NexusGenRootTypes['Barber'] | null; // Barber
+    allAppointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
+    allBarbers: Array<NexusGenRootTypes['Barber'] | null> | null; // [Barber]
+    appointment: NexusGenRootTypes['Appointment'] | null; // Appointment
+    barber: NexusGenRootTypes['Barber'] | null; // Barber
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -153,6 +157,7 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     image: string | null; // String
     name: string | null; // String
+    password: string | null; // String
     profile: NexusGenRootTypes['Profile'][]; // [Profile!]!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -195,7 +200,10 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
+    allAppointments: 'Appointment'
     allBarbers: 'Barber'
+    appointment: 'Appointment'
+    barber: 'Barber'
     me: 'User'
   }
   User: { // field return type name
@@ -206,6 +214,7 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     image: 'String'
     name: 'String'
+    password: 'String'
     profile: 'Profile'
     updatedAt: 'DateTime'
   }

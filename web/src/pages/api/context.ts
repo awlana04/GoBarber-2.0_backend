@@ -7,9 +7,9 @@ export interface Context {
   request: any;
 };
 
-export function createContext(req: any) {
+export function createContext(request: any) {
   return {
-    ...req,
+    ...request,
     prisma,
   };
 };

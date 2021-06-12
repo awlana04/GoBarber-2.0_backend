@@ -26,45 +26,42 @@ export const Query = objectType({
 
         return context.prisma.barber.findUnique({
           where: {
-            ...args,
-            user: { connect: { id: String(userId) } },
+            id: String(userId),
           }
         })
       }
     })
 
-    // t.list.field('allBarbers', {
-    //   type: 'Barber',
-    //   resolve: (_parent, _args, context: Context) => {
-    //     return context.prisma.barber.findMany();
-    //   }
-    // })
+    t.list.field('allBarbers', {
+      type: 'Barber',
+      resolve: (_parent, _args, context: Context) => {
+        return context.prisma.barber.findMany();
+      }
+    })
 
     t.field('appointment', {
       type: 'Appointment',
-      resolve: (_parent, args, context: Context) => {
+      resolve: (_parent, _args, context: Context) => {
         const userId = getUserId(context);
 
         return context.prisma.appointment.findUnique({
           where: {
-            ...args,
-            user: { connect: { id: String(userId) } },
+            id: String(userId),
           }
-        })
+        });
       }
     })
 
-    t.field('allAppointments', {
+    t.list.field('allAppointments', {
       type: 'Appointment',
-      resolve: (_parent, args, context: Context) => {
+      resolve: (_parent, _args, context: Context) => {
         const userId = getUserId(context);
 
         return context.prisma.appointment.findMany({
           where: {
-            ...args,
-            barber: { connect: { id: String(userId) } },
+            barber: { id: String(userId) },
           }
-        })
+        });
       }
     })
   }

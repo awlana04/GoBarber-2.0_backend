@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "npm run build:nexus-typegen && next build",
-    "build:nexus-typegen": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only backend/graphql/index",
+    "build:nexus-typegen": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only src/pages/api/nexus/index",
     "start": "next start"
   },
   "dependencies": {

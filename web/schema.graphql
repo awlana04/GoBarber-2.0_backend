@@ -57,7 +57,10 @@ input ProfileWhereUniqueInput {
 }
 
 type Query {
-  allBarbers: Barber
+  allAppointments: [Appointment]
+  allBarbers: [Barber]
+  appointment: Appointment
+  barber: Barber
   me: User
 }
 
@@ -69,6 +72,7 @@ type User {
   id: String!
   image: String
   name: String
+  password: String
   profile(after: ProfileWhereUniqueInput, before: ProfileWhereUniqueInput, first: Int, last: Int): [Profile!]!
   updatedAt: DateTime!
 }
