@@ -4,16 +4,16 @@ import { Context } from '../context';
 
 interface Token {
   userId: string;
-}
+};
 
 export function getUserId(context: Context) {
   const authHeader = context.request.get('Authorization');
 
   if (authHeader) {
-    const token = authHeader.replace('Bearer', '');
+    const token = authHeader.replace('Bearer ', '');
 
     const verifiedToken = verify(token, process.env.APP_SECRET as string) as Token;
 
     return verifiedToken && String(verifiedToken.userId);
-  }
-}
+  };
+};

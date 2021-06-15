@@ -18,7 +18,7 @@ import { AuthPayload } from './resolvers/AuthPayload';
 export const DateTime = asNexusMethod(DateTimeResolver, 'date');
 
 const schemaWithPermissions = makeSchema({
-  types: [User, Barber, Profile, Appointment, Query, Mutation, AuthPayload],
+  types: [User, Barber, Profile, Appointment, Query, Mutation, AuthPayload, DateTime],
   outputs: {
     schema: path.join(__dirname, '..', '..', 'schema.graphql'),
     typegen: path.join(__dirname, '..', '..', 'generated', 'nexus.ts'),

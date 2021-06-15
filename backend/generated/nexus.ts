@@ -6,9 +6,20 @@
 
 import { Context } from "./../src/context"
 import { core, connectionPluginCore } from "nexus"
-
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
 declare global {
   interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
     /**
      * Adds a Relay-style connection to the type, with numerous options for configuration
      *
@@ -143,10 +154,6 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    allAppointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
-    allBarbers: Array<NexusGenRootTypes['Barber'] | null> | null; // [Barber]
-    appointment: NexusGenRootTypes['Appointment'] | null; // Appointment
-    barber: NexusGenRootTypes['Barber'] | null; // Barber
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -200,10 +207,6 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
-    allAppointments: 'Appointment'
-    allBarbers: 'Barber'
-    appointment: 'Appointment'
-    barber: 'Barber'
     me: 'User'
   }
   User: { // field return type name
