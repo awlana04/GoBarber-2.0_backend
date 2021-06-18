@@ -7,12 +7,14 @@ interface Token {
 };
 
 export function getUserId(context: Context) {
-  const authHeader = context.request.get('Authorization');
+  const authHeader = context.req.get('Authorization');
 
   if (authHeader) {
     const token = authHeader.replace('Bearer ', '');
-
-    const verifiedToken = verify(token, process.env.APP_SECRET as string) as Token;
+    const verifiedToken = verify(
+      token,
+      process.env.APP_SECRET as string
+    ) as Token;
 
     return verifiedToken && String(verifiedToken.userId);
   };

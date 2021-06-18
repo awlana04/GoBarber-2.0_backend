@@ -3,7 +3,6 @@ import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import { Context } from '../../context';
-import { getUserId } from '../../utils/getUserId';
 
 export const Mutation = objectType({
   name: 'Mutation',
@@ -14,12 +13,12 @@ export const Mutation = objectType({
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      resolve: async (_parent, { email, password }, context: Context) => {
-        const hashedPassword = await hash(password, 10);
+      resolve: async (_parent, args, context: Context) => {
+        const hashedPassword = await hash(args.password, 10);
 
         const user = await context.prisma.user.create({
           data: {
-            email: email,
+            email: args.email,
             password: hashedPassword,
           },
         })
@@ -40,15 +39,15 @@ export const Mutation = objectType({
       resolve: async (_parent, { email, password }, context: Context) => {
         const user = await context.prisma.user.findUnique({
           where: {
-            email
-          }
+            email,
+          },
         })
 
         if (!user) {
           throw new Error(`No user found for email: ${email}`);
         }
 
-        const passwordValid = await compare(password, user.password as string);
+        const passwordValid = await compare(password, user.password);
 
         if (!passwordValid) {
           throw new Error('Invalid password');
@@ -58,7 +57,7 @@ export const Mutation = objectType({
           token: sign({ userId: user.id }, process.env.APP_SECRET as string),
           user,
         }
-      }
+      },
     })
-  }
+  },
 })
