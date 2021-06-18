@@ -7,6 +7,9 @@ import path from 'path';
 import { permissions } from '../config/permissions';
 
 import { User } from './schemas/User';
+import { Profile } from './schemas/Profile';
+import { Barber } from './schemas/Barber';
+import { Appointment } from './schemas/Appointment';
 
 import { Query } from './resolvers/Query';
 import { Mutation } from './resolvers/Mutation';
@@ -17,6 +20,9 @@ export const DateTime = asNexusMethod(DateTimeResolver, 'date');
 export const schemaWithoutPermissions = makeSchema({
   types: [
     User,
+    Profile,
+    Barber,
+    Appointment,
     Query,
     Mutation,
     AuthPayload,

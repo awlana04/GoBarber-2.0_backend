@@ -43,6 +43,15 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AppointmentWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  BarberWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  ProfileWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -58,16 +67,41 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Appointment: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   AuthPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Barber: { // root type
+    barberLocation: string; // String!
+    barberName?: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description?: string | null; // String
+    id: string; // String!
+    openOnWeekends: boolean; // Boolean!
+    photos: string[]; // [String!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Mutation: {};
+  Profile: { // root type
+    avatar?: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: {};
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     id: string; // String!
+    image?: string | null; // String
+    name?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -83,46 +117,120 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Appointment: { // field return type
+    barber: NexusGenRootTypes['Barber']; // Barber!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+  }
   AuthPayload: { // field return type
     token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
+  }
+  Barber: { // field return type
+    appointments: NexusGenRootTypes['Appointment'][]; // [Appointment!]!
+    barberLocation: string; // String!
+    barberName: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string | null; // String
+    id: string; // String!
+    openOnWeekends: boolean; // Boolean!
+    photos: string[]; // [String!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
     signin: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
+  Profile: { // field return type
+    avatar: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User'] | null; // User
+  }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
+    appointment: NexusGenRootTypes['Appointment'][]; // [Appointment!]!
+    barber: NexusGenRootTypes['Barber'][]; // [Barber!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     id: string; // String!
+    image: string | null; // String
+    name: string | null; // String
+    profile: NexusGenRootTypes['Profile'][]; // [Profile!]!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Appointment: { // field return type name
+    barber: 'Barber'
+    createdAt: 'DateTime'
+    date: 'DateTime'
+    id: 'String'
+    updatedAt: 'DateTime'
+    user: 'User'
+  }
   AuthPayload: { // field return type name
     token: 'String'
+    user: 'User'
+  }
+  Barber: { // field return type name
+    appointments: 'Appointment'
+    barberLocation: 'String'
+    barberName: 'String'
+    createdAt: 'DateTime'
+    description: 'String'
+    id: 'String'
+    openOnWeekends: 'Boolean'
+    photos: 'String'
+    updatedAt: 'DateTime'
     user: 'User'
   }
   Mutation: { // field return type name
     signin: 'AuthPayload'
     signup: 'AuthPayload'
   }
+  Profile: { // field return type name
+    avatar: 'String'
+    createdAt: 'DateTime'
+    id: 'String'
+    name: 'String'
+    updatedAt: 'DateTime'
+    user: 'User'
+  }
   Query: { // field return type name
     me: 'User'
   }
   User: { // field return type name
+    appointment: 'Appointment'
+    barber: 'Barber'
     createdAt: 'DateTime'
     email: 'String'
     id: 'String'
+    image: 'String'
+    name: 'String'
+    profile: 'Profile'
     updatedAt: 'DateTime'
   }
 }
 
 export interface NexusGenArgTypes {
+  Barber: {
+    appointments: { // args
+      after?: NexusGenInputs['AppointmentWhereUniqueInput'] | null; // AppointmentWhereUniqueInput
+      before?: NexusGenInputs['AppointmentWhereUniqueInput'] | null; // AppointmentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+  }
   Mutation: {
     signin: { // args
       email: string; // String!
@@ -131,6 +239,26 @@ export interface NexusGenArgTypes {
     signup: { // args
       email: string; // String!
       password: string; // String!
+    }
+  }
+  User: {
+    appointment: { // args
+      after?: NexusGenInputs['AppointmentWhereUniqueInput'] | null; // AppointmentWhereUniqueInput
+      before?: NexusGenInputs['AppointmentWhereUniqueInput'] | null; // AppointmentWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    barber: { // args
+      after?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
+      before?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    profile: { // args
+      after?: NexusGenInputs['ProfileWhereUniqueInput'] | null; // ProfileWhereUniqueInput
+      before?: NexusGenInputs['ProfileWhereUniqueInput'] | null; // ProfileWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
   }
 }
@@ -143,7 +271,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

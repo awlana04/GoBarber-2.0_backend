@@ -13,12 +13,12 @@ export const Mutation = objectType({
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      resolve: async (_parent, args, context: Context) => {
-        const hashedPassword = await hash(args.password, 10);
+      resolve: async (_parent, { email, password }, context: Context) => {
+        const hashedPassword = await hash(password, 10);
 
         const user = await context.prisma.user.create({
           data: {
-            email: args.email,
+            email: email,
             password: hashedPassword,
           },
         })
@@ -47,7 +47,7 @@ export const Mutation = objectType({
           throw new Error(`No user found for email: ${email}`);
         }
 
-        const passwordValid = await compare(password, user.password);
+        const passwordValid = await compare(password, user.password as string);
 
         if (!passwordValid) {
           throw new Error('Invalid password');

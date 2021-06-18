@@ -5,6 +5,11 @@ export const User = objectType({
   definition(t) {
     t.model.id(),
       t.model.email(),
+      t.model.name(),
+      t.model.image(),
+      t.model.profile(),
+      t.model.barber(),
+      t.model.appointment(),
       t.model.createdAt(),
       t.model.updatedAt()
   },
