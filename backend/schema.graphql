@@ -43,15 +43,18 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
+  createProfile(avatar: String, id: String, name: String): Profile
   signin(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!): AuthPayload
+  updateProfile(avatar: String, id: String, name: String): Profile
+  updateUser(id: String, image: String, name: String): User
 }
 
 type Profile {
   avatar: String
   createdAt: DateTime!
   id: String!
-  name: String!
+  name: String
   updatedAt: DateTime!
   user: User
 }

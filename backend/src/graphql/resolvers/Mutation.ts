@@ -3,6 +3,7 @@ import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import { Context } from '../../context';
+import { getUserId } from '../../utils/getUserId';
 
 export const Mutation = objectType({
   name: 'Mutation',
@@ -58,6 +59,79 @@ export const Mutation = objectType({
           user,
         }
       },
+    })
+
+    t.field('updateUser', {
+      type: 'User',
+      args: {
+        id: stringArg(),
+        name: stringArg(),
+        image: stringArg()
+      },
+      resolve: (_parent, { id, ...args }, context: Context) => {
+        const userId = getUserId(context);
+
+        if (!userId) {
+          throw new Error('Could not authenticate user.');
+        }
+
+        return context.prisma.user.update({
+          data: {
+            ...args,
+          },
+          where: {
+            id: String(userId),
+          }
+        })
+      }
+    })
+
+    t.field('createProfile', {
+      type: 'Profile',
+      args: {
+        id: stringArg(),
+        avatar: stringArg(),
+        name: stringArg(),
+      },
+      resolve: (_parent, { id, ...args }, context: Context) => {
+        const userId = getUserId(context);
+
+        if (!userId) {
+          throw new Error('Could not authenticate user.');
+        }
+
+        return context.prisma.profile.create({
+          data: {
+            ...args,
+            user: { connect: { id: String(userId) } }
+          }
+        })
+      }
+    })
+
+    t.field('updateProfile', {
+      type: 'Profile',
+      args: {
+        id: stringArg(),
+        name: stringArg(),
+        avatar: stringArg()
+      },
+      resolve: (_parent, { id, ...args }, context: Context) => {
+        const userId = getUserId(context);
+
+        if (!userId) {
+          throw new Error('Could not authenticate user.');
+        }
+
+        return context.prisma.profile.update({
+          data: {
+            ...args,
+          },
+          where: {
+            id: String(id),
+          }
+        })
+      }
     })
   },
 })

@@ -35,7 +35,7 @@ model User {
 model Profile {
   id String @id @default(uuid())
 
-  name   String
+  name   String?
   avatar String?
 
   userId String? @map(name: "user_id")

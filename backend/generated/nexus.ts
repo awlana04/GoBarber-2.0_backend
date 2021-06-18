@@ -92,7 +92,7 @@ export interface NexusGenObjects {
     avatar?: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
-    name: string; // String!
+    name?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Query: {};
@@ -142,14 +142,17 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    createProfile: NexusGenRootTypes['Profile'] | null; // Profile
     signin: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    updateProfile: NexusGenRootTypes['Profile'] | null; // Profile
+    updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Profile: { // field return type
     avatar: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
-    name: string; // String!
+    name: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User'] | null; // User
   }
@@ -195,8 +198,11 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    createProfile: 'Profile'
     signin: 'AuthPayload'
     signup: 'AuthPayload'
+    updateProfile: 'Profile'
+    updateUser: 'User'
   }
   Profile: { // field return type name
     avatar: 'String'
@@ -232,6 +238,11 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    createProfile: { // args
+      avatar?: string | null; // String
+      id?: string | null; // String
+      name?: string | null; // String
+    }
     signin: { // args
       email: string; // String!
       password: string; // String!
@@ -239,6 +250,16 @@ export interface NexusGenArgTypes {
     signup: { // args
       email: string; // String!
       password: string; // String!
+    }
+    updateProfile: { // args
+      avatar?: string | null; // String
+      id?: string | null; // String
+      name?: string | null; // String
+    }
+    updateUser: { // args
+      id?: string | null; // String
+      image?: string | null; // String
+      name?: string | null; // String
     }
   }
   User: {
