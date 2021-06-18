@@ -1,4 +1,4 @@
-import { objectType, nonNull, stringArg } from 'nexus';
+import { objectType, nonNull, stringArg, booleanArg } from 'nexus';
 import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
@@ -124,6 +124,60 @@ export const Mutation = objectType({
         }
 
         return context.prisma.profile.update({
+          data: {
+            ...args,
+          },
+          where: {
+            id: String(id),
+          }
+        })
+      }
+    })
+
+    t.field('createBarber', {
+      type: 'Barber',
+      args: {
+        id: stringArg(),
+        barberLocation: stringArg(),
+        barberName: stringArg(),
+        description: stringArg(),
+        photos: stringArg(),
+        openOnWeekends: booleanArg()
+      },
+      resolve: (_parent, { id, ...args }, context: Context) => {
+        const userId = getUserId(context);
+
+        if (!userId) {
+          throw new Error('Could not authenticate user.');
+        }
+
+        return context.prisma.barber.create({
+          data: {
+            ...args,
+            user: { connect: { id: String(userId) } },
+          }
+        })
+      }
+    })
+
+    t.field('updateBarber', {
+      type: 'Barber',
+      args: {
+        id: stringArg(),
+        barberLocation: stringArg(),
+        barberName: stringArg(),
+        description: stringArg(),
+        photos: stringArg(),
+        openOnWeekends: booleanArg()
+      },
+      resolve: (_parent, { id, ...args }, context: Context) => {
+        const userId = getUserId(context);
+
+        if (!userId) {
+          throw new Error('Could not authenticate user.');
+        }
+
+        return context.prisma.barber.update({
           data: {
             ...args,
           },

@@ -1,13 +1,22 @@
--- AlterTable
-ALTER TABLE "users" ADD COLUMN     "name" TEXT,
-ADD COLUMN     "image" TEXT,
-ADD COLUMN     "email_verified" TIMESTAMP(3),
-ALTER COLUMN "password" DROP NOT NULL;
+-- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT,
+    "type" BOOLEAN,
+    "name" TEXT,
+    "image" TEXT,
+    "email_verified" TIMESTAMP(3),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "profiles" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT,
     "avatar" TEXT,
     "user_id" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -84,6 +93,9 @@ CREATE TABLE "verification_requests" (
 
     PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users.email_unique" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts.compound_id_unique" ON "accounts"("compound_id");

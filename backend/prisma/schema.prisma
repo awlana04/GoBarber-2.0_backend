@@ -16,6 +16,7 @@ model User {
   email    String  @unique
   password String?
 
+  type          Boolean?
   name          String?
   image         String?
   emailVerified DateTime? @map(name: "email_verified")

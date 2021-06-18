@@ -142,9 +142,11 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    createBarber: NexusGenRootTypes['Barber'] | null; // Barber
     createProfile: NexusGenRootTypes['Profile'] | null; // Profile
     signin: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    updateBarber: NexusGenRootTypes['Barber'] | null; // Barber
     updateProfile: NexusGenRootTypes['Profile'] | null; // Profile
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
@@ -157,6 +159,8 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    allBarbers: Array<NexusGenRootTypes['Barber'] | null> | null; // [Barber]
+    barber: NexusGenRootTypes['Barber'] | null; // Barber
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -198,9 +202,11 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    createBarber: 'Barber'
     createProfile: 'Profile'
     signin: 'AuthPayload'
     signup: 'AuthPayload'
+    updateBarber: 'Barber'
     updateProfile: 'Profile'
     updateUser: 'User'
   }
@@ -213,6 +219,8 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
+    allBarbers: 'Barber'
+    barber: 'Barber'
     me: 'User'
   }
   User: { // field return type name
@@ -238,6 +246,14 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    createBarber: { // args
+      barberLocation?: string | null; // String
+      barberName?: string | null; // String
+      description?: string | null; // String
+      id?: string | null; // String
+      openOnWeekends?: boolean | null; // Boolean
+      photos?: Array<string | null> | null; // [String]
+    }
     createProfile: { // args
       avatar?: string | null; // String
       id?: string | null; // String
@@ -251,6 +267,14 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
     }
+    updateBarber: { // args
+      barberLocation?: string | null; // String
+      barberName?: string | null; // String
+      description?: string | null; // String
+      id?: string | null; // String
+      openOnWeekends?: boolean | null; // Boolean
+      photos?: Array<string | null> | null; // [String]
+    }
     updateProfile: { // args
       avatar?: string | null; // String
       id?: string | null; // String
@@ -260,6 +284,11 @@ export interface NexusGenArgTypes {
       id?: string | null; // String
       image?: string | null; // String
       name?: string | null; // String
+    }
+  }
+  Query: {
+    barber: { // args
+      id?: string | null; // String
     }
   }
   User: {
