@@ -1,4 +1,7 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { ApolloProvider } from '@apollo/client';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+import client from '../hooks/auth';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,10 +20,12 @@ const theme = {
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   )
 }
