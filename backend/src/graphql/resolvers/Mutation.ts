@@ -86,6 +86,43 @@ export const Mutation = objectType({
       }
     })
 
+    t.field('deleteUser', {
+      type: 'User',
+      args: {
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg())
+      },
+      resolve: async (_parent, { email, password }, context: Context) => {
+        const userId = getUserId(context);
+
+        if (!userId) {
+          throw new Error('Could not authenticate user.');
+        }
+
+        const user = await context.prisma.user.findUnique({
+          where: {
+            email
+          }
+        })
+
+        if (!user) {
+          throw new Error(`No user found for email: ${email}`);
+        }
+
+        const passwordValid = await compare(password, user.password as string);
+
+        if (!passwordValid) {
+          throw new Error('Invalid password');
+        }
+
+        return context.prisma.user.delete({
+          where: {
+            email
+          },
+        });
+      }
+    })
+
     t.field('createProfile', {
       type: 'Profile',
       args: {

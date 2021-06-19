@@ -144,6 +144,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createBarber: NexusGenRootTypes['Barber'] | null; // Barber
     createProfile: NexusGenRootTypes['Profile'] | null; // Profile
+    deleteUser: NexusGenRootTypes['User'] | null; // User
     signin: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     updateBarber: NexusGenRootTypes['Barber'] | null; // Barber
@@ -204,6 +205,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createBarber: 'Barber'
     createProfile: 'Profile'
+    deleteUser: 'User'
     signin: 'AuthPayload'
     signup: 'AuthPayload'
     updateBarber: 'Barber'
@@ -258,6 +260,10 @@ export interface NexusGenArgTypes {
       avatar?: string | null; // String
       id?: string | null; // String
       name?: string | null; // String
+    }
+    deleteUser: { // args
+      email: string; // String!
+      password: string; // String!
     }
     signin: { // args
       email: string; // String!
