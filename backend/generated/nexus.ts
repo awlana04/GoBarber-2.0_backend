@@ -247,12 +247,12 @@ export interface NexusGenArgTypes {
   }
   Mutation: {
     createBarber: { // args
-      barberLocation?: string | null; // String
+      barberLocation: string; // String!
       barberName?: string | null; // String
       description?: string | null; // String
       id?: string | null; // String
-      openOnWeekends?: boolean | null; // Boolean
-      photos?: Array<string | null> | null; // [String]
+      openOnWeekends: boolean; // Boolean!
+      photos: string[]; // [String!]!
     }
     createProfile: { // args
       avatar?: string | null; // String
@@ -268,12 +268,12 @@ export interface NexusGenArgTypes {
       password: string; // String!
     }
     updateBarber: { // args
-      barberLocation?: string | null; // String
+      barberLocation: string; // String!
       barberName?: string | null; // String
       description?: string | null; // String
       id?: string | null; // String
-      openOnWeekends?: boolean | null; // Boolean
-      photos?: Array<string | null> | null; // [String]
+      openOnWeekends: boolean; // Boolean!
+      photos: string[]; // [String!]!
     }
     updateProfile: { // args
       avatar?: string | null; // String

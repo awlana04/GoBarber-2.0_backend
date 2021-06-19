@@ -43,11 +43,11 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
-  createBarber(barberLocation: String, barberName: String, description: String, id: String, openOnWeekends: Boolean, photos: [String]): Barber
+  createBarber(barberLocation: String!, barberName: String, description: String, id: String, openOnWeekends: Boolean!, photos: [String!]!): Barber
   createProfile(avatar: String, id: String, name: String): Profile
   signin(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!): AuthPayload
-  updateBarber(barberLocation: String, barberName: String, description: String, id: String, openOnWeekends: Boolean, photos: [String]): Barber
+  updateBarber(barberLocation: String!, barberName: String, description: String, id: String, openOnWeekends: Boolean!, photos: [String!]!): Barber
   updateProfile(avatar: String, id: String, name: String): Profile
   updateUser(id: String, image: String, name: String): User
 }

@@ -1,4 +1,4 @@
-import { objectType, nonNull, stringArg, booleanArg } from 'nexus';
+import { objectType, nonNull, stringArg, booleanArg, list } from 'nexus';
 import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
@@ -138,11 +138,11 @@ export const Mutation = objectType({
       type: 'Barber',
       args: {
         id: stringArg(),
-        barberLocation: stringArg(),
+        barberLocation: nonNull(stringArg()),
         barberName: stringArg(),
         description: stringArg(),
-        photos: stringArg(),
-        openOnWeekends: booleanArg()
+        photos: nonNull(list(nonNull(stringArg()))),
+        openOnWeekends: nonNull(booleanArg())
       },
       resolve: (_parent, { id, ...args }, context: Context) => {
         const userId = getUserId(context);
@@ -164,11 +164,11 @@ export const Mutation = objectType({
       type: 'Barber',
       args: {
         id: stringArg(),
-        barberLocation: stringArg(),
+        barberLocation: nonNull(stringArg()),
         barberName: stringArg(),
         description: stringArg(),
-        photos: stringArg(),
-        openOnWeekends: booleanArg()
+        photos: nonNull(list(nonNull(stringArg()))),
+        openOnWeekends: nonNull(booleanArg())
       },
       resolve: (_parent, { id, ...args }, context: Context) => {
         const userId = getUserId(context);
