@@ -1,10 +1,9 @@
-import styled from 'styled-components'
+import React from 'react';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import Signup from '../screens/Signup';
 
-export default function Home() {
-  return <Title>My page</Title>
-}
+const SignupPage: React.FC = () => (
+  <Signup />
+)
+
+export default SignupPage;
