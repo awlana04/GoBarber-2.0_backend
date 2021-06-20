@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Signup from '../screens/Signup';
+import Signin from '../screens/Signin';
 
-const SignupPage: React.FC = () => (
-  <Signup />
+const SigninPage: React.FC = () => (
+  <Signin />
 )
 
-export default SignupPage;
+export default SigninPage;

@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, InputField } from './styles';
 
 interface InputProps {
+  id: string;
   type: string;
   value: string;
   placeholder: string;
@@ -10,9 +11,9 @@ interface InputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({ type, value, placeholder, onBlur, onChange }) => (
+const Input: React.FC<InputProps> = ({ id, type, value, placeholder, onBlur, onChange }) => (
   <Container>
-    <InputField type={type} value={value} placeholder={placeholder} onBlur={onBlur} onChange={onChange} />
+    <InputField id={id} type={type} value={value} placeholder={placeholder} onBlur={onBlur} onChange={onChange} />
   </Container>
 )
 

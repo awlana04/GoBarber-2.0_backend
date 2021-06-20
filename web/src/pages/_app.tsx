@@ -1,31 +1,22 @@
+import React from 'react';
+import { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import client from '../hooks/auth';
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-`
+import GlobalStyle from '../styles/global';
+import theme from '../styles/theme';
 
-const theme = {
-  colors: {
-    primary: '#0070f3',
-  },
-}
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <>
+    {/* <ApolloProvider client={client}> */}
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+      <GlobalStyle />
+    </ThemeProvider>
+    {/* </ApolloProvider> */}
+  </>
+);
 
-export default function App({ Component, pageProps }) {
-  return (
-    <>
-      <ApolloProvider client={client}>
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </ApolloProvider>
-    </>
-  )
-}
+export default MyApp;
