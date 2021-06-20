@@ -1,18 +1,17 @@
 import React from 'react';
-import Image from 'next/image';
-import { Form, useFormik } from 'formik';
 import { useMutation } from '@apollo/client';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { FiMail } from 'react-icons/fi';
 
 import SIGNIN_MUTATION from '../../schemas/Mutations/Signin';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, Logo, BackgroundImage } from './styles';
+import { Container, Form, Footer } from './styles';
+import Link from 'next/link';
 
-const Signin: React.FC = () => {
+const Login: React.FC = () => {
   const [signin] = useMutation(SIGNIN_MUTATION, {
     variables: {
       email: '',
@@ -22,12 +21,12 @@ const Signin: React.FC = () => {
 
   const initialValues = {
     email: '',
-    password: ''
+    password: '',
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().required('Email is required').email(),
-    password: Yup.string().required('Password is required')
+    email: Yup.string().email().required('Email is required'),
+    password: Yup.string().required('Password is required').min(6, 'Very short'),
   })
 
   const validate = useFormik({
@@ -37,52 +36,48 @@ const Signin: React.FC = () => {
       setSubmitting(true);
 
       const response = await signin({
-        variables: values
-      })
+        variables: values as any,
+      });
 
-      localStorage.setItem('token', response.data.signin.token);
+      localStorage.setItem('token', response.data.signup.token);
 
       setSubmitting(false);
     }
-  })
+  });
 
   return (
     <Container>
-      <Content>
-        <Logo>
-          <Image src="/assets/logo.svg" alt="Background Image" width="192" height="192" />
-        </Logo>
+      <Form onSubmit={validate.handleSubmit}>
+        <Input
+          id={'email'}
+          type="text"
+          label={'Email:'}
+          placeholder={'Digite seu melhor email'}
+          value={validate.values.email}
+          onBlur={validate.handleBlur}
+          onChange={validate.handleChange}
+        />
 
-        <h1>Faça seu login</h1>
+        <Input
+          id={'password'}
+          type="password"
+          label={'Senha:'}
+          placeholder={'Digite sua senha'}
+          value={validate.values.password}
+          onBlur={validate.handleBlur}
+          onChange={validate.handleChange}
+        />
 
-        <Form onSubmit={validate.handleSubmit}>
-          <Input
-            id={'email'}
-            type="text"
-            placeholder="E-mail"
-            value={validate.values.email}
-            onBlur={validate.handleBlur}
-            onChange={validate.handleChange}
-          />
+        <Button type="submit" disabled={false}>
+          <span>Entrar</span>
+        </Button>
+      </Form>
+      <Footer>
 
-          <Input
-            id={'password'}
-            type="password"
-            placeholder="Senha"
-            value={validate.values.email}
-            onBlur={validate.handleBlur}
-            onChange={validate.handleChange}
-          />
-
-          <Button type="submit" disabled={false}>Entrar</Button>
-        </Form>
-      </Content>
-
-      <BackgroundImage>
-        <Image src="/assets/background-image.png" alt="Background Image" layout='fill' />
-      </BackgroundImage>
+        <Link href="/signup">Cadastra-se</Link>
+      </Footer>
     </Container>
-  )
-}
+  );
+};
 
-export default Signin;
+export default Login;

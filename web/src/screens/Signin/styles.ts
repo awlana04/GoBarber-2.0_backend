@@ -1,33 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
-  background: #312E38;
-
-`;
-
-export const Content = styled.div`
-  width: 50vw;
-
-  h1 {
-    color: #F4EDE8;
-  }
+  width: 20rem;
+  height: 18rem;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
-export const Logo = styled.div``;
+export const Form = styled.form`
+  margin: 0.8rem 0;
+`;
 
-export const BackgroundImage = styled.div`
-  width: 50vw;
-  height: 100vh;
+export const Footer = styled.footer`
+  width: 90%;
+  margin: 0 auto;
 
-  position: absolute;
-  top: 0;
-  right: 0;
+  font-size: 0.8rem;
+
+  display: flex;
+  justify-content: space-around;
 `;

@@ -1,17 +1,17 @@
 import React from 'react';
-
 import { ButtonContainer } from './styles';
 
-interface ButtonProps {
-  type: 'button' | 'submit';
+interface ButtonProp {
+  type: 'submit' | 'button';
   disabled?: boolean;
   onClick?: (e: React.MouseEvent) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ type, disabled, onClick, children }) => (
+const Button: React.FC<ButtonProp> = ({ children, type, disabled, onClick }) => (
   <ButtonContainer type={type} disabled={disabled} onClick={onClick}>
     {children}
   </ButtonContainer>
-)
+);
+
 
 export default Button;

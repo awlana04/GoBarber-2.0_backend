@@ -1,8 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "node": true
+    "es2021": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -10,6 +9,7 @@
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
+    "plugin:react/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,9 +21,7 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint",
-    "react-hooks",
-    "prettier"
+    "@typescript-eslint"
   ],
   "rules": {
     "camelcase": "off",
@@ -32,47 +30,34 @@
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "@typescript-eslint/ban-types": "off",
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
-    "no-sequences": "off",
-    "class-methods-use-this": "off",
-    "no-useless-constructor": "off",
-    "import/no-unresolved": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "_"
-      }
-    ],
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "js": "never",
-        "jsx": "never",
         "ts": "never",
         "tsx": "never"
       }
-    ],
+    ]
   },
   "settings": {
     "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
+      "typescript": {}
     },
     "react": {
       "version": "detect"
-    },
-    "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
     }
   }
 }
