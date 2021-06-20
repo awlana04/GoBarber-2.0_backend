@@ -1,6 +1,7 @@
 const theme = {
   colors: {
-    background: '#F2F2F2',
+    primary: '#FF9000',
+    background: '#312E38',
   },
   elements: {
     border: '#9F9F9F',
@@ -8,11 +9,9 @@ const theme = {
     buttonDisabled: '#7D8597',
   },
   fonts: {
-    dark: '#353535',
-    white: '#ffffff',
-    graySemiLight: '#595959',
-    grayLight: '#7F7F7F',
-    placeholder: '#9F9F9F',
+    dark: '#312E38',
+    white: '#F4EDE8',
+    placeholder: '#666360',
   },
 };
 

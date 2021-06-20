@@ -1,20 +1,21 @@
 import React from 'react';
+import { IconBaseProps } from 'react-icons';
 
-import { Container, InputField, Label } from './styles';
+import { Container, InputField } from './styles';
 
 interface InputProps {
   id: string;
   type: string;
-  label: string;
   value: string;
+  icon: React.ComponentType<IconBaseProps>;
   placeholder: string;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({ id, type, label, value, placeholder, onBlur, onChange }) => (
+const Input: React.FC<InputProps> = ({ id, type, value, icon: Icon, placeholder, onBlur, onChange }) => (
   <Container>
-    <Label>{label}</Label>
+    {Icon && <Icon size={24} />}
     <InputField
       id={id}
       type={type}

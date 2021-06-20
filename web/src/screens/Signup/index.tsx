@@ -50,7 +50,7 @@ const Signup: React.FC = () => {
   return (
     <Container>
       <Form onSubmit={validate.handleSubmit}>
-        <Input
+        {/* <Input
           id={'email'}
           type="text"
           label={'Email:'}
@@ -78,7 +78,7 @@ const Signup: React.FC = () => {
           value={validate.values.confirmPassword}
           onBlur={validate.handleBlur}
           onChange={validate.handleChange}
-        />
+        /> */}
 
         <Button type="submit" disabled={false}>
           <span>Cadastra-se</span>

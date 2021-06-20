@@ -1,33 +1,38 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 25.6rem;
-  height: 5rem;
+  margin-bottom: 10px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-`;
 
-export const Label = styled.label`
-  color: ${({ theme }) => theme.fonts.graySemiLight};
-  font-size: 0.9rem;
-  font-weight: 500;
+  svg {
+    margin-top: 18px;
+    margin-left: 14px;
+
+    position: absolute;
+
+    color: ${({ theme }) => theme.fonts.placeholder};
+  }
 `;
 
 export const InputField = styled.input`
-  width: 100%;
-  padding: 0.5rem;
+  width: 426px;
+  height: 62px;
 
-  border: 1px solid ${({ theme }) => theme.elements.border};
-  border-radius: 0.35rem;
+  background: #232129;
+  border-radius: 0.78rem;
 
   ::placeholder {
+    padding-left: 56px;
+
     color: ${({ theme }) => theme.fonts.placeholder};
+    font-size: 20px;
   }
 
   :focus,
   :hover {
-    border: 1px solid ${({ theme }) => theme.elements.borderFocus};
+    border: 2px solid ${({ theme }) => theme.colors.primary};
   }
 `;
