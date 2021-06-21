@@ -28,19 +28,49 @@ export const Logo = styled.div`
 
 export const Form = styled.form``;
 
-export const Footer = styled.footer`
-  /* width: 90%;
-  margin: 0 auto;
-
-  font-size: 0.8rem;
+export const Links = styled.div`
+  margin-top: 42px;
 
   display: flex;
-  justify-content: space-around; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin-top: 32px;
+
+    color: ${({ theme }) => theme.fonts.white};
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const ForgotPassword = styled.div``;
+
+export const AnotherProvider = styled.div``;
+
+export const Signup = styled.div`
+  margin-top: 112px;
+
+  display: flex;
+  flex-direction: row;
+
+  svg {
+    margin-top: 2px;
+    margin-right: 16px;
+  }
+
+  svg, a {
+    color: ${({ theme }) => theme.colors.primary}
+  }
 `;
 
 export const BackgroundImage = styled.div`
   width: 50vw;
   height: 100vh;
+
   position: absolute;
   top: 0;
   right: 0;

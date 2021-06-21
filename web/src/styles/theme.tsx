@@ -12,6 +12,7 @@ const theme = {
     dark: '#312E38',
     white: '#F4EDE8',
     placeholder: '#666360',
+    grayHard: '#232129'
   },
 };
 

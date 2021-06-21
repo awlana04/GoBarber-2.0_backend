@@ -21,7 +21,7 @@ export const InputField = styled.input`
   width: 426px;
   height: 62px;
 
-  background: #232129;
+  background: ${({ theme }) => theme.fonts.grayHard};
   border-radius: 0.78rem;
 
   ::placeholder {

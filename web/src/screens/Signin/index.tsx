@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { useMutation } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { FiMail, FiLock } from 'react-icons/fi';
+import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 
 import SIGNIN_MUTATION from '../../schemas/Mutations/Signin';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, Logo, Form, Footer, BackgroundImage } from './styles';
+import { Container, Content, Logo, Form, BackgroundImage, Links, ForgotPassword, AnotherProvider, Signup } from './styles';
 
 const Login: React.FC = () => {
   const [signin] = useMutation(SIGNIN_MUTATION, {
@@ -27,8 +27,8 @@ const Login: React.FC = () => {
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
-    password: Yup.string().required('Password is required').min(6, 'Very short'),
+    email: Yup.string().required('Email is required').email(),
+    password: Yup.string().required('Password is required'),
   })
 
   const validate = useFormik({
@@ -38,10 +38,10 @@ const Login: React.FC = () => {
       setSubmitting(true);
 
       const response = await signin({
-        variables: values as any,
+        variables: values,
       });
 
-      localStorage.setItem('token', response.data.signup.token);
+      localStorage.setItem('token', response.data.signin.token);
 
       setSubmitting(false);
     }
@@ -82,9 +82,20 @@ const Login: React.FC = () => {
           </Button>
         </Form>
 
-        {/* <Footer>
-          <Link href="/signup">Cadastra-se</Link>
-        </Footer> */}
+        <Links>
+          <ForgotPassword>
+            <Link href="/forgot">Esqueci minha senha</Link>
+          </ForgotPassword>
+
+          <AnotherProvider>
+            <p>Entrar com outro provedor</p>
+          </AnotherProvider>
+
+          <Signup>
+            <FiLogIn size="20" />
+            <Link href="/signup">Criar conta</Link>
+          </Signup>
+        </Links>
       </Content>
 
       <BackgroundImage>
