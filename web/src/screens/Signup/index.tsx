@@ -1,14 +1,16 @@
 import React from 'react';
+import Image from 'next/image';
 import { useMutation } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { FiCamera, FiUser, FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 
 import SIGNUP_MUTATION from '../../schemas/Mutations/Signup';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Form, Footer } from './styles';
+import { Container, BackgroundImage, Content, Logo, Form, Login } from './styles';
 import Link from 'next/link';
 
 const Signup: React.FC = () => {
@@ -49,45 +51,66 @@ const Signup: React.FC = () => {
 
   return (
     <Container>
-      <Form onSubmit={validate.handleSubmit}>
-        {/* <Input
-          id={'email'}
-          type="text"
-          label={'Email:'}
-          placeholder={'Digite seu melhor email'}
-          value={validate.values.email}
-          onBlur={validate.handleBlur}
-          onChange={validate.handleChange}
-        />
+      <BackgroundImage>
+        <Image src="/assets/background.png" alt="Background" layout='fill' />
+      </BackgroundImage>
 
-        <Input
-          id={'password'}
-          type="password"
-          label={'Senha:'}
-          placeholder={'Digite sua senha'}
-          value={validate.values.password}
-          onBlur={validate.handleBlur}
-          onChange={validate.handleChange}
-        />
+      <Content>
+        <Logo>
+          <Image src="/assets/logo.svg" alt="GoBarber-2.0 Logo" width="226" height="192" />
+        </Logo>
 
-        <Input
-          id={'confirmPassword'}
-          type="password"
-          label={'Confirmar senha:'}
-          placeholder={'Confirmar a senha'}
-          value={validate.values.confirmPassword}
-          onBlur={validate.handleBlur}
-          onChange={validate.handleChange}
-        /> */}
+        <Form onSubmit={validate.handleSubmit}>
+          <Input
+            id={'username'}
+            type="text"
+            icon={FiUser}
+            placeholder={'Nome de usuário'}
+            value={validate.values.email}
+            onBlur={validate.handleBlur}
+            onChange={validate.handleChange}
+          />
 
-        <Button type="submit" disabled={false}>
-          <span>Cadastra-se</span>
-        </Button>
-      </Form>
-      <Footer>
+          <Input
+            id={'email'}
+            type="text"
+            icon={FiMail}
+            placeholder={'E-mail'}
+            value={validate.values.email}
+            onBlur={validate.handleBlur}
+            onChange={validate.handleChange}
+          />
 
-        <Link href="/">Faça o login</Link>
-      </Footer>
+          <Input
+            id={'password'}
+            type="password"
+            icon={FiLock}
+            placeholder={'Senha'}
+            value={validate.values.password}
+            onBlur={validate.handleBlur}
+            onChange={validate.handleChange}
+          />
+
+          <Input
+            id={'confirmPassword'}
+            type="password"
+            icon={FiLock}
+            placeholder={'Confirmar senha'}
+            value={validate.values.confirmPassword}
+            onBlur={validate.handleBlur}
+            onChange={validate.handleChange}
+          />
+
+          <Button type="submit" disabled={false}>
+            <span>Cadastrar</span>
+          </Button>
+        </Form>
+
+        <Login>
+          <FiArrowLeft size="20" />
+          <Link href="/">Voltar para o login</Link>
+        </Login>
+      </Content>
     </Container >
   );
 };
