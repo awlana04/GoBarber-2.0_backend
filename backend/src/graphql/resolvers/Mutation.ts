@@ -11,14 +11,18 @@ export const Mutation = objectType({
     t.field('signup', {
       type: 'AuthPayload',
       args: {
+        image: stringArg(),
+        name: nonNull(stringArg()),
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      resolve: async (_parent, { email, password }, context: Context) => {
+      resolve: async (_parent, { image, name, email, password }, context: Context) => {
         const hashedPassword = await hash(password, 10);
 
         const user = await context.prisma.user.create({
           data: {
+            image: image,
+            name: name,
             email: email,
             password: hashedPassword,
           },

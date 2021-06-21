@@ -20,16 +20,13 @@ export const Container = styled.div`
 export const InputField = styled.input`
   width: 426px;
   height: 62px;
+  padding-left: 56px;
 
   background: ${({ theme }) => theme.fonts.grayHard};
   border-radius: 0.78rem;
 
-  ::placeholder {
-    padding-left: 56px;
-
-    color: ${({ theme }) => theme.fonts.placeholder};
-    font-size: 20px;
-  }
+  color: ${({ theme }) => theme.fonts.placeholder};
+  font-size: 20px;
 
   :focus,
   :hover {

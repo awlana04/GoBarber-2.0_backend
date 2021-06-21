@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { FiCamera, FiUser, FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 
 import SIGNUP_MUTATION from '../../schemas/Mutations/Signup';
+import CREATE_PROFILE_MUTATION from '../../schemas/Mutations/CreateProfile';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -16,18 +17,24 @@ import Link from 'next/link';
 const Signup: React.FC = () => {
   const [signup] = useMutation(SIGNUP_MUTATION, {
     variables: {
+      image: '',
+      name: '',
       email: '',
       password: '',
     }
   });
 
   const initialValues = {
+    image: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
   };
 
   const validationSchema = Yup.object({
+    avatar: Yup.string(),
+    name: Yup.string().required(),
     email: Yup.string().required('Email is required').email(),
     password: Yup.string().required('Password is required'),
     confirmPassword: Yup.string().required('Confirm your password').oneOf([Yup.ref('password'), null], 'Password must match')
@@ -62,11 +69,11 @@ const Signup: React.FC = () => {
 
         <Form onSubmit={validate.handleSubmit}>
           <Input
-            id={'username'}
+            id={'name'}
             type="text"
             icon={FiUser}
             placeholder={'Nome de usuário'}
-            value={validate.values.email}
+            value={validate.values.name}
             onBlur={validate.handleBlur}
             onChange={validate.handleChange}
           />

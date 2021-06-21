@@ -271,6 +271,8 @@ export interface NexusGenArgTypes {
     }
     signup: { // args
       email: string; // String!
+      image?: string | null; // String
+      name: string; // String!
       password: string; // String!
     }
     updateBarber: { // args
