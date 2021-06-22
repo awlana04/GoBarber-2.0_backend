@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import { useMutation } from '@apollo/client';
+import Link from 'next/link';
+import { useQuery, useMutation } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FiCamera, FiUser, FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 
 import SIGNUP_MUTATION from '../../schemas/Mutations/Signup';
-import CREATE_PROFILE_MUTATION from '../../schemas/Mutations/CreateProfile';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, BackgroundImage, Content, Logo, Form, Login } from './styles';
-import Link from 'next/link';
+import { Container, BackgroundImage, Content, Logo, Form, UploadAvatar, Login } from './styles';
 
 const Signup: React.FC = () => {
+  const inputFile = useRef<HTMLInputElement | null>(null);
+
+  const [image, setImage] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
+
+  const addImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files!;
+    const data = new FormData();
+
+    data.append('file', files[0]);
+    data.append('upload_preset', 'dmgkfffzb');
+
+    setImageLoading(true);
+
+    const response = await fetch(process.env.CLOUDINARY_API_URL, {
+      method: 'POST',
+      body: data,
+    })
+
+    const file = await response.json();
+
+    setImage(file.secure_url);
+    setImageLoading(false);
+  }
+
   const [signup] = useMutation(SIGNUP_MUTATION, {
     variables: {
       image: '',
+      type: '',
       name: '',
       email: '',
       password: '',
@@ -26,6 +51,7 @@ const Signup: React.FC = () => {
 
   const initialValues = {
     image: '',
+    type: '',
     name: '',
     email: '',
     password: '',
@@ -33,7 +59,7 @@ const Signup: React.FC = () => {
   };
 
   const validationSchema = Yup.object({
-    avatar: Yup.string(),
+    image: Yup.string(),
     name: Yup.string().required(),
     email: Yup.string().required('Email is required').email(),
     password: Yup.string().required('Password is required'),
@@ -68,6 +94,17 @@ const Signup: React.FC = () => {
         </Logo>
 
         <Form onSubmit={validate.handleSubmit}>
+          <UploadAvatar>
+            <Input
+              id={'image'}
+              type="file"
+              icon={FiCamera}
+              value={validate.values.image}
+              ref={inputFile}
+              onChange={addImage}
+            />
+          </UploadAvatar>
+
           <Input
             id={'name'}
             type="text"

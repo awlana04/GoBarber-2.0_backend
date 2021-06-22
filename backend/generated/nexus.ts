@@ -274,6 +274,7 @@ export interface NexusGenArgTypes {
       image?: string | null; // String
       name: string; // String!
       password: string; // String!
+      type: string; // String!
     }
     updateBarber: { // args
       barberLocation: string; // String!

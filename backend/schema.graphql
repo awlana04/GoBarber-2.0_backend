@@ -47,7 +47,7 @@ type Mutation {
   createProfile(avatar: String, id: String, name: String): Profile
   deleteUser(email: String!, password: String!): User
   signin(email: String!, password: String!): AuthPayload
-  signup(email: String!, image: String, name: String!, password: String!): AuthPayload
+  signup(email: String!, image: String, name: String!, password: String!, type: String!): AuthPayload
   updateBarber(barberLocation: String!, barberName: String, description: String, id: String, openOnWeekends: Boolean!, photos: [String!]!): Barber
   updateProfile(avatar: String, id: String, name: String): Profile
   updateUser(id: String, image: String, name: String): User

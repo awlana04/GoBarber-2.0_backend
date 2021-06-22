@@ -12,16 +12,18 @@ export const Mutation = objectType({
       type: 'AuthPayload',
       args: {
         image: stringArg(),
+        type: nonNull(stringArg()),
         name: nonNull(stringArg()),
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      resolve: async (_parent, { image, name, email, password }, context: Context) => {
+      resolve: async (_parent, { image, type, name, email, password }, context: Context) => {
         const hashedPassword = await hash(password, 10);
 
         const user = await context.prisma.user.create({
           data: {
             image: image,
+            type: type,
             name: name,
             email: email,
             password: hashedPassword,

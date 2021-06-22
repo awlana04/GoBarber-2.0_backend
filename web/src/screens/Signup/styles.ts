@@ -35,6 +35,17 @@ export const Form = styled.form`
   margin: 0.8rem 0;
 `;
 
+export const UploadAvatar = styled.div`
+  /* margin-bottom: 100px; */
+
+  input {
+    width: 186px;
+    height: 186px;
+
+    /* display: none; */
+  }
+`;
+
 export const Login = styled.div`
   margin-top: 112px;
 
