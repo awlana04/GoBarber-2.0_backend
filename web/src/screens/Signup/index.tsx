@@ -95,14 +95,13 @@ const Signup: React.FC = () => {
 
         <Form onSubmit={validate.handleSubmit}>
           <UploadAvatar>
-            <Input
-              id={'image'}
-              type="file"
-              icon={FiCamera}
-              value={validate.values.image}
-              ref={inputFile}
-              onChange={addImage}
-            />
+            <Image src="/assets/avatar.svg" alt="Barber's avatar" width="112" height="86" />
+
+            <label htmlFor="avatar">
+              <FiCamera width="22" />
+
+              <input name="file" id="avatar" type="file" onChange={addImage} ref={inputFile} />
+            </label>
           </UploadAvatar>
 
           <Input

@@ -36,13 +36,50 @@ export const Form = styled.form`
 `;
 
 export const UploadAvatar = styled.div`
-  /* margin-bottom: 100px; */
+  width: 118px;
+  height: 118px;
+  margin-bottom: 38px;
 
-  input {
-    width: 186px;
-    height: 186px;
+  background: #c4c4c4;
 
-    /* display: none; */
+  border-radius: 50%;
+
+  position: relative;
+  align-self: center;
+
+  img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  label {
+    width: 48px;
+    height: 48px;
+
+    background: ${({ theme }) => theme.colors.primary};
+    border-radius: 50%;
+
+    position: absolute;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    svg {
+      width: 20px;
+      height: 20px;
+
+      color: #312e38;
+    }
+
+    input {
+      display: none;
+    }
   }
 `;
 
