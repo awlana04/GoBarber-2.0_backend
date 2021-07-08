@@ -18,15 +18,15 @@ export const Container = styled.div`
 `;
 
 export const InputField = styled.input`
-  width: 426px;
-  height: 62px;
+  width: 386px;
+  height: 56px;
   padding-left: 56px;
 
   background: ${({ theme }) => theme.fonts.grayHard};
   border-radius: 0.78rem;
 
   color: ${({ theme }) => theme.fonts.placeholder};
-  font-size: 20px;
+  font-size: 18px;
 
   :focus,
   :hover {

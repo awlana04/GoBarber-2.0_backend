@@ -51,7 +51,7 @@ const Login: React.FC = () => {
     <Container>
       <Content>
         <Logo>
-          <Image src="/assets/logo.svg" alt="GoBarber-2.0 Logo" width="226" height="192" />
+          <Image src="/assets/logo.svg" alt="GoBarber-2.0 Logo" width="186" height="162" />
         </Logo>
 
         <h1>Faça seu login</h1>

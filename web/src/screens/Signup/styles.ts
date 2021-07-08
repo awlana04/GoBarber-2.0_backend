@@ -32,7 +32,10 @@ export const Content = styled.div`
 export const Logo = styled.div``;
 
 export const Form = styled.form`
-  margin: 0.8rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const UploadAvatar = styled.div`
@@ -47,15 +50,14 @@ export const UploadAvatar = styled.div`
   position: relative;
   align-self: center;
 
-  img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   label {
     width: 48px;
     height: 48px;
+    margin-top: 112px;
 
     background: ${({ theme }) => theme.colors.primary};
     border-radius: 50%;
@@ -84,7 +86,7 @@ export const UploadAvatar = styled.div`
 `;
 
 export const Login = styled.div`
-  margin-top: 112px;
+  margin-top: 88px;
 
   display: flex;
   flex-direction: row;

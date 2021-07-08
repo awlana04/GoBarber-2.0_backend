@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { IconBaseProps } from 'react-icons';
 
 import { Container, InputField } from './styles';

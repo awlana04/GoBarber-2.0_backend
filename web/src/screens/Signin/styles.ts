@@ -14,7 +14,7 @@ export const Content = styled.div`
     margin: 34px 22px;
 
     color: ${({ theme }) => theme.fonts.white};
-    font-size: 28px;
+    font-size: 24px;
   }
 
   display: flex;
@@ -24,10 +24,15 @@ export const Content = styled.div`
 `;
 
 export const Logo = styled.div`
-  margin-top: 24px;
+  margin-top: 38px;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const Links = styled.div`
   margin-top: 42px;
