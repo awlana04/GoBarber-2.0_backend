@@ -7,7 +7,7 @@ export const User = objectType({
       t.model.email(),
       t.model.name(),
       t.model.image(),
-      t.model.profile(),
+      t.model.type(),
       t.model.barber(),
       t.model.appointment(),
       t.model.createdAt(),

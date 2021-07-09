@@ -44,26 +44,13 @@ scalar DateTime
 
 type Mutation {
   createBarber(barberLocation: String!, barberName: String, description: String, id: String, openOnWeekends: Boolean!, photos: [String!]!): Barber
-  createProfile(avatar: String, id: String, name: String): Profile
+  createProfile(id: String, image: String, type: Boolean): User
   deleteUser(email: String!, password: String!): User
   signin(email: String!, password: String!): AuthPayload
-  signup(email: String!, image: String, name: String!, password: String!, type: String!): AuthPayload
+  signup(email: String!, name: String!, password: String!): AuthPayload
   updateBarber(barberLocation: String!, barberName: String, description: String, id: String, openOnWeekends: Boolean!, photos: [String!]!): Barber
-  updateProfile(avatar: String, id: String, name: String): Profile
+  updateProfile(id: String, image: String): User
   updateUser(id: String, image: String, name: String): User
-}
-
-type Profile {
-  avatar: String
-  createdAt: DateTime!
-  id: String!
-  name: String
-  updatedAt: DateTime!
-  user: User
-}
-
-input ProfileWhereUniqueInput {
-  id: String
 }
 
 type Query {
@@ -80,6 +67,6 @@ type User {
   id: String!
   image: String
   name: String
-  profile(after: ProfileWhereUniqueInput, before: ProfileWhereUniqueInput, first: Int, last: Int): [Profile!]!
+  type: Boolean
   updatedAt: DateTime!
 }

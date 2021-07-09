@@ -49,9 +49,6 @@ export interface NexusGenInputs {
   BarberWhereUniqueInput: { // input type
     id?: string | null; // String
   }
-  ProfileWhereUniqueInput: { // input type
-    id?: string | null; // String
-  }
 }
 
 export interface NexusGenEnums {
@@ -88,13 +85,6 @@ export interface NexusGenObjects {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Mutation: {};
-  Profile: { // root type
-    avatar?: string | null; // String
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // String!
-    name?: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
   Query: {};
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -102,6 +92,7 @@ export interface NexusGenObjects {
     id: string; // String!
     image?: string | null; // String
     name?: string | null; // String
+    type?: boolean | null; // Boolean
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -143,21 +134,13 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createBarber: NexusGenRootTypes['Barber'] | null; // Barber
-    createProfile: NexusGenRootTypes['Profile'] | null; // Profile
+    createProfile: NexusGenRootTypes['User'] | null; // User
     deleteUser: NexusGenRootTypes['User'] | null; // User
     signin: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     updateBarber: NexusGenRootTypes['Barber'] | null; // Barber
-    updateProfile: NexusGenRootTypes['Profile'] | null; // Profile
+    updateProfile: NexusGenRootTypes['User'] | null; // User
     updateUser: NexusGenRootTypes['User'] | null; // User
-  }
-  Profile: { // field return type
-    avatar: string | null; // String
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // String!
-    name: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     allBarbers: Array<NexusGenRootTypes['Barber'] | null> | null; // [Barber]
@@ -172,7 +155,7 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     image: string | null; // String
     name: string | null; // String
-    profile: NexusGenRootTypes['Profile'][]; // [Profile!]!
+    type: boolean | null; // Boolean
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -204,21 +187,13 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createBarber: 'Barber'
-    createProfile: 'Profile'
+    createProfile: 'User'
     deleteUser: 'User'
     signin: 'AuthPayload'
     signup: 'AuthPayload'
     updateBarber: 'Barber'
-    updateProfile: 'Profile'
+    updateProfile: 'User'
     updateUser: 'User'
-  }
-  Profile: { // field return type name
-    avatar: 'String'
-    createdAt: 'DateTime'
-    id: 'String'
-    name: 'String'
-    updatedAt: 'DateTime'
-    user: 'User'
   }
   Query: { // field return type name
     allBarbers: 'Barber'
@@ -233,7 +208,7 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     image: 'String'
     name: 'String'
-    profile: 'Profile'
+    type: 'Boolean'
     updatedAt: 'DateTime'
   }
 }
@@ -257,9 +232,9 @@ export interface NexusGenArgTypes {
       photos: string[]; // [String!]!
     }
     createProfile: { // args
-      avatar?: string | null; // String
       id?: string | null; // String
-      name?: string | null; // String
+      image?: string | null; // String
+      type?: boolean | null; // Boolean
     }
     deleteUser: { // args
       email: string; // String!
@@ -271,10 +246,8 @@ export interface NexusGenArgTypes {
     }
     signup: { // args
       email: string; // String!
-      image?: string | null; // String
       name: string; // String!
       password: string; // String!
-      type: string; // String!
     }
     updateBarber: { // args
       barberLocation: string; // String!
@@ -285,9 +258,8 @@ export interface NexusGenArgTypes {
       photos: string[]; // [String!]!
     }
     updateProfile: { // args
-      avatar?: string | null; // String
       id?: string | null; // String
-      name?: string | null; // String
+      image?: string | null; // String
     }
     updateUser: { // args
       id?: string | null; // String
@@ -310,12 +282,6 @@ export interface NexusGenArgTypes {
     barber: { // args
       after?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
       before?: NexusGenInputs['BarberWhereUniqueInput'] | null; // BarberWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
-    profile: { // args
-      after?: NexusGenInputs['ProfileWhereUniqueInput'] | null; // ProfileWhereUniqueInput
-      before?: NexusGenInputs['ProfileWhereUniqueInput'] | null; // ProfileWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     }

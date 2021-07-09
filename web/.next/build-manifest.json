@@ -24,10 +24,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/signup": [
+    "/createProfile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/signup.js"
+      "static/chunks/pages/createProfile.js"
     ]
   },
   "ampFirstPages": []

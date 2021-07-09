@@ -16,12 +16,11 @@ model User {
   email    String  @unique
   password String?
 
-  type          Boolean?
   name          String?
   image         String?
+  type          Boolean?
   emailVerified DateTime? @map(name: "email_verified")
 
-  profile     Profile[]
   barber      Barber[]
   appointment Appointment[]
   accounts    Account[]
@@ -31,21 +30,6 @@ model User {
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   @@map(name: "users")
-}
-
-model Profile {
-  id String @id @default(uuid())
-
-  name   String?
-  avatar String?
-
-  userId String? @map(name: "user_id")
-  user   User?   @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
-
-  @@map("profiles")
 }
 
 model Barber {

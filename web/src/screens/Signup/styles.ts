@@ -38,53 +38,6 @@ export const Form = styled.form`
   justify-content: center;
 `;
 
-export const UploadAvatar = styled.div`
-  width: 118px;
-  height: 118px;
-  margin-bottom: 38px;
-
-  background: #c4c4c4;
-
-  border-radius: 50%;
-
-  position: relative;
-  align-self: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  label {
-    width: 48px;
-    height: 48px;
-    margin-top: 112px;
-
-    background: ${({ theme }) => theme.colors.primary};
-    border-radius: 50%;
-
-    position: absolute;
-    right: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    transition: background-color 0.2s;
-
-    svg {
-      width: 20px;
-      height: 20px;
-
-      color: #312e38;
-    }
-
-    input {
-      display: none;
-    }
-  }
-`;
-
 export const Login = styled.div`
   margin-top: 88px;
 
