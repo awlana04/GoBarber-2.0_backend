@@ -4,9 +4,12 @@ const ME_QUERY = gql`
   query {
     me {
       id
-      image
-      name
       email
+      profile {
+        name
+        avatar
+        type
+      }
     }
   }
 `;

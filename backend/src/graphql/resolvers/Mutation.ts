@@ -11,16 +11,14 @@ export const Mutation = objectType({
     t.field('signup', {
       type: 'AuthPayload',
       args: {
-        name: nonNull(stringArg()),
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      resolve: async (_parent, { name, email, password }, context: Context) => {
+      resolve: async (_parent, { email, password }, context: Context) => {
         const hashedPassword = await hash(password, 10);
 
         const user = await context.prisma.user.create({
           data: {
-            name,
             email,
             password: hashedPassword,
           },
@@ -126,54 +124,52 @@ export const Mutation = objectType({
     })
 
     t.field('createProfile', {
-      type: 'User',
+      type: 'Profile',
       args: {
         id: stringArg(),
-        image: stringArg(),
+        name: nonNull(stringArg()),
+        avatar: stringArg(),
         type: booleanArg(),
       },
-      resolve: (_parent, { image, type }, context: Context) => {
+      resolve: (_parent, { id, ...args }, context: Context) => {
         const userId = getUserId(context);
 
         if (!userId) {
           throw new Error('Could not authenticate user.');
         }
 
-        return context.prisma.user.update({
+        return context.prisma.profile.create({
           data: {
-            image,
-            type
-          },
-          where: {
-            id: String(userId)
+            ...args,
+            user: { connect: { id: String(userId) } }
           }
         })
       }
     })
 
-    t.field('updateProfile', {
-      type: 'User',
-      args: {
-        id: stringArg(),
-        image: stringArg()
-      },
-      resolve: (_parent, { image }, context: Context) => {
-        const userId = getUserId(context);
+    // t.field('updateProfile', {
+    //   type: 'User',
+    //   args: {
+    //     id: stringArg(),
+    //     image: stringArg()
+    //   },
+    //   resolve: (_parent, { id, image }, context: Context) => {
+    //     const userId = getUserId(context);
 
-        if (!userId) {
-          throw new Error('Could not authenticate user.');
-        }
+    //     if (!userId) {
+    //       throw new Error('Could not authenticate user.');
+    //     }
 
-        return context.prisma.user.update({
-          data: {
-            image
-          },
-          where: {
-            id: String(userId)
-          }
-        })
-      }
-    })
+    //     return context.prisma.user.update({
+    //       data: {
+    //         image
+    //       },
+    //       where: {
+    //         id: String(id)
+    //       }
+    //     })
+    //   }
+    // })
 
     t.field('createBarber', {
       type: 'Barber',

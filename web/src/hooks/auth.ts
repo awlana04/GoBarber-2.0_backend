@@ -2,21 +2,18 @@ import { ApolloClient, InMemoryCache, HttpLink, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { setContext } from 'apollo-link-context';
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
+const httpLink = new HttpLink({ uri: "http://localhost:4000" });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(
-        `[GraphQLError]: Message: ${message}, location: ${locations}, path: ${path}`
-      );
-    })
-  }
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
 
-  if (networkError) {
-    console.log(`[NetworkError]: ${networkError}`);
-  }
-})
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
 const authLink = setContext(async (request, { headers }) => {
   const token = localStorage.getItem('token');
@@ -25,15 +22,15 @@ const authLink = setContext(async (request, { headers }) => {
     ...headers,
     headers: {
       Authorization: token ? `Bearer ${token}` : null,
-    }
-  }
-})
+    },
+  };
+});
 
 const link = authLink.concat(httpLink as any);
 
 const client = new ApolloClient({
   link: from([errorLink, link as any]),
   cache: new InMemoryCache(),
-})
+});
 
 export default client;

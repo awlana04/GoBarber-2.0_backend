@@ -30,7 +30,6 @@ const Signup: React.FC = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required(),
     email: Yup.string().required('Email is required').email(),
     password: Yup.string().required('Password is required'),
     confirmPassword: Yup.string().required('Confirm your password').oneOf([Yup.ref('password'), null], 'Password must match')
@@ -64,16 +63,6 @@ const Signup: React.FC = () => {
         </Logo>
 
         <Form onSubmit={validate.handleSubmit}>
-          <Input
-            id={'name'}
-            type="text"
-            icon={FiUser}
-            placeholder={'Nome de usuário'}
-            value={validate.values.name}
-            onBlur={validate.handleBlur}
-            onChange={validate.handleChange}
-          />
-
           <Input
             id={'email'}
             type="text"
