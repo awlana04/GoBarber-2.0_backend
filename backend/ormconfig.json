@@ -7,7 +7,7 @@
   "password": "docker",
   "database": "gobarber-2.0_postgres",
   "migrations": [
-    "./src/database/migrations"
+    "./src/database/migrations/*.ts"
   ],
   "cli": {
     "migrationsDir": "./src/database/migrations"
