@@ -10,7 +10,7 @@ import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 const usersRouter = Router();
 const upload = multer(uploadConfig);
 
-// usersRouter.use(ensureAuthenticated);
+usersRouter.use(ensureAuthenticated);
 
 usersRouter.post('/', async (request, response) => {
   try {
