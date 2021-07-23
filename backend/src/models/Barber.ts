@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 import User from './User';
+import Image from './Image';
 
 @Entity('barbers')
 class Barber {
@@ -22,6 +23,12 @@ class Barber {
 
   @Column()
   description: string;
+
+  @OneToMany(() => Image, image => image.barber, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'barber_id' })
+  images: Image;
 
   @Column()
   open_on_weekends: boolean;
