@@ -7,12 +7,13 @@ import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 interface Request {
+  user_id: string;
   provider_id: string;
   date: Date;
 }
 
 class CreateAppointmentService {
-  public async execute({ provider_id, date }: Request): Promise<Appointment> {
+  public async execute({ user_id, provider_id, date }: Request): Promise<Appointment> {
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
     const appointmentDate = startOfHour(date);
@@ -25,7 +26,12 @@ class CreateAppointmentService {
       throw new AppError('This appointment is already booked');
     }
 
+    if (user_id === provider_id) {
+      throw new AppError('User can not book an appointment with itself');
+    }
+
     const appointment = appointmentsRepository.create({
+      user_id,
       provider_id,
       date: appointmentDate,
     })

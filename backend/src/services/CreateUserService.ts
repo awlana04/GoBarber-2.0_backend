@@ -6,13 +6,15 @@ import AppError from '../errors/AppError';
 import User from '../models/User';
 
 interface Request {
+  type: boolean;
   name: string;
   email: string;
   password: string;
+  avatar?: string;
 }
 
 class CreateUserService {
-  public async execute({ name, email, password }: Request): Promise<User> {
+  public async execute({ type, name, email, password, avatar }: Request): Promise<User> {
     const usersRepository = getRepository(User);
 
     const checkUserExists = await usersRepository.findOne({
@@ -26,9 +28,11 @@ class CreateUserService {
     const hashedPassword = await hash(password, 10);
 
     const user = usersRepository.create({
+      type,
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      avatar
     })
 
     await usersRepository.save(user);
@@ -38,4 +42,3 @@ class CreateUserService {
 }
 
 export default CreateUserService;
-

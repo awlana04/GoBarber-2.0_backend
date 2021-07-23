@@ -1,18 +1,18 @@
 import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
 
-export class CreateForeignKeyBetweenAppointmentsAndUsers1626488335497 implements MigrationInterface {
+export class CreateForeignKeyBetweenBarbersAndAppointments1627003537389 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createForeignKey('appointments', new TableForeignKey({
-      name: 'AppointmentUser',
-      columnNames: ['user_id'],
+      name: 'AppointmentProvier',
+      columnNames: ['provider_id'],
       referencedColumnNames: ['id'],
       referencedTableName: 'users',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE'
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     }))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('appointments', 'AppointmentUser');
+    await queryRunner.dropForeignKey('appointments', 'AppointmentProvier');
   }
 }

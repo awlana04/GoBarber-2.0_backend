@@ -30,13 +30,18 @@ export class CreateBarber1626979277905 implements MigrationInterface {
           isNullable: true
         },
         {
-          name: 'images',
-          type: 'varchar',
-          isNullable: true
-        },
-        {
           name: 'open_on_weekends',
           type: 'boolean',
+        },
+        {
+          name: 'created_at',
+          type: 'timestamp',
+          default: 'now()'
+        },
+        {
+          name: 'updated_at',
+          type: 'timestamp',
+          default: 'now()'
         }
       ]
     }))

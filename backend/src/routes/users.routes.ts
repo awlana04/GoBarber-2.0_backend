@@ -10,17 +10,17 @@ import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 const usersRouter = Router();
 const upload = multer(uploadConfig);
 
-usersRouter.use(ensureAuthenticated);
-
-usersRouter.post('/', async (request, response) => {
-  const { name, email, password } = request.body;
+usersRouter.post('/', upload.single('avatar'), async (request, response) => {
+  const { type, name, email, password, avatar } = request.body;
 
   const createUser = new CreateUserService();
 
   const user = await createUser.execute({
+    type,
     name,
     email,
-    password
+    password,
+    avatar: request.file.filename
   })
 
   delete user.password;

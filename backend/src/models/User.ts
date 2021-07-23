@@ -6,6 +6,9 @@ class User {
   id: string;
 
   @Column()
+  type: boolean;
+
+  @Column()
   name: string;
 
   @Column()
