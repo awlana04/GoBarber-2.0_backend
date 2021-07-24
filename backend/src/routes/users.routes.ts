@@ -20,7 +20,7 @@ usersRouter.post('/', upload.single('avatar'), async (request, response) => {
     name,
     email,
     password,
-    avatar: request.file.filename
+    avatar: request.file ? request.file.filename : null
   })
 
   delete user.password;

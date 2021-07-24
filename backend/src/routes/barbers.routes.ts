@@ -9,7 +9,7 @@ const barbersRouter = Router();
 barbersRouter.use(ensureAuthenticated);
 
 barbersRouter.post('/', async (request, response) => {
-  const { user_id, name, location, description, open_on_weekends } = request.body;
+  const { user_id, name, location, description, images, open_on_weekends } = request.body;
 
   const createBarber = new CreateBarberService();
 
