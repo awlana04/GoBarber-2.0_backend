@@ -1,10 +1,35 @@
-import 'dotenv/config';
+import 'reflect-metadata';
+import 'express-async-errors';
 
-import { ApolloServer } from 'apollo-server';
+import express, { Request, Response, NextFunction } from 'express';
 
-import { schema } from './graphql/index';
-import { createContext } from './context';
+import './database';
 
-export const server = new ApolloServer({ schema, context: createContext });
+import uploadConfig from './config/upload';
+import AppError from './errors/AppError';
 
-server.listen().then(({ url }) => console.log(`🚀 Server started at url: ${url}!`));
+import Routes from './routes';
+
+const app = express();
+
+app.use(express.json());
+app.use(Routes);
+app.use('/files', express.static(uploadConfig.directory));
+
+app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
+  if (err instanceof AppError) {
+    return response.status(err.statusCode).json({
+      status: 'error',
+      message: err.message,
+    })
+  }
+
+  console.error(err);
+
+  return response.status(500).json({
+    status: 'error',
+    message: 'Internal server error',
+  })
+})
+
+app.listen(3333, () => console.log('🚀 Server started at port: 3333!'));

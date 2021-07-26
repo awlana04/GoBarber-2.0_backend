@@ -1,7 +1,8 @@
 {
   "env": {
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base",
@@ -16,7 +17,7 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "prettier"
+    "prettier/prettier"
   ],
   "rules": {
     "prettier/prettier": "error",
