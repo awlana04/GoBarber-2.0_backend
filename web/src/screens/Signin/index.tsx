@@ -1,15 +1,20 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, Logo, Form, BackgroundImage, Links, ForgotPassword, AnotherProvider, Signup } from './styles';
+import { Container, Content, Logo, BackgroundImage, Links, ForgotPassword, AnotherProvider, Signup } from './styles';
 
 const Login: React.FC = () => {
+  function handleSubmit(data: any): void {
+    console.log(data);
+  }
+
   return (
     <Container>
       <Content>
@@ -19,7 +24,7 @@ const Login: React.FC = () => {
 
         <h1>Faça seu login</h1>
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Input
             id={'email'}
             name="email"

@@ -1,14 +1,19 @@
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiCamera, FiUser } from 'react-icons/fi';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, BackgroundImage, Content, Logo, Form, UploadAvatar } from './styles';
+import { Container, BackgroundImage, Content, Logo, UploadAvatar } from './styles';
 
 const CreateProfile: React.FC = () => {
+  function handleSubmit(data: any): void {
+    console.log(data);
+  }
+
   return (
     <Container>
       <BackgroundImage>
@@ -20,7 +25,7 @@ const CreateProfile: React.FC = () => {
           <Image src="/assets/logo.svg" alt="GoBarber-2.0 Logo" width="226" height="192" />
         </Logo>
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Input
             id={'name'}
             name="name"

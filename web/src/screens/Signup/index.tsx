@@ -3,14 +3,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
+import { Form } from '@unform/web';
 import { FiUser, FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, BackgroundImage, Content, Logo, Form, Login } from './styles';
+import { Container, BackgroundImage, Content, Logo, Login } from './styles';
 
 const Signup: React.FC = () => {
+  function handleSubmit(data: any): void {
+    console.log(data);
+  }
+
   return (
     <Container>
       <BackgroundImage>
@@ -22,7 +27,15 @@ const Signup: React.FC = () => {
           <Image src="/assets/logo.svg" alt="GoBarber-2.0 Logo" width="226" height="192" />
         </Logo>
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            id={'name'}
+            name="name"
+            type="text"
+            icon={FiUser}
+            placeholder={'Nome'}
+          />
+
           <Input
             id={'email'}
             name="email"
