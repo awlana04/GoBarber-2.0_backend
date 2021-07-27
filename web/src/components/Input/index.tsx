@@ -1,32 +1,18 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { IconBaseProps } from 'react-icons';
 
 import { Container, InputField } from './styles';
 
-interface InputProps {
-  id: string;
-  type: string;
-  value: string;
-  icon?: React.ComponentType<IconBaseProps>;
-  placeholder?: string;
-  ref?: React.MutableRefObject<HTMLInputElement>;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  icon: React.ComponentType<IconBaseProps>;
 }
 
-const Input: React.FC<InputProps> = ({ id, type, value, icon: Icon, placeholder, ref, onBlur, onChange }) => (
+const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => (
   <Container>
     {Icon && <Icon size={24} />}
 
-    <InputField
-      id={id}
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      ref={ref}
-      onBlur={onBlur}
-      onChange={onChange}
-    />
+    <InputField {...rest} />
   </Container>
 );
 
