@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMutation } from '@apollo/client';
 import * as Yup from 'yup';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiUser, FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 
@@ -12,9 +12,28 @@ import Button from '../../components/Button';
 import { Container, BackgroundImage, Content, Logo, Login } from './styles';
 
 const Signup: React.FC = () => {
-  function handleSubmit(data: any): void {
-    console.log(data);
-  }
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSubmit = useCallback(async (data: any) => {
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome é obrigatório'),
+        email: Yup.string().required().email('Digite um email válido'),
+        password: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres'),
+        // confirmPassword: Yup.string().required().oneOf()
+      })
+
+      await schema.validate(data, {
+        abortEarly: false
+      });
+    } catch (err) {
+      formRef.current?.setErrors({
+        name: 'Nome é obrigatório',
+        email: 'Email é obrigatório',
+        password: 'Senha é obrigatória e deve conte no mínimo 6 caracteres'
+      })
+    }
+  }, [])
 
   return (
     <Container>
@@ -27,7 +46,7 @@ const Signup: React.FC = () => {
           <Image src="/assets/logo.svg" alt="GoBarber-2.0 Logo" width="226" height="192" />
         </Logo>
 
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Input
             id={'name'}
             name="name"

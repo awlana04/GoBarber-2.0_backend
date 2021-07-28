@@ -7,14 +7,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.19",
     "@types/yup": "^0.29.11",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
-    "apollo-link-context": "^1.0.20",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "graphql": "^15.5.0",
     "next": "10.2.0",
     "next-auth": "^3.24.0",
     "react": "17.0.2",
