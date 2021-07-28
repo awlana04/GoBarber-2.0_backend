@@ -18,7 +18,7 @@ const Login: React.FC = () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().required('Email é obrigatório').email('Digite um email válido'),
-        password: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres'),
+        password: Yup.string().required('A senha é obrigatória')
       })
 
       await schema.validate(data, {
@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     } catch (err) {
       formRef.current?.setErrors({
         email: 'Email é obrigatório',
-        password: 'Senha é obrigatória e deve conter no mínimo 6 caracteres'
+        password: 'Senha é obrigatória'
       })
     }
   }, [])

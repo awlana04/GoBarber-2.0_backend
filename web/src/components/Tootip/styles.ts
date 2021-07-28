@@ -4,7 +4,7 @@ export const Container = styled.div`
   position: relative;
 
   span {
-    width: 260px;
+    width: 160px;
     padding: 8px;
 
     background: ${({ theme }) => theme.colors.primary};
