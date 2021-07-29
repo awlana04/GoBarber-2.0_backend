@@ -6,19 +6,24 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 
-import AuthContext from '../../hooks/auth';
+import { AuthContext } from '../../hooks/auth';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Content, Logo, BackgroundImage, Links, ForgotPassword, AnotherProvider, Signup } from './styles';
 
+interface SignInFormData {
+  email: string;
+  password: string;
+}
+
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const auth = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
-  const handleSubmit = useCallback(async (data: any) => {
+  const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().required('Email é obrigatório').email('Digite um email válido'),
@@ -28,13 +33,18 @@ const Login: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false
       })
+
+      signIn({
+        email: data.email,
+        password: data.password
+      });
     } catch (err) {
       formRef.current?.setErrors({
         email: 'Email é obrigatório',
         password: 'Senha é obrigatória'
       })
     }
-  }, [])
+  }, [signIn])
 
   return (
     <Container>
