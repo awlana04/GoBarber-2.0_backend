@@ -2,15 +2,15 @@ import React, { createContext, useState, useEffect, useCallback, useContext } fr
 
 import api from '../services/api';
 
+interface AuthState {
+  token: string;
+  user: object;
+}
+
 interface AuthContextData {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
-}
-
-interface AuthState {
-  token: string;
-  user: object;
 }
 
 interface SignInCredentials {
