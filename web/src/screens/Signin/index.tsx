@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -22,6 +23,7 @@ const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
@@ -34,7 +36,7 @@ const Login: React.FC = () => {
         abortEarly: false
       })
 
-      signIn({
+      await signIn({
         email: data.email,
         password: data.password
       });
@@ -43,8 +45,10 @@ const Login: React.FC = () => {
         email: 'Email é obrigatório',
         password: 'Senha é obrigatória'
       })
+
+      addToast();
     }
-  }, [signIn])
+  }, [signIn, addToast])
 
   return (
     <Container>
