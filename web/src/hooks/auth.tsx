@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback, useContext } from 'react';
+import React, { createContext, useState, useEffect, useCallback, useContext, Component } from 'react';
 
 import api from '../services/api';
 
@@ -22,14 +22,14 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
-    useEffect(() => {
-      const token = localStorage.getItem('@GoBarber:token');
-      const user = localStorage.getItem('@GoBarber:user');
+    if (typeof window !== 'undefined') {
+      const token = window.localStorage.getItem('@GoBarber:token');
+      const user = window.localStorage.getItem('@GoBarber:user');
 
       if (token && user) {
         return { token, user: JSON.parse(user) };
       }
-    }, [])
+    }
 
     return {} as AuthState;
   })
