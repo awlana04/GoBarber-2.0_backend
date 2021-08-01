@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -14,6 +15,8 @@ import { Container, BackgroundImage, Content, Logo, Login } from './styles';
 const Signup: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
+  const Router = useRouter();
+
   const handleSubmit = useCallback(async (data: any) => {
     try {
       const schema = Yup.object().shape({
@@ -26,6 +29,8 @@ const Signup: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false
       });
+
+      Router.push('/dashboard');
     } catch (err) {
       formRef.current?.setErrors({
         name: 'Nome é obrigatório',

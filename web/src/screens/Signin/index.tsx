@@ -1,6 +1,7 @@
-import React, { useRef, useCallback, useContext } from 'react';
+import React, { useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -25,6 +26,8 @@ const Login: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
 
+  const Router = useRouter();
+
   const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
       const schema = Yup.object().shape({
@@ -40,6 +43,8 @@ const Login: React.FC = () => {
         email: data.email,
         password: data.password
       });
+
+      Router.push('/dashboard');
     } catch (err) {
       formRef.current?.setErrors({
         email: 'Email é obrigatório',
