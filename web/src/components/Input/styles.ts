@@ -1,35 +1,87 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
-  margin-bottom: 10px;
+import Tooltip from '../Tootip';
+
+interface ContainerProps {
+  isFocused: boolean;
+  isFilled: boolean;
+  isErrored: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
+  width: 100%;
+  padding: 16px;
+
+  background: ${({ theme }) => theme.fonts.grayHard};
+
+  border: 2px solid ${({ theme }) => theme.fonts.grayHard};
+  border-radius: 10px;
+
+  color: ${({ theme }) => theme.fonts.placeholder};
 
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+
+  &:focus {
+    background: #fff;
+  }
+
+  & ::placeholder {
+    color: ${({ theme }) => theme.fonts.placeholder};
+  }
+
+  & + div {
+    margin-top: 8px;
+  }
+
+  ${(props) =>
+    props.isErrored &&
+    css`
+      border-color: #c53939;
+    `}
+
+  ${(props) =>
+    props.isFocused &&
+    css`
+      color: ${({ theme }) => theme.colors.primary};
+      border-color: ${({ theme }) => theme.colors.primary};
+    `}
+
+  ${(props) =>
+    props.isFilled &&
+    css`
+      color: ${({ theme }) => theme.colors.primary};
+    `}
+
+  input {
+    background: transparent;
+
+    color: ${({ theme }) => theme.fonts.white};
+    font-size: 16px;
+
+    flex: 1;
+    border: 0;
+  }
 
   svg {
-    margin-top: 18px;
-    margin-left: 14px;
-
-    position: absolute;
-
-    color: ${({ theme }) => theme.fonts.placeholder};
+    margin-right: 16px;
   }
 `;
 
-export const InputField = styled.input`
-  width: 386px;
-  height: 56px;
-  padding-left: 56px;
+export const Error = styled(Tooltip)`
+  height: 24px;
+  margin-left: 16px;
 
-  background: ${({ theme }) => theme.fonts.grayHard};
-  border-radius: 0.78rem;
+  svg {
+    margin: 0;
+  }
 
-  color: ${({ theme }) => theme.fonts.placeholder};
-  font-size: 18px;
+  span {
+    background: #c53030;
+    color: #fff;
 
-  :focus,
-  :hover {
-    border: 2px solid ${({ theme }) => theme.colors.primary};
+    &::before {
+      border-color: #c53030 transparent;
+    }
   }
 `;

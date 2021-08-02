@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
+
 import { ButtonContainer } from './styles';
 
-interface ButtonProp {
-  type: 'submit' | 'button';
-  disabled?: boolean;
-  onClick?: (e: React.MouseEvent) => void;
-}
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: React.FC<ButtonProp> = ({ children, type, disabled, onClick }) => (
-  <ButtonContainer type={type} disabled={disabled} onClick={onClick}>
+const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (
+  <ButtonContainer type='button' {...rest} >
     {children}
   </ButtonContainer>
 );

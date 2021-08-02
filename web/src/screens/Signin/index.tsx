@@ -1,51 +1,63 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMutation } from '@apollo/client';
-import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 
-import SIGNIN_MUTATION from '../../schemas/Mutations/Signin';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, Logo, Form, BackgroundImage, Links, ForgotPassword, AnotherProvider, Signup } from './styles';
+import { Container, Content, Logo, BackgroundImage, Links, ForgotPassword, AnotherProvider, Signup } from './styles';
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
-  const [signin] = useMutation(SIGNIN_MUTATION, {
-    variables: {
-      email: '',
-      password: '',
-    }
-  })
+  const formRef = useRef<FormHandles>(null);
 
-  const initialValues = {
-    email: '',
-    password: '',
-  }
+  const { signIn } = useAuth();
+  const { addToast } = useToast();
 
-  const validationSchema = Yup.object({
-    email: Yup.string().required('Email is required').email(),
-    password: Yup.string().required('Password is required'),
-  })
+  const Router = useRouter();
 
-  const validate = useFormik({
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true);
+  const handleSubmit = useCallback(async (data: SignInFormData) => {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string().required('Email é obrigatório').email('Digite um email válido'),
+        password: Yup.string().required('A senha é obrigatória')
+      })
 
-      const response = await signin({
-        variables: values,
+      await schema.validate(data, {
+        abortEarly: false
+      })
+
+      await signIn({
+        email: data.email,
+        password: data.password
       });
 
-      localStorage.setItem('token', response.data.signin.token);
+      Router.push('/dashboard');
+    } catch (err) {
+      formRef.current?.setErrors({
+        email: 'Email é obrigatório',
+        password: 'Senha é obrigatória'
+      })
 
-      setSubmitting(false);
+      addToast({
+        type: 'error',
+        title: 'Erro na autenticação',
+        description: 'Ocorreu um erro ao fazer o login, cheque as credenciais.'
+      });
     }
-  });
+  }, [signIn, addToast])
 
   return (
     <Container>
@@ -56,25 +68,21 @@ const Login: React.FC = () => {
 
         <h1>Faça seu login</h1>
 
-        <Form onSubmit={validate.handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Input
             id={'email'}
+            name="email"
             type="text"
             icon={FiMail}
             placeholder={'E-mail'}
-            value={validate.values.email}
-            onBlur={validate.handleBlur}
-            onChange={validate.handleChange}
           />
 
           <Input
             id={'password'}
+            name="password"
             type="password"
             icon={FiLock}
             placeholder={'Senha'}
-            value={validate.values.password}
-            onBlur={validate.handleBlur}
-            onChange={validate.handleChange}
           />
 
           <Button type="submit" disabled={false}>

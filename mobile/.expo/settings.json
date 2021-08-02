@@ -4,5 +4,10 @@
   "dev": true,
   "minify": false,
   "urlRandomness": null,
+<<<<<<< HEAD
   "https": false
+=======
+  "https": false,
+  "scheme": null
+>>>>>>> rest
 }

@@ -10,7 +10,12 @@
 >>>>>>> graphql
 =======
   "/_error": "pages/_error.js",
+<<<<<<< HEAD
   "/createProfile": "pages/createProfile.js",
   "/signup": "pages/signup.js"
+>>>>>>> rest
+=======
+  "/": "pages/index.js",
+  "/dashboard": "pages/dashboard.js"
 >>>>>>> rest
 }
