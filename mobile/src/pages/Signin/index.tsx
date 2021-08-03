@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from '@expo/vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -10,24 +11,32 @@ import Logo from '../../assets/logo.png';
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountButtonText } from './styles';
 
 const Signin: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <>
-      <Container>
-        <Image source={Logo} />
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }} enabled>
+        <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ flex: 1 }}>
+          <Container>
+            <Image source={Logo} />
 
-        <Title>Faça seu logon</Title>
+            <View>
+              <Title>Faça seu logon</Title>
+            </View>
 
-        <Input name="email" icon="mail" placeholder="E-mail" />
-        <Input name="password" icon="lock" placeholder="Senha" />
+            <Input name="email" icon="mail" placeholder="E-mail" />
+            <Input name="password" icon="lock" placeholder="Senha" />
 
-        <Button onPress={() => { }}>Entrar</Button>
+            <Button onPress={() => { }}>Entrar</Button>
 
-        <ForgotPassword onPress={() => { }}>
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
-      </Container>
+            <ForgotPassword onPress={() => { }}>
+              <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+            </ForgotPassword>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
 
-      <CreateAccountButton onPress={() => { }}>
+      <CreateAccountButton onPress={() => navigation.navigate('Signup')}>
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountButtonText>Criar conta</CreateAccountButtonText>
       </CreateAccountButton>

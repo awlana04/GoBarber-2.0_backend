@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
-  padding: 0 30px;
+  padding: 0 30px ${Platform.OS === 'android' ? 120 : 40}px;
 
   flex: 1;
   align-items: center;
@@ -30,6 +31,7 @@ export const ForgotPasswordText = styled.Text`
 export const CreateAccountButton = styled.TouchableOpacity`
   padding: 16px 0 ${16 + getBottomSpace()}px;
 
+  background: #312e38;
   border-top-width: 1px;
   border-color: #232129;
 

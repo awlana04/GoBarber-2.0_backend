@@ -15,7 +15,7 @@ export const Container = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
-  color: #fff;
+  color: #f4ede8;
   font-size: 16px;
   font-family: 'RobotoSlab_400Regular';
 
