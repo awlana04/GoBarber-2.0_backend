@@ -8,8 +8,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './src/routes';
 
-// import Signin from './src/pages/Signin';
-
 function App() {
   const [fontsLoaded] = useFonts({
     RobotoSlab_400Regular,
@@ -24,8 +22,6 @@ function App() {
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" backgroundColor="#312e38" />
-
-      {/* <Signin /> */}
 
       <Routes />
     </NavigationContainer>
