@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
 import Icon from '@expo/vector-icons/Feather';

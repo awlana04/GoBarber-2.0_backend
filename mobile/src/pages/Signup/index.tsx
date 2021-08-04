@@ -1,6 +1,6 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 import Icon from '@expo/vector-icons/Feather';
 
 import Input from '../../components/Input';
