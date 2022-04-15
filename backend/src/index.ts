@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import 'dotenv/config';
 
 import express from 'express';
@@ -6,10 +7,6 @@ const app = express();
 
 const port = process.env.PORT;
 const host = process.env.HOST;
-
-app.get('/', (request, response) => {
-  response.send('Hello World');
-});
 
 app.listen({ port, host }, () =>
   console.log(`🚀 Server running at port: ${port}!`)
