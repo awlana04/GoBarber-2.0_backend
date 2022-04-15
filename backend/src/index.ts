@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from 'express';
 
 const app = express();
@@ -5,4 +7,10 @@ const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
 
-app.listen(port, () => console.log(`${port}`));
+app.get('/', (request, response) => {
+  response.send('Hello World');
+});
+
+app.listen({ port, host }, () =>
+  console.log(`🚀 Server running at port: ${port}!`)
+);
