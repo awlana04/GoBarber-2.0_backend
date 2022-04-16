@@ -23,5 +23,26 @@ model User {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
+  barber Barber[]
+
   @@map("users")
+}
+
+model Barber {
+  id String @id @default(uuid())
+
+  name           String
+  location       String
+  description    String
+  images         String[]
+  openAtNight    Boolean  @map(name: "open_at_night")
+  openOnWeekends Boolean  @map(name: "open_on_weekends")
+
+  userId String @map(name: "user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map("barbers")
 }

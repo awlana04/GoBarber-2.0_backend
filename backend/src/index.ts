@@ -17,21 +17,23 @@ app.use(errors());
 const port = process.env.PORT;
 const host = process.env.HOST;
 
-app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
-    return response.status(err.statusCode).json({
+app.use(
+  (err: Error, _request: Request, response: Response, _: NextFunction) => {
+    if (err instanceof AppError) {
+      return response.status(err.statusCode).json({
+        status: 'error',
+        message: err.message,
+      });
+    }
+
+    console.error(err);
+
+    return response.status(500).json({
       status: 'error',
       message: err.message,
     });
   }
-
-  console.error(err);
-
-  return response.status(500).json({
-    status: 'error',
-    message: err.message,
-  });
-});
+);
 
 app.listen({ port, host }, () =>
   console.log(`🚀 Server running at port: ${port}!`)

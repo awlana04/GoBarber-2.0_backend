@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
+import { hash } from 'bcryptjs';
 
 import prisma from '../database/prisma';
+
 import AppError from '../utils/AppError';
 
 export class CreateUserController {
-  async handle(request: Request, response: Response) {
+  public async handle(request: Request, response: Response) {
     try {
       const { name, email, password, avatar, location } = request.body;
 
@@ -18,11 +20,13 @@ export class CreateUserController {
         throw new AppError('Email address aready in use');
       }
 
+      const hashedPassword = await hash(password, 10);
+
       const users = await prisma.user.create({
         data: {
           name,
           email,
-          password,
+          password: hashedPassword,
           avatar,
           location,
         },
