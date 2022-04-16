@@ -41,12 +41,11 @@ router.post(
 );
 
 router.post(
-  '/appointment',
+  '/appointment/:id',
   celebrate({
     [Segments.BODY]: {
-      time: Joi.binary().required(),
-      date: Joi.binary().required(),
-      userId: Joi.string().required(),
+      time: Joi.string().required(),
+      date: Joi.string().required(),
       barberId: Joi.string().required(),
     },
   }),

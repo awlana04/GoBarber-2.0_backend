@@ -23,7 +23,7 @@ model User {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  barber      Barber[]
+  barber      Barber?
   appointment Appointment[]
 
   @@map("users")
@@ -39,7 +39,7 @@ model Barber {
   openAtNight    Boolean  @map(name: "open_at_night")
   openOnWeekends Boolean  @map(name: "open_on_weekends")
 
-  userId String @map(name: "user_id")
+  userId String @unique @map(name: "user_id")
   user   User   @relation(fields: [userId], references: [id])
 
   appointment Appointment[]
@@ -53,8 +53,8 @@ model Barber {
 model Appointment {
   id String @id @default(uuid())
 
-  time Int
-  date Int
+  time String
+  date String
 
   userId   String @map(name: "user_id")
   user     User   @relation(fields: [userId], references: [id])
