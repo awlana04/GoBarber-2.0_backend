@@ -15,7 +15,6 @@ export class CreateBarberController {
         openAtNight,
         openOnWeekends,
       } = request.body;
-
       const { id } = request.params;
 
       const checkIfUserExists = await prisma.user.findFirst({

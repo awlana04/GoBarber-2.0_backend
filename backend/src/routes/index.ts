@@ -3,11 +3,13 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import { CreateUserController } from '../controllers/CreateUserController';
 import { CreateBarberController } from '../controllers/CreateBarberController';
+import { CreateAppointmentController } from '../controllers/CreateAppointmentController';
 
 const router = Router();
 
 const createUser = new CreateUserController();
 const createBarber = new CreateBarberController();
+const createAppointment = new CreateAppointmentController();
 
 router.post(
   '/',
@@ -36,6 +38,19 @@ router.post(
     },
   }),
   createBarber.execute
+);
+
+router.post(
+  '/appointment',
+  celebrate({
+    [Segments.BODY]: {
+      time: Joi.binary().required(),
+      date: Joi.binary().required(),
+      userId: Joi.string().required(),
+      barberId: Joi.string().required(),
+    },
+  }),
+  createAppointment.execute
 );
 
 export { router };

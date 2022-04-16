@@ -23,7 +23,8 @@ model User {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  barber Barber[]
+  barber      Barber[]
+  appointment Appointment[]
 
   @@map("users")
 }
@@ -31,7 +32,7 @@ model User {
 model Barber {
   id String @id @default(uuid())
 
-  name           String
+  name           String   @unique
   location       String
   description    String
   images         String[]
@@ -41,8 +42,27 @@ model Barber {
   userId String @map(name: "user_id")
   user   User   @relation(fields: [userId], references: [id])
 
+  appointment Appointment[]
+
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   @@map("barbers")
+}
+
+model Appointment {
+  id String @id @default(uuid())
+
+  time Int
+  date Int
+
+  userId   String @map(name: "user_id")
+  user     User   @relation(fields: [userId], references: [id])
+  barberId String @map(name: "barber_id")
+  barber   Barber @relation(fields: [barberId], references: [id])
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map("appointments")
 }
