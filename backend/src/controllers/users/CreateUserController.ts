@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 
-import prisma from '../database/prisma';
+import prisma from '../../database/prisma';
 
-import AppError from '../utils/AppError';
+import AppError from '../../utils/AppError';
 
 export class CreateUserController {
   public async handle(request: Request, response: Response) {

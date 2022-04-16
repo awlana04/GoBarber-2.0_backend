@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import prisma from '../database/prisma';
+import prisma from '../../database/prisma';
 
-import AppError from '../utils/AppError';
+import AppError from '../../utils/AppError';
 
 export class CreateAppointmentController {
   public async execute(request: Request, response: Response) {
