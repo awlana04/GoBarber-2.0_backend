@@ -5,14 +5,24 @@ import { CreateAppointmentController } from '../controllers/appointments/CreateA
 import { GetAnAppointmentController } from '../controllers/appointments/GetAnAppointmentComtroller';
 import { FindAllAppointmentsController } from '../controllers/appointments/FindAllAppointmentsController';
 
+import authMiddleware from '../middlewares/authMiddleware';
+
 const appointmentsRouter = Router();
 
 const createAppointment = new CreateAppointmentController();
 const getAnAppointment = new GetAnAppointmentController();
 const findAllAppointments = new FindAllAppointmentsController();
 
-appointmentsRouter.get('/appointments/:id', getAnAppointment.execute);
-appointmentsRouter.get('/barber/appointments/:id', findAllAppointments.execute);
+appointmentsRouter.get(
+  '/appointments/:id',
+  authMiddleware,
+  getAnAppointment.execute
+);
+appointmentsRouter.get(
+  '/barber/appointments/:id',
+  authMiddleware,
+  findAllAppointments.execute
+);
 
 appointmentsRouter.post(
   '/appointment/:id',
@@ -22,6 +32,7 @@ appointmentsRouter.post(
       barberId: Joi.string().required(),
     },
   }),
+  authMiddleware,
   createAppointment.execute
 );
 

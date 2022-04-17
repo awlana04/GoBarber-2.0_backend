@@ -5,14 +5,16 @@ import { CreateBarberController } from '../controllers/barbers/CreateBarberContr
 import { GetBarberController } from '../controllers/barbers/GetBarberController';
 import { GetAllBarbersController } from '../controllers/barbers/GetAllBarbersController';
 
+import authMiddleware from '../middlewares/authMiddleware';
+
 const barberRouter = Router();
 
 const createBarber = new CreateBarberController();
 const getBarber = new GetBarberController();
 const getAllBarbers = new GetAllBarbersController();
 
-barberRouter.get('/barbers', getAllBarbers.execute);
-barberRouter.get('/barbers/:id', getBarber.execute);
+barberRouter.get('/barbers', authMiddleware, getAllBarbers.execute);
+barberRouter.get('/barbers/:id', authMiddleware, getBarber.execute);
 
 barberRouter.post(
   '/barber/:id',
@@ -26,6 +28,7 @@ barberRouter.post(
       openOnWeekends: Joi.boolean(),
     },
   }),
+  authMiddleware,
   createBarber.execute
 );
 

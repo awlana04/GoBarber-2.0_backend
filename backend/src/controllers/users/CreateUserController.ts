@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 import prisma from '../../database/prisma';
 
@@ -32,7 +33,11 @@ export class CreateUserController {
         },
       });
 
-      return response.json(users);
+      const token = jwt.sign({ id: user.id }, process.env.SECRET, {
+        expiresIn: '7d',
+      });
+
+      return response.json({ users, token });
     } catch (error) {
       return response.json(error);
     }
