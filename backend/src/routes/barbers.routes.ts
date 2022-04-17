@@ -15,12 +15,18 @@ const getAllBarbers = new GetAllBarbersController();
 const createBarber = new CreateBarberController();
 const updateBarber = new UpdateBarberController();
 
-barberRouter.get('/barbers/:id', ensureAuthenticated, getBarber.execute);
+barberRouter.get(
+  '/barbers/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  getBarber.execute
+);
 barberRouter.get('/barbers', ensureAuthenticated, getAllBarbers.execute);
 
 barberRouter.post(
   '/barber/:id',
   celebrate({
+    [Segments.PARAMS]: { id: Joi.string().required() },
     [Segments.BODY]: {
       name: Joi.string().required(),
       location: Joi.string().required(),
@@ -37,6 +43,7 @@ barberRouter.post(
 barberRouter.put(
   '/barber/:id',
   celebrate({
+    [Segments.PARAMS]: { id: Joi.string().required() },
     [Segments.BODY]: {
       name: Joi.string(),
       userName: Joi.string(),
