@@ -31,8 +31,7 @@ CREATE TABLE "barbers" (
 -- CreateTable
 CREATE TABLE "appointments" (
     "id" TEXT NOT NULL,
-    "time" INTEGER NOT NULL,
-    "date" INTEGER NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
     "user_id" TEXT NOT NULL,
     "barber_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

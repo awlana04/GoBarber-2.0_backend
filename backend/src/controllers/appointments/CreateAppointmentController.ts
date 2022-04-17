@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { startOfDay } from 'date-fns';
 
 import prisma from '../../database/prisma';
 
@@ -7,49 +8,48 @@ import AppError from '../../utils/AppError';
 export class CreateAppointmentController {
   public async execute(request: Request, response: Response) {
     try {
-      const { time, date, barberId } = request.body;
+      const { date, barberId } = request.body;
       const { id } = request.params;
 
-      const checkIfUserExists = await prisma.user.findFirst({
+      const user = await prisma.user.findFirst({
         where: {
           id,
         },
       });
 
-      if (!checkIfUserExists) {
+      if (!user) {
         throw new AppError('User does not exists');
       }
 
-      const checkIfBarberExists = await prisma.barber.findFirst({
+      const barber = await prisma.barber.findFirst({
         where: {
           id: barberId,
         },
       });
 
-      if (!checkIfBarberExists) {
+      if (!barber) {
         throw new AppError('Barber does not exists');
       }
 
-      const checkIfAppointmentAlreadyExistsForTheSameBarber =
-        await prisma.user.findFirst({
-          where: {
-            appointment: {
-              some: {
-                barberId,
-              },
-            },
-          },
-        });
+      const checkIfAppointmentIsBookedInAPastDate = startOfDay(Date.now());
 
-      if (checkIfAppointmentAlreadyExistsForTheSameBarber) {
-        throw new AppError(
-          'You can not have two appointments booked with the same barber'
-        );
+      if (checkIfAppointmentIsBookedInAPastDate > date) {
+        throw new AppError('You can not book an appointment in a past date');
+      }
+
+      const bookedDate = await prisma.appointment.findFirst({
+        where: {
+          date,
+          barberId,
+        },
+      });
+
+      if (bookedDate) {
+        throw new AppError('This date is already booked');
       }
 
       const appointment = await prisma.appointment.create({
         data: {
-          time,
           date,
           userId: id,
           barberId,

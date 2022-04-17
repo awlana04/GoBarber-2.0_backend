@@ -10,13 +10,13 @@ export class CreateUserController {
     try {
       const { name, email, password, avatar, location } = request.body;
 
-      const checkUserExists = await prisma.user.findFirst({
+      const user = await prisma.user.findFirst({
         where: {
           email,
         },
       });
 
-      if (checkUserExists) {
+      if (user) {
         throw new AppError('Email address aready in use');
       }
 

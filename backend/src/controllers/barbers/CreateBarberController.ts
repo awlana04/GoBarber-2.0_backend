@@ -17,13 +17,13 @@ export class CreateBarberController {
       } = request.body;
       const { id } = request.params;
 
-      const checkIfUserExists = await prisma.user.findFirst({
+      const user = await prisma.user.findFirst({
         where: {
           id,
         },
       });
 
-      if (!checkIfUserExists) {
+      if (!user) {
         throw new AppError('User does not exists');
       }
 
