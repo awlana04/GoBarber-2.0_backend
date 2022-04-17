@@ -9,7 +9,7 @@ interface TokenPayload {
   exp: Number;
 }
 
-export default function authMiddleware(
+export default function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction

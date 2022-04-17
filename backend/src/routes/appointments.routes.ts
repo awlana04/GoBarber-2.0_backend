@@ -5,7 +5,7 @@ import { CreateAppointmentController } from '../controllers/appointments/CreateA
 import { GetAnAppointmentController } from '../controllers/appointments/GetAnAppointmentComtroller';
 import { FindAllAppointmentsController } from '../controllers/appointments/FindAllAppointmentsController';
 
-import authMiddleware from '../middlewares/authMiddleware';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
 
@@ -15,12 +15,12 @@ const findAllAppointments = new FindAllAppointmentsController();
 
 appointmentsRouter.get(
   '/appointments/:id',
-  authMiddleware,
+  ensureAuthenticated,
   getAnAppointment.execute
 );
 appointmentsRouter.get(
   '/barber/appointments/:id',
-  authMiddleware,
+  ensureAuthenticated,
   findAllAppointments.execute
 );
 
@@ -32,7 +32,7 @@ appointmentsRouter.post(
       barberId: Joi.string().required(),
     },
   }),
-  authMiddleware,
+  ensureAuthenticated,
   createAppointment.execute
 );
 

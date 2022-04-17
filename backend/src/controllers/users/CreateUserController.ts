@@ -37,6 +37,8 @@ export class CreateUserController {
         expiresIn: '7d',
       });
 
+      delete user.password;
+
       return response.json({ users, token });
     } catch (error) {
       return response.json(error);

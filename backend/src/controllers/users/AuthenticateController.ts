@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import dayjs from 'dayjs';
 
 import prisma from '../../database/prisma';
 
@@ -18,22 +19,37 @@ export class AuthenticateController {
       });
 
       if (!user) {
-        throw new AppError('User does not exists');
+        throw new AppError('Email or password incorrect');
       }
 
       const isValidPassword = compare(password, user.password);
 
       if (!isValidPassword) {
-        throw new AppError('Password does not match');
+        throw new AppError('Email or password incorrect');
       }
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET as string, {
-        expiresIn: '7d',
+        expiresIn: '30s',
+      });
+
+      await prisma.refreshToken.deleteMany({
+        where: {
+          userId: user.id,
+        },
+      });
+
+      const expiresIn = dayjs().add(30, 'second').unix();
+
+      const refreshToken = await prisma.refreshToken.create({
+        data: {
+          expiresIn,
+          userId: user.id,
+        },
       });
 
       delete user.password;
 
-      return response.json({ user, token });
+      return response.json({ user, token, refreshToken });
     } catch (error) {
       return response.json(error);
     }

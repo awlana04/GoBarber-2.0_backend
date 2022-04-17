@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl"]
@@ -20,13 +17,28 @@ model User {
   avatar   String?
   location String
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  barber      Barber?
-  appointment Appointment[]
+  refresh_token RefreshToken?
+  barber        Barber?
+  appointment   Appointment[]
 
   @@map("users")
+}
+
+model RefreshToken {
+  id String @id @default(uuid())
+
+  expiresIn Int @map("expires_in")
+
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("refresh_token")
 }
 
 model Barber {
@@ -36,16 +48,18 @@ model Barber {
   location       String
   description    String
   images         String[]
-  openAtNight    Boolean  @map(name: "open_at_night")
-  openOnWeekends Boolean  @map(name: "open_on_weekends")
+  ratimg         Int[]
+  comments       String?
+  openAtNight    Boolean  @map("open_at_night")
+  openOnWeekends Boolean  @map("open_on_weekends")
 
-  userId String @unique @map(name: "user_id")
+  userId String @unique @map("user_id")
   user   User   @relation(fields: [userId], references: [id])
 
   appointment Appointment[]
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("barbers")
 }
@@ -55,13 +69,13 @@ model Appointment {
 
   date DateTime
 
-  userId   String @map(name: "user_id")
+  userId   String @map("user_id")
   user     User   @relation(fields: [userId], references: [id])
-  barberId String @map(name: "barber_id")
+  barberId String @map("barber_id")
   barber   Barber @relation(fields: [barberId], references: [id])
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("appointments")
 }
