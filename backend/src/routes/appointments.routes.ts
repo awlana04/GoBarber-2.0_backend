@@ -4,6 +4,7 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import { GetAnAppointmentController } from '../controllers/appointments/GetAnAppointmentComtroller';
 import { FindAllAppointmentsController } from '../controllers/appointments/FindAllAppointmentsController';
 import { CreateAppointmentController } from '../controllers/appointments/CreateAppointmentController';
+import { UpdateAppointmentController } from '../controllers/appointments/UpdateAppointmentController';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
@@ -12,6 +13,7 @@ const appointmentsRouter = Router();
 const getAnAppointment = new GetAnAppointmentController();
 const findAllAppointments = new FindAllAppointmentsController();
 const createAppointment = new CreateAppointmentController();
+const updateAppointmnet = new UpdateAppointmentController();
 
 appointmentsRouter.get(
   '/appointments/:id',
@@ -37,6 +39,18 @@ appointmentsRouter.post(
   }),
   ensureAuthenticated,
   createAppointment.execute
+);
+
+appointmentsRouter.put(
+  '/appointment/:id',
+  celebrate({
+    [Segments.PARAMS]: { id: Joi.string().required() },
+    [Segments.BODY]: {
+      date: Joi.date().required(),
+    },
+  }),
+  ensureAuthenticated,
+  updateAppointmnet.execute
 );
 
 export default appointmentsRouter;

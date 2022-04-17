@@ -11,19 +11,19 @@ export class CreateUserController {
     try {
       const { name, email, password, avatar, location } = request.body;
 
-      const user = await prisma.user.findFirst({
+      const checkUserExists = await prisma.user.findFirst({
         where: {
           email,
         },
       });
 
-      if (user) {
+      if (checkUserExists) {
         throw new AppError('Email address aready in use');
       }
 
       const hashedPassword = await hash(password, 10);
 
-      const users = await prisma.user.create({
+      const user = await prisma.user.create({
         data: {
           name,
           email,
@@ -34,12 +34,12 @@ export class CreateUserController {
       });
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET, {
-        expiresIn: '7d',
+        expiresIn: process.env.ENVIRONMENT === 'development' ? '1d' : '15s',
       });
 
       delete user.password;
 
-      return response.json({ users, token });
+      return response.json({ user, token });
     } catch (error) {
       return response.json(error);
     }

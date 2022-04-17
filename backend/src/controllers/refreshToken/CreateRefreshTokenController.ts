@@ -22,7 +22,7 @@ export class CreateRefreshTokenController {
       }
 
       const token = jwt.sign({ id: refreshToken.userId }, process.env.SECRET, {
-        expiresIn: '30s',
+        expiresIn: process.env.ENVIRONMENT === 'development' ? '1d' : '15s',
       });
 
       const expiredRefreshToken = dayjs().isAfter(
@@ -36,7 +36,10 @@ export class CreateRefreshTokenController {
           },
         });
 
-        const expiresIn = dayjs().add(30, 'second').unix();
+        const expiresIn =
+          process.env.ENVIRONMENT === 'development'
+            ? dayjs().add(1, 'day').unix()
+            : dayjs().add(15, 'seconds').unix();
 
         const newRefreshToken = await prisma.refreshToken.create({
           data: {

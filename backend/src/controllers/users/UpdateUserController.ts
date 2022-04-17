@@ -34,7 +34,7 @@ export class UpdateUserController {
         throw new AppError('User does not exists');
       }
 
-      if (user.password) {
+      if (password) {
         const hashedPassword = await hash(user.password, 10);
 
         await prisma.user.update({

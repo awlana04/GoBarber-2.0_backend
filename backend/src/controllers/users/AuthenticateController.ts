@@ -29,7 +29,7 @@ export class AuthenticateController {
       }
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET as string, {
-        expiresIn: '30s',
+        expiresIn: process.env.ENVIRONMENT === 'development' ? '1d' : '15s',
       });
 
       await prisma.refreshToken.deleteMany({
@@ -38,7 +38,10 @@ export class AuthenticateController {
         },
       });
 
-      const expiresIn = dayjs().add(30, 'second').unix();
+      const expiresIn =
+        process.env.ENVIRONMENT === 'development'
+          ? dayjs().add(1, 'day').unix()
+          : dayjs().add(15, 'seconds').unix();
 
       const refreshToken = await prisma.refreshToken.create({
         data: {
