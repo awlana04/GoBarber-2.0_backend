@@ -2,24 +2,19 @@ import { Request, Response } from 'express';
 
 import prisma from '../../database/prisma';
 
-export class GetBarberController {
+export class FindAllAppointmentsController {
   public async execute(request: Request, response: Response) {
     const { id } = request.params;
 
-    const barber = await prisma.barber.findUnique({
+    const appointments = await prisma.appointment.findMany({
       where: {
-        id,
+        barberId: id,
       },
       include: {
-        user: {
-          select: {
-            name: true,
-            avatar: true,
-          },
-        },
+        user: true,
       },
     });
 
-    return response.json(barber);
+    return response.json(appointments);
   }
 }

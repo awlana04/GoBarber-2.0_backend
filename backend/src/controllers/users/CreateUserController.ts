@@ -6,7 +6,7 @@ import prisma from '../../database/prisma';
 import AppError from '../../utils/AppError';
 
 export class CreateUserController {
-  public async handle(request: Request, response: Response) {
+  public async execute(request: Request, response: Response) {
     try {
       const { name, email, password, avatar, location } = request.body;
 

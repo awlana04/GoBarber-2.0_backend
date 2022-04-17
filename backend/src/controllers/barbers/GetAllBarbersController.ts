@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import prisma from '../../database/prisma';
 
 export class GetAllBarbersController {
-  public async view(request: Request, response: Response) {
+  public async execute(request: Request, response: Response) {
     const barbers = await prisma.barber.findMany({
       select: {
         id: true,

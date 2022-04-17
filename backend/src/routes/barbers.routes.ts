@@ -11,8 +11,8 @@ const createBarber = new CreateBarberController();
 const getBarber = new GetBarberController();
 const getAllBarbers = new GetAllBarbersController();
 
-barberRouter.get('/barbers', getAllBarbers.view);
-barberRouter.get('/barbers/:id', getBarber.view);
+barberRouter.get('/barbers', getAllBarbers.execute);
+barberRouter.get('/barbers/:id', getBarber.execute);
 
 barberRouter.post(
   '/barber/:id',

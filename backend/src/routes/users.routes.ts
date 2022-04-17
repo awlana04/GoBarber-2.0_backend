@@ -18,7 +18,7 @@ usersRouter.post(
       location: Joi.string().required(),
     },
   }),
-  createUser.handle
+  createUser.execute
 );
 
 export default usersRouter;
