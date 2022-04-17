@@ -48,8 +48,6 @@ model Barber {
   location       String
   description    String
   images         String[]
-  ratimg         Int[]
-  comments       String?
   openAtNight    Boolean  @map("open_at_night")
   openOnWeekends Boolean  @map("open_on_weekends")
 
