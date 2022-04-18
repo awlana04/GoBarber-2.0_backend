@@ -5,6 +5,7 @@ import { GetAnAppointmentController } from '../controllers/appointments/GetAnApp
 import { FindAllAppointmentsController } from '../controllers/appointments/FindAllAppointmentsController';
 import { CreateAppointmentController } from '../controllers/appointments/CreateAppointmentController';
 import { UpdateAppointmentController } from '../controllers/appointments/UpdateAppointmentController';
+import { DeleteAppointmentController } from '../controllers/appointments/DeleteAppointmentController';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
@@ -14,6 +15,7 @@ const getAnAppointment = new GetAnAppointmentController();
 const findAllAppointments = new FindAllAppointmentsController();
 const createAppointment = new CreateAppointmentController();
 const updateAppointmnet = new UpdateAppointmentController();
+const deleteAppointment = new DeleteAppointmentController();
 
 appointmentsRouter.get(
   '/appointments/:id',
@@ -21,6 +23,7 @@ appointmentsRouter.get(
   ensureAuthenticated,
   getAnAppointment.execute
 );
+
 appointmentsRouter.get(
   '/barber/appointments/:id',
   celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
@@ -51,6 +54,13 @@ appointmentsRouter.put(
   }),
   ensureAuthenticated,
   updateAppointmnet.execute
+);
+
+appointmentsRouter.delete(
+  '/appointment/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteAppointment.execute
 );
 
 export default appointmentsRouter;

@@ -1,20 +1,31 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
+import { GetUserController } from '../controllers/users/GetUserController';
 import { CreateUserController } from '../controllers/users/CreateUserController';
 import { AuthenticateController } from '../controllers/users/AuthenticateController';
 import { UpdateUserController } from '../controllers/users/UpdateUserController';
+import { DeleteUserController } from '../controllers/users/DeleteUserController';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
 
+const getUser = new GetUserController();
 const createUser = new CreateUserController();
 const authenticate = new AuthenticateController();
 const updateUser = new UpdateUserController();
+const deleteUser = new DeleteUserController();
+
+usersRouter.get(
+  '/user/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  getUser.execute
+);
 
 usersRouter.post(
-  '/',
+  '/user',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -39,7 +50,7 @@ usersRouter.post(
 );
 
 usersRouter.put(
-  '/:id',
+  '/user/:id',
   celebrate({
     [Segments.PARAMS]: { id: Joi.string().required() },
     [Segments.BODY]: {
@@ -51,6 +62,13 @@ usersRouter.put(
   }),
   ensureAuthenticated,
   updateUser.execute
+);
+
+usersRouter.delete(
+  '/user/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteUser.execute
 );
 
 export default usersRouter;

@@ -12,7 +12,7 @@ export class AuthenticateController {
     try {
       const { email, password } = request.body;
 
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findFirst({
         where: {
           email,
         },

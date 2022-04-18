@@ -4,30 +4,22 @@ import prisma from '../../database/prisma';
 
 import AppError from '../../utils/AppError';
 
-export class GetBarberController {
+export class DeleteAppointmentController {
   public async execute(request: Request, response: Response) {
     try {
       const { id } = request.params;
 
-      const barber = await prisma.barber.findUnique({
+      const appointment = await prisma.appointment.delete({
         where: {
           id,
         },
-        include: {
-          user: {
-            select: {
-              name: true,
-              avatar: true,
-            },
-          },
-        },
       });
 
-      if (!barber) {
-        throw new AppError('Barber does not exists');
+      if (!appointment) {
+        throw new AppError('Appointment does not exists');
       }
 
-      return response.json(barber);
+      return response.json(appointment);
     } catch (error) {
       return response.json(error);
     }

@@ -6,7 +6,6 @@ export class GetAllBarbersController {
   public async execute(request: Request, response: Response) {
     const barbers = await prisma.barber.findMany({
       select: {
-        id: true,
         name: true,
         location: true,
         openAtNight: true,

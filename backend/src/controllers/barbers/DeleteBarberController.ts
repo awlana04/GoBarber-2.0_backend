@@ -4,22 +4,14 @@ import prisma from '../../database/prisma';
 
 import AppError from '../../utils/AppError';
 
-export class GetBarberController {
+export class DeleteBarberController {
   public async execute(request: Request, response: Response) {
     try {
       const { id } = request.params;
 
-      const barber = await prisma.barber.findUnique({
+      const barber = await prisma.barber.delete({
         where: {
           id,
-        },
-        include: {
-          user: {
-            select: {
-              name: true,
-              avatar: true,
-            },
-          },
         },
       });
 
