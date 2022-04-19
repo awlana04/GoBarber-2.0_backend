@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import cors from 'cors';
+import path from 'path';
 
 import express, { NextFunction, Request, Response } from 'express';
 import { errors } from 'celebrate';
@@ -12,6 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(router);
 app.use(errors());
+app.use(cors());
+app.use('/avatar', express.static(path.join(__dirname, '..', 'tmp')));
 
 const port = process.env.PORT;
 const host = process.env.HOST;

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
+import multer from 'multer';
 
 import { GetUserController } from '../controllers/users/GetUserController';
 import { CreateUserController } from '../controllers/users/CreateUserController';
@@ -9,7 +10,10 @@ import { DeleteUserController } from '../controllers/users/DeleteUserController'
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
+import uploadConfig from '../config/upload';
+
 const usersRouter = Router();
+const upload = multer(uploadConfig);
 
 const getUser = new GetUserController();
 const createUser = new CreateUserController();
@@ -26,17 +30,20 @@ usersRouter.get(
 
 usersRouter.post(
   '/user',
-  celebrate({
-    [Segments.BODY]: {
-      name: Joi.string().required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().min(8).required(),
-      avatar: Joi.string(),
-      location: Joi.string().required(),
-    },
-  }),
+  // celebrate({
+  //   [Segments.BODY]: {
+  //     name: Joi.string().required(),
+  //     email: Joi.string().email().required(),
+  //     password: Joi.string().min(8).required(),
+  //     avatar: Joi.string(),
+  //     location: Joi.string().required(),
+  //   },
+  // }),
+  upload.single('avatar'),
   createUser.execute
 );
+
+usersRouter.patch('/', upload.single('avatar'), createUser.execute);
 
 usersRouter.post(
   '/authenticate',

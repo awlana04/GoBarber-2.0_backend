@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
 
 import prisma from '../../database/prisma';
 
@@ -23,12 +24,14 @@ export class CreateUserController {
 
       const hashedPassword = await hash(password, 10);
 
+      const image = request.file;
+
       const user = await prisma.user.create({
         data: {
           name,
           email,
           password: hashedPassword,
-          avatar,
+          avatar: image.filename,
           location,
         },
       });
