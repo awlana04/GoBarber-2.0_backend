@@ -28,20 +28,7 @@ usersRouter.get(
   getUser.execute
 );
 
-usersRouter.post(
-  '/user',
-  // celebrate({
-  //   [Segments.BODY]: {
-  //     name: Joi.string().required(),
-  //     email: Joi.string().email().required(),
-  //     password: Joi.string().min(8).required(),
-  //     avatar: Joi.string(),
-  //     location: Joi.string().required(),
-  //   },
-  // }),
-  upload.single('avatar'),
-  createUser.execute
-);
+usersRouter.post('/user', upload.single('avatar'), createUser.execute);
 
 usersRouter.patch('/', upload.single('avatar'), createUser.execute);
 

@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import multer from 'multer';
 
 import prisma from '../../database/prisma';
 
@@ -10,7 +9,7 @@ import AppError from '../../utils/AppError';
 export class CreateUserController {
   public async execute(request: Request, response: Response) {
     try {
-      const { name, email, password, avatar, location } = request.body;
+      const { name, email, password, location } = request.body;
 
       const checkUserExists = await prisma.user.findFirst({
         where: {
@@ -24,20 +23,20 @@ export class CreateUserController {
 
       const hashedPassword = await hash(password, 10);
 
-      const image = request.file;
+      const avatar = request.file;
 
       const user = await prisma.user.create({
         data: {
           name,
           email,
           password: hashedPassword,
-          avatar: image.filename,
           location,
+          avatar: avatar.filename,
         },
       });
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET, {
-        expiresIn: process.env.ENVIRONMENT === 'development' ? '1d' : '15s',
+        expiresIn: '15m',
       });
 
       delete user.password;

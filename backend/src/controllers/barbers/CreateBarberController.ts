@@ -7,17 +7,11 @@ import AppError from '../../utils/AppError';
 export class CreateBarberController {
   public async execute(request: Request, response: Response) {
     try {
-      const {
-        name,
-        location,
-        description,
-        images,
-        openAtNight,
-        openOnWeekends,
-      } = request.body;
+      const { name, location, description, openAtNight, openOnWeekends } =
+        request.body;
       const { id } = request.params;
 
-      const user = await prisma.user.findFirst({
+      const user = await prisma.user.findUnique({
         where: {
           id,
         },
@@ -34,7 +28,7 @@ export class CreateBarberController {
         throw new AppError('User already have a barber account');
       }
 
-      const barberNameExists = await prisma.barber.findFirst({
+      const barberNameExists = await prisma.barber.findUnique({
         where: {
           name,
         },
@@ -44,19 +38,21 @@ export class CreateBarberController {
         throw new AppError('Barber name already in use');
       }
 
+      // const files = request.files as Express.Multer.File[];
+
+      // const images = files.map(image => {
+      //   return image.filename;
+      // });
+
       const barber = await prisma.barber.create({
         data: {
           name,
           location,
           description,
-          images,
+          // images,
           openAtNight,
           openOnWeekends,
-          user: {
-            connect: {
-              id,
-            },
-          },
+          userId: id,
         },
       });
 

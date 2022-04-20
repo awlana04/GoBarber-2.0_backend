@@ -4,7 +4,7 @@ import prisma from '../../database/prisma';
 
 import AppError from '../../utils/AppError';
 
-export class DeleteBarberUserAndAppointmentController {
+export class DeleteBarberAndUserController {
   public async execute(request: Request, response: Response) {
     try {
       const { id } = request.params;
@@ -14,17 +14,12 @@ export class DeleteBarberUserAndAppointmentController {
           id,
         },
         include: {
-          appointment: true,
           user: true,
         },
       });
 
-      if (barber?.appointment) {
-        await prisma.appointment.deleteMany({
-          where: {
-            barberId: id,
-          },
-        });
+      if (!barber) {
+        throw new AppError('Barber does not exists');
       }
 
       if (barber?.user) {
@@ -39,10 +34,6 @@ export class DeleteBarberUserAndAppointmentController {
             email: barber.user.email,
           },
         });
-      }
-
-      if (!barber) {
-        throw new AppError('Barber does not exists');
       }
 
       return response.json(barber);

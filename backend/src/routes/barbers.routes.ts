@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
+import multer from 'multer';
 
 import { GetBarberController } from '../controllers/barbers/GetBarberController';
 import { GetAllBarbersController } from '../controllers/barbers/GetAllBarbersController';
@@ -7,11 +8,16 @@ import { CreateBarberController } from '../controllers/barbers/CreateBarberContr
 import { UpdateBarberController } from '../controllers/barbers/UpdateBarberController';
 import { UpdateBarberUserController } from '../controllers/barbers/UpdateBarberUserController';
 import { DeleteBarberController } from '../controllers/barbers/DeleteBarberController';
-import { DeleteBarberAndUserController } from '../controllers/barbers/DeleteBarberAndUserAppointmentController';
+import { DeleteBarberUserAndAppointmentController } from '../controllers/barbers/DeleteBarberAndUserAppointmentController';
+import { DeleteBarberAndAppointmentController } from '../controllers/barbers/DeleteBarberAndAppointmentController';
+import { DeleteBarberAndUserController } from '../controllers/barbers/DeleteBarberAndUserController';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
+import uploadConfig from '../config/upload';
+
 const barberRouter = Router();
+const upload = multer(uploadConfig);
 
 const getBarber = new GetBarberController();
 const getAllBarbers = new GetAllBarbersController();
@@ -19,6 +25,8 @@ const createBarber = new CreateBarberController();
 const updateBarber = new UpdateBarberController();
 const updateBarberUserController = new UpdateBarberUserController();
 const deleteBarber = new DeleteBarberController();
+const deleteBarberUserAndAppointment = new DeleteBarberAndUserController();
+const deleteBarberAndAppointment = new DeleteBarberAndAppointmentController();
 const deleteBarberAndUser = new DeleteBarberAndUserController();
 
 barberRouter.get(
@@ -32,17 +40,18 @@ barberRouter.get('/barbers', ensureAuthenticated, getAllBarbers.execute);
 
 barberRouter.post(
   '/barber/:id',
-  celebrate({
-    [Segments.PARAMS]: { id: Joi.string().required() },
-    [Segments.BODY]: {
-      name: Joi.string().required(),
-      location: Joi.string().required(),
-      description: Joi.string().max(256).required(),
-      images: Joi.string().required(),
-      openAtNight: Joi.boolean(),
-      openOnWeekends: Joi.boolean(),
-    },
-  }),
+  // celebrate({
+  //   [Segments.PARAMS]: { id: Joi.string().required() },
+  //   [Segments.BODY]: {
+  //     name: Joi.string().required(),
+  //     location: Joi.string().required(),
+  //     description: Joi.string().max(256).required(),
+  //     images: Joi.string().required(),
+  //     openAtNight: Joi.boolean(),
+  //     openOnWeekends: Joi.boolean(),
+  //   },
+  // }),
+  upload.array('images'),
   ensureAuthenticated,
   createBarber.execute
 );
@@ -83,6 +92,20 @@ barberRouter.delete(
   celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
   ensureAuthenticated,
   deleteBarber.execute
+);
+
+barberRouter.delete(
+  '/user/barber/appointment/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteBarberAndUser.execute
+);
+
+barberRouter.delete(
+  '/barber/appointment/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteBarberAndAppointment.execute
 );
 
 barberRouter.delete(
