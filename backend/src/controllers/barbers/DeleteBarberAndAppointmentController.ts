@@ -19,22 +19,21 @@ export class DeleteBarberAndAppointmentController {
       });
 
       if (!barber) {
-        throw new AppError('Barber does not exists');
+        response.status(404);
+        throw new AppError('Barber does not exists', 404);
       }
 
-      if (barber?.appointment) {
-        await prisma.appointment.deleteMany({
-          where: {
-            barberId: id,
-          },
-        });
+      await prisma.appointment.deleteMany({
+        where: {
+          barberId: id,
+        },
+      });
 
-        await prisma.barber.delete({
-          where: {
-            id,
-          },
-        });
-      }
+      await prisma.barber.delete({
+        where: {
+          id,
+        },
+      });
 
       return response.json(barber);
     } catch (error) {

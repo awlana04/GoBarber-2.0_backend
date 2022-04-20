@@ -11,14 +11,15 @@ export class CreateAppointmentController {
       const { date, barberId } = request.body;
       const { id } = request.params;
 
-      const user = await prisma.user.findFirst({
+      const user = await prisma.user.findUnique({
         where: {
           id,
         },
       });
 
       if (!user) {
-        throw new AppError('User does not exists');
+        response.status(404);
+        throw new AppError('User does not exists', 404);
       }
 
       const barber = await prisma.barber.findFirst({
@@ -28,13 +29,18 @@ export class CreateAppointmentController {
       });
 
       if (!barber) {
-        throw new AppError('Barber does not exists');
+        response.status(404);
+        throw new AppError('Barber does not exists', 404);
       }
 
       const checkIfAppointmentIsBookedInAPastDate = startOfDay(Date.now());
 
       if (checkIfAppointmentIsBookedInAPastDate > date) {
-        throw new AppError('You can not book an appointment in a past date');
+        response.status(406);
+        throw new AppError(
+          'You can not book an appointment in a past date',
+          406
+        );
       }
 
       const bookedDate = await prisma.appointment.findFirst({
@@ -45,7 +51,8 @@ export class CreateAppointmentController {
       });
 
       if (bookedDate) {
-        throw new AppError('This date is already booked');
+        response.status(406);
+        throw new AppError('This date is already booked', 406);
       }
 
       const appointment = await prisma.appointment.create({
@@ -56,7 +63,7 @@ export class CreateAppointmentController {
         },
       });
 
-      return response.json(appointment);
+      return response.status(201).json(appointment);
     } catch (error) {
       return response.json(error);
     }

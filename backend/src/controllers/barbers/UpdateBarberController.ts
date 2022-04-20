@@ -10,9 +10,6 @@ export class UpdateBarberController {
     try {
       const {
         name,
-        userName,
-        avatar,
-        password,
         location,
         description,
         images,
@@ -21,14 +18,15 @@ export class UpdateBarberController {
       } = request.body;
       const { id } = request.params;
 
-      const barberNameExists = await prisma.barber.findFirst({
+      const barberNameExists = await prisma.barber.findUnique({
         where: {
           name,
         },
       });
 
       if (barberNameExists === name) {
-        throw new AppError('Barber name already in use');
+        response.status(406);
+        throw new AppError('Barber name already in use', 406);
       }
 
       const barber = await prisma.barber.update({
@@ -42,38 +40,15 @@ export class UpdateBarberController {
           images,
           openAtNight,
           openOnWeekends,
-          user: {
-            update: {
-              name: userName,
-              avatar,
-              password,
-            },
-          },
         },
         include: {
           user: true,
         },
       });
-      if (password) {
-        const hashedPassword = await hash(barber.user.password, 10);
 
-        await prisma.barber.update({
-          where: {
-            id,
-          },
-          data: {
-            user: {
-              update: {
-                password: hashedPassword,
-              },
-            },
-          },
-        });
-
-        delete barber.user.password;
-      }
       if (!barber) {
-        throw new AppError('Barber does not exists');
+        response.status(404);
+        throw new AppError('Barber does not exists', 404);
       }
 
       return response.json(barber);

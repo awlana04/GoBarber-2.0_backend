@@ -19,22 +19,21 @@ export class DeleteBarberAndUserController {
       });
 
       if (!barber) {
-        throw new AppError('Barber does not exists');
+        response.status(404);
+        throw new AppError('Barber does not exists', 404);
       }
 
-      if (barber?.user) {
-        await prisma.barber.delete({
-          where: {
-            id,
-          },
-        });
+      await prisma.barber.delete({
+        where: {
+          id,
+        },
+      });
 
-        await prisma.user.delete({
-          where: {
-            email: barber.user.email,
-          },
-        });
-      }
+      await prisma.user.delete({
+        where: {
+          email: barber.user.email,
+        },
+      });
 
       return response.json(barber);
     } catch (error) {

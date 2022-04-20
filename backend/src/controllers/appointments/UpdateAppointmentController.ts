@@ -8,13 +8,17 @@ import AppError from '../../utils/AppError';
 export class UpdateAppointmentController {
   public async execute(request: Request, response: Response) {
     try {
-      const { date, userId, barberId } = request.body;
+      const { date, barberId } = request.body;
       const { id } = request.params;
 
       const checkIfAppointmentISBookedInAPastDate = startOfHour(Date.now());
 
       if (checkIfAppointmentISBookedInAPastDate > date) {
-        throw new AppError('You can not book an appointment in a past date');
+        response.status(406);
+        throw new AppError(
+          'You can not book an appointment in a past date',
+          406
+        );
       }
 
       const bookedData = await prisma.appointment.findFirst({
@@ -25,7 +29,8 @@ export class UpdateAppointmentController {
       });
 
       if (bookedData) {
-        throw new AppError('This date is already booked');
+        response.status(406);
+        throw new AppError('This date is already booked', 406);
       }
 
       const appointment = await prisma.appointment.update({
@@ -38,7 +43,8 @@ export class UpdateAppointmentController {
       });
 
       if (!appointment) {
-        throw new AppError('Appointment does not exists');
+        response.status(404);
+        throw new AppError('Appointment does not exists', 404);
       }
 
       return response.json(appointment);

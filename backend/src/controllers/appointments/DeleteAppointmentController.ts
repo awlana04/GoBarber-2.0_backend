@@ -16,7 +16,8 @@ export class DeleteAppointmentController {
       });
 
       if (!appointment) {
-        throw new AppError('Appointment does not exists');
+        response.status(404);
+        throw new AppError('Appointment does not exists', 404);
       }
 
       return response.json(appointment);

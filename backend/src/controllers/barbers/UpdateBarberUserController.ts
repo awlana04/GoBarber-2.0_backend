@@ -8,7 +8,7 @@ import AppError from '../../utils/AppError';
 export class UpdateBarberUserController {
   public async execute(request: Request, response: Response) {
     try {
-      const { name, avatar, password } = request.body;
+      const { name, password, avatar } = request.body;
       const { id } = request.params;
 
       const barber = await prisma.barber.update({
@@ -19,6 +19,7 @@ export class UpdateBarberUserController {
           user: {
             update: {
               name,
+              password,
               avatar,
             },
           },
@@ -48,7 +49,8 @@ export class UpdateBarberUserController {
       }
 
       if (!barber) {
-        throw new AppError('Barber does not exists');
+        response.status(404);
+        throw new AppError('Barber does not exists', 404);
       }
 
       return response.json(barber);

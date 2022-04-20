@@ -16,7 +16,8 @@ export class DeleteBarberController {
       });
 
       if (!barber) {
-        throw new AppError('Barber does not exists');
+        response.status(404);
+        throw new AppError('Barber does not exists', 404);
       }
 
       return response.json(barber);

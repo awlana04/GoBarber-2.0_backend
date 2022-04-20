@@ -27,11 +27,16 @@ export class UpdateUserController {
       });
 
       if (user.barber) {
-        throw new AppError('You are a barber. You can not update your profile');
+        response.status(406);
+        throw new AppError(
+          'You are a barber. You can not update your profile',
+          406
+        );
       }
 
       if (!user) {
-        throw new AppError('User does not exists');
+        response.status(404);
+        throw new AppError('User does not exists', 404);
       }
 
       if (password) {

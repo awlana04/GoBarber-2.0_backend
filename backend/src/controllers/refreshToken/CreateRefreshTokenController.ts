@@ -11,14 +11,15 @@ export class CreateRefreshTokenController {
     try {
       const { refresh_token } = request.body;
 
-      const refreshToken = await prisma.refreshToken.findFirst({
+      const refreshToken = await prisma.refreshToken.findUnique({
         where: {
           id: refresh_token,
         },
       });
 
       if (!refreshToken) {
-        throw new AppError('Refresh token invalid');
+        response.status(404);
+        throw new AppError('Refresh token invalid', 404);
       }
 
       const token = jwt.sign({ id: refreshToken.userId }, process.env.SECRET, {
@@ -45,7 +46,9 @@ export class CreateRefreshTokenController {
           },
         });
 
-        return response.json({ token, refreshToken: newRefreshToken });
+        return response
+          .status(201)
+          .json({ token, refreshToken: newRefreshToken });
       }
 
       return response.json(token);

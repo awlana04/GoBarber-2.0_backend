@@ -21,11 +21,13 @@ export class CreateBarberController {
       });
 
       if (!user) {
-        throw new AppError('User does not exists');
+        response.status(404);
+        throw new AppError('User does not exists', 404);
       }
 
       if (user.barber) {
-        throw new AppError('User already have a barber account');
+        response.status(406);
+        throw new AppError('User already have a barber account', 406);
       }
 
       const barberNameExists = await prisma.barber.findUnique({
@@ -35,7 +37,8 @@ export class CreateBarberController {
       });
 
       if (barberNameExists) {
-        throw new AppError('Barber name already in use');
+        response.status(406);
+        throw new AppError('Barber name already in use', 406);
       }
 
       // const files = request.files as Express.Multer.File[];
@@ -43,6 +46,8 @@ export class CreateBarberController {
       // const images = files.map(image => {
       //   return image.filename;
       // });
+
+      // console.log(images);
 
       const barber = await prisma.barber.create({
         data: {

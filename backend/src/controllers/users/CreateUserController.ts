@@ -18,7 +18,8 @@ export class CreateUserController {
       });
 
       if (checkUserExists) {
-        throw new AppError('Email address aready in use');
+        response.status(406);
+        throw new AppError('Email address aready in use', 406);
       }
 
       const hashedPassword = await hash(password, 10);
@@ -41,7 +42,7 @@ export class CreateUserController {
 
       delete user.password;
 
-      return response.json({ user, token });
+      return response.status(201).json({ user, token });
     } catch (error) {
       return response.json(error);
     }

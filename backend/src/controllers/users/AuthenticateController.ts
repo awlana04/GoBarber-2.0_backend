@@ -19,13 +19,15 @@ export class AuthenticateController {
       });
 
       if (!user) {
-        throw new AppError('Email or password incorrect');
+        response.status(404);
+        throw new AppError('Email or password incorrect', 404);
       }
 
       const isValidPassword = compare(password, user.password);
 
       if (!isValidPassword) {
-        throw new AppError('Email or password incorrect');
+        response.status(404);
+        throw new AppError('Email or password incorrect', 404);
       }
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET as string, {

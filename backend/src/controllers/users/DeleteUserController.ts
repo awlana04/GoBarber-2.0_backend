@@ -16,7 +16,8 @@ export class DeleteUserController {
       });
 
       if (!user) {
-        throw new AppError('User does not exists');
+        response.status(404);
+        throw new AppError('User does not exists', 404);
       }
 
       return response.json(user);

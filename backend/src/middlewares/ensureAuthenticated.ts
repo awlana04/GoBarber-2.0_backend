@@ -31,6 +31,6 @@ export default function ensureAuthenticated(
 
     return next();
   } catch (error) {
-    return response.json(error);
+    return response.status(401).json(error);
   }
 }
