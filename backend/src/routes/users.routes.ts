@@ -30,7 +30,7 @@ usersRouter.get(
 
 usersRouter.post('/user', upload.single('avatar'), createUser.execute);
 
-usersRouter.patch('/', upload.single('avatar'), createUser.execute);
+// usersRouter.patch('/', upload.single('avatar'), createUser.execute);
 
 usersRouter.post(
   '/authenticate',
@@ -52,6 +52,9 @@ usersRouter.put(
       avatar: Joi.string(),
       location: Joi.string(),
       password: Joi.string(),
+    },
+    [Segments.QUERY]: {
+      token: Joi.string().token().required(),
     },
   }),
   ensureAuthenticated,

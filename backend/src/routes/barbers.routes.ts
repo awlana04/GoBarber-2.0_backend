@@ -25,9 +25,9 @@ const createBarber = new CreateBarberController();
 const updateBarber = new UpdateBarberController();
 const updateBarberUserController = new UpdateBarberUserController();
 const deleteBarber = new DeleteBarberController();
-const deleteBarberUserAndAppointment = new DeleteBarberAndUserController();
+const deleteBarberUserAndAppointment =
+  new DeleteBarberUserAndAppointmentController();
 const deleteBarberAndAppointment = new DeleteBarberAndAppointmentController();
-const deleteBarberAndUser = new DeleteBarberAndUserController();
 
 barberRouter.get(
   '/barbers/:id',
@@ -98,7 +98,7 @@ barberRouter.delete(
   '/user/barber/appointment/:id',
   celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
   ensureAuthenticated,
-  deleteBarberAndUser.execute
+  deleteBarberUserAndAppointment.execute
 );
 
 barberRouter.delete(
@@ -106,13 +106,6 @@ barberRouter.delete(
   celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
   ensureAuthenticated,
   deleteBarberAndAppointment.execute
-);
-
-barberRouter.delete(
-  '/user/barber/:id',
-  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
-  ensureAuthenticated,
-  deleteBarberAndUser.execute
 );
 
 export default barberRouter;

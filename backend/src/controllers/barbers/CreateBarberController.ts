@@ -61,7 +61,7 @@ export class CreateBarberController {
         },
       });
 
-      return response.json(barber);
+      return response.status(201).json(barber);
     } catch (error) {
       return response.json(error);
     }
