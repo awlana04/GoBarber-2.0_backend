@@ -1,9 +1,10 @@
 import { RefreshToken } from '@prisma/client';
 import jwt from 'jsonwebtoken';
+import dayjs from 'dayjs';
 
 import IRefreshTokenRepository from '../repositories/IRefreshTokenRepository';
+
 import AppError from '../../../shared/errors/AppError';
-import dayjs from 'dayjs';
 
 interface IRequest {
   id: string;

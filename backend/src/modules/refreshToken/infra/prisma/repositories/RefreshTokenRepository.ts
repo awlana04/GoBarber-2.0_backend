@@ -19,7 +19,6 @@ export default class RefreshTokenRepository implements IRefreshTokenRepository {
   public async create(data: ICreateRefreshTokenDTO): Promise<RefreshToken> {
     const refreshToken = await prisma.refreshToken.create({
       data,
-      include: { user: true },
     });
 
     return refreshToken;
