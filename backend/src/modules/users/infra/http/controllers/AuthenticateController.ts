@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
 
 import AuthenticateService from '../../../services/AuthenticateService';
 import { UserRepository } from '../../prisma/repositories/UserRepository';
@@ -11,7 +12,11 @@ export default class AuthenticateController {
     const { email, password } = request.body;
 
     const userRepository = new UserRepository();
-    const createAuthentication = new AuthenticateService(userRepository);
+    const refreshToken = new RefreshTokenRepository();
+    const createAuthentication = new AuthenticateService(
+      userRepository,
+      refreshToken
+    );
 
     try {
       const authenticate = await createAuthentication.handle({

@@ -39,6 +39,8 @@ export default class CreateUserService {
       avatar,
     });
 
+    delete user.password;
+
     return user;
   }
 }
