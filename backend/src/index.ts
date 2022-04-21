@@ -5,9 +5,9 @@ import path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
 import { errors } from 'celebrate';
 
-import { router } from './routes';
+import { router } from './shared/infra/http/routes/index';
 
-import AppError from './utils/AppError';
+import AppError from './shared/errors/AppError';
 
 const app = express();
 
