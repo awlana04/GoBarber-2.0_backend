@@ -10,7 +10,7 @@ export default class CreateUserController {
   ): Promise<Response> {
     const { name, email, password, location } = request.body;
 
-    // const avatar = request.file.filename;
+    const avatar = request.file.filename;
 
     const userRepository = new UserRepository();
     const createUser = new CreateUserService(userRepository);
@@ -21,7 +21,7 @@ export default class CreateUserController {
         email,
         password,
         location,
-        // avatar,
+        avatar,
       });
 
       return response.status(201).json(user);
