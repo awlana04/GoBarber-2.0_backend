@@ -1,29 +1,23 @@
 import { Router } from 'express';
-import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 
 import CreateUserController from '../controllers/CreateUserController';
-import AuthenticateController from '../controllers/AuthenticateController';
+
+import { profileRouter } from './profile.routes';
+import { sessionRouter } from './session.routes';
 
 import uploadConfig from '../../../../../config/upload';
+
+import ensureAuthenticated from '../../../../../shared/infra/http/middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
 
 const createUser = new CreateUserController();
-const createAuthentication = new AuthenticateController();
+
+usersRouter.use('/profile', ensureAuthenticated, profileRouter);
+usersRouter.use('/session', sessionRouter);
 
 usersRouter.post('/', upload.single('avatar'), createUser.execute);
-
-usersRouter.post(
-  '/session',
-  celebrate({
-    [Segments.BODY]: {
-      email: Joi.string().required(),
-      password: Joi.string().min(8).required(),
-    },
-  }),
-  createAuthentication.execute
-);
 
 export { usersRouter };
