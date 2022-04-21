@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import CreateUserService from '../../../services/CreateUserService';
 import { UserRepository } from '../../prisma/repositories/UserRepository';
+import CreateUserService from '../../../services/CreateUserService';
 
 export default class CreateUserController {
   public async execute(

@@ -36,6 +36,8 @@ export default class AuthenticateService {
       expiresIn: '15m',
     });
 
+    await this.refreshToken.deletePastRefreshToken(user.id);
+
     const expiresIn = dayjs().add(30, 'day').unix();
 
     const refreshToken = await this.refreshToken.create({

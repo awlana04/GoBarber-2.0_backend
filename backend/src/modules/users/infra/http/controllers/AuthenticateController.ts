@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
 
-import AuthenticateService from '../../../services/AuthenticateService';
 import { UserRepository } from '../../prisma/repositories/UserRepository';
+import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
+import AuthenticateService from '../../../services/AuthenticateService';
 
 export default class AuthenticateController {
   public async execute(

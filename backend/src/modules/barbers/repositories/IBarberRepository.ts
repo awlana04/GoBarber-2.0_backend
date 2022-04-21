@@ -1,4 +1,4 @@
-import { Barber, User } from '@prisma/client';
+import { User, Barber } from '@prisma/client';
 
 import ICreateBarberDTO from '../dtos/ICreateBarberDTO';
 

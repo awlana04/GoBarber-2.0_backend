@@ -2,8 +2,8 @@ import { Barber, User } from '@prisma/client';
 
 import prisma from '../../../../../shared/infra/prisma/prisma';
 
-import ICreateBarberDTO from '../../../dtos/ICreateBarberDTO';
 import IBarberRepository from '../../../repositories/IBarberRepository';
+import ICreateBarberDTO from '../../../dtos/ICreateBarberDTO';
 
 export default class BarberRepository implements IBarberRepository {
   public async findBarberByUserId(
