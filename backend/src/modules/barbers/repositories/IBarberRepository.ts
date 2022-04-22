@@ -4,6 +4,7 @@ import ICreateBarberDTO from '../dtos/ICreateBarberDTO';
 import IUpdateBarberDTO from '../dtos/IUpdateBarberDTO';
 
 export default interface IBarberRepository {
+  findAllBarbers(): Promise<Barber | any>;
   findBarberByUserId(
     id: string
   ): Promise<(User & { barber: Barber }) | undefined>;
