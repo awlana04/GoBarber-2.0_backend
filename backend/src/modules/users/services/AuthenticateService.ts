@@ -1,10 +1,10 @@
 import { User } from '@prisma/client';
-import { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dayjs from 'dayjs';
 
 import IUserRepository from '../repositories/IUserRepository';
 import IRefreshTokenRepository from '../../refreshToken/repositories/IRefreshTokenRepository';
+import IHashProvider from '../providers/models/IHashProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -16,6 +16,7 @@ interface IRequest {
 export default class AuthenticateService {
   constructor(
     private userRepository: IUserRepository,
+    private hashProvider: IHashProvider,
     private refreshToken: IRefreshTokenRepository
   ) {}
 
@@ -26,7 +27,10 @@ export default class AuthenticateService {
       throw new AppError('Email or password does not match', 406);
     }
 
-    const isValidPassword = await compare(password, user.password);
+    const isValidPassword = await this.hashProvider.compareHash(
+      password,
+      user.password
+    );
 
     if (!isValidPassword) {
       throw new AppError('Email or password does not match', 406);

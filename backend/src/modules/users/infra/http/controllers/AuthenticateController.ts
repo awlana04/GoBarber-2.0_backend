@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { UserRepository } from '../../prisma/repositories/UserRepository';
 import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
 import AuthenticateService from '../../../services/AuthenticateService';
+import BCryptHashProvider from '../../../providers/implemetantions/BCryptHashProvider';
 
 export default class AuthenticateController {
   public async execute(
@@ -12,9 +13,11 @@ export default class AuthenticateController {
     const { email, password } = request.body;
 
     const userRepository = new UserRepository();
+    const hashProvider = new BCryptHashProvider();
     const refreshToken = new RefreshTokenRepository();
     const createAuthentication = new AuthenticateService(
       userRepository,
+      hashProvider,
       refreshToken
     );
 

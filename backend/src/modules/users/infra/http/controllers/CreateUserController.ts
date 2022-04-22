@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { UserRepository } from '../../prisma/repositories/UserRepository';
+import BCryptHashProvider from '../../../providers/implemetantions/BCryptHashProvider';
 import CreateUserService from '../../../services/CreateUserService';
 
 export default class CreateUserController {
@@ -13,7 +14,8 @@ export default class CreateUserController {
     const avatar = request.file.filename;
 
     const userRepository = new UserRepository();
-    const createUser = new CreateUserService(userRepository);
+    const hashedPassword = new BCryptHashProvider();
+    const createUser = new CreateUserService(userRepository, hashedPassword);
 
     try {
       const user = await createUser.handle({

@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
-import { hash } from 'bcryptjs';
 
 import IUserRepository from '../repositories/IUserRepository';
+import IHashProvider from '../providers/models/IHashProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -14,7 +14,10 @@ interface IRequest {
 }
 
 export default class CreateUserService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+    private hashProvider: IHashProvider
+  ) {}
 
   public async handle({
     name,
@@ -29,7 +32,7 @@ export default class CreateUserService {
       throw new AppError('User already exists', 406);
     }
 
-    const hashedPassword = await hash(password, 8);
+    const hashedPassword = await this.hashProvider.generateHash(password);
 
     const user = await this.userRepository.create({
       name,
