@@ -4,6 +4,7 @@ import prisma from '../../../../../shared/infra/prisma/prisma';
 
 import IBarberRepository from '../../../repositories/IBarberRepository';
 import ICreateBarberDTO from '../../../dtos/ICreateBarberDTO';
+import IUpdateBarberDTO from '../../../dtos/IUpdateBarberDTO';
 
 export default class BarberRepository implements IBarberRepository {
   public async findBarberByUserId(
@@ -19,6 +20,14 @@ export default class BarberRepository implements IBarberRepository {
     });
   }
 
+  public async findBarberById(id: string): Promise<Barber> {
+    return await prisma.barber.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   public async findBarberByName(name: string): Promise<Barber> {
     return await prisma.barber.findUnique({
       where: {
@@ -30,6 +39,60 @@ export default class BarberRepository implements IBarberRepository {
   public async create(data: ICreateBarberDTO): Promise<Barber> {
     return await prisma.barber.create({
       data,
+    });
+  }
+
+  public async updateBarber(
+    barberId: string,
+    data: IUpdateBarberDTO
+  ): Promise<Barber> {
+    return await prisma.barber.update({
+      where: {
+        id: barberId,
+      },
+      data,
+    });
+  }
+
+  public async updateBarberPassword(
+    barberId: string,
+    password: string
+  ): Promise<Barber & { user: User }> {
+    return await prisma.barber.update({
+      where: {
+        id: barberId,
+      },
+      data: {
+        user: {
+          update: {
+            password,
+          },
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+  }
+
+  public async updateBarberAvatar(
+    barberId: string,
+    avatar: string
+  ): Promise<Barber & { user: User }> {
+    return await prisma.barber.update({
+      where: {
+        id: barberId,
+      },
+      data: {
+        user: {
+          update: {
+            avatar,
+          },
+        },
+      },
+      include: {
+        user: true,
+      },
     });
   }
 }

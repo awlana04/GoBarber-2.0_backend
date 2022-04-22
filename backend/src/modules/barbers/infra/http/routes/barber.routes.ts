@@ -3,11 +3,15 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import CreateBarberController from '../controllers/CreateBarberController';
 
+import { profileRouter } from './profile.routes';
+
 import ensureAuthenticated from '../../../../../shared/infra/http/middlewares/ensureAuthenticated';
 
 const barberRouter = Router();
 
 const createBarber = new CreateBarberController();
+
+barberRouter.use('/profile', ensureAuthenticated, profileRouter);
 
 barberRouter.post(
   '/:id',
