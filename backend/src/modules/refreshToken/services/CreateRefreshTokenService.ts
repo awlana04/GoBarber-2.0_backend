@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import dayjs from 'dayjs';
 
 import IRefreshTokenRepository from '../repositories/IRefreshTokenRepository';
+import IRefreshTokenProvider from '../../../shared/providers/models/IRefreshTokenProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -13,7 +14,10 @@ interface IRequest {
 }
 
 export default class CreateRefreshTokenService {
-  constructor(private refreshToken: IRefreshTokenRepository) {}
+  constructor(
+    private refreshToken: IRefreshTokenRepository,
+    private refreshTokenProvider: IRefreshTokenProvider
+  ) {}
 
   public async handle({
     id,
@@ -33,16 +37,7 @@ export default class CreateRefreshTokenService {
     const expiredRefreshToken = dayjs().isAfter(dayjs.unix(expiresIn));
 
     if (expiredRefreshToken) {
-      await this.refreshToken.deletePastRefreshToken(userId);
-
-      const expiresIn = dayjs().add(30, 'day').unix();
-
-      const refreshToken = await this.refreshToken.create({
-        expiresIn,
-        userId,
-      });
-
-      return refreshToken;
+      return await this.refreshTokenProvider.createRefreshToken(userId);
     }
 
     return token;

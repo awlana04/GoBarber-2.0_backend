@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import dayjs from 'dayjs';
 
 import IUserRepository from '../repositories/IUserRepository';
-import IRefreshTokenRepository from '../../refreshToken/repositories/IRefreshTokenRepository';
+import ITokenProvider from '../../../shared/providers/models/ITokenProvider';
+import IRefreshTokenProvider from '../../../shared/providers/models/IRefreshTokenProvider';
 import IHashProvider from '../providers/models/IHashProvider';
 
 import AppError from '../../../shared/errors/AppError';
@@ -17,7 +18,8 @@ export default class AuthenticateService {
   constructor(
     private userRepository: IUserRepository,
     private hashProvider: IHashProvider,
-    private refreshToken: IRefreshTokenRepository
+    private tokenProvider: ITokenProvider,
+    private refreshToken: IRefreshTokenProvider
   ) {}
 
   public async handle({ email, password }: IRequest): Promise<User | any> {
@@ -36,18 +38,8 @@ export default class AuthenticateService {
       throw new AppError('Email or password does not match', 406);
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.SECRET, {
-      expiresIn: '15m',
-    });
-
-    await this.refreshToken.deletePastRefreshToken(user.id);
-
-    const expiresIn = dayjs().add(30, 'day').unix();
-
-    const refreshToken = await this.refreshToken.create({
-      expiresIn,
-      userId: user.id,
-    });
+    const token = await this.tokenProvider.createToken(user.id);
+    const refreshToken = await this.refreshToken.createRefreshToken(user.id);
 
     delete user.password;
 

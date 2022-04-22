@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import RefreshTokenRepository from '../../prisma/repositories/RefreshTokenRepository';
 import CreateRefreshTokenService from '../../../services/CreateRefreshTokenService';
+import RefreshTokenProvider from '../../../../../shared/providers/implemetantions/RefreshTokenProvider';
 
 export default class CreateRefreshTokenController {
   public async execute(
@@ -11,8 +12,12 @@ export default class CreateRefreshTokenController {
     const { refresh_token } = request.body;
 
     const refreshTokenRepository = new RefreshTokenRepository();
-    const createRefreshToken = new CreateRefreshTokenService(
+    const refreshTokenProvider = new RefreshTokenProvider(
       refreshTokenRepository
+    );
+    const createRefreshToken = new CreateRefreshTokenService(
+      refreshTokenRepository,
+      refreshTokenProvider
     );
 
     try {

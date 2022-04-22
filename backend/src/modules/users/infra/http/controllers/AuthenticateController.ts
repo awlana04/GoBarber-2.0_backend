@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 
 import { UserRepository } from '../../prisma/repositories/UserRepository';
-import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
 import AuthenticateService from '../../../services/AuthenticateService';
 import BCryptHashProvider from '../../../providers/implemetantions/BCryptHashProvider';
+import JWTTokenProvider from '../../../../../shared/providers/implemetantions/JWTTokenProvider';
+import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
+import RefreshTokenProvider from '../../../../../shared/providers/implemetantions/RefreshTokenProvider';
 
 export default class AuthenticateController {
   public async execute(
@@ -14,11 +16,16 @@ export default class AuthenticateController {
 
     const userRepository = new UserRepository();
     const hashProvider = new BCryptHashProvider();
-    const refreshToken = new RefreshTokenRepository();
+    const tokenProvider = new JWTTokenProvider();
+    const refreshTokenRepository = new RefreshTokenRepository();
+    const refreshTokenProvider = new RefreshTokenProvider(
+      refreshTokenRepository
+    );
     const createAuthentication = new AuthenticateService(
       userRepository,
       hashProvider,
-      refreshToken
+      tokenProvider,
+      refreshTokenProvider
     );
 
     try {
