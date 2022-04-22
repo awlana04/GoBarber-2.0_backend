@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { UserRepository } from '../../prisma/repositories/UserRepository';
 import UpdateUserService from '../../../services/UpdateUserService';
+import BCryptHashProvider from '../../../providers/implemetantions/BCryptHashProvider';
 
 export default class UpdateUserController {
   public async execute(
@@ -12,7 +13,8 @@ export default class UpdateUserController {
     const { id } = request.params;
 
     const userRepository = new UserRepository();
-    const updateUser = new UpdateUserService(userRepository);
+    const hashProvider = new BCryptHashProvider();
+    const updateUser = new UpdateUserService(userRepository, hashProvider);
 
     try {
       const user = await updateUser.handle({

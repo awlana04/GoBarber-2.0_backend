@@ -25,9 +25,10 @@ export default class UpdateBarberPasswordService {
 
     const hashedPassword = await this.hashProvider.generateHash(password);
 
-    const barber = await this.barberRepository.updateBarberPassword(id, {
-      password: hashedPassword,
-    } as unknown as string);
+    const barber = await this.barberRepository.updateBarberPassword(
+      id,
+      hashedPassword
+    );
 
     delete barber.user.password;
 

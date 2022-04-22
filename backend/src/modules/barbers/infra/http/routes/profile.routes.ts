@@ -45,6 +45,7 @@ profileRouter.put(
 profileRouter.patch(
   '/avatar/:id',
   celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  upload.single('avatar'),
   updateAvatar.execute
 );
 

@@ -2,6 +2,7 @@ import { User } from '@prisma/client';
 import { hash } from 'bcryptjs';
 
 import IUserRepository from '../repositories/IUserRepository';
+import IHashProvider from '../providers/models/IHashProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -13,7 +14,10 @@ interface IRequest {
 }
 
 export default class UpdateUserService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+    private hashProvider: IHashProvider
+  ) {}
 
   public async handle({
     id,
@@ -34,7 +38,7 @@ export default class UpdateUserService {
     });
 
     if (password) {
-      const hashedPassword = await hash(password, 8);
+      const hashedPassword = await this.hashProvider.generateHash(password);
 
       await this.userRepository.updatePassword(id, hashedPassword);
 

@@ -2,7 +2,6 @@ import { User, Barber } from '@prisma/client';
 
 import ICreateBarberDTO from '../dtos/ICreateBarberDTO';
 import IUpdateBarberDTO from '../dtos/IUpdateBarberDTO';
-import IHashProvider from '../../users/providers/models/IHashProvider';
 
 export default interface IBarberRepository {
   findBarberByUserId(

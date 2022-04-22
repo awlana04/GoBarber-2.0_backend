@@ -2,6 +2,8 @@ import { User } from '@prisma/client';
 
 import IUserRepository from '../repositories/IUserRepository';
 import IHashProvider from '../providers/models/IHashProvider';
+import ITokenProvider from '../../../shared/providers/models/ITokenProvider';
+import IRefreshTokenProvider from '../../../shared/providers/models/IRefreshTokenProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -16,7 +18,9 @@ interface IRequest {
 export default class CreateUserService {
   constructor(
     private userRepository: IUserRepository,
-    private hashProvider: IHashProvider
+    private hashProvider: IHashProvider,
+    private tokenProvider: ITokenProvider,
+    private refreshTokenProvider: IRefreshTokenProvider
   ) {}
 
   public async handle({
@@ -25,7 +29,7 @@ export default class CreateUserService {
     password,
     location,
     avatar,
-  }: IRequest): Promise<User> {
+  }: IRequest): Promise<User | any> {
     const checkUserExists = await this.userRepository.findByEmail(email);
 
     if (checkUserExists) {
@@ -42,8 +46,13 @@ export default class CreateUserService {
       avatar,
     });
 
+    const token = await this.tokenProvider.createToken(user.id);
+    const refreshToken = await this.refreshTokenProvider.createRefreshToken(
+      user.id
+    );
+
     delete user.password;
 
-    return user;
+    return { user, token, refreshToken };
   }
 }

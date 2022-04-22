@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 
 import { UserRepository } from '../../prisma/repositories/UserRepository';
 import BCryptHashProvider from '../../../providers/implemetantions/BCryptHashProvider';
+import JWTTokenProvider from '../../../../../shared/providers/implemetantions/JWTTokenProvider';
+import RefreshTokenRepository from '../../../../refreshToken/infra/prisma/repositories/RefreshTokenRepository';
+import RefreshTokenProvider from '../../../../../shared/providers/implemetantions/RefreshTokenProvider';
 import CreateUserService from '../../../services/CreateUserService';
 
 export default class CreateUserController {
@@ -15,7 +18,15 @@ export default class CreateUserController {
 
     const userRepository = new UserRepository();
     const hashedPassword = new BCryptHashProvider();
-    const createUser = new CreateUserService(userRepository, hashedPassword);
+    const tokenProvider = new JWTTokenProvider();
+    const refreshTokenRepository = new RefreshTokenRepository();
+    const refreshToken = new RefreshTokenProvider(refreshTokenRepository);
+    const createUser = new CreateUserService(
+      userRepository,
+      hashedPassword,
+      tokenProvider,
+      refreshToken
+    );
 
     try {
       const user = await createUser.handle({
