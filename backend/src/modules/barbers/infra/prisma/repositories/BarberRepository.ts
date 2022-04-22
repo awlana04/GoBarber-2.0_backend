@@ -7,24 +7,6 @@ import ICreateBarberDTO from '../../../dtos/ICreateBarberDTO';
 import IUpdateBarberDTO from '../../../dtos/IUpdateBarberDTO';
 
 export default class BarberRepository implements IBarberRepository {
-  public async findAllBarbers(): Promise<Barber[] & any> {
-    return await prisma.barber.findMany({
-      select: {
-        id: true,
-        name: true,
-        location: true,
-        openAtNight: true,
-        openOnWeekends: true,
-        user: {
-          select: {
-            avatar: true,
-          },
-        },
-      },
-      take: 10,
-    });
-  }
-
   public async findBarberByUserId(
     id: string
   ): Promise<User & { barber: Barber }> {
@@ -51,6 +33,24 @@ export default class BarberRepository implements IBarberRepository {
       where: {
         name,
       },
+    });
+  }
+
+  public async findAllBarbers(): Promise<Barber & any> {
+    return await prisma.barber.findMany({
+      select: {
+        id: true,
+        name: true,
+        location: true,
+        openAtNight: true,
+        openOnWeekends: true,
+        user: {
+          select: {
+            avatar: true,
+          },
+        },
+      },
+      take: 10,
     });
   }
 
@@ -110,6 +110,43 @@ export default class BarberRepository implements IBarberRepository {
       },
       include: {
         user: true,
+      },
+    });
+  }
+
+  public async deleteBarber(id: string): Promise<User> {
+    const barber = await prisma.barber.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        user: {
+          select: {
+            email: true,
+          },
+        },
+      },
+    });
+
+    await this.deleteBarberAndAppointment(id);
+
+    return await prisma.user.delete({
+      where: {
+        email: barber.user.email,
+      },
+    });
+  }
+
+  public async deleteBarberAndAppointment(id: string): Promise<Barber> {
+    await prisma.appointment.deleteMany({
+      where: {
+        barberId: id,
+      },
+    });
+
+    return await prisma.barber.delete({
+      where: {
+        id,
       },
     });
   }

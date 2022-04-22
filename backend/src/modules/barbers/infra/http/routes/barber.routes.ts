@@ -4,6 +4,8 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import ViewBarberProfileController from '../controllers/ViewBarberProfileController';
 import GetAllBarbersController from '../controllers/GetAllBarbersController';
 import CreateBarberController from '../controllers/CreateBarberController';
+import DeleteBarberController from '../controllers/DeleteBarberController';
+import DeleteBarberAndAppointmentController from '../controllers/DeleteBarberAndAppointmentController';
 
 import { profileRouter } from './profile.routes';
 
@@ -14,6 +16,8 @@ const barberRouter = Router();
 const viewBarberProfile = new ViewBarberProfileController();
 const getAllBarbers = new GetAllBarbersController();
 const createBarber = new CreateBarberController();
+const deleteBarber = new DeleteBarberController();
+const deleteBarberAndAppointment = new DeleteBarberAndAppointmentController();
 
 barberRouter.use('/profile', ensureAuthenticated, profileRouter);
 
@@ -46,6 +50,20 @@ barberRouter.post(
   }),
   ensureAuthenticated,
   createBarber.execute
+);
+
+barberRouter.delete(
+  '/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteBarber.execute
+);
+
+barberRouter.delete(
+  '/users/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteBarberAndAppointment.execute
 );
 
 export { barberRouter };

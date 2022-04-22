@@ -59,4 +59,12 @@ export class UserRepository implements IUserRepository {
       },
     });
   }
+
+  public async delete(id: string): Promise<User> {
+    return await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

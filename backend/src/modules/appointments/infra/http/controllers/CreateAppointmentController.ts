@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import AppointmentRepository from '../../prisma/repositories/AppointmentRepository';
+import AppointmentProvider from '../../../providers/implemetantions/AppointmentProvider';
 import CreateAppointmentService from '../../../services/CreateAppointmentService';
 
 export default class CreateAppointmentController {
@@ -12,8 +13,10 @@ export default class CreateAppointmentController {
     const { id } = request.params;
 
     const appointmentRepository = new AppointmentRepository();
+    const appointmentProvider = new AppointmentProvider(appointmentRepository);
     const createAppointment = new CreateAppointmentService(
-      appointmentRepository
+      appointmentRepository,
+      appointmentProvider
     );
 
     try {

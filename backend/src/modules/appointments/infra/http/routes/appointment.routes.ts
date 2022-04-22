@@ -5,6 +5,7 @@ import ViewAppointmentController from '../controllers/ViewAppointmentController'
 import GetAllAppointmentsController from '../controllers/GetAllAppointmentsController';
 import CreateAppointmentController from '../controllers/CreateAppointmentController';
 import UpdateAppointmentController from '../controllers/UpdateAppointmentController';
+import DeleteAppointmentController from '../controllers/DeleteAppointmentController';
 
 import ensureAuthenticated from '../../../../../shared/infra/http/middlewares/ensureAuthenticated';
 
@@ -14,6 +15,7 @@ const viewAppointment = new ViewAppointmentController();
 const getAllAppointments = new GetAllAppointmentsController();
 const createAppointment = new CreateAppointmentController();
 const updateAppointment = new UpdateAppointmentController();
+const deleteAppointment = new DeleteAppointmentController();
 
 appointmentRouter.get(
   '/users/:id',
@@ -50,6 +52,13 @@ appointmentRouter.put(
   }),
   ensureAuthenticated,
   updateAppointment.execute
+);
+
+appointmentRouter.delete(
+  '/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteAppointment.execute
 );
 
 export { appointmentRouter };

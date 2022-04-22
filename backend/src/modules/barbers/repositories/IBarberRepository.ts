@@ -20,4 +20,6 @@ export default interface IBarberRepository {
     barberId: string,
     avatar: string
   ): Promise<Barber & { user: User }>;
+  deleteBarber(id: string): Promise<User>;
+  deleteBarberAndAppointment(id: string): Promise<Barber>;
 }

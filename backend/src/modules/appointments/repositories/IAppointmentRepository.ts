@@ -13,4 +13,5 @@ export default interface IAppointmentRepository {
   findAllAppointments(barberId: string): Promise<Appointment[]>;
   create(data: ICreateAppointmentDTO): Promise<Appointment>;
   update(id: string, date: Date, barberId: string): Promise<Appointment>;
+  delete(id: string): Promise<Appointment>;
 }

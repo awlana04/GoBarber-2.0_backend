@@ -71,4 +71,12 @@ export default class AppointmentRepository implements IAppointmentRepository {
       },
     });
   }
+
+  public async delete(id: string): Promise<Appointment> {
+    return await prisma.appointment.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

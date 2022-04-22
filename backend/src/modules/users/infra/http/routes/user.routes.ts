@@ -1,8 +1,10 @@
 import { Router } from 'express';
+import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 
 import ViewUserProfileController from '../controllers/ViewUserProfileController';
 import CreateUserController from '../controllers/CreateUserController';
+import DeleteUserController from '../controllers/DeleteUserController';
 
 import { profileRouter } from './profile.routes';
 import { sessionRouter } from './session.routes';
@@ -16,11 +18,25 @@ const upload = multer(uploadConfig);
 
 const viewProfile = new ViewUserProfileController();
 const createUser = new CreateUserController();
+const deleteUser = new DeleteUserController();
 
 usersRouter.use('/profile', ensureAuthenticated, profileRouter);
 usersRouter.use('/session', sessionRouter);
 
-usersRouter.get('/:id', ensureAuthenticated, viewProfile.execute);
+usersRouter.get(
+  '/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  viewProfile.execute
+);
+
 usersRouter.post('/', upload.single('avatar'), createUser.execute);
+
+usersRouter.delete(
+  '/:id',
+  celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
+  ensureAuthenticated,
+  deleteUser.execute
+);
 
 export { usersRouter };

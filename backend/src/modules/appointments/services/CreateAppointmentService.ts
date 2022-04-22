@@ -1,7 +1,7 @@
 import { Appointment } from '@prisma/client';
-import { startOfHour } from 'date-fns';
 
 import IAppointmentRepository from '../repositories/IAppointmentRepository';
+import IAppointmentProvider from '../providers/models/IAppointmentProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -12,7 +12,10 @@ interface IRequest {
 }
 
 export default class CreateAppointmentService {
-  constructor(private appointmentRepository: IAppointmentRepository) {}
+  constructor(
+    private appointmentRepository: IAppointmentRepository,
+    private appointmentProvider: IAppointmentProvider
+  ) {}
 
   public async handle({
     date,
@@ -33,20 +36,7 @@ export default class CreateAppointmentService {
       throw new AppError('Barber does not exists', 406);
     }
 
-    const isBookedInAPastDate = startOfHour(Date.now());
-
-    if (isBookedInAPastDate > date) {
-      throw new AppError('You can not book an appointment in a past date', 406);
-    }
-
-    const bookedData = await this.appointmentRepository.findAppointmentByDate(
-      date,
-      barberId
-    );
-
-    if (bookedData) {
-      throw new AppError('This date is already booked', 406);
-    }
+    await this.appointmentProvider.bookedDate(date, barberId);
 
     const appointment = await this.appointmentRepository.create({
       date,

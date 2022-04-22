@@ -10,4 +10,5 @@ export default interface IUserRepository {
   update(id: string, data: IUpdateUserDTO): Promise<User>;
   updatePassword(id: string, password: string): Promise<User>;
   updateAvatar(id: string, avatar: string): Promise<User>;
+  delete(id: string): Promise<User>;
 }
