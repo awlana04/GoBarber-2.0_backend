@@ -7,7 +7,7 @@ import ICreateBarberDTO from '../../../dtos/ICreateBarberDTO';
 import IUpdateBarberDTO from '../../../dtos/IUpdateBarberDTO';
 
 export default class BarberRepository implements IBarberRepository {
-  public async findAllBarbers(): Promise<Barber | any> {
+  public async findAllBarbers(): Promise<Barber[] & any> {
     return await prisma.barber.findMany({
       select: {
         id: true,

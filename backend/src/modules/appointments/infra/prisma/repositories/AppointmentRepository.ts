@@ -5,6 +5,18 @@ import ICreateAppointmentDTO from '../../../dtos/ICreateAppointmentDTO';
 import { Appointment, Barber, User } from '@prisma/client';
 
 export default class AppointmentRepository implements IAppointmentRepository {
+  public async findAppointmentById(id: string): Promise<Appointment> {
+    return await prisma.appointment.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: true,
+        barber: true,
+      },
+    });
+  }
+
   public async findAppointmentByUser(id: string): Promise<User> {
     return await prisma.user.findUnique({
       where: {
@@ -33,7 +45,30 @@ export default class AppointmentRepository implements IAppointmentRepository {
     });
   }
 
+  public async findAllAppointments(barberId: string): Promise<Appointment[]> {
+    return await prisma.appointment.findMany({
+      where: {
+        barberId,
+      },
+    });
+  }
+
   public async create(data: ICreateAppointmentDTO): Promise<Appointment> {
     return await prisma.appointment.create({ data });
+  }
+
+  public async update(
+    id: string,
+    date: Date,
+    _barberId: string
+  ): Promise<Appointment> {
+    return await prisma.appointment.update({
+      where: {
+        id,
+      },
+      data: {
+        date,
+      },
+    });
   }
 }
