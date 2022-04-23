@@ -2,18 +2,16 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 
-import UpdateBarberController from '../controllers/UpdateBarberController';
-import UpdateBarberPasswordController from '../controllers/UpdateBarberPasswordController';
-import UpdateBarberAvatarController from '../controllers/UpdateBarberAvatarController';
+import {
+  updateBarber,
+  updateBarberPassword,
+  updateBarberAvatar,
+} from '../../../exports/Controllers';
 
 import UploadConfig from '../../../../../config/upload';
 
 const profileRouter = Router();
-const upload = multer(UploadConfig);
-
-const updateBarber = new UpdateBarberController();
-const updatePassword = new UpdateBarberPasswordController();
-const updateAvatar = new UpdateBarberAvatarController();
+const upload = multer(UploadConfig.multer);
 
 profileRouter.put(
   '/:id',
@@ -39,14 +37,14 @@ profileRouter.put(
       password: Joi.string().required(),
     },
   }),
-  updatePassword.execute
+  updateBarberPassword.execute
 );
 
 profileRouter.patch(
   '/avatar/:id',
   celebrate({ [Segments.PARAMS]: { id: Joi.string().required() } }),
   upload.single('avatar'),
-  updateAvatar.execute
+  updateBarberAvatar.execute
 );
 
 export { profileRouter };

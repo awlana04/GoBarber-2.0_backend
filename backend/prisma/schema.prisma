@@ -60,6 +60,18 @@ model Barber {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("barbers")
+  Images Images[]
+}
+
+model Images {
+  id String @id @default(uuid())
+
+  path String[]
+
+  barberId String @map("barber_id")
+  barber   Barber @relation(fields: [barberId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  @@map("images")
 }
 
 model Appointment {

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 
-import AppointmentRepository from '../../prisma/repositories/AppointmentRepository';
-import AppointmentProvider from '../../../providers/implemetantions/AppointmentProvider';
 import CreateAppointmentService from '../../../services/CreateAppointmentService';
 
 export default class CreateAppointmentController {
+  constructor(private createAppointment: CreateAppointmentService) {}
+
   public async execute(
     request: Request,
     response: Response
@@ -12,15 +12,8 @@ export default class CreateAppointmentController {
     const { date, barberId } = request.body;
     const { id } = request.params;
 
-    const appointmentRepository = new AppointmentRepository();
-    const appointmentProvider = new AppointmentProvider(appointmentRepository);
-    const createAppointment = new CreateAppointmentService(
-      appointmentRepository,
-      appointmentProvider
-    );
-
     try {
-      const appointment = await createAppointment.handle({
+      const appointment = await this.createAppointment.handle({
         date,
         barberId,
         userId: id,

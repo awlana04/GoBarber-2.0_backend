@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "docker-compose up",
-    "app": "ts-node-dev --transpile-only --ignore-watch node_modules ./src/index.ts"
+    "app": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules ./src/index.ts"
   },
   "dependencies": {
     "@prisma/client": "^3.12.0",

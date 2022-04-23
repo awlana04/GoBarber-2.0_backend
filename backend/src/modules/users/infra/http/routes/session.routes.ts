@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
-import AuthenticateController from '../controllers/AuthenticateController';
+import { authenticate } from '../../../exports/Controllers';
 
 const sessionRouter = Router();
-
-const createAuthentication = new AuthenticateController();
 
 sessionRouter.post(
   '/',
@@ -15,7 +13,7 @@ sessionRouter.post(
       password: Joi.string().min(8).required(),
     },
   }),
-  createAuthentication.execute
+  authenticate.execute
 );
 
 export { sessionRouter };

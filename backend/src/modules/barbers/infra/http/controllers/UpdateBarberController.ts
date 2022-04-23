@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
-import BarberRepository from '../../prisma/repositories/BarberRepository';
 import UpdateBarberService from '../../../services/UpdateBarberService';
 
 export default class UpdateBarberController {
+  constructor(private updateBarber: UpdateBarberService) {}
+
   public async execute(
     request: Request,
     response: Response
@@ -12,11 +13,8 @@ export default class UpdateBarberController {
       request.body;
     const { id } = request.params;
 
-    const barberRepository = new BarberRepository();
-    const updateBarber = new UpdateBarberService(barberRepository);
-
     try {
-      const barber = await updateBarber.handle({
+      const barber = await this.updateBarber.handle({
         id,
         name,
         location,

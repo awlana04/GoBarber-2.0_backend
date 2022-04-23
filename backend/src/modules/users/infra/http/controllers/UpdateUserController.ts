@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 
-import { UserRepository } from '../../prisma/repositories/UserRepository';
 import UpdateUserService from '../../../services/UpdateUserService';
-import BCryptHashProvider from '../../../providers/implemetantions/BCryptHashProvider';
 
 export default class UpdateUserController {
+  constructor(private updateUser: UpdateUserService) {}
+
   public async execute(
     request: Request,
     response: Response
@@ -12,12 +12,8 @@ export default class UpdateUserController {
     const { name, password, location } = request.body;
     const { id } = request.params;
 
-    const userRepository = new UserRepository();
-    const hashProvider = new BCryptHashProvider();
-    const updateUser = new UpdateUserService(userRepository, hashProvider);
-
     try {
-      const user = await updateUser.handle({
+      const user = await this.updateUser.handle({
         id,
         name,
         password,

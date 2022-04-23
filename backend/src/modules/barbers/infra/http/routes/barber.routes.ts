@@ -1,23 +1,22 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
+import multer from 'multer';
 
-import ViewBarberProfileController from '../controllers/ViewBarberProfileController';
-import GetAllBarbersController from '../controllers/GetAllBarbersController';
-import CreateBarberController from '../controllers/CreateBarberController';
-import DeleteBarberController from '../controllers/DeleteBarberController';
-import DeleteBarberAndAppointmentController from '../controllers/DeleteBarberAndAppointmentController';
+import {
+  viewBarberProfile,
+  getAllBarbers,
+  createBarber,
+  deleteBarber,
+  deleteBarberAndAppointment,
+} from '../../../exports/Controllers';
 
 import { profileRouter } from './profile.routes';
 
 import ensureAuthenticated from '../../../../../shared/infra/http/middlewares/ensureAuthenticated';
+import uploadConfig from '../../../../../config/upload';
 
 const barberRouter = Router();
-
-const viewBarberProfile = new ViewBarberProfileController();
-const getAllBarbers = new GetAllBarbersController();
-const createBarber = new CreateBarberController();
-const deleteBarber = new DeleteBarberController();
-const deleteBarberAndAppointment = new DeleteBarberAndAppointmentController();
+const upload = multer(uploadConfig.multer);
 
 barberRouter.use('/profile', ensureAuthenticated, profileRouter);
 

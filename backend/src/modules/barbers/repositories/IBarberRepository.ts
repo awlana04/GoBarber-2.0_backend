@@ -1,4 +1,4 @@
-import { User, Barber } from '@prisma/client';
+import { User, Barber, Images } from '@prisma/client';
 
 import ICreateBarberDTO from '../dtos/ICreateBarberDTO';
 import IUpdateBarberDTO from '../dtos/IUpdateBarberDTO';
@@ -11,6 +11,7 @@ export default interface IBarberRepository {
   findBarberByName(name: string): Promise<Barber | undefined>;
   findAllBarbers(): Promise<Barber[] & any>;
   create(data: ICreateBarberDTO): Promise<Barber>;
+  createImages(id: string, path: string): Promise<Images>;
   updateBarber(barberId: string, data: IUpdateBarberDTO): Promise<Barber>;
   updateBarberPassword(
     barberId: string,

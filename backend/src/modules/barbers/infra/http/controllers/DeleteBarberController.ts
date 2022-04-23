@@ -1,20 +1,18 @@
 import { Request, Response } from 'express';
 
-import BarberRepository from '../../prisma/repositories/BarberRepository';
 import DeleteBarberService from '../../../services/DeleteBarberService';
 
 export default class DeleteBarberController {
+  constructor(private deleteBarber: DeleteBarberService) {}
+
   public async execute(
     request: Request,
     response: Response
   ): Promise<Response> {
     const { id } = request.params;
 
-    const barberRepository = new BarberRepository();
-    const deleteBarber = new DeleteBarberService(barberRepository);
-
     try {
-      const barber = await deleteBarber.handle(id);
+      const barber = await this.deleteBarber.handle(id);
 
       return response.json(barber);
     } catch (error) {

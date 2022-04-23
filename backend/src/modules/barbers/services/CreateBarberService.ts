@@ -1,8 +1,8 @@
-import { Barber } from '@prisma/client';
-
-import AppError from '../../../shared/errors/AppError';
+import { Barber, Images } from '@prisma/client';
 
 import IBarberRepository from '../repositories/IBarberRepository';
+
+import AppError from '../../../shared/errors/AppError';
 
 interface IRequest {
   name: string;
@@ -25,7 +25,7 @@ export default class CreateBarberService {
     openAtNight,
     openOnWeekends,
     userId,
-  }: IRequest): Promise<Barber> {
+  }: IRequest): Promise<Barber | string> {
     const user = await this.barberRepository.findBarberByUserId(userId);
 
     if (!user) {

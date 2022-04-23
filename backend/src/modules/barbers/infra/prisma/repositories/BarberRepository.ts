@@ -1,4 +1,4 @@
-import { Barber, User } from '@prisma/client';
+import { Barber, Images, User } from '@prisma/client';
 
 import prisma from '../../../../../shared/infra/prisma/prisma';
 
@@ -57,6 +57,18 @@ export default class BarberRepository implements IBarberRepository {
   public async create(data: ICreateBarberDTO): Promise<Barber> {
     return await prisma.barber.create({
       data,
+    });
+  }
+
+  public async createImages(id: string, path: string): Promise<Images> {
+    return await prisma.images.create({
+      data: {
+        path,
+        barberId: id,
+      },
+      include: {
+        barber: true,
+      },
     });
   }
 

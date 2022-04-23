@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
-import BarberRepository from '../../prisma/repositories/BarberRepository';
 import UpdateBarberAvatarSerice from '../../../services/UpdateBarberAvatarService';
 
 export default class UpdateBarberAvatarController {
+  constructor(private updateBarberAvatar: UpdateBarberAvatarSerice) {}
+
   public async execute(
     request: Request,
     response: Response
@@ -12,11 +13,8 @@ export default class UpdateBarberAvatarController {
 
     const avatar = request.file.filename;
 
-    const barberRepository = new BarberRepository();
-    const updateAvatar = new UpdateBarberAvatarSerice(barberRepository);
-
     try {
-      const barber = await updateAvatar.handle({ id, avatar });
+      const barber = await this.updateBarberAvatar.handle({ id, avatar });
 
       return response.json(barber);
     } catch (error) {

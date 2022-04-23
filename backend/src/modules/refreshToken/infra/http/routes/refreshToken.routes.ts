@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
-import CreateRefreshTokenController from '../controllers/CreateRefreshTokenController';
+import { createRefreshToken } from '../../../exports/Controllers';
 
 const refreshTokenRouter = Router();
-
-const createRefreshToken = new CreateRefreshTokenController();
 
 refreshTokenRouter.post(
   '/',

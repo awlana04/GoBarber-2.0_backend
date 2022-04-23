@@ -1,21 +1,17 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
-import ViewAppointmentController from '../controllers/ViewAppointmentController';
-import GetAllAppointmentsController from '../controllers/GetAllAppointmentsController';
-import CreateAppointmentController from '../controllers/CreateAppointmentController';
-import UpdateAppointmentController from '../controllers/UpdateAppointmentController';
-import DeleteAppointmentController from '../controllers/DeleteAppointmentController';
+import {
+  viewAppointment,
+  getAllAppointments,
+  createAppointment,
+  updateAppointment,
+  deleteAppointment,
+} from '../../../exports/Controllers';
 
 import ensureAuthenticated from '../../../../../shared/infra/http/middlewares/ensureAuthenticated';
 
 const appointmentRouter = Router();
-
-const viewAppointment = new ViewAppointmentController();
-const getAllAppointments = new GetAllAppointmentsController();
-const createAppointment = new CreateAppointmentController();
-const updateAppointment = new UpdateAppointmentController();
-const deleteAppointment = new DeleteAppointmentController();
 
 appointmentRouter.get(
   '/users/:id',

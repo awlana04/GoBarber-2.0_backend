@@ -1,6 +1,7 @@
 import { Barber } from '@prisma/client';
 
 import IBarberRepository from '../repositories/IBarberRepository';
+import IStorageProvider from '../../../shared/providers/models/IStorageProvider';
 
 import AppError from '../../../shared/errors/AppError';
 
@@ -9,8 +10,11 @@ interface IRequest {
   avatar: string;
 }
 
-export default class UpdateBarberAvatarSerice {
-  constructor(private barberRepository: IBarberRepository) {}
+export default class UpdateBarberAvatarService {
+  constructor(
+    private barberRepository: IBarberRepository,
+    private storageProvider: IStorageProvider
+  ) {}
 
   public async handle({ id, avatar }: IRequest): Promise<Barber> {
     const checkBarberExists = await this.barberRepository.findBarberById(id);
@@ -19,7 +23,9 @@ export default class UpdateBarberAvatarSerice {
       throw new AppError('Barber does not exists', 404);
     }
 
-    const barber = await this.barberRepository.updateBarberAvatar(id, avatar);
+    const file = await this.storageProvider.saveFile(avatar);
+
+    const barber = await this.barberRepository.updateBarberAvatar(id, file);
 
     return barber;
   }

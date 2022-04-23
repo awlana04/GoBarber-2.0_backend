@@ -1,20 +1,18 @@
 import { Request, Response } from 'express';
 
-import BarberRepository from '../../prisma/repositories/BarberRepository';
 import GetAllBarbersService from '../../../services/GetAllBarbersService';
 
 export default class GetAllBarbersController {
+  constructor(private getAllBarbers: GetAllBarbersService) {}
+
   public async execute(
     request: Request,
     response: Response
   ): Promise<Response> {
     const { id } = request.params;
 
-    const barberRepository = new BarberRepository();
-    const getAllBarbers = new GetAllBarbersService(barberRepository);
-
     try {
-      const barbers = await getAllBarbers.handle(id);
+      const barbers = await this.getAllBarbers.handle(id);
 
       return response.json(barbers);
     } catch (error) {

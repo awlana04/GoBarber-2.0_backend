@@ -2,16 +2,12 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 
-import UpdateUserController from '../controllers/UpdateUserController';
-import UpdateAvatarController from '../controllers/UpdateAvatarController';
+import { updateUser, updateAvatar } from '../../../exports/Controllers';
 
 import uplaodConfig from '../../../../../config/upload';
 
 const profileRouter = Router();
 const upload = multer(uplaodConfig.multer);
-
-const updateUser = new UpdateUserController();
-const updateAvatar = new UpdateAvatarController();
 
 profileRouter.put(
   '/:id',

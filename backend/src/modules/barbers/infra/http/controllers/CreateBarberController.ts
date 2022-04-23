@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
-import BarberRepository from '../../prisma/repositories/BarberRepository';
 import CreateBarberService from '../../../services/CreateBarberService';
 
 export default class CreateBarberController {
+  constructor(private createBarber: CreateBarberService) {}
+
   public async execute(
     request: Request,
     response: Response
@@ -12,11 +13,8 @@ export default class CreateBarberController {
       request.body;
     const { id } = request.params;
 
-    const barberRepository = new BarberRepository();
-    const createBarber = new CreateBarberService(barberRepository);
-
     try {
-      const barber = await createBarber.handle({
+      const barber = await this.createBarber.handle({
         name,
         location,
         description,
