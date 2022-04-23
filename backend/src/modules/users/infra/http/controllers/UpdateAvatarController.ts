@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { UserRepository } from '../../prisma/repositories/UserRepository';
+import DiskStorageProvider from '../../../../../shared/providers/implemetantions/DiskSotrageProvider';
 import UpdateAvatarService from '../../../services/UpdateAvatarService';
 
 export default class UpdateAvatarController {
@@ -13,7 +14,8 @@ export default class UpdateAvatarController {
     const avatar = request.file.filename;
 
     const userRepository = new UserRepository();
-    const updateAvatar = new UpdateAvatarService(userRepository);
+    const diskStorage = new DiskStorageProvider();
+    const updateAvatar = new UpdateAvatarService(userRepository, diskStorage);
 
     try {
       const user = await updateAvatar.handle({ id, avatar });

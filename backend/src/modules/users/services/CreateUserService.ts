@@ -2,6 +2,7 @@ import { User } from '@prisma/client';
 
 import IUserRepository from '../repositories/IUserRepository';
 import IHashProvider from '../providers/models/IHashProvider';
+import IStorageProvider from '../../../shared/providers/models/IStorageProvider';
 import ITokenProvider from '../../../shared/providers/models/ITokenProvider';
 import IRefreshTokenProvider from '../../../shared/providers/models/IRefreshTokenProvider';
 
@@ -19,6 +20,7 @@ export default class CreateUserService {
   constructor(
     private userRepository: IUserRepository,
     private hashProvider: IHashProvider,
+    private storageProvider: IStorageProvider,
     private tokenProvider: ITokenProvider,
     private refreshTokenProvider: IRefreshTokenProvider
   ) {}
@@ -38,12 +40,14 @@ export default class CreateUserService {
 
     const hashedPassword = await this.hashProvider.generateHash(password);
 
+    const filename = await this.storageProvider.saveFile(avatar);
+
     const user = await this.userRepository.create({
       name,
       email,
       password: hashedPassword,
       location,
-      avatar,
+      avatar: filename,
     });
 
     const token = await this.tokenProvider.createToken(user.id);

@@ -1,13 +1,28 @@
-import multer from 'multer';
+import multer, { StorageEngine } from 'multer';
 import path from 'path';
 
-export default {
-  storage: multer.diskStorage({
-    destination: path.resolve(__dirname, '..', '..', 'tmp'),
-    filename: (request, file, cb) => {
-      const fileName = `${Date.now()}-${file.originalname}`;
+const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
-      cb(null, fileName);
-    },
-  }),
-};
+interface IUploadConfig {
+  tmpFolder: string;
+  uploadsFolder: string;
+  multer: {
+    storage: StorageEngine;
+  };
+}
+
+export default {
+  tmpFolder,
+  uploadsFolder: path.resolve(tmpFolder, 'uploads'),
+
+  multer: {
+    storage: multer.diskStorage({
+      destination: tmpFolder,
+      filename(_request, file, callback) {
+        const fileName = `${Date.now()}-${file.originalname}`;
+
+        return callback(null, fileName);
+      },
+    }),
+  },
+} as IUploadConfig;

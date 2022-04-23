@@ -14,7 +14,7 @@ import uploadConfig from '../../../../../config/upload';
 import ensureAuthenticated from '../../../../../shared/infra/http/middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 
 const viewProfile = new ViewUserProfileController();
 const createUser = new CreateUserController();

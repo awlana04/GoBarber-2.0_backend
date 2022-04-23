@@ -8,7 +8,7 @@ import UpdateAvatarController from '../controllers/UpdateAvatarController';
 import uplaodConfig from '../../../../../config/upload';
 
 const profileRouter = Router();
-const upload = multer(uplaodConfig);
+const upload = multer(uplaodConfig.multer);
 
 const updateUser = new UpdateUserController();
 const updateAvatar = new UpdateAvatarController();

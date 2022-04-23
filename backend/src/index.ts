@@ -7,15 +7,16 @@ import { errors } from 'celebrate';
 
 import { router } from './shared/infra/http/routes/index';
 
+import uploadConfig from './config/upload';
 import AppError from './shared/errors/AppError';
 
 const app = express();
 
 app.use(express.json());
 app.use(router);
-app.use(errors());
 app.use(cors());
-app.use('/upload', express.static(path.join(__dirname, '..', 'tmp')));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(errors());
 
 const port = process.env.PORT;
 const host = process.env.HOST;

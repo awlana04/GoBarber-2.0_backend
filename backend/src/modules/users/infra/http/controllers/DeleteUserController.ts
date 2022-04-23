@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { UserRepository } from '../../prisma/repositories/UserRepository';
+import DiskStorageProvider from '../../../../../shared/providers/implemetantions/DiskSotrageProvider';
 import DeleteUserService from '../../../services/DeleteUserService';
 
 export default class DeleteUserController {
@@ -11,7 +12,8 @@ export default class DeleteUserController {
     const { id } = request.params;
 
     const userRepository = new UserRepository();
-    const deleteUser = new DeleteUserService(userRepository);
+    const diskStorage = new DiskStorageProvider();
+    const deleteUser = new DeleteUserService(userRepository, diskStorage);
 
     try {
       const user = await deleteUser.handle(id);
