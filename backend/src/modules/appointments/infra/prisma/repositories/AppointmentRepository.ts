@@ -1,8 +1,9 @@
+import { Appointment, User, Barber } from '@prisma/client';
+
 import prisma from '../../../../../shared/infra/prisma/prisma';
 
 import IAppointmentRepository from '../../../repositories/IAppointmentRepository';
 import ICreateAppointmentDTO from '../../../dtos/ICreateAppointmentDTO';
-import { Appointment, Barber, User } from '@prisma/client';
 
 export default class AppointmentRepository implements IAppointmentRepository {
   public async findAppointmentById(id: string): Promise<Appointment> {

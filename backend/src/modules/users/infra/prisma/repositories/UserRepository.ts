@@ -3,10 +3,10 @@ import { User } from '@prisma/client';
 import prisma from '../../../../../shared/infra/prisma/prisma';
 
 import IUserRepository from '../../../repositories/IUserRepository';
-import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO';
+import ICreateUserDTO from '../../../dtos/ICreateUserDTO';
 import IUpdateUserDTO from '../../../dtos/IUpdateUserDTO';
 
-export class UserRepository implements IUserRepository {
+export abstract class UserRepository implements IUserRepository {
   public async findById(id: string): Promise<User> {
     return await prisma.user.findUnique({
       where: {

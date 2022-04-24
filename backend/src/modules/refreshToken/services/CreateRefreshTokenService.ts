@@ -31,7 +31,7 @@ export default class CreateRefreshTokenService {
     }
 
     const token = jwt.sign({ id: userId }, process.env.SECRET, {
-      expiresIn: '15m',
+      expiresIn: '30d',
     });
 
     const expiredRefreshToken = dayjs().isAfter(dayjs.unix(expiresIn));
