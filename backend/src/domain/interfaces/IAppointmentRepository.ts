@@ -1,6 +1,6 @@
-import Appointment from '../../domain/entities/appointment';
-import User from '../../domain/entities/user';
-import Barber from '../../domain/entities/barber';
+import Appointment from '../entities/appointment';
+import User from '../entities/user';
+import Barber from '../entities/barber';
 
 export default interface IAppointmentRepository {
   findByDate(date: Date, barberId: string): Promise<Appointment | null>;

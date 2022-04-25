@@ -1,6 +1,6 @@
 import User from '../entities/user';
 
-import IUserRepository from '../../core/interfaces/IUserRepository';
+import IUserRepository from '../interfaces/IUserRepository';
 
 interface CreateUserServiceRequest {
   name: string;
@@ -11,7 +11,7 @@ interface CreateUserServiceRequest {
 }
 
 export default class CreateUserService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   public async handle({
     name,

@@ -1,4 +1,4 @@
-import IBarberRepository from '../../src/core/interfaces/IBarberRepository';
+import IBarberRepository from '../../src/domain/interfaces/IBarberRepository';
 
 import Barber from '../../src/domain/entities/barber';
 import User from '../../src/domain/entities/user';

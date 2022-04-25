@@ -1,4 +1,4 @@
-import IAppointmentRepository from '../../src/core/interfaces/IAppointmentRepository';
+import IAppointmentRepository from '../../src/domain/interfaces/IAppointmentRepository';
 
 import User from '../../src/domain/entities/user';
 import Barber from '../../src/domain/entities/barber';

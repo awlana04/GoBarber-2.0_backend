@@ -1,4 +1,4 @@
-import IUserRepository from '../../src/core/interfaces/IUserRepository';
+import IUserRepository from '../../src/domain/interfaces/IUserRepository';
 
 import User from '../../src/domain/entities/user';
 

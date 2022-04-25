@@ -1,6 +1,6 @@
 import Barber from '../entities/barber';
 
-import IBarberRepository from '../../core/interfaces/IBarberRepository';
+import IBarberRepository from '../interfaces/IBarberRepository';
 
 interface CreateBarberServiceRequest {
   name: string;
@@ -13,7 +13,7 @@ interface CreateBarberServiceRequest {
 }
 
 export default class CreateBarberService {
-  constructor(private barberRepository: IBarberRepository) {}
+  constructor(private readonly barberRepository: IBarberRepository) {}
 
   public async handle({
     name,

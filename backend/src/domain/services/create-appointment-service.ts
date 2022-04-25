@@ -1,6 +1,6 @@
 import Appointment from '../entities/appointment';
 
-import IAppointmentRepository from '../../core/interfaces/IAppointmentRepository';
+import IAppointmentRepository from '../interfaces/IAppointmentRepository';
 
 interface CreateAppointmentServiceRequest {
   date: Date;
@@ -9,7 +9,7 @@ interface CreateAppointmentServiceRequest {
 }
 
 export default class CreateAppointmentService {
-  constructor(private appointmentRepository: IAppointmentRepository) {}
+  constructor(private readonly appointmentRepository: IAppointmentRepository) {}
 
   public async handle({
     date,
