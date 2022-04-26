@@ -26,26 +26,19 @@ export default class InMemoryUsersRepository implements IUserRepository {
     return user;
   }
 
-  async update(
-    id: string,
-    data: { name: string; password: string; location: string }
-  ): Promise<User | any> {
+  async update(id: string, data: IUpdateUserDTO): Promise<User | any> {
     const user = this.item.find(user => user.id === id);
 
-    const name = user?.props.name.replace(user.props.name, data.name);
+    if (data.name) {
+      return user?.props.name.replace(user.props.name, data.name);
+    }
 
-    const password = user?.props.password.replace(
-      user.props.password,
-      data.password
-    );
+    if (data.password) {
+      return user?.props.password.replace(user.props.password, data.password);
+    }
 
-    const location = user?.props.location.replace(
-      user.props.location,
-      data.location
-    );
-
-    const newUser = { name, password, location };
-
-    return newUser;
+    if (data.location) {
+      return user?.props.location.replace(user.props.location, data.location);
+    }
   }
 }
