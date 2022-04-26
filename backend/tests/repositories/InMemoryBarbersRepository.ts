@@ -18,7 +18,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
   }
 
   async findByName(name: string): Promise<Barber | null> {
-    const barber = this.barber.find(barber => barber.name !== name);
+    const barber = this.barber.find(barber => barber.name === name);
 
     if (!barber) {
       return null;
