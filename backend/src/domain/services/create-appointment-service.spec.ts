@@ -6,12 +6,21 @@ import User from '../entities/user';
 import Barber from '../entities/barber';
 import Appointment from '../entities/appointment';
 
+type SutOutput = {
+  appointmentRepository: InMemoryAppointmentsRepository;
+  sut: CreateAppointmentService;
+};
+
+const makeSut = (): SutOutput => {
+  const appointmentRepository = new InMemoryAppointmentsRepository();
+  const sut = new CreateAppointmentService(appointmentRepository);
+
+  return { appointmentRepository, sut };
+};
+
 describe('Create appointment service', () => {
   it('should be able to create a new appointment', async () => {
-    const appointmentRepository = new InMemoryAppointmentsRepository();
-    const createAppointment = new CreateAppointmentService(
-      appointmentRepository
-    );
+    const { appointmentRepository, sut } = makeSut();
 
     const user = User.create({
       name: 'John Doe',
@@ -29,22 +38,38 @@ describe('Create appointment service', () => {
       userId: user.id,
     });
 
-    const appointment = Appointment.create({
+    appointmentRepository.user.push(user);
+    appointmentRepository.barber.push(barber);
+
+    const response = await sut.handle({
       date: new Date(),
       userId: user.id,
       barberId: barber.id,
     });
 
-    appointmentRepository.user.push(user);
-    appointmentRepository.barber.push(barber);
-    appointmentRepository.appointment.push(appointment);
+    expect(response).toBeInstanceOf(Appointment);
+  });
 
-    const response = await createAppointment.handle({
-      date: appointment.props.date,
-      userId: appointment.props.userId,
-      barberId: appointment.props.barberId,
+  it('should NOT be able to create a new appointment with an invalid userId', () => {
+    const { appointmentRepository, sut } = makeSut();
+
+    const barber = Barber.create({
+      name: 'John Doe Barber',
+      location: 'Somewhere Into the Pocket',
+      description: 'A Really Good Place',
+      openAtNight: true,
+      openOnWeekends: true,
+      userId: 'InvalidID',
     });
 
-    expect(response).toBeTruthy();
+    appointmentRepository.barber.push(barber);
+
+    const response = sut.handle({
+      date: new Date(),
+      userId: 'InvalidID',
+      barberId: barber.id,
+    });
+
+    expect(response).rejects.toThrowError();
   });
 });
