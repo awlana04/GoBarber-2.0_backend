@@ -72,4 +72,25 @@ describe('Create appointment service', () => {
 
     expect(response).rejects.toThrowError();
   });
+
+  it('should NOT be able to create a new appointment with an invalid barberId', () => {
+    const { appointmentRepository, sut } = makeSut();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    appointmentRepository.user.push(user);
+
+    const response = sut.handle({
+      date: new Date(),
+      userId: user.id,
+      barberId: 'InvalidID',
+    });
+
+    expect(response).rejects.toThrowError();
+  });
 });
