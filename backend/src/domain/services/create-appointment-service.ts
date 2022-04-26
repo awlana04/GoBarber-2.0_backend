@@ -39,6 +39,10 @@ export default class CreateAppointmentService {
       throw new Error('This date is already booked');
     }
 
+    if (date < new Date()) {
+      throw new Error('You can not book an appointment in a past date');
+    }
+
     const appointment = Appointment.create({ date, userId, barberId });
 
     return appointment;

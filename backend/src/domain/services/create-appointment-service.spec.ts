@@ -131,4 +131,35 @@ describe('Create appointment service', () => {
 
     expect(response).rejects.toThrowError();
   });
+
+  it('should NOT be able to create a new appointment in a past date', () => {
+    const { appointmentRepository, sut } = makeSut();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    const barber = Barber.create({
+      name: 'John Doe Barber',
+      location: 'Somewhere Into the Pocket',
+      description: 'A Really Good Place',
+      openAtNight: true,
+      openOnWeekends: true,
+      userId: user.id,
+    });
+
+    appointmentRepository.user.push(user);
+    appointmentRepository.barber.push(barber);
+
+    const response = sut.handle({
+      date: Date.UTC(2022, 3) as unknown as Date,
+      userId: user.id,
+      barberId: barber.id,
+    });
+
+    expect(response).rejects.toThrowError();
+  });
 });
