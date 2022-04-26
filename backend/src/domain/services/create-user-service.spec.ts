@@ -18,6 +18,19 @@ const makeSut = (): SutOutput => {
 
 describe('Create user service', () => {
   it('should be able to create a new user', async () => {
+    const { sut } = makeSut();
+
+    const response = await sut.handle({
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    expect(response).toBeInstanceOf(User);
+  });
+
+  it('should NOT be able to create a new user with an invalid email', () => {
     const { sut, usersRepository } = makeSut();
 
     const user = User.create({
@@ -29,13 +42,13 @@ describe('Create user service', () => {
 
     usersRepository.item.push(user);
 
-    const response = await sut.handle({
-      name: user.props.name,
-      email: user.props.email,
-      password: user.props.password,
-      location: user.props.location,
+    const response = sut.handle({
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
     });
 
-    expect(response).toBeTruthy();
+    expect(response).rejects.toThrowError();
   });
 });

@@ -6,7 +6,7 @@ export default class InMemoryUsersRepository implements IUserRepository {
   public item: User[] = [];
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = this.item.find(user => user.email !== email);
+    const user = this.item.find(user => user.email === email);
 
     if (!user) {
       return null;
