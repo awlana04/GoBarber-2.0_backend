@@ -51,4 +51,17 @@ describe('Create user service', () => {
 
     expect(response).rejects.toThrowError();
   });
+
+  it('should NOT be able to create a new user with an invalid password', () => {
+    const { sut } = makeSut();
+
+    const user = sut.handle({
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '1234567',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    expect(user).rejects.toThrowError();
+  });
 });

@@ -26,6 +26,10 @@ export default class CreateUserService {
       throw new Error('User already exists');
     }
 
+    if (password.length < 8) {
+      throw new Error('Password must have at least 8 characters');
+    }
+
     const user = User.create({ name, email, password, location, avatar });
 
     return user;
