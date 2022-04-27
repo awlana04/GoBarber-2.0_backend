@@ -54,4 +54,41 @@ describe('Update appointment service', () => {
 
     expect(response).toBeDefined();
   });
+
+  it('should NOT be able to update the appointment with an invalid id', () => {
+    const { appointmentRepository, sut } = makeSut();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    const barber = Barber.create({
+      name: 'John Doe Barber',
+      location: 'Somewhere Into the Pocket',
+      description: 'A Really Good Place',
+      openAtNight: true,
+      openOnWeekends: true,
+      userId: user.id,
+    });
+
+    const appointment = Appointment.create({
+      date: new Date(),
+      userId: user.id,
+      barberId: barber.id,
+    });
+
+    appointmentRepository.user.push(user);
+    appointmentRepository.barber.push(barber);
+    appointmentRepository.appointment.push(appointment);
+
+    const response = sut.handle({
+      id: 'invalidID',
+      date: new Date(),
+    });
+
+    expect(response).rejects.toThrowError();
+  });
 });
