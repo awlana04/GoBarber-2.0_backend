@@ -1,10 +1,10 @@
 import CreateAppointmentService from './create-appointment-service';
 
-import InMemoryAppointmentsRepository from '../../../tests/repositories/InMemoryAppointmentsRepository';
+import InMemoryAppointmentsRepository from '../../../../tests/repositories/InMemoryAppointmentsRepository';
 
-import User from '../entities/user';
-import Barber from '../entities/barber';
-import Appointment from '../entities/appointment';
+import User from '../../entities/user';
+import Barber from '../../entities/barber';
+import Appointment from '../../entities/appointment';
 
 type SutOutput = {
   appointmentRepository: InMemoryAppointmentsRepository;

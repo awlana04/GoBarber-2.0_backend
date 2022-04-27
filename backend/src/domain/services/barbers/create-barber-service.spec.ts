@@ -1,9 +1,9 @@
 import CreateBarberService from './create-barber-service';
 
-import InMemoryBarbersRepository from '../../../tests/repositories/InMemoryBarbersRepository';
+import InMemoryBarbersRepository from '../../../../tests/repositories/InMemoryBarbersRepository';
 
-import User from '../entities/user';
-import Barber from '../entities/barber';
+import User from '../../entities/user';
+import Barber from '../../entities/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;

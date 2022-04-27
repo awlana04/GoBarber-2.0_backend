@@ -1,6 +1,6 @@
-import Appointment from '../entities/appointment';
+import Appointment from '../../entities/appointment';
 
-import IAppointmentRepository from '../interfaces/IAppointmentRepository';
+import IAppointmentRepository from '../../interfaces/IAppointmentRepository';
 
 interface CreateAppointmentServiceRequest {
   date: Date;

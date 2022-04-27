@@ -41,4 +41,12 @@ export default class InMemoryUsersRepository implements IUserRepository {
       return user?.props.location.replace(user.props.location, data.location);
     }
   }
+
+  async updateAvatar(id: string, avatar: string): Promise<User | any> {
+    const user = await this.findById(id);
+
+    user?.props.avatar?.replace(user.props.avatar, avatar);
+
+    return user;
+  }
 }

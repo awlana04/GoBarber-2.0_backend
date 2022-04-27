@@ -1,8 +1,8 @@
-import InMemoryBarbersRepository from '../../../tests/repositories/InMemoryBarbersRepository';
+import InMemoryBarbersRepository from '../../../../tests/repositories/InMemoryBarbersRepository';
 import UpdateBarberService from './update-barber-service';
 
-import Barber from '../entities/barber';
-import User from '../entities/user';
+import Barber from '../../entities/barber';
+import User from '../../entities/user';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;

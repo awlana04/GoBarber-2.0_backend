@@ -1,8 +1,8 @@
-import InMemoryUsersRepository from '../../../tests/repositories/InMemoryUsersRepository';
+import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
 
 import CreateUserService from './create-user-service';
 
-import User from '../entities/user';
+import User from '../../entities/user';
 
 type SutOutput = {
   sut: CreateUserService;

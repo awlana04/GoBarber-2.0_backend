@@ -1,5 +1,5 @@
-import InMemoryUsersRepository from '../../../tests/repositories/InMemoryUsersRepository';
-import User from '../entities/user';
+import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
+import User from '../../entities/user';
 
 import UpdateUserService from './update-user-service';
 

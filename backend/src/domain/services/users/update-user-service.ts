@@ -1,6 +1,6 @@
-import User from '../entities/user';
+import User from '../../entities/user';
 
-import IUserRepository from '../interfaces/IUserRepository';
+import IUserRepository from '../../interfaces/IUserRepository';
 
 interface UpdateUserServiceRequest {
   id: string;
