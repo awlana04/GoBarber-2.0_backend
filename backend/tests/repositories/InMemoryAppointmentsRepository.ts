@@ -11,6 +11,18 @@ export default class InMemoryAppointmentsRepository
   public barber: Barber[] = [];
   public appointment: Appointment[] = [];
 
+  async findById(id: string): Promise<Appointment | null> {
+    const appointment = this.appointment.find(
+      appointment => appointment.id === id
+    );
+
+    if (!appointment) {
+      return null;
+    }
+
+    return appointment;
+  }
+
   async findUserId(userId: string): Promise<User | null> {
     const user = this.user.find(user => user.id === userId);
 
@@ -40,6 +52,14 @@ export default class InMemoryAppointmentsRepository
     if (!appointment) {
       return null;
     }
+
+    return appointment;
+  }
+
+  async update(id: string, date: Date): Promise<Appointment | any> {
+    const appointment = await this.findById(id);
+
+    appointment?.props.date.setDate(Number(date));
 
     return appointment;
   }
