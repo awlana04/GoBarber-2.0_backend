@@ -2,7 +2,7 @@ import Barber from '../../entities/barber';
 
 import IBarberRepository from '../../interfaces/IBarberRepository';
 
-interface CreateBarberServiceRequest {
+interface ICreateBarberServiceRequest {
   name: string;
   location: string;
   description: string;
@@ -23,7 +23,7 @@ export default class CreateBarberService {
     openAtNight,
     openOnWeekends,
     userId,
-  }: CreateBarberServiceRequest) {
+  }: ICreateBarberServiceRequest) {
     const checkUserExists = await this.barberRepository.findUserId(userId);
 
     if (!checkUserExists) {

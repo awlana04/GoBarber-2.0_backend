@@ -1,12 +1,11 @@
 import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
-
 import CreateUserService from './create-user-service';
 
 import User from '../../entities/user';
 
 type SutOutput = {
-  sut: CreateUserService;
   usersRepository: InMemoryUsersRepository;
+  sut: CreateUserService;
 };
 
 const makeSut = (): SutOutput => {
@@ -31,7 +30,7 @@ describe('Create user service', () => {
   });
 
   it('should NOT be able to create a new user with an invalid email', () => {
-    const { sut, usersRepository } = makeSut();
+    const { usersRepository, sut } = makeSut();
 
     const user = User.create({
       name: 'John Doe',

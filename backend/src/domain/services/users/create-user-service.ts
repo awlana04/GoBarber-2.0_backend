@@ -2,7 +2,7 @@ import User from '../../entities/user';
 
 import IUserRepository from '../../interfaces/IUserRepository';
 
-interface CreateUserServiceRequest {
+interface ICreateUserServiceRequest {
   name: string;
   email: string;
   password: string;
@@ -19,7 +19,7 @@ export default class CreateUserService {
     password,
     location,
     avatar,
-  }: CreateUserServiceRequest) {
+  }: ICreateUserServiceRequest) {
     const checkUserExists = await this.userRepository.findByEmail(email);
 
     if (checkUserExists) {

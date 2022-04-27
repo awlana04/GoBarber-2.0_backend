@@ -1,6 +1,7 @@
-import CreateBarberService from './create-barber-service';
+import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '../../../../tests/repositories/InMemoryBarbersRepository';
+import CreateBarberService from './create-barber-service';
 
 import User from '../../entities/user';
 import Barber from '../../entities/barber';
@@ -60,6 +61,8 @@ describe('Create barber service', () => {
   it('should NOT be able to create a new barber with an invalid name', () => {
     const { barberRepository, sut } = makeSut();
 
+    const id = crypto.randomUUID();
+
     const user = User.create({
       name: 'John Doe',
       email: 'john@doe',
@@ -67,14 +70,17 @@ describe('Create barber service', () => {
       location: 'Somewhere Over the Rainbow',
     });
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A really good place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A really good place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
 
     barberRepository.user.push(user);
     barberRepository.barber.push(barber);

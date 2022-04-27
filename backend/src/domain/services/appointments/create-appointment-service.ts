@@ -2,7 +2,7 @@ import Appointment from '../../entities/appointment';
 
 import IAppointmentRepository from '../../interfaces/IAppointmentRepository';
 
-interface CreateAppointmentServiceRequest {
+interface ICreateAppointmentServiceRequest {
   date: Date;
   userId: string;
   barberId: string;
@@ -15,7 +15,7 @@ export default class CreateAppointmentService {
     date,
     userId,
     barberId,
-  }: CreateAppointmentServiceRequest) {
+  }: ICreateAppointmentServiceRequest) {
     const checkUserExists = await this.appointmentRepository.findUserId(userId);
 
     if (!checkUserExists) {

@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 import InMemoryAppointmentsRepository from '../../../../tests/repositories/InMemoryAppointmentsRepository';
 import UpdateAppointmentService from './update-appointment-service';
 
@@ -18,6 +20,8 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Update appointment service', () => {
+  const id = crypto.randomUUID();
+
   it('should be able to update the appointment', async () => {
     const { appointmentRepository, sut } = makeSut();
 
@@ -28,14 +32,17 @@ describe('Update appointment service', () => {
       location: 'Somewhere Over the Rainbow',
     });
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A Really Good Place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A Really Good Place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
 
     const appointment = Appointment.create({
       date: new Date(),
@@ -65,14 +72,17 @@ describe('Update appointment service', () => {
       location: 'Somewhere Over the Rainbow',
     });
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A Really Good Place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A Really Good Place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
 
     const appointment = Appointment.create({
       date: new Date(),

@@ -31,7 +31,7 @@ export default class Barber extends Entity<BarberProps> {
 
   static create(
     props: BarberProps,
-    id?: string,
+    id: string,
     createdAt?: Date,
     updatedAt?: Date
   ) {

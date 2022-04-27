@@ -1,7 +1,7 @@
 import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
-import User from '../../entities/user';
-
 import UpdateUserService from './update-user-service';
+
+import User from '../../entities/user';
 
 type SutOutupt = {
   usersRepository: InMemoryUsersRepository;

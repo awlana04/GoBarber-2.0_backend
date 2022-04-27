@@ -61,4 +61,26 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
 
     return barber;
   }
+
+  async updatePassword(
+    id: string,
+    password: string
+  ): Promise<(Barber & User) | any> {
+    const user = this.user.find(user => user.id === id);
+
+    user?.props.password.replace(user.props.password, password);
+
+    return user;
+  }
+
+  async updateAvatar(
+    id: string,
+    avatar: string
+  ): Promise<(Barber & User) | any> {
+    const user = this.user.find(user => user.id === id);
+
+    user?.props.avatar?.replace(user.props.avatar, avatar);
+
+    return user;
+  }
 }

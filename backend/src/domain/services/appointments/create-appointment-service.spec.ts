@@ -1,6 +1,7 @@
-import CreateAppointmentService from './create-appointment-service';
+import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '../../../../tests/repositories/InMemoryAppointmentsRepository';
+import CreateAppointmentService from './create-appointment-service';
 
 import User from '../../entities/user';
 import Barber from '../../entities/barber';
@@ -19,6 +20,8 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Create appointment service', () => {
+  const id = crypto.randomUUID();
+
   it('should be able to create a new appointment', async () => {
     const { appointmentRepository, sut } = makeSut();
 
@@ -29,14 +32,17 @@ describe('Create appointment service', () => {
       location: 'Somewhere Over the Rainbow',
     });
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A Really Good Place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A Really Good Place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
 
     appointmentRepository.user.push(user);
     appointmentRepository.barber.push(barber);
@@ -53,14 +59,17 @@ describe('Create appointment service', () => {
   it('should NOT be able to create a new appointment with an invalid userId', () => {
     const { appointmentRepository, sut } = makeSut();
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A Really Good Place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: 'InvalidID',
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A Really Good Place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: 'InvalidID',
+      },
+      id
+    );
 
     appointmentRepository.barber.push(barber);
 
@@ -104,14 +113,17 @@ describe('Create appointment service', () => {
       location: 'Somewhere Over the Rainbow',
     });
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A Really Good Place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A Really Good Place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
 
     const appointment = Appointment.create({
       date: new Date(),
@@ -142,14 +154,17 @@ describe('Create appointment service', () => {
       location: 'Somewhere Over the Rainbow',
     });
 
-    const barber = Barber.create({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A Really Good Place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A Really Good Place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
 
     appointmentRepository.user.push(user);
     appointmentRepository.barber.push(barber);
