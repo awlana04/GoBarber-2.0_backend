@@ -55,4 +55,39 @@ describe('Update barber user avatar', () => {
 
     expect(response).toBeDefined();
   });
+
+  it('should NOT be able to update the barber avatar with an invalid id', () => {
+    const { barbersRepository, sut } = makeSut();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+      avatar: 'avatar.png',
+      barberId: id,
+    });
+
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A really good place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
+
+    barbersRepository.user.push(user);
+    barbersRepository.barber.push(barber);
+
+    const response = sut.handle({
+      id: 'invalidID',
+      avatar: 'another-avatar.png',
+    });
+
+    expect(response).rejects.toThrowError();
+  });
 });

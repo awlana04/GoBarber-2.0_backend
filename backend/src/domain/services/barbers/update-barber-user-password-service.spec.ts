@@ -54,4 +54,40 @@ describe('Update barber user password service', () => {
 
     expect(response).toBeDefined();
   });
+
+  it('ahould NOT be able to update the barber user password with an invalid id', () => {
+    const { barbersRepository, sut } = makeSut();
+
+    const id = crypto.randomUUID();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+      barberId: id,
+    });
+
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A really good place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
+
+    barbersRepository.user.push(user);
+    barbersRepository.barber.push(barber);
+
+    const response = sut.handle({
+      id: 'invalidID',
+      password: '12345678910',
+    });
+
+    expect(response).rejects.toThrowError();
+  });
 });
