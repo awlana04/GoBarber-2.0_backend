@@ -38,7 +38,16 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return barber;
   }
 
-  async update(id: string, data: IUpdateBarberDTO): Promise<Barber | any> {
+  async update(
+    id: string,
+    data: {
+      name: string;
+      location: string;
+      description: string;
+      openAtNight: boolean;
+      openOnWeekends: boolean;
+    }
+  ): Promise<Barber | any> {
     const barber = await this.findById(id);
 
     if (data.name) {
@@ -56,6 +65,61 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
       return barber?.props.description.replace(
         barber.props.description,
         data.description
+      );
+    }
+
+    const name = String(barber?.props.name);
+    const location = String(barber?.props.location);
+    const description = String(barber?.props.description);
+    const openAtNight = Boolean(barber?.props.openAtNight);
+    const openOnWeekends = Boolean(barber?.props.openOnWeekends);
+    const userId = String(barber?.props.userId);
+
+    if (data.openAtNight !== undefined && data.openOnWeekends === undefined) {
+      this.barber.pop();
+
+      return Barber.create(
+        {
+          name,
+          location,
+          description,
+          openAtNight: data.openAtNight,
+          openOnWeekends,
+          userId,
+        },
+        id
+      );
+    }
+
+    if (data.openOnWeekends !== undefined && data.openAtNight === undefined) {
+      this.barber.pop();
+
+      return Barber.create(
+        {
+          name,
+          location,
+          description,
+          openAtNight,
+          openOnWeekends: data.openOnWeekends,
+          userId,
+        },
+        id
+      );
+    }
+
+    if (data.openAtNight !== undefined && data.openOnWeekends !== undefined) {
+      this.barber.pop();
+
+      return Barber.create(
+        {
+          name,
+          location,
+          description,
+          openAtNight: data.openAtNight,
+          openOnWeekends: data.openOnWeekends,
+          userId,
+        },
+        id
       );
     }
 

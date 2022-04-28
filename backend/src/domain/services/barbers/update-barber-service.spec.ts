@@ -50,8 +50,12 @@ describe('Update barber service', () => {
       id: barber.id,
       name: 'John Doe Junior Barber',
       location: 'Somewhere Out of The Box',
-      description: 'A really HELLA good place',
+      description: 'A Really HELLA Good Place',
+      openAtNight: false,
+      openOnWeekends: false,
     });
+
+    console.log(response);
 
     expect(response).toBeDefined();
   });
