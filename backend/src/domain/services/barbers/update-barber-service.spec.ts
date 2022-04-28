@@ -55,8 +55,6 @@ describe('Update barber service', () => {
       openOnWeekends: false,
     });
 
-    console.log(response);
-
     expect(response).toBeDefined();
   });
 
@@ -153,12 +151,76 @@ describe('Update barber service', () => {
 
     const response = await sut.handle({
       id: barber.id,
-      name: 'John Doe Junior Barber',
-      location: 'Somewhere Out of The Box',
       description: 'A really HELLA good place',
     });
 
     expect(response).toBeDefined();
+  });
+
+  it('should be able to update the barber open at night boolean', async () => {
+    const { barberRepository, sut } = makeSut();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A really good place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
+
+    barberRepository.user.push(user);
+    barberRepository.barber.push(barber);
+
+    const response = await sut.handle({
+      id: barber.id,
+      openAtNight: false,
+    });
+
+    expect(response.props.openAtNight).toBeFalsy();
+  });
+
+  it('should be able to update the barber open on weekends boolean', async () => {
+    const { barberRepository, sut } = makeSut();
+
+    const user = User.create({
+      name: 'John Doe',
+      email: 'john@doe',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
+    });
+
+    const barber = Barber.create(
+      {
+        name: 'John Doe Barber',
+        location: 'Somewhere Into the Pocket',
+        description: 'A really good place',
+        openAtNight: true,
+        openOnWeekends: true,
+        userId: user.id,
+      },
+      id
+    );
+
+    barberRepository.user.push(user);
+    barberRepository.barber.push(barber);
+
+    const response = await sut.handle({
+      id: barber.id,
+      openOnWeekends: false,
+    });
+
+    expect(response.props.openOnWeekends).toBeFalsy();
   });
 
   it('should NOT be able to update the barber with an invalid id', () => {
@@ -191,6 +253,8 @@ describe('Update barber service', () => {
       name: 'John Doe Junior Barber',
       location: 'Somewhere Out of The Box',
       description: 'A really HELLA good place',
+      openAtNight: false,
+      openOnWeekends: false,
     });
 
     expect(response).rejects.toThrowError();
