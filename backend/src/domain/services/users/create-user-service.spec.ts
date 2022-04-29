@@ -16,14 +16,14 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Create user service', () => {
+  const { usersRepository, sut } = makeSut();
+
   const name = 'John Doe';
   const email = 'john@doe.com';
   const password = '12345678';
   const location = 'Somewhere Over the Rainbow';
 
   it('should be able to create a new user', async () => {
-    const { sut } = makeSut();
-
     const response = await sut.handle({
       name,
       email,
@@ -35,8 +35,6 @@ describe('Create user service', () => {
   });
 
   it('should NOT be able to create a new user with an invalid email', () => {
-    const { usersRepository, sut } = makeSut();
-
     const user = User.create({
       name,
       email,
@@ -53,12 +51,10 @@ describe('Create user service', () => {
       location,
     });
 
-    expect(response).toBeTruthy();
+    expect(response).rejects.toThrowError();
   });
 
   it('should NOT be able to create a new user with an invalid password', () => {
-    const { sut } = makeSut();
-
     const user = sut.handle({
       name,
       email,

@@ -41,7 +41,7 @@ describe('Create appointment service', () => {
       userId: user.id,
     },
     id
-  );
+  ).value as Barber;
 
   appointmentRepository.user.push(user);
   appointmentRepository.barber.push(barber);

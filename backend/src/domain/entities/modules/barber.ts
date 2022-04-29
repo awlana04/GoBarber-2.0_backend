@@ -1,42 +1,70 @@
 import Entity from '../shared/entity';
 
-type BarberProps = {
-  name: string;
-  location: string;
-  description: string;
-  images?: string[];
-  openAtNight: boolean;
-  openOnWeekends: boolean;
-  userId: string;
-  appointmentId?: string[];
-};
+import { BarberProps, BarberValidationProps } from '../interfaces/IBarber';
 
-export default class Barber extends Entity<BarberProps> {
+import Name from '../domain/name';
+
+import { Either, left, right } from '../../shared/either';
+
+import InvalidNameError from '../errors/invalid-name-error';
+
+export default class Barber extends Entity<
+  BarberProps | BarberValidationProps
+> {
+  public readonly name: Name;
+
   private constructor(
-    props: BarberProps,
+    props: BarberValidationProps,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
   ) {
     super(props, id, createdAt, updatedAt);
+
+    this.name = props.name;
   }
 
   get userId() {
     return this.props.userId;
   }
 
-  get name() {
-    return this.props.name;
-  }
-
-  static create(
+  public static create(
     props: BarberProps,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
-  ) {
-    const barber = new Barber(props, id, createdAt, updatedAt);
+  ): Either<InvalidNameError, Barber> {
+    const nameOrError = Name.create(props.name);
 
-    return barber;
+    if (nameOrError.isLeft()) {
+      return left(nameOrError.value);
+    }
+
+    const name: Name = nameOrError.value as Name;
+    const location = props.location;
+    const description = props.description;
+    const images = props.images;
+    const openAtNight = props.openAtNight;
+    const openOnWeekends = props.openOnWeekends;
+    const userId = props.userId;
+    const appointmentId = props.appointmentId;
+
+    return right(
+      new Barber(
+        {
+          name,
+          location,
+          description,
+          images,
+          openAtNight,
+          openOnWeekends,
+          userId,
+          appointmentId,
+        },
+        id,
+        createdAt,
+        updatedAt
+      )
+    );
   }
 }

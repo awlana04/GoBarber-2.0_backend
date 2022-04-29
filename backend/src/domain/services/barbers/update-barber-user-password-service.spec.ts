@@ -41,7 +41,7 @@ describe('Update barber user password service', () => {
       userId: user.id,
     },
     id
-  );
+  ).value as Barber;
 
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);

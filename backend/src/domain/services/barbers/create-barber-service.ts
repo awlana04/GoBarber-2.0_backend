@@ -46,7 +46,7 @@ export default class CreateBarberService {
       openAtNight,
       openOnWeekends,
       userId,
-    });
+    }).value as Barber;
 
     return barber;
   }

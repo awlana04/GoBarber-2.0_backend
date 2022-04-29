@@ -17,7 +17,7 @@ export default class InMemoryUsersRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = this.item.find(user => String(user.email) === email);
+    const user = this.item.find(user => user.email.value === email);
 
     if (!user) {
       return null;
@@ -30,14 +30,11 @@ export default class InMemoryUsersRepository implements IUserRepository {
     const user = this.item.find(user => user.id === id);
 
     if (data.name) {
-      return user?.props.name.value.replace(user.props.name.value, data.name);
+      return user?.name.value.replace(user.name.value, data.name);
     }
 
     if (data.password) {
-      return user?.props.password.value.replace(
-        user.props.password.value,
-        data.password
-      );
+      return user?.password.value.replace(user.password.value, data.password);
     }
 
     if (data.location) {

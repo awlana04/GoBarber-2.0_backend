@@ -41,7 +41,7 @@ describe('Update appointment service', () => {
       userId: user.id,
     },
     id
-  );
+  ).value as Barber;
 
   const appointment = Appointment.create({
     date: new Date(),

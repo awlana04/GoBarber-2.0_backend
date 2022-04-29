@@ -1,5 +1,7 @@
 import Entity from '../shared/entity';
 
+import { UserProps, UserValidationProps } from '../interfaces/IUser';
+
 import Name from '../domain/name';
 import Email from '../domain/email';
 import Password from '../domain/password';
@@ -10,33 +12,13 @@ import InvalidNameError from '../errors/invalid-name-error';
 import InvalidEmailError from '../errors/invalid-email-error';
 import InvalidPasswordError from '../errors/invalid-password-error';
 
-type UserProps = {
-  name: string;
-  email: string;
-  password: string;
-  location: string;
-  avatar?: string;
-  refreshTokenId?: string;
-  barberId?: string;
-  appointmentId?: string[];
-};
-
-export default class User extends Entity<UserProps | any> {
+export default class User extends Entity<UserProps | UserValidationProps> {
   public readonly name: Name;
   public readonly email: Email;
   public readonly password: Password;
 
   private constructor(
-    props: {
-      name: Name;
-      email: Email;
-      password: Password;
-      location: string;
-      avatar?: string;
-      refreshTokenId?: string;
-      barberId?: string;
-      appointmentId?: string[];
-    },
+    props: UserValidationProps,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
@@ -47,10 +29,6 @@ export default class User extends Entity<UserProps | any> {
     this.email = props.email;
     this.password = props.password;
   }
-
-  // get email() {
-  //   return this.props.email;
-  // }
 
   public static create(
     props: UserProps,
@@ -92,15 +70,4 @@ export default class User extends Entity<UserProps | any> {
       )
     );
   }
-
-  // static create(
-  //   props: UserProps,
-  //   id?: string,
-  //   createdAt?: Date,
-  //   updatedAt?: Date
-  // ) {
-  //   const user = new User(props, id, createdAt, updatedAt);
-
-  //   return user;
-  // }
 }

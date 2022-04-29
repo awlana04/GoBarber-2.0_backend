@@ -42,7 +42,7 @@ describe('Update barber user avatar', () => {
       userId: user.id,
     },
     id
-  );
+  ).value as Barber;
 
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);

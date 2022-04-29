@@ -69,7 +69,7 @@ describe('Create barber service', () => {
         userId: user.id,
       },
       id
-    );
+    ).value as Barber;
 
     barberRepository.barber.push(barber);
 

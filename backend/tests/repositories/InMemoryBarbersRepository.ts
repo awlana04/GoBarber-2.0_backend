@@ -29,7 +29,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
   }
 
   async findByName(name: string): Promise<Barber | null> {
-    const barber = this.barber.find(barber => barber.name === name);
+    const barber = this.barber.find(barber => barber.name.value === name);
 
     if (!barber) {
       return null;
@@ -51,7 +51,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     const barber = await this.findById(id);
 
     if (data.name) {
-      return barber?.props.name.replace(barber.props.name, data.name);
+      return barber?.name.value.replace(barber.name.value, data.name);
     }
 
     if (data.location) {
@@ -88,7 +88,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
           userId,
         },
         id
-      );
+      ).value as Barber;
     }
 
     if (data.openOnWeekends !== undefined && data.openAtNight === undefined) {
@@ -104,7 +104,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
           userId,
         },
         id
-      );
+      ).value as Barber;
     }
 
     if (data.openAtNight !== undefined && data.openOnWeekends !== undefined) {
@@ -120,7 +120,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
           userId,
         },
         id
-      );
+      ).value as Barber;
     }
 
     return barber;
@@ -132,7 +132,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
   ): Promise<(Barber & User) | any> {
     const user = this.user.find(user => user.id === id);
 
-    user?.props.password.value.replace(user.props.password.value, password);
+    user?.password.value.replace(user.password.value, password);
 
     return user;
   }
