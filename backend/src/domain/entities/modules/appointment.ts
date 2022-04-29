@@ -1,10 +1,6 @@
 import Entity from '../shared/entity';
 
-type AppointmentProps = {
-  date: Date;
-  userId: string;
-  barberId: string;
-};
+import { AppointmentProps } from '../interfaces/IAppointment';
 
 export default class Appointment extends Entity<AppointmentProps> {
   private constructor(
