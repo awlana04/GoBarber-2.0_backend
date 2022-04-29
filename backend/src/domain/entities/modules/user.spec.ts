@@ -23,7 +23,10 @@ describe('User entity', () => {
   });
 
   it('should NOT be able to create a new user with invalid name (too many characters)', () => {
-    const invalidName = 'a'.repeat(257);
+    // const invalidName =
+    //   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
+    const invalidName = 'a'.repeat(129);
 
     const response = User.create({
       name: invalidName,
