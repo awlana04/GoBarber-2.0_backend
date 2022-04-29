@@ -15,7 +15,7 @@ export default class CreateAppointmentService {
     date,
     userId,
     barberId,
-  }: ICreateAppointmentServiceRequest) {
+  }: ICreateAppointmentServiceRequest): Promise<Appointment> {
     const checkUserExists = await this.appointmentRepository.findUserId(userId);
 
     if (!checkUserExists) {

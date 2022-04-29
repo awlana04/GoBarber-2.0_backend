@@ -23,7 +23,7 @@ export default class CreateBarberService {
     openAtNight,
     openOnWeekends,
     userId,
-  }: ICreateBarberServiceRequest) {
+  }: ICreateBarberServiceRequest): Promise<Barber> {
     const checkUserExists = await this.barberRepository.findUserId(userId);
 
     if (!checkUserExists) {

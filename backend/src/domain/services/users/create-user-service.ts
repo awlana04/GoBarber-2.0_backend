@@ -19,7 +19,7 @@ export default class CreateUserService {
     password,
     location,
     avatar,
-  }: ICreateUserServiceRequest) {
+  }: ICreateUserServiceRequest): Promise<User> {
     const checkUserExists = await this.userRepository.findByEmail(email);
 
     if (checkUserExists) {
