@@ -86,8 +86,6 @@ describe('Update barber service', () => {
   });
 
   it('should be able to update the barber open at night boolean', async () => {
-    barberRepository.barber.push(barber);
-
     const response = await sut.handle({
       id: barber.id,
       openAtNight: false,
