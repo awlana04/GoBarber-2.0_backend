@@ -3,9 +3,9 @@ import crypto from 'crypto';
 import InMemoryAppointmentsRepository from '../../../../tests/repositories/InMemoryAppointmentsRepository';
 import UpdateAppointmentService from './update-appointment-service';
 
-import User from '../../entities/user';
-import Barber from '../../entities/barber';
-import Appointment from '../../entities/appointment';
+import User from '../../entities/modules/user';
+import Barber from '../../entities/modules/barber';
+import Appointment from '../../entities/modules/appointment';
 
 type SutOutput = {
   appointmentRepository: InMemoryAppointmentsRepository;
@@ -22,38 +22,38 @@ const makeSut = (): SutOutput => {
 describe('Update appointment service', () => {
   const id = crypto.randomUUID();
 
-  it('should be able to update the appointment', async () => {
-    const { appointmentRepository, sut } = makeSut();
+  const { appointmentRepository, sut } = makeSut();
 
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
+  const user = User.create({
+    name: 'John Doe',
+    email: 'john@doe.com',
+    password: '12345678',
+    location: 'Somewhere Over the Rainbow',
+  }).value as User;
 
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A Really Good Place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: user.id,
-      },
-      id
-    );
-
-    const appointment = Appointment.create({
-      date: new Date(),
+  const barber = Barber.create(
+    {
+      name: 'John Doe Barber',
+      location: 'Somewhere Into the Pocket',
+      description: 'A really good place',
+      openAtNight: true,
+      openOnWeekends: true,
       userId: user.id,
-      barberId: barber.id,
-    });
+    },
+    id
+  );
 
-    appointmentRepository.user.push(user);
-    appointmentRepository.barber.push(barber);
-    appointmentRepository.appointment.push(appointment);
+  const appointment = Appointment.create({
+    date: new Date(),
+    userId: user.id,
+    barberId: barber.id,
+  });
 
+  appointmentRepository.user.push(user);
+  appointmentRepository.barber.push(barber);
+  appointmentRepository.appointment.push(appointment);
+
+  it('should be able to update the appointment', async () => {
     const response = await sut.handle({
       id: appointment.id,
       date: new Date(),
@@ -63,37 +63,6 @@ describe('Update appointment service', () => {
   });
 
   it('should NOT be able to update the appointment with an invalid id', () => {
-    const { appointmentRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A Really Good Place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: user.id,
-      },
-      id
-    );
-
-    const appointment = Appointment.create({
-      date: new Date(),
-      userId: user.id,
-      barberId: barber.id,
-    });
-
-    appointmentRepository.user.push(user);
-    appointmentRepository.barber.push(barber);
-    appointmentRepository.appointment.push(appointment);
-
     const response = sut.handle({
       id: 'invalidID',
       date: new Date(),

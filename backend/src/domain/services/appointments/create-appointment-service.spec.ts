@@ -3,9 +3,9 @@ import crypto from 'crypto';
 import InMemoryAppointmentsRepository from '../../../../tests/repositories/InMemoryAppointmentsRepository';
 import CreateAppointmentService from './create-appointment-service';
 
-import User from '../../entities/user';
-import Barber from '../../entities/barber';
-import Appointment from '../../entities/appointment';
+import User from '../../entities/modules/user';
+import Barber from '../../entities/modules/barber';
+import Appointment from '../../entities/modules/appointment';
 
 type SutOutput = {
   appointmentRepository: InMemoryAppointmentsRepository;
@@ -22,31 +22,31 @@ const makeSut = (): SutOutput => {
 describe('Create appointment service', () => {
   const id = crypto.randomUUID();
 
+  const { appointmentRepository, sut } = makeSut();
+
+  const user = User.create({
+    name: 'John Doe',
+    email: 'john@doe.com',
+    password: '12345678',
+    location: 'Somewhere Over the Rainbow',
+  }).value as User;
+
+  const barber = Barber.create(
+    {
+      name: 'John Doe Barber',
+      location: 'Somewhere Into the Pocket',
+      description: 'A really good place',
+      openAtNight: true,
+      openOnWeekends: true,
+      userId: user.id,
+    },
+    id
+  );
+
+  appointmentRepository.user.push(user);
+  appointmentRepository.barber.push(barber);
+
   it('should be able to create a new appointment', async () => {
-    const { appointmentRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A Really Good Place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: user.id,
-      },
-      id
-    );
-
-    appointmentRepository.user.push(user);
-    appointmentRepository.barber.push(barber);
-
     const response = await sut.handle({
       date: new Date(),
       userId: user.id,
@@ -57,22 +57,6 @@ describe('Create appointment service', () => {
   });
 
   it('should NOT be able to create a new appointment with an invalid userId', () => {
-    const { appointmentRepository, sut } = makeSut();
-
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A Really Good Place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: 'InvalidID',
-      },
-      id
-    );
-
-    appointmentRepository.barber.push(barber);
-
     const response = sut.handle({
       date: new Date(),
       userId: 'InvalidID',
@@ -83,17 +67,6 @@ describe('Create appointment service', () => {
   });
 
   it('should NOT be able to create a new appointment with an invalid barberId', () => {
-    const { appointmentRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    appointmentRepository.user.push(user);
-
     const response = sut.handle({
       date: new Date(),
       userId: user.id,
@@ -104,35 +77,11 @@ describe('Create appointment service', () => {
   });
 
   it('should NOT be able to create a new appointment with an invalid date', () => {
-    const { appointmentRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A Really Good Place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: user.id,
-      },
-      id
-    );
-
     const appointment = Appointment.create({
       date: new Date(),
       userId: user.id,
       barberId: barber.id,
     });
-
-    appointmentRepository.user.push(user);
-    appointmentRepository.barber.push(barber);
     appointmentRepository.appointment.push(appointment);
 
     const response = sut.handle({
@@ -145,30 +94,6 @@ describe('Create appointment service', () => {
   });
 
   it('should NOT be able to create a new appointment in a past date', () => {
-    const { appointmentRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A Really Good Place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: user.id,
-      },
-      id
-    );
-
-    appointmentRepository.user.push(user);
-    appointmentRepository.barber.push(barber);
-
     const response = sut.handle({
       date: Date.UTC(2022, 3) as unknown as Date,
       userId: user.id,

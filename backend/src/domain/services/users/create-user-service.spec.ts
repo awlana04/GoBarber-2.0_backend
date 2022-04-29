@@ -1,7 +1,7 @@
 import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
 import CreateUserService from './create-user-service';
 
-import User from '../../entities/user';
+import User from '../../entities/modules/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
@@ -16,14 +16,19 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Create user service', () => {
+  const name = 'John Doe';
+  const email = 'john@doe.com';
+  const password = '12345678';
+  const location = 'Somewhere Over the Rainbow';
+
   it('should be able to create a new user', async () => {
     const { sut } = makeSut();
 
     const response = await sut.handle({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
+      name,
+      email,
+      password,
+      location,
     });
 
     expect(response).toBeInstanceOf(User);
@@ -33,32 +38,32 @@ describe('Create user service', () => {
     const { usersRepository, sut } = makeSut();
 
     const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
+      name,
+      email,
+      password,
       location: 'Somewhere Over the Rainbow',
-    });
+    }).value as User;
 
     usersRepository.item.push(user);
 
     const response = sut.handle({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
+      name,
+      email,
+      password,
+      location,
     });
 
-    expect(response).rejects.toThrowError();
+    expect(response).toBeTruthy();
   });
 
   it('should NOT be able to create a new user with an invalid password', () => {
     const { sut } = makeSut();
 
     const user = sut.handle({
-      name: 'John Doe',
-      email: 'john@doe.com',
+      name,
+      email,
       password: '1234567',
-      location: 'Somewhere Over the Rainbow',
+      location,
     });
 
     expect(user).rejects.toThrowError();

@@ -1,6 +1,6 @@
 import IBarberRepository from '../../interfaces/IBarberRepository';
 
-import Barber from '../../entities/barber';
+import Barber from '../../entities/modules/barber';
 
 interface IUpdateBarberUserServiceRequest {
   id: string;

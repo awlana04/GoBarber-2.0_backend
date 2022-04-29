@@ -1,4 +1,4 @@
-import Barber from '../../entities/barber';
+import Barber from '../../entities/modules/barber';
 
 import IBarberRepository from '../../interfaces/IBarberRepository';
 

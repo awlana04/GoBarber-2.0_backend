@@ -12,7 +12,7 @@ export default class Email {
     return this.value;
   }
 
-  public static validate(email: string): boolean {
+  private static validate(email: string): boolean {
     if (!email) {
       return false;
     }
@@ -41,8 +41,8 @@ export default class Email {
     const domainParts = domain.split('.');
 
     if (
-      domainParts.some(part => {
-        return part.length > 64;
+      domainParts.some(function (part) {
+        return part.length > 63;
       })
     ) {
       return false;

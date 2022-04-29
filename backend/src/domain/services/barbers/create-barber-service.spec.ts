@@ -3,8 +3,8 @@ import crypto from 'crypto';
 import InMemoryBarbersRepository from '../../../../tests/repositories/InMemoryBarbersRepository';
 import CreateBarberService from './create-barber-service';
 
-import User from '../../entities/user';
-import Barber from '../../entities/barber';
+import User from '../../entities/modules/user';
+import Barber from '../../entities/modules/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;
@@ -19,18 +19,18 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Create barber service', () => {
+  const { barberRepository, sut } = makeSut();
+
+  const user = User.create({
+    name: 'John Doe',
+    email: 'john@doe.com',
+    password: '12345678',
+    location: 'Somewhere Over the Rainbow',
+  }).value as User;
+
+  barberRepository.user.push(user);
+
   it('should be able to create a new barber', async () => {
-    const { barberRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    barberRepository.user.push(user);
-
     const response = await sut.handle({
       name: 'John Doe Barber',
       location: 'Somewhere Into the Pocket',
@@ -44,8 +44,6 @@ describe('Create barber service', () => {
   });
 
   it('should NOT be able to create a new barber with an invalid userId', () => {
-    const { sut } = makeSut();
-
     const response = sut.handle({
       name: 'John Doe Barber',
       location: 'Somewhere Into the Pocket',
@@ -59,16 +57,7 @@ describe('Create barber service', () => {
   });
 
   it('should NOT be able to create a new barber with an invalid name', () => {
-    const { barberRepository, sut } = makeSut();
-
     const id = crypto.randomUUID();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
 
     const barber = Barber.create(
       {
@@ -82,7 +71,6 @@ describe('Create barber service', () => {
       id
     );
 
-    barberRepository.user.push(user);
     barberRepository.barber.push(barber);
 
     const response = sut.handle({

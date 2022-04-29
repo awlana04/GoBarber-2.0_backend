@@ -1,4 +1,4 @@
-import User from '../../entities/user';
+import User from '../../entities/modules/user';
 
 import IUserRepository from '../../interfaces/IUserRepository';
 
@@ -30,7 +30,8 @@ export default class CreateUserService {
       throw new Error('Password must have at least 8 characters');
     }
 
-    const user = User.create({ name, email, password, location, avatar });
+    const user = User.create({ name, email, password, location, avatar })
+      .value as User;
 
     return user;
   }

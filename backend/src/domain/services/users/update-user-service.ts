@@ -1,4 +1,4 @@
-import User from '../../entities/user';
+import User from '../../entities/modules/user';
 
 import IUserRepository from '../../interfaces/IUserRepository';
 

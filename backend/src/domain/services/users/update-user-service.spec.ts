@@ -1,7 +1,7 @@
 import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
 import UpdateUserService from './update-user-service';
 
-import User from '../../entities/user';
+import User from '../../entities/modules/user';
 
 type SutOutupt = {
   usersRepository: InMemoryUsersRepository;
@@ -16,18 +16,18 @@ const makeSut = (): SutOutupt => {
 };
 
 describe('Update user service', () => {
+  const { usersRepository, sut } = makeSut();
+
+  const user = User.create({
+    name: 'John Doe',
+    email: 'john@doe.com',
+    password: '12345678',
+    location: 'Somewhere Over the Rainbow',
+  }).value as User;
+
+  usersRepository.item.push(user);
+
   it('should be able to update the user', async () => {
-    const { usersRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    usersRepository.item.push(user);
-
     const response = await sut.handle({
       id: user.id,
       name: 'John Doe Junior',
@@ -39,17 +39,6 @@ describe('Update user service', () => {
   });
 
   it('should be able to update the user name', async () => {
-    const { usersRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    usersRepository.item.push(user);
-
     const response = await sut.handle({
       id: user.id,
       name: 'John Doe Junior',
@@ -59,17 +48,6 @@ describe('Update user service', () => {
   });
 
   it('should be able to update the user password', async () => {
-    const { usersRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    usersRepository.item.push(user);
-
     const response = await sut.handle({
       id: user.id,
       password: '12345678910',
@@ -79,17 +57,6 @@ describe('Update user service', () => {
   });
 
   it('should be able to update the user location', async () => {
-    const { usersRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    usersRepository.item.push(user);
-
     const response = await sut.handle({
       id: user.id,
       location: 'Somewhere Over the Sun',
@@ -99,17 +66,6 @@ describe('Update user service', () => {
   });
 
   it('should NOT be able to update the user with invalid id', async () => {
-    const { usersRepository, sut } = makeSut();
-
-    const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-    });
-
-    usersRepository.item.push(user);
-
     const response = sut.handle({
       id: 'invalidID',
       name: 'John Doe Junior',

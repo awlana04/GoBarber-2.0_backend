@@ -1,7 +1,7 @@
 import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
 import UpdateUserAvatarService from './update-user-avatar-service';
 
-import User from '../../entities/user';
+import User from '../../entities/modules/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
@@ -16,16 +16,22 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Update user avatar service', () => {
+  const name = 'John Doe';
+  const email = 'john@doe.com';
+  const password = '12345678';
+  const location = 'Somewhere Over the Rainbow';
+  const avatar = 'avatar.png';
+
   it('should be able to update the user avatar', async () => {
     const { usersRepository, sut } = makeSut();
 
     const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-      avatar: 'avatar.png',
-    });
+      name,
+      email,
+      password,
+      location,
+      avatar,
+    }).value as User;
 
     usersRepository.item.push(user);
 
@@ -41,12 +47,12 @@ describe('Update user avatar service', () => {
     const { usersRepository, sut } = makeSut();
 
     const user = User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
-      password: '12345678',
-      location: 'Somewhere Over the Rainbow',
-      avatar: 'avatar.png',
-    });
+      name,
+      email,
+      password,
+      location,
+      avatar,
+    }).value as User;
 
     usersRepository.item.push(user);
 

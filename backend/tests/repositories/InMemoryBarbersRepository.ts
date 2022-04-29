@@ -1,7 +1,7 @@
 import IBarberRepository from '../../src/domain/interfaces/IBarberRepository';
 
-import Barber from '../../src/domain/entities/barber';
-import User from '../../src/domain/entities/user';
+import Barber from '../../src/domain/entities/modules/barber';
+import User from '../../src/domain/entities/modules/user';
 import IUpdateBarberDTO from '../../src/domain/dtos/IUpdateBarberDTO';
 
 export default class InMemoryBarbersRepository implements IBarberRepository {
@@ -132,7 +132,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
   ): Promise<(Barber & User) | any> {
     const user = this.user.find(user => user.id === id);
 
-    user?.props.password.replace(user.props.password, password);
+    user?.props.password.value.replace(user.props.password.value, password);
 
     return user;
   }
