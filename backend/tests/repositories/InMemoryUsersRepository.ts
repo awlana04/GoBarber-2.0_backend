@@ -43,7 +43,7 @@ export default class InMemoryUsersRepository implements IUserRepository {
   }
 
   async updateAvatar(id: string, avatar: string): Promise<User | any> {
-    const user = await this.findById(id);
+    const user = this.item.find(user => user.id === id);
 
     user?.props.avatar?.replace(user.props.avatar, avatar);
 

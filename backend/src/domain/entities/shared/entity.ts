@@ -8,10 +8,6 @@ export default abstract class Entity<T> {
   protected createdAt: Date;
   protected updatedAt: Date;
 
-  get id() {
-    return this._id;
-  }
-
   constructor(props: T, id?: string, createdAt?: Date, updatedAt?: Date) {
     this._id = id ?? crypto.randomUUID();
 
@@ -19,5 +15,9 @@ export default abstract class Entity<T> {
 
     this.createdAt = createdAt ?? new Date();
     this.updatedAt = updatedAt ?? new Date();
+  }
+
+  get id() {
+    return this._id;
   }
 }

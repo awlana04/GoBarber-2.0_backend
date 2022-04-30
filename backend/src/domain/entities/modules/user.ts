@@ -12,6 +12,12 @@ import InvalidNameError from '../errors/invalid-name-error';
 import InvalidEmailError from '../errors/invalid-email-error';
 import InvalidPasswordError from '../errors/invalid-password-error';
 
+type UpdateUserProps = {
+  name?: string;
+  password?: string;
+  location?: string;
+};
+
 export default class User extends Entity<UserProps | UserValidationProps> {
   public readonly name: Name;
   public readonly email: Email;

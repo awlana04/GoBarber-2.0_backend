@@ -31,15 +31,20 @@ describe('Create user service', () => {
       location,
     });
 
+    expect(response.name.value).toEqual(name);
+    expect(response.email.value).toEqual(email);
+    expect(response.password.value).toEqual(password);
+    expect(response.props.location).toEqual(location);
+
     expect(response).toBeInstanceOf(User);
   });
 
-  it('should NOT be able to create a new user with an invalid email', () => {
+  it('should NOT be able to create a new user with an invalid email (duplicated email)', () => {
     const user = User.create({
       name,
       email,
       password,
-      location: 'Somewhere Over the Rainbow',
+      location,
     }).value as User;
 
     usersRepository.item.push(user);
@@ -52,16 +57,5 @@ describe('Create user service', () => {
     });
 
     expect(response).rejects.toThrowError();
-  });
-
-  it('should NOT be able to create a new user with an invalid password', () => {
-    const user = sut.handle({
-      name,
-      email,
-      password: '1234567',
-      location,
-    });
-
-    expect(user).rejects.toThrowError();
   });
 });

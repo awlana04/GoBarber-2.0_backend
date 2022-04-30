@@ -27,20 +27,25 @@ describe('Update user service', () => {
 
   usersRepository.item.push(user);
 
-  it('should be able to update the user', async () => {
-    const response = await sut.handle({
-      id: user.id,
-      name: 'John Doe Junior',
-      password: '12345678910',
-      location: 'Somewhere Over the Sun',
+  const id = user.id;
+  const name = 'John Doe Junior';
+  const password = '12345678910';
+  const location = 'Somewhere Over the Sun';
+
+  it('should NOT be able to update the user with invalid id', async () => {
+    const response = sut.handle({
+      id: 'invalidID',
+      name,
+      password,
+      location,
     });
 
-    expect(response).toBeDefined();
+    expect(response).rejects.toThrowError();
   });
 
   it('should be able to update the user name', async () => {
     const response = await sut.handle({
-      id: user.id,
+      id,
       name: 'John Doe Junior',
     });
 
@@ -49,8 +54,8 @@ describe('Update user service', () => {
 
   it('should be able to update the user password', async () => {
     const response = await sut.handle({
-      id: user.id,
-      password: '12345678910',
+      id,
+      password,
     });
 
     expect(response).toBeDefined();
@@ -58,21 +63,21 @@ describe('Update user service', () => {
 
   it('should be able to update the user location', async () => {
     const response = await sut.handle({
-      id: user.id,
-      location: 'Somewhere Over the Sun',
+      id,
+      location,
     });
 
     expect(response).toBeDefined();
   });
 
-  it('should NOT be able to update the user with invalid id', async () => {
-    const response = sut.handle({
-      id: 'invalidID',
-      name: 'John Doe Junior',
-      password: '12345678910',
-      location: 'Somewhere Over the Sun',
+  it('should be able to update the user', async () => {
+    const response = await sut.handle({
+      id,
+      name,
+      password,
+      location,
     });
 
-    expect(response).rejects.toThrowError();
+    expect(response).toBeDefined();
   });
 });
