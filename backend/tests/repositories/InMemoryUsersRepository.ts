@@ -49,4 +49,12 @@ export default class InMemoryUsersRepository implements IUserRepository {
 
     return user;
   }
+
+  async delete(id: string): Promise<User | any> {
+    await this.findById(id);
+
+    const user = this.item.pop();
+
+    return user;
+  }
 }

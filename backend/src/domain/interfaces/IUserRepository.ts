@@ -7,4 +7,5 @@ export default interface IUserRepository {
   findByEmail(email: string): Promise<User | null>;
   update(id: string, data: IUpdateUserDTO): Promise<User>;
   updateAvatar(id: string, avatar: string): Promise<User>;
+  delete(id: string): Promise<User>;
 }
