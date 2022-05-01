@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 
-import InMemoryBarbersRepository from '../../../../tests/repositories/InMemoryBarbersRepository';
+import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import UpdateBarberUserAvatarService from './update-barber-user-avatar-service';
 
-import User from '../../entities/modules/user';
-import Barber from '../../entities/modules/barber';
+import User from '@entities/user';
+import Barber from '@entities/barber';
 
 type SutOutput = {
   barbersRepository: InMemoryBarbersRepository;

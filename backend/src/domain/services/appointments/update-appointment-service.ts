@@ -1,6 +1,6 @@
-import Appointment from '../../entities/modules/appointment';
+import IAppointmentRepository from '@interfaces/i-appointment-repository';
 
-import IAppointmentRepository from '../../interfaces/IAppointmentRepository';
+import Appointment from '@entities/appointment';
 
 interface IUpdateAppointmentServiceRequest {
   id: string;

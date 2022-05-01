@@ -1,12 +1,12 @@
 import Entity from '../shared/entity';
 
-import { UserProps, UserValidationProps } from '../interfaces/IUser';
+import { UserProps, UserValidationProps } from '../interfaces/user-props';
 
 import Name from '../domain/name';
 import Email from '../domain/email';
 import Password from '../domain/password';
 
-import { Either, left, right } from '../../shared/either';
+import { Either, left, right } from '@shared/either';
 
 import InvalidNameError from '../errors/invalid-name-error';
 import InvalidEmailError from '../errors/invalid-email-error';

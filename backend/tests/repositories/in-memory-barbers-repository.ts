@@ -38,6 +38,10 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return barber;
   }
 
+  async getAllBarbers(): Promise<Barber[]> {
+    return this.barber;
+  }
+
   async update(
     id: string,
     data: {
@@ -146,5 +150,13 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     user?.props.avatar?.replace(user.props.avatar, avatar);
 
     return user;
+  }
+
+  async delete(id: string): Promise<Barber | any> {
+    const barber = await this.findById(id);
+
+    this.barber.pop();
+
+    return barber;
   }
 }

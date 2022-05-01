@@ -1,6 +1,6 @@
-import Appointment from '../entities/appointment';
-import User from '../entities/user';
-import Barber from '../entities/barber';
+import Appointment from '../entities/modules/appointment';
+import User from '../entities/modules/user';
+import Barber from '../entities/modules/barber';
 
 export default interface IAppointmentRepository {
   findById(id: string): Promise<Appointment | null>;

@@ -1,6 +1,6 @@
 import Entity from '../shared/entity';
 
-import { AppointmentProps } from '../interfaces/IAppointment';
+import { AppointmentProps } from '../interfaces/appointment-props';
 
 export default class Appointment extends Entity<AppointmentProps> {
   private constructor(

@@ -81,7 +81,23 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '@entities/user': ['<rootDir>/src/domain/entities/modules/user.ts'],
+    '@entities/barber': ['<rootDir>/src/domain/entities/modules/barber.ts'],
+    '@entities/appointment': [
+      '<rootDir>/src/domain/entities/modules/appointment.ts',
+    ],
+    '@shared/*': ['<rootDir>/src/domain/shared/either.ts'],
+    '@in-memory/in-memory-appointments-repository': [
+      '<rootDir>/tests/repositories/in-memory-appointments-repository.ts',
+    ],
+    '@in-memory/in-memory-barbers-repository': [
+      '<rootDir>/tests/repositories/in-memory-barbers-repository.ts',
+    ],
+    '@in-memory/in-memory-users-repository': [
+      '<rootDir>/tests/repositories/in-memory-users-repository.ts',
+    ],
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

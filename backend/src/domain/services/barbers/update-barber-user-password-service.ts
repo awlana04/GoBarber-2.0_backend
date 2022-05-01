@@ -1,7 +1,7 @@
-import IBarberRepository from '../../interfaces/IBarberRepository';
+import IBarberRepository from '@interfaces/i-barber-repository';
 
-import Barber from '../../entities/modules/barber';
-import User from '../../entities/modules/user';
+import Barber from '@entities/barber';
+import User from '@entities/user';
 
 interface IUpdateBarberUserPasswordServiceRequest {
   id: string;

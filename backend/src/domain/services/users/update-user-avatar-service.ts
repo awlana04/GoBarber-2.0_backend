@@ -1,6 +1,6 @@
-import User from '../../entities/modules/user';
+import IUserRepository from '@interfaces/i-user-repository';
 
-import IUserRepository from '../../interfaces/IUserRepository';
+import User from '@entities/user';
 
 interface IUpdateUserAvatarServiceRequest {
   id: string;

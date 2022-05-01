@@ -1,7 +1,7 @@
-import InMemoryUsersRepository from '../../../../tests/repositories/InMemoryUsersRepository';
+import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import DeleteUserService from './delete-user-service';
 
-import User from '../../entities/modules/user';
+import User from '@entities/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;

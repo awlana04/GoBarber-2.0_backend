@@ -1,11 +1,11 @@
 import crypto from 'crypto';
 
-import InMemoryAppointmentsRepository from '../../../../tests/repositories/InMemoryAppointmentsRepository';
+import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import CreateAppointmentService from './create-appointment-service';
 
-import User from '../../entities/modules/user';
-import Barber from '../../entities/modules/barber';
-import Appointment from '../../entities/modules/appointment';
+import User from '@entities/user';
+import Barber from '@entities/barber';
+import Appointment from '@entities/appointment';
 
 type SutOutput = {
   appointmentRepository: InMemoryAppointmentsRepository;

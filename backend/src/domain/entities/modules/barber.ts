@@ -1,10 +1,10 @@
 import Entity from '../shared/entity';
 
-import { BarberProps, BarberValidationProps } from '../interfaces/IBarber';
+import { BarberProps, BarberValidationProps } from '../interfaces/barber-props';
 
 import Name from '../domain/name';
 
-import { Either, left, right } from '../../shared/either';
+import { Either, left, right } from '@shared/either';
 
 import InvalidNameError from '../errors/invalid-name-error';
 
