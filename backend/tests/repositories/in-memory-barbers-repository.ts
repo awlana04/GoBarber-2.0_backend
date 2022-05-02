@@ -1,12 +1,15 @@
-import IBarberRepository from '../../src/domain/interfaces/IBarberRepository';
+import IBarberRepository from '@interfaces/i-barber-repository';
 
-import Barber from '../../src/domain/entities/modules/barber';
-import User from '../../src/domain/entities/modules/user';
-import IUpdateBarberDTO from '../../src/domain/dtos/IUpdateBarberDTO';
+import Barber from '@entities/barber';
+import User from '@entities/user';
+import Appointment from '@entities/appointment';
+
+// import IUpdateBarberDTO from '../../src/domain/dtos/IUpdateBarberDTO';
 
 export default class InMemoryBarbersRepository implements IBarberRepository {
   public user: User[] = [];
   public barber: Barber[] = [];
+  public appointment: Appointment[] = [];
 
   async findById(id: string): Promise<Barber | null> {
     const barber = this.barber.find(barber => barber.id === id);
@@ -156,6 +159,19 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     const barber = await this.findById(id);
 
     this.barber.pop();
+    this.user.pop();
+
+    return barber;
+  }
+
+  async deleteBarberAndAppointments(
+    id: string
+  ): Promise<Barber | Appointment | any> {
+    const barber = await this.findById(id);
+
+    this.appointment.pop();
+    this.barber.pop();
+    this.user.pop();
 
     return barber;
   }

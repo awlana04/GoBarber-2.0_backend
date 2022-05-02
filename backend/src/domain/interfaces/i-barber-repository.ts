@@ -1,5 +1,6 @@
 import Barber from '../entities/modules/barber';
 import User from '../entities/modules/user';
+import Appointment from '@entities/appointment';
 
 import IUpdateBarberDTO from '../dtos/IUpdateBarberDTO';
 
@@ -12,4 +13,5 @@ export default interface IBarberRepository {
   updatePassword(id: string, password: string): Promise<Barber & User>;
   updateAvatar(id: string, avatar: string): Promise<Barber & User>;
   delete(id: string): Promise<Barber>;
+  deleteBarberAndAppointments(id: string): Promise<Barber | Appointment>;
 }

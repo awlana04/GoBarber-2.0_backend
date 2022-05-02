@@ -1,8 +1,8 @@
-import IAppointmentRepository from '../../src/domain/interfaces/IAppointmentRepository';
+import IAppointmentRepository from '@interfaces/i-appointment-repository';
 
-import User from '../../src/domain/entities/modules/user';
-import Barber from '../../src/domain/entities/modules/barber';
-import Appointment from '../../src/domain/entities/modules/appointment';
+import User from '@entities/user';
+import Barber from '@entities/barber';
+import Appointment from '@entities/appointment';
 
 export default class InMemoryAppointmentsRepository
   implements IAppointmentRepository

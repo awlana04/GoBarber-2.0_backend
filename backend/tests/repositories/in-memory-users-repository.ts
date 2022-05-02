@@ -1,7 +1,7 @@
-import IUserRepository from '../../src/domain/interfaces/IUserRepository';
+import IUserRepository from '@interfaces/i-user-repository';
 
-import User from '../../src/domain/entities/modules/user';
-import IUpdateUserDTO from '../../src/domain/dtos/IUpdateUserDTO';
+import User from '@entities/user';
+import IUpdateUserDTO from '@domain/dtos/IUpdateUserDTO';
 
 export default class InMemoryUsersRepository implements IUserRepository {
   public item: User[] = [];
