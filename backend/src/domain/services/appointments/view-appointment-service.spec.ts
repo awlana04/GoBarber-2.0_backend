@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
-import DeleteAppointmentService from './delete-appointment-service';
+import ViewAppointmentService from './view-appointment-service';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -9,17 +9,17 @@ import Appointment from '@entities/appointment';
 
 type SutOutput = {
   appointmentsRepository: InMemoryAppointmentsRepository;
-  sut: DeleteAppointmentService;
+  sut: ViewAppointmentService;
 };
 
 const makeSut = (): SutOutput => {
   const appointmentsRepository = new InMemoryAppointmentsRepository();
-  const sut = new DeleteAppointmentService(appointmentsRepository);
+  const sut = new ViewAppointmentService(appointmentsRepository);
 
   return { appointmentsRepository, sut };
 };
 
-describe('Delete appointment service', () => {
+describe('View appointment service', () => {
   const { appointmentsRepository, sut } = makeSut();
 
   const id = crypto.randomUUID();
@@ -55,13 +55,13 @@ describe('Delete appointment service', () => {
   appointmentsRepository.barber.push(barber);
   appointmentsRepository.appointment.push(appointment);
 
-  it('should NOT be able to delete an appointment with an invalod id', () => {
+  it('should NOT be able to view an appointment with an invalod id', () => {
     const response = sut.handle('invalidID');
 
     expect(response).rejects.toThrowError();
   });
 
-  it('should be able to delete an appointment', async () => {
+  it('should be able to view an appointment', async () => {
     const response = await sut.handle(appointment.id);
 
     expect(response.id).toEqual(appointment.id);

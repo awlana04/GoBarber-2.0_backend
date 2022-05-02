@@ -20,15 +20,16 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Create appointment service', () => {
-  const id = crypto.randomUUID();
-
   const { appointmentRepository, sut } = makeSut();
+
+  const id = crypto.randomUUID();
 
   const user = User.create({
     name: 'John Doe',
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
+    barberId: id,
   }).value as User;
 
   const barber = Barber.create(
@@ -52,6 +53,9 @@ describe('Create appointment service', () => {
       userId: user.id,
       barberId: barber.id,
     });
+
+    expect(response.userId).toEqual(user.id);
+    expect(response.barberId).toEqual(barber.id);
 
     expect(response).toBeInstanceOf(Appointment);
   });
@@ -82,6 +86,7 @@ describe('Create appointment service', () => {
       userId: user.id,
       barberId: barber.id,
     });
+
     appointmentRepository.appointment.push(appointment);
 
     const response = sut.handle({
