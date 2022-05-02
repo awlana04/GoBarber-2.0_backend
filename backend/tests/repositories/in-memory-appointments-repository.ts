@@ -63,4 +63,12 @@ export default class InMemoryAppointmentsRepository
 
     return appointment;
   }
+
+  async delete(id: string): Promise<Appointment | any> {
+    const appointment = await this.findById(id);
+
+    this.appointment.pop();
+
+    return appointment;
+  }
 }

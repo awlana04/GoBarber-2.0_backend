@@ -8,4 +8,5 @@ export default interface IAppointmentRepository {
   findUserId(userId: string): Promise<User | null>;
   findBarberId(barberId: string): Promise<Barber | null>;
   update(id: string, date: Date): Promise<Appointment>;
+  delete(id: string): Promise<Appointment>;
 }
