@@ -56,6 +56,12 @@ export default class InMemoryAppointmentsRepository
     return appointment;
   }
 
+  public findAllAppointments(barberId: string): any {
+    return this.appointment.find(
+      appointment => appointment.barberId === barberId
+    );
+  }
+
   async update(id: string, date: Date): Promise<Appointment | any> {
     const appointment = await this.findById(id);
 
