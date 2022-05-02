@@ -3,11 +3,11 @@ import crypto from 'crypto';
 import Appointment from './appointment';
 
 describe('appointment entity', () => {
-  it('should be able to create a new appointment', () => {
-    const date = new Date();
-    const userId = crypto.randomUUID();
-    const barberId = crypto.randomUUID();
+  const date = new Date();
+  const userId = crypto.randomUUID();
+  const barberId = crypto.randomUUID();
 
+  it('should be able to create a new appointment', () => {
     const response = Appointment.create({
       date,
       userId,
