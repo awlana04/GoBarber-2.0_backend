@@ -90,6 +90,9 @@ export default {
     '@entities/appointment': [
       '<rootDir>/src/domain/entities/modules/appointment.ts',
     ],
+    '@domain/providers/implementations/refresh-token-provider': [
+      '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
+    ],
     '@shared/*': ['<rootDir>/src/domain/shared/either.ts'],
     '@in-memory/in-memory-appointments-repository': [
       '<rootDir>/tests/repositories/in-memory-appointments-repository.ts',

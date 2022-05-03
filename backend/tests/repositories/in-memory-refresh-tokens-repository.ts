@@ -18,4 +18,12 @@ export default class InMemoryRefreshTokenRepository
 
     return refreshToken;
   }
+
+  async deletePastRefreshToken(userId: string): Promise<void | any> {
+    const user = this.user.find(user => user.id === userId);
+
+    this.refreshToken.pop();
+
+    return user;
+  }
 }
