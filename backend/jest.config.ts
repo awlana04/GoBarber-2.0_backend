@@ -84,6 +84,9 @@ export default {
   moduleNameMapper: {
     '@entities/user': ['<rootDir>/src/domain/entities/modules/user.ts'],
     '@entities/barber': ['<rootDir>/src/domain/entities/modules/barber.ts'],
+    '@entities/refresh-token': [
+      '<rootDir>/src/domain/entities/modules/refresh-token.ts',
+    ],
     '@entities/appointment': [
       '<rootDir>/src/domain/entities/modules/appointment.ts',
     ],
@@ -96,6 +99,9 @@ export default {
     ],
     '@in-memory/in-memory-users-repository': [
       '<rootDir>/tests/repositories/in-memory-users-repository.ts',
+    ],
+    '@in-memory/in-memory-refresh-tokens-repository': [
+      '<rootDir>/tests/repositories/in-memory-refresh-tokens-repository.ts',
     ],
   },
 
