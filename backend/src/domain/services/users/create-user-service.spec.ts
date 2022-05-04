@@ -28,22 +28,6 @@ describe('Create user service', () => {
   const password = '12345678';
   const location = 'Somewhere Over the Rainbow';
 
-  it('should be able to create a new user', async () => {
-    const response = await sut.handle({
-      name,
-      email,
-      password,
-      location,
-    });
-
-    // expect(response.name.value).toEqual(name);
-    // expect(response.email.value).toEqual(email);
-    // expect(response.password.value).toEqual(password);
-    // expect(response.props.location).toEqual(location);
-
-    expect(response).toBeDefined();
-  });
-
   it('should NOT be able to create a new user with an invalid email (duplicated email)', () => {
     const user = User.create({
       name,
@@ -62,5 +46,25 @@ describe('Create user service', () => {
     });
 
     expect(response).rejects.toThrowError();
+
+    usersRepository.item.pop();
+  });
+
+  it('should be able to create a new user', async () => {
+    const response = await sut.handle({
+      name,
+      email,
+      password,
+      location,
+    });
+
+    expect(response.value).toBeDefined();
+
+    // expect(response.user.name.value).toEqual(name);
+    // expect(response.user.email.value).toEqual(email);
+    // expect(response.user.password.value).toEqual(password);
+    // expect(response.user.props.location).toEqual(location);
+
+    // expect(response.user).toBeInstanceOf(User);
   });
 });
