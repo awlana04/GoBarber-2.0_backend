@@ -1,6 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
+import CheckUserExistsUsecase from '@usecases/implementations/barbers/check-user-exists-usecase';
+import CheckBarberNameAlreadyExistsUsecase from '@usecases/implementations/barbers/check-barber-name-already-exists-usecase';
 import CreateBarberService from './create-barber-service';
 
 import User from '@entities/user';
@@ -8,14 +10,29 @@ import Barber from '@entities/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;
+  checkUserExists: CheckUserExistsUsecase;
+  checkBarberNameAlreadyExists: CheckBarberNameAlreadyExistsUsecase;
   sut: CreateBarberService;
 };
 
 const makeSut = (): SutOutput => {
   const barberRepository = new InMemoryBarbersRepository();
-  const sut = new CreateBarberService(barberRepository);
+  const checkUserExists = new CheckUserExistsUsecase(barberRepository);
+  const checkBarberNameAlreadyExists = new CheckBarberNameAlreadyExistsUsecase(
+    barberRepository
+  );
+  const sut = new CreateBarberService(
+    barberRepository,
+    checkUserExists,
+    checkBarberNameAlreadyExists
+  );
 
-  return { barberRepository, sut };
+  return {
+    barberRepository,
+    checkUserExists,
+    checkBarberNameAlreadyExists,
+    sut,
+  };
 };
 
 describe('Create barber service', () => {

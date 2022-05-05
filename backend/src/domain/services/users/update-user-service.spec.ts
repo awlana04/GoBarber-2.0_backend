@@ -1,18 +1,23 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
+import CheckUserDoesNotExistsUsecase from '@usecases/implementations/users/check-user-does-not-exists-usecase';
 import UpdateUserService from './update-user-service';
 
 import User from '@entities/user';
 
 type SutOutupt = {
   usersRepository: InMemoryUsersRepository;
+  checkUserDoesNotExists: CheckUserDoesNotExistsUsecase;
   sut: UpdateUserService;
 };
 
 const makeSut = (): SutOutupt => {
   const usersRepository = new InMemoryUsersRepository();
-  const sut = new UpdateUserService(usersRepository);
+  const checkUserDoesNotExists = new CheckUserDoesNotExistsUsecase(
+    usersRepository
+  );
+  const sut = new UpdateUserService(usersRepository, checkUserDoesNotExists);
 
-  return { usersRepository, sut };
+  return { usersRepository, checkUserDoesNotExists, sut };
 };
 
 describe('Update user service', () => {

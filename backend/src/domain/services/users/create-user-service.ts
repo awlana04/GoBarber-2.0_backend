@@ -7,7 +7,7 @@ import InvalidPasswordError from '@domain/entities/errors/invalid-password-error
 import User from '@entities/user';
 import RefreshToken from '@domain/entities/modules/refresh-token';
 
-import ICheckUserAlreadyExistsUseCase from '@domain/usecases/models/i-check-user-already-exsits-usecase';
+import ICheckUserAlreadyExistsUseCase from '@usecases/models/users/i-check-user-already-exists-usecase';
 
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 

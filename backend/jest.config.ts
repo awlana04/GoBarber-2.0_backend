@@ -82,29 +82,42 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '@entities/user': ['<rootDir>/src/domain/entities/modules/user.ts'],
-    '@entities/barber': ['<rootDir>/src/domain/entities/modules/barber.ts'],
+    '@entities/user': ['<rootDir>/src/domain/entities/modules/user'],
+    '@entities/barber': ['<rootDir>/src/domain/entities/modules/barber'],
     '@entities/refresh-token': [
-      '<rootDir>/src/domain/entities/modules/refresh-token.ts',
+      '<rootDir>/src/domain/entities/modules/refresh-token',
     ],
     '@entities/appointment': [
-      '<rootDir>/src/domain/entities/modules/appointment.ts',
+      '<rootDir>/src/domain/entities/modules/appointment',
     ],
+    '@usecases/implementations/users/check-user-already-exists-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/users/check-user-already-exists-usecase',
+    ],
+    '@usecases/implementations/users/check-user-does-not-exists-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/users/check-user-does-not-exists-usecase',
+    ],
+    '@usecases/implementations/barbers/check-user-exists-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/barbers/check-user-exists-usecase',
+    ],
+    '@usecases/implementations/barbers/check-barber-name-already-exists-usecase':
+      [
+        '<rootDir>/src/domain/usecases/implementations/barbers/check-barber-name-already-exists-usecase',
+      ],
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
-    '@shared/*': ['<rootDir>/src/domain/shared/either.ts'],
+    '@shared/*': ['<rootDir>/src/domain/shared/either'],
     '@in-memory/in-memory-appointments-repository': [
-      '<rootDir>/tests/repositories/in-memory-appointments-repository.ts',
+      '<rootDir>/tests/repositories/in-memory-appointments-repository',
     ],
     '@in-memory/in-memory-barbers-repository': [
-      '<rootDir>/tests/repositories/in-memory-barbers-repository.ts',
+      '<rootDir>/tests/repositories/in-memory-barbers-repository',
     ],
     '@in-memory/in-memory-users-repository': [
-      '<rootDir>/tests/repositories/in-memory-users-repository.ts',
+      '<rootDir>/tests/repositories/in-memory-users-repository',
     ],
     '@in-memory/in-memory-refresh-tokens-repository': [
-      '<rootDir>/tests/repositories/in-memory-refresh-tokens-repository.ts',
+      '<rootDir>/tests/repositories/in-memory-refresh-tokens-repository',
     ],
   },
 

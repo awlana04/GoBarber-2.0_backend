@@ -1,5 +1,5 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import CheckUserDoesNotExistsUsecase from '../../usecases/implementations/check-user-does-not-exists-usecase';
+import CheckUserDoesNotExistsUsecase from '@usecases/implementations/users/check-user-does-not-exists-usecase';
 import UpdateUserAvatarService from './update-user-avatar-service';
 
 import User from '@entities/user';

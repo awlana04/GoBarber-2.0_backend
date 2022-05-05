@@ -2,6 +2,8 @@ import IUserRepository from '@interfaces/i-user-repository';
 
 import User from '@entities/user';
 
+import ICheckUserDoesNotExistUsecase from '@usecases/models/users/i-check-user-does-not-exists-usecase';
+
 interface UpdateUserServiceRequest {
   id: string;
   name?: string;
@@ -10,7 +12,10 @@ interface UpdateUserServiceRequest {
 }
 
 export default class UpdateUserService {
-  constructor(private usersRepository: IUserRepository) {}
+  constructor(
+    private usersRepository: IUserRepository,
+    private checkUserDoesNotExists: ICheckUserDoesNotExistUsecase
+  ) {}
 
   public async handle({
     id,
@@ -18,11 +23,7 @@ export default class UpdateUserService {
     password,
     location,
   }: UpdateUserServiceRequest): Promise<User> {
-    const checkUserExists = await this.usersRepository.findById(id);
-
-    if (!checkUserExists) {
-      throw new Error('User does not exists');
-    }
+    await this.checkUserDoesNotExists.run(id);
 
     const user = await this.usersRepository.update(id, {
       name,

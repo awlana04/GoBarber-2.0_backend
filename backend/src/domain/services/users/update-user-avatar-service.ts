@@ -2,7 +2,7 @@ import IUserRepository from '@interfaces/i-user-repository';
 
 import User from '@entities/user';
 
-import ICheckUserDoesNotExistsUsecase from '../../usecases/models/i-check-user-does-not-exsits-usecase';
+import ICheckUserDoesNotExistsUsecase from '@usecases/models/users/i-check-user-does-not-exists-usecase';
 
 interface IUpdateUserAvatarServiceRequest {
   id: string;

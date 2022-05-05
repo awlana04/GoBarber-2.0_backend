@@ -1,5 +1,4 @@
-import ICheckUserAlreadyExistsUsecase from '../models/i-check-user-already-exsits-usecase';
-
+import ICheckUserAlreadyExistsUsecase from '../../models/barbers/i-check-user-exists-usecase';
 import IUserRepository from '@interfaces/i-user-repository';
 
 import User from '@domain/entities/modules/user';

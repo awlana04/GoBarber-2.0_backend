@@ -2,15 +2,16 @@ import IUserRepository from '@interfaces/i-user-repository';
 
 import User from '@entities/user';
 
+import ICheckUserDoesNotExistsUsecase from '@usecases/models/users/i-check-user-does-not-exists-usecase';
+
 export default class DeleteUserService {
-  constructor(private usersRepository: IUserRepository) {}
+  constructor(
+    private usersRepository: IUserRepository,
+    private checkUserDoesNotExists: ICheckUserDoesNotExistsUsecase
+  ) {}
 
   public async handle(id: string): Promise<User> {
-    const checkUserExists = await this.usersRepository.findById(id);
-
-    if (!checkUserExists) {
-      throw new Error('User does not exists');
-    }
+    await this.checkUserDoesNotExists.run(id);
 
     const user = await this.usersRepository.delete(id);
 
