@@ -103,6 +103,9 @@ export default {
       [
         '<rootDir>/src/domain/usecases/implementations/barbers/check-barber-name-already-exists-usecase',
       ],
+    '@usecases/implementations/barbers/check-barber-does-not-exists-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/barbers/check-barber-does-not-exists-usecase',
+    ],
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
