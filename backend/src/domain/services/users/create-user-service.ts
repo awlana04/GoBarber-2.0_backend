@@ -1,5 +1,3 @@
-import IUserRepository from '@interfaces/i-user-repository';
-
 import { Either, left, right } from '../../shared/either';
 
 import InvalidNameError from '@domain/entities/errors/invalid-name-error';
@@ -8,6 +6,8 @@ import InvalidPasswordError from '@domain/entities/errors/invalid-password-error
 
 import User from '@entities/user';
 import RefreshToken from '@domain/entities/modules/refresh-token';
+
+import ICheckUserAlreadyExistsUseCase from '@domain/usecases/models/i-check-user-already-exsits-usecase';
 
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
@@ -21,7 +21,7 @@ interface ICreateUserServiceRequest {
 
 export default class CreateUserService {
   constructor(
-    private readonly userRepository: IUserRepository,
+    private checkUserAlreadyExists: ICheckUserAlreadyExistsUseCase,
     private refreshTokenProvider: IRefreshTokenProvider
   ) {}
 
@@ -40,11 +40,7 @@ export default class CreateUserService {
       }
     >
   > {
-    const checkUserExists = await this.userRepository.findByEmail(email);
-
-    if (checkUserExists) {
-      throw new Error('User already exists');
-    }
+    await this.checkUserAlreadyExists.run(email);
 
     const userOrError: Either<
       InvalidNameError | InvalidEmailError | InvalidPasswordError,

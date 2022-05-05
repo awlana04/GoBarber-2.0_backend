@@ -1,18 +1,26 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
+import CheckUserDoesNotExistsUsecase from '../../usecases/implementations/check-user-does-not-exists-usecase';
 import UpdateUserAvatarService from './update-user-avatar-service';
 
 import User from '@entities/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
+  checkUserDoesNotExists: CheckUserDoesNotExistsUsecase;
   sut: UpdateUserAvatarService;
 };
 
 const makeSut = (): SutOutput => {
   const usersRepository = new InMemoryUsersRepository();
-  const sut = new UpdateUserAvatarService(usersRepository);
+  const checkUserDoesNotExists = new CheckUserDoesNotExistsUsecase(
+    usersRepository
+  );
+  const sut = new UpdateUserAvatarService(
+    usersRepository,
+    checkUserDoesNotExists
+  );
 
-  return { usersRepository, sut };
+  return { usersRepository, checkUserDoesNotExists, sut };
 };
 
 describe('Update user avatar service', () => {
