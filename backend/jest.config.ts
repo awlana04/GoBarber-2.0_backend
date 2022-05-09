@@ -90,21 +90,11 @@ export default {
     '@entities/appointment': [
       '<rootDir>/src/domain/entities/modules/appointment',
     ],
-    '@usecases/implementations/users/check-user-already-exists-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/users/check-user-already-exists-usecase',
+    '@usecases/implementations/users-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/users-usecase',
     ],
-    '@usecases/implementations/users/check-user-does-not-exists-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/users/check-user-does-not-exists-usecase',
-    ],
-    '@usecases/implementations/barbers/check-user-exists-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/barbers/check-user-exists-usecase',
-    ],
-    '@usecases/implementations/barbers/check-barber-name-already-exists-usecase':
-      [
-        '<rootDir>/src/domain/usecases/implementations/barbers/check-barber-name-already-exists-usecase',
-      ],
-    '@usecases/implementations/barbers/check-barber-does-not-exists-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/barbers/check-barber-does-not-exists-usecase',
+    '@usecases/implementations/barbers-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/barbers-usecase',
     ],
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',

@@ -1,23 +1,21 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import CheckUserDoesNotExistsUsecase from '@usecases/implementations/users/check-user-does-not-exists-usecase';
+import UsersUsecase from '@usecases/implementations/users-usecase';
 import DeleteUserService from './delete-user-service';
 
 import User from '@entities/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
-  checkUserDoesNotExists: CheckUserDoesNotExistsUsecase;
+  usersUsecase: UsersUsecase;
   sut: DeleteUserService;
 };
 
 const makeSut = (): SutOutput => {
   const usersRepository = new InMemoryUsersRepository();
-  const checkUserDoesNotExists = new CheckUserDoesNotExistsUsecase(
-    usersRepository
-  );
-  const sut = new DeleteUserService(usersRepository, checkUserDoesNotExists);
+  const usersUsecase = new UsersUsecase(usersRepository);
+  const sut = new DeleteUserService(usersRepository, usersUsecase);
 
-  return { usersRepository, checkUserDoesNotExists, sut };
+  return { usersRepository, usersUsecase, sut };
 };
 
 describe('Delete user service', () => {

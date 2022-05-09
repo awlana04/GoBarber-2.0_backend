@@ -7,7 +7,7 @@ import InvalidPasswordError from '@domain/entities/errors/invalid-password-error
 import User from '@entities/user';
 import RefreshToken from '@domain/entities/modules/refresh-token';
 
-import ICheckUserAlreadyExistsUseCase from '@usecases/models/users/i-check-user-already-exists-usecase';
+import IUsersUsecase from '@usecases/models/i-users-usecase';
 
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
@@ -21,7 +21,7 @@ interface ICreateUserServiceRequest {
 
 export default class CreateUserService {
   constructor(
-    private checkUserAlreadyExists: ICheckUserAlreadyExistsUseCase,
+    private usersUsecase: IUsersUsecase,
     private refreshTokenProvider: IRefreshTokenProvider
   ) {}
 
@@ -40,7 +40,7 @@ export default class CreateUserService {
       }
     >
   > {
-    await this.checkUserAlreadyExists.run(email);
+    await this.usersUsecase.checkUserAlreadyExists(email);
 
     const userOrError: Either<
       InvalidNameError | InvalidEmailError | InvalidPasswordError,

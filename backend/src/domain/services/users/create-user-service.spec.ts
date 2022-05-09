@@ -1,31 +1,26 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import CheckUserAlreadyExistsUseCase from '@usecases/implementations/users/check-user-already-exists-usecase';
-import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
+import UsersUsecase from '@usecases/implementations/users-usecase';
 import CreateUserService from './create-user-service';
+import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
 
 import User from '@entities/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
   refreshTokenProvider: RefreshTokenProvider;
-  checkUserAlreadyExists: CheckUserAlreadyExistsUseCase;
+  usersUsecase: UsersUsecase;
   sut: CreateUserService;
 };
 
 const makeSut = (): SutOutput => {
   const usersRepository = new InMemoryUsersRepository();
   const refreshTokenRepository = new InMemoryRefreshTokenRepository();
-  const checkUserAlreadyExists = new CheckUserAlreadyExistsUseCase(
-    usersRepository
-  );
+  const usersUsecase = new UsersUsecase(usersRepository);
   const refreshTokenProvider = new RefreshTokenProvider(refreshTokenRepository);
-  const sut = new CreateUserService(
-    checkUserAlreadyExists,
-    refreshTokenProvider
-  );
+  const sut = new CreateUserService(usersUsecase, refreshTokenProvider);
 
-  return { sut, refreshTokenProvider, checkUserAlreadyExists, usersRepository };
+  return { sut, refreshTokenProvider, usersUsecase, usersRepository };
 };
 
 describe('Create user service', () => {
