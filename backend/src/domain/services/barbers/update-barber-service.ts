@@ -2,6 +2,8 @@ import IBarberRepository from '@interfaces/i-barber-repository';
 
 import Barber from '@entities/barber';
 
+import IBarberUsecase from '@usecases/models/i-barbers-usecase';
+
 interface IUpdateBarberServiceRequest {
   id: string;
   name?: string;
@@ -12,7 +14,10 @@ interface IUpdateBarberServiceRequest {
 }
 
 export default class UpdateBarberService {
-  constructor(private barberRepository: IBarberRepository) {}
+  constructor(
+    private barberRepository: IBarberRepository,
+    private barbersUsecase: IBarberUsecase
+  ) {}
 
   public async handle({
     id,
@@ -22,11 +27,7 @@ export default class UpdateBarberService {
     openAtNight,
     openOnWeekends,
   }: IUpdateBarberServiceRequest): Promise<Barber> {
-    const checkBarberExists = await this.barberRepository.findById(id);
-
-    if (!checkBarberExists) {
-      throw new Error('Barber does not exists');
-    }
+    await this.barbersUsecase.checkBarberDoesNotExists(id);
 
     const barber = await this.barberRepository.update(id, {
       name,

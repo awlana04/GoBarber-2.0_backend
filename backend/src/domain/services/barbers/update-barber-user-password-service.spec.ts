@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import UpdateBarberUserPassword from './update-barber-user-password-service';
 
 import User from '@entities/user';
@@ -8,14 +9,16 @@ import Barber from '@entities/barber';
 
 type SutOutput = {
   barbersRepository: InMemoryBarbersRepository;
+  barbersUsecase: BarbersUsecase;
   sut: UpdateBarberUserPassword;
 };
 
 const makeSut = (): SutOutput => {
   const barbersRepository = new InMemoryBarbersRepository();
-  const sut = new UpdateBarberUserPassword(barbersRepository);
+  const barbersUsecase = new BarbersUsecase(barbersRepository);
+  const sut = new UpdateBarberUserPassword(barbersRepository, barbersUsecase);
 
-  return { barbersRepository, sut };
+  return { barbersRepository, barbersUsecase, sut };
 };
 
 describe('Update barber user password service', () => {
@@ -46,21 +49,33 @@ describe('Update barber user password service', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('ahould be able to update the barber user password', async () => {
-    const response = await sut.handle({
-      id: user.id,
+  it('should NOT be able to update the barber user password with an invalid user id', () => {
+    const response = sut.handle({
+      id,
+      userId: 'invalidID',
       password: '12345678910',
     });
 
-    expect(response).toBeDefined();
+    expect(response).rejects.toThrowError();
   });
 
   it('ahould NOT be able to update the barber user password with an invalid id', () => {
     const response = sut.handle({
       id: 'invalidID',
+      userId: user.id,
       password: '12345678910',
     });
 
     expect(response).rejects.toThrowError();
+  });
+
+  it('ahould be able to update the barber user password', async () => {
+    const response = await sut.handle({
+      id,
+      userId: user.id,
+      password: '12345678910',
+    });
+
+    expect(response).toBeDefined();
   });
 });

@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import UpdateBarberService from './update-barber-service';
 
 import User from '@entities/user';
@@ -8,14 +9,16 @@ import Barber from '@entities/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;
+  barbersUsecase: BarbersUsecase;
   sut: UpdateBarberService;
 };
 
 const makeSut = (): SutOutput => {
   const barberRepository = new InMemoryBarbersRepository();
-  const sut = new UpdateBarberService(barberRepository);
+  const barbersUsecase = new BarbersUsecase(barberRepository);
+  const sut = new UpdateBarberService(barberRepository, barbersUsecase);
 
-  return { barberRepository, sut };
+  return { barberRepository, barbersUsecase, sut };
 };
 
 describe('Update barber service', () => {

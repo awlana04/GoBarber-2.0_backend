@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 import InMemoryBarberRepository from '@in-memory/in-memory-barbers-repository';
-import CheckBarberDoesNotExistsUsecase from '@usecases/implementations/barbers/check-barber-does-not-exists-usecase';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import DeleteBarberAndAppointmentService from './delete-barber-and-appointment-service';
 
 import User from '@entities/user';
@@ -10,21 +10,19 @@ import Appointment from '@entities/appointment';
 
 type SutOutput = {
   barbersRepository: InMemoryBarberRepository;
-  checkBarberDoesNotExists: CheckBarberDoesNotExistsUsecase;
+  barbersUsecase: BarbersUsecase;
   sut: DeleteBarberAndAppointmentService;
 };
 
 const makeSut = (): SutOutput => {
   const barbersRepository = new InMemoryBarberRepository();
-  const checkBarberDoesNotExists = new CheckBarberDoesNotExistsUsecase(
-    barbersRepository
-  );
+  const barbersUsecase = new BarbersUsecase(barbersRepository);
   const sut = new DeleteBarberAndAppointmentService(
     barbersRepository,
-    checkBarberDoesNotExists
+    barbersUsecase
   );
 
-  return { barbersRepository, checkBarberDoesNotExists, sut };
+  return { barbersRepository, barbersUsecase, sut };
 };
 
 describe('Delete barber and appointment service', () => {

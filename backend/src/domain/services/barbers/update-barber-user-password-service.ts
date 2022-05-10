@@ -3,29 +3,33 @@ import IBarberRepository from '@interfaces/i-barber-repository';
 import Barber from '@entities/barber';
 import User from '@entities/user';
 
+import IBarberUsecase from '@usecases/models/i-barbers-usecase';
+
 interface IUpdateBarberUserPasswordServiceRequest {
   id: string;
+  userId: string;
   password: string;
 }
 
 export default class UpdateBarberUserPassword {
-  constructor(private barberRepository: IBarberRepository) {}
+  constructor(
+    private barbersRepository: IBarberRepository,
+    private barbersUsecase: IBarberUsecase
+  ) {}
 
   public async handle({
     id,
+    userId,
     password,
   }: IUpdateBarberUserPasswordServiceRequest): Promise<Barber & User> {
-    const user = await this.barberRepository.findUserId(id);
+    await this.barbersUsecase.checkUserExists(userId);
+    await this.barbersUsecase.checkBarberDoesNotExists(id);
 
-    if (!user) {
-      throw new Error('User does not exists');
-    }
-
-    if (!user.props.barberId) {
-      throw new Error('Barber does not exists');
-    }
-
-    const barber = await this.barberRepository.updatePassword(id, password);
+    const barber = await this.barbersRepository.updatePassword(
+      id,
+      userId,
+      password
+    );
 
     return barber;
   }

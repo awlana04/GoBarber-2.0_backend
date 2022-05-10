@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import UpdateBarberUserAvatarService from './update-barber-user-avatar-service';
 
 import User from '@entities/user';
@@ -8,14 +9,19 @@ import Barber from '@entities/barber';
 
 type SutOutput = {
   barbersRepository: InMemoryBarbersRepository;
+  barbersUsecase: BarbersUsecase;
   sut: UpdateBarberUserAvatarService;
 };
 
 const makeSut = (): SutOutput => {
   const barbersRepository = new InMemoryBarbersRepository();
-  const sut = new UpdateBarberUserAvatarService(barbersRepository);
+  const barbersUsecase = new BarbersUsecase(barbersRepository);
+  const sut = new UpdateBarberUserAvatarService(
+    barbersRepository,
+    barbersUsecase
+  );
 
-  return { barbersRepository, sut };
+  return { barbersRepository, barbersUsecase, sut };
 };
 
 describe('Update barber user avatar', () => {
@@ -47,21 +53,33 @@ describe('Update barber user avatar', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('should be able to update the barber avatar', async () => {
-    const response = await sut.handle({
-      id: user.id,
-      avatar: 'another-avatar.png',
-    });
-
-    expect(response).toBeDefined();
-  });
-
   it('should NOT be able to update the barber avatar with an invalid id', () => {
     const response = sut.handle({
       id: 'invalidID',
+      userId: user.id,
       avatar: 'another-avatar.png',
     });
 
     expect(response).rejects.toThrowError();
+  });
+
+  it('should NOT be able to update the barber avatar with an invalid user id', () => {
+    const response = sut.handle({
+      id,
+      userId: 'invalidID',
+      avatar: 'another-avatar.png',
+    });
+
+    expect(response).rejects.toThrowError();
+  });
+
+  it('should be able to update the barber avatar', async () => {
+    const response = await sut.handle({
+      id,
+      userId: user.id,
+      avatar: 'another-avatar.png',
+    });
+
+    expect(response).toBeDefined();
   });
 });

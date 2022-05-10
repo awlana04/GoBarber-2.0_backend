@@ -1,5 +1,5 @@
 import IBarbersUsecase from '../models/i-barbers-usecase';
-import IBarberRepository from '@domain/interfaces/i-barber-repository';
+import IBarberRepository from '@interfaces/i-barber-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

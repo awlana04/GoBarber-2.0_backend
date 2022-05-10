@@ -2,8 +2,7 @@ import IBarberRepository from '@interfaces/i-barber-repository';
 
 import Barber from '@entities/barber';
 
-import ICheckUserExists from '@usecases/models/barbers/i-check-user-exists-usecase';
-import ICheckBarberNameAlreadyExists from '@usecases/models/barbers/i-check-barber-name-already-exists-usecase';
+import IBarberUsecase from '@usecases/models/i-barbers-usecase';
 
 interface ICreateBarberServiceRequest {
   name: string;
@@ -18,8 +17,7 @@ interface ICreateBarberServiceRequest {
 export default class CreateBarberService {
   constructor(
     private barberRepository: IBarberRepository,
-    private checkUserExists: ICheckUserExists,
-    private checkBarberNameAlreadyExists: ICheckBarberNameAlreadyExists
+    private barbersUsecase: IBarberUsecase
   ) {}
 
   public async handle({
@@ -31,8 +29,8 @@ export default class CreateBarberService {
     openOnWeekends,
     userId,
   }: ICreateBarberServiceRequest): Promise<Barber> {
-    await this.checkUserExists.run(userId);
-    await this.checkBarberNameAlreadyExists.run(name);
+    await this.barbersUsecase.checkUserExists(userId);
+    await this.barbersUsecase.checkBarberNameAlreadyExists(name);
 
     const barber = Barber.create({
       name,

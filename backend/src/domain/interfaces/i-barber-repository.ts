@@ -10,8 +10,16 @@ export default interface IBarberRepository {
   findUserId(userId: string): Promise<User | null>;
   getAllBarbers(): Promise<Barber[]>;
   update(id: string, data: IUpdateBarberDTO): Promise<Barber>;
-  updatePassword(id: string, password: string): Promise<Barber & User>;
-  updateAvatar(id: string, avatar: string): Promise<Barber & User>;
+  updatePassword(
+    id: string,
+    userId: string,
+    password: string
+  ): Promise<Barber & User>;
+  updateAvatar(
+    id: string,
+    userId: string,
+    avatar: string
+  ): Promise<Barber & User>;
   delete(id: string): Promise<Barber>;
   deleteBarberAndAppointments(id: string): Promise<Barber | Appointment>;
 }

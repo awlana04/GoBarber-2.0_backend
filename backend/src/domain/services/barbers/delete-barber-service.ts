@@ -2,15 +2,16 @@ import IBarberRepository from '@interfaces/i-barber-repository';
 
 import Barber from '@entities/barber';
 
+import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
+
 export default class DeleteBarberService {
-  constructor(private barbersRepository: IBarberRepository) {}
+  constructor(
+    private barbersRepository: IBarberRepository,
+    private barbersUsecase: IBarbersUsecase
+  ) {}
 
   public async handle(id: string): Promise<Barber> {
-    const checkBarberExists = await this.barbersRepository.findById(id);
-
-    if (!checkBarberExists) {
-      throw new Error('Barber does not exists');
-    }
+    await this.barbersUsecase.checkBarberDoesNotExists(id);
 
     const barber = await this.barbersRepository.delete(id);
 
