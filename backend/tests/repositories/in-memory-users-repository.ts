@@ -26,6 +26,10 @@ export default class InMemoryUsersRepository implements IUserRepository {
     return user;
   }
 
+  async save(user: User): Promise<User | any> {
+    return this.item.push(user);
+  }
+
   async update(id: string, data: IUpdateUserDTO): Promise<User | any> {
     const user = this.item.find(user => user.id === id);
 

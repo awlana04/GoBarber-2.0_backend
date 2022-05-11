@@ -9,6 +9,7 @@ import RefreshToken from '@domain/entities/modules/refresh-token';
 
 import IUsersUsecase from '@usecases/models/i-users-usecase';
 
+import IUserRepository from '@interfaces/i-user-repository';
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
 interface ICreateUserServiceRequest {
@@ -21,6 +22,7 @@ interface ICreateUserServiceRequest {
 
 export default class CreateUserService {
   constructor(
+    private readonly usersRepository: IUserRepository,
     private readonly usersUsecase: IUsersUsecase,
     private readonly refreshTokenProvider: IRefreshTokenProvider
   ) {}
@@ -52,6 +54,8 @@ export default class CreateUserService {
     }
 
     const user: User = userOrError.value as User;
+
+    await this.usersRepository.save(user);
 
     const refreshToken = await this.refreshTokenProvider.createRefreshToken(
       userOrError.value.id

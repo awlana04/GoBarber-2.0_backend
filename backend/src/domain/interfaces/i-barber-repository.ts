@@ -9,6 +9,7 @@ export default interface IBarberRepository {
   findByName(name: string): Promise<Barber | null>;
   findUserId(userId: string): Promise<User | null>;
   getAllBarbers(): Promise<Barber[]>;
+  save(barber: Barber): Promise<Barber>;
   update(id: string, data: IUpdateBarberDTO): Promise<Barber>;
   updatePassword(
     id: string,

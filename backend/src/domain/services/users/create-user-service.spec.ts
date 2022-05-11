@@ -1,8 +1,8 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
 import UsersUsecase from '@usecases/implementations/users-usecase';
-import CreateUserService from './create-user-service';
 import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
+import CreateUserService from './create-user-service';
 
 import User from '@entities/user';
 
@@ -18,7 +18,11 @@ const makeSut = (): SutOutput => {
   const refreshTokenRepository = new InMemoryRefreshTokenRepository();
   const usersUsecase = new UsersUsecase(usersRepository);
   const refreshTokenProvider = new RefreshTokenProvider(refreshTokenRepository);
-  const sut = new CreateUserService(usersUsecase, refreshTokenProvider);
+  const sut = new CreateUserService(
+    usersRepository,
+    usersUsecase,
+    refreshTokenProvider
+  );
 
   return { sut, refreshTokenProvider, usersUsecase, usersRepository };
 };

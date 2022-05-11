@@ -62,6 +62,10 @@ export default class InMemoryAppointmentsRepository
     );
   }
 
+  async save(appointment: Appointment): Promise<Appointment | any> {
+    return this.appointment.push(appointment);
+  }
+
   async update(id: string, date: Date): Promise<Appointment | any> {
     const appointment = await this.findById(id);
 

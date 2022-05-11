@@ -42,6 +42,8 @@ export default class CreateBarberService {
       userId,
     }).value as Barber;
 
+    await this.barberRepository.save(barber);
+
     return barber;
   }
 }

@@ -45,6 +45,10 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return this.barber;
   }
 
+  async save(barber: Barber): Promise<Barber | any> {
+    return this.barber.push(barber);
+  }
+
   async update(
     id: string,
     data: {
