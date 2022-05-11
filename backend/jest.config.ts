@@ -96,6 +96,9 @@ export default {
     '@usecases/implementations/barbers-usecase': [
       '<rootDir>/src/domain/usecases/implementations/barbers-usecase',
     ],
+    '@usecases/implementations/appointments-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/appointments-usecase',
+    ],
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
