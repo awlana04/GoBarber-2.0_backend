@@ -6,8 +6,8 @@ import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
 
 export default class GetAllBarbersService {
   constructor(
-    private barbersRepository: IBarberRepository,
-    private barbersUsecase: IBarbersUsecase
+    private readonly barbersRepository: IBarberRepository,
+    private readonly barbersUsecase: IBarbersUsecase
   ) {}
 
   public async handle(userId: string): Promise<Barber[]> {

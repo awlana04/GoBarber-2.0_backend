@@ -11,8 +11,8 @@ interface IUpdateUserAvatarServiceRequest {
 
 export default class UpdateUserAvatarService {
   constructor(
-    private usersRepository: IUserRepository,
-    private usersUsecase: IUserUsecase
+    private readonly usersRepository: IUserRepository,
+    private readonly usersUsecase: IUserUsecase
   ) {}
 
   public async handle({

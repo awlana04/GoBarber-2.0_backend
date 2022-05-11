@@ -2,17 +2,16 @@ import IAppointmentRepository from '@interfaces/i-appointment-repository';
 
 import Appointment from '@entities/appointment';
 
+import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
+
 export default class DeleteAppointmentService {
-  constructor(private appointmentsRepository: IAppointmentRepository) {}
+  constructor(
+    private readonly appointmentsRepository: IAppointmentRepository,
+    private readonly appointmentsUsecase: IAppointmentUsecase
+  ) {}
 
   public async handle(id: string): Promise<Appointment> {
-    const checkAppointmentExists = await this.appointmentsRepository.findById(
-      id
-    );
-
-    if (!checkAppointmentExists) {
-      throw new Error('Appointment does not exists');
-    }
+    await this.appointmentsUsecase.checkAppointmentExists(id);
 
     const appointment = await this.appointmentsRepository.delete(id);
 

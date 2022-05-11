@@ -15,8 +15,8 @@ interface IUpdateBarberServiceRequest {
 
 export default class UpdateBarberService {
   constructor(
-    private barberRepository: IBarberRepository,
-    private barbersUsecase: IBarberUsecase
+    private readonly barberRepository: IBarberRepository,
+    private readonly barbersUsecase: IBarberUsecase
   ) {}
 
   public async handle({

@@ -13,8 +13,8 @@ interface IUpdateBarberUserPasswordServiceRequest {
 
 export default class UpdateBarberUserPassword {
   constructor(
-    private barbersRepository: IBarberRepository,
-    private barbersUsecase: IBarberUsecase
+    private readonly barbersRepository: IBarberRepository,
+    private readonly barbersUsecase: IBarberUsecase
   ) {}
 
   public async handle({

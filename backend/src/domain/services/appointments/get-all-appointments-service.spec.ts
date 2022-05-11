@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
+import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 import GetAllAppointmentsService from './get-all-appointments-service';
 
 import User from '@entities/user';
@@ -9,14 +10,19 @@ import Appointment from '@entities/appointment';
 
 type SutOutput = {
   appointmentsRepository: InMemoryAppointmentsRepository;
+  appointmentsUsecase: AppointmentsUsecase;
   sut: GetAllAppointmentsService;
 };
 
 const makeSut = (): SutOutput => {
   const appointmentsRepository = new InMemoryAppointmentsRepository();
-  const sut = new GetAllAppointmentsService(appointmentsRepository);
+  const appointmentsUsecase = new AppointmentsUsecase(appointmentsRepository);
+  const sut = new GetAllAppointmentsService(
+    appointmentsRepository,
+    appointmentsUsecase
+  );
 
-  return { appointmentsRepository, sut };
+  return { appointmentsRepository, appointmentsUsecase, sut };
 };
 
 describe('Get all appointments service', () => {

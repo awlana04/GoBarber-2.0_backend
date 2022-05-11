@@ -21,8 +21,8 @@ interface ICreateUserServiceRequest {
 
 export default class CreateUserService {
   constructor(
-    private usersUsecase: IUsersUsecase,
-    private refreshTokenProvider: IRefreshTokenProvider
+    private readonly usersUsecase: IUsersUsecase,
+    private readonly refreshTokenProvider: IRefreshTokenProvider
   ) {}
 
   public async handle({

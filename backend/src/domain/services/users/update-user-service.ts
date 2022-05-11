@@ -13,8 +13,8 @@ interface UpdateUserServiceRequest {
 
 export default class UpdateUserService {
   constructor(
-    private usersRepository: IUserRepository,
-    private usersUsecase: IUserUsecase
+    private readonly usersRepository: IUserRepository,
+    private readonly usersUsecase: IUserUsecase
   ) {}
 
   public async handle({

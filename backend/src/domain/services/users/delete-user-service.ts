@@ -6,8 +6,8 @@ import IUsersUsecase from '@usecases/models/i-users-usecase';
 
 export default class DeleteUserService {
   constructor(
-    private usersRepository: IUserRepository,
-    private usersUsecase: IUsersUsecase
+    private readonly usersRepository: IUserRepository,
+    private readonly usersUsecase: IUsersUsecase
   ) {}
 
   public async handle(id: string): Promise<User> {

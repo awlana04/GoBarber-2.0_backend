@@ -7,8 +7,8 @@ import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
 
 export default class DeleteBarberAndAppointmentService {
   constructor(
-    private barbersRepository: IBarberRepository,
-    private barbersUsecase: IBarbersUsecase
+    private readonly barbersRepository: IBarberRepository,
+    private readonly barbersUsecase: IBarbersUsecase
   ) {}
 
   public async handle(id: string): Promise<Barber | Appointment> {
