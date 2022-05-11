@@ -4,9 +4,9 @@ import { BarberProps, BarberValidationProps } from '../interfaces/barber-props';
 
 import Name from '../domain/name';
 
-import { Either, left, right } from '@shared/either';
+import { Either, left, right } from '@shared/utils/either';
 
-import InvalidNameError from '../errors/invalid-name-error';
+import InvalidNameError from '@shared/errors/invalid-name-error';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps

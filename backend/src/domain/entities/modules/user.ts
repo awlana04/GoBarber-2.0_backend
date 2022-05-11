@@ -6,11 +6,11 @@ import Name from '../domain/name';
 import Email from '../domain/email';
 import Password from '../domain/password';
 
-import { Either, left, right } from '@shared/either';
+import { Either, left, right } from '@shared/utils/either';
 
-import InvalidNameError from '../errors/invalid-name-error';
-import InvalidEmailError from '../errors/invalid-email-error';
-import InvalidPasswordError from '../errors/invalid-password-error';
+import InvalidNameError from '@shared/errors/invalid-name-error';
+import InvalidEmailError from '@shared/errors/invalid-email-error';
+import InvalidPasswordError from '@shared/errors/invalid-password-error';
 
 export default class User extends Entity<UserProps | UserValidationProps> {
   public readonly name: Name;

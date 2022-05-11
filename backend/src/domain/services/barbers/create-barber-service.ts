@@ -1,3 +1,7 @@
+import { Either, left, right } from '@shared/utils/either';
+
+import InvalidNameError from '@shared/errors/invalid-name-error';
+
 import IBarberRepository from '@interfaces/i-barber-repository';
 
 import Barber from '@entities/barber';
@@ -28,11 +32,11 @@ export default class CreateBarberService {
     openAtNight,
     openOnWeekends,
     userId,
-  }: ICreateBarberServiceRequest): Promise<Barber> {
+  }: ICreateBarberServiceRequest): Promise<Either<InvalidNameError, Barber>> {
     await this.barbersUsecase.checkUserExists(userId);
     await this.barbersUsecase.checkBarberNameAlreadyExists(name);
 
-    const barber = Barber.create({
+    const barberOrError: Either<InvalidNameError, Barber> = Barber.create({
       name,
       location,
       description,
@@ -40,10 +44,12 @@ export default class CreateBarberService {
       openAtNight,
       openOnWeekends,
       userId,
-    }).value as Barber;
+    });
+
+    const barber: Barber = barberOrError.value as Barber;
 
     await this.barberRepository.save(barber);
 
-    return barber;
+    return right(barber);
   }
 }

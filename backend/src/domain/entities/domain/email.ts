@@ -1,5 +1,6 @@
-import { Either, left, right } from '@shared/either';
-import InvalidEmailError from '../errors/invalid-email-error';
+import { Either, left, right } from '@shared/utils/either';
+
+import InvalidEmailError from '@shared/errors/invalid-email-error';
 
 export default class Email {
   public readonly value: string;

@@ -102,7 +102,16 @@ export default {
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
-    '@shared/*': ['<rootDir>/src/domain/shared/either'],
+    '@shared/utils/either': ['<rootDir>/src/domain/shared/utils/either'],
+    '@shared/errors/invalid-name-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-name-error',
+    ],
+    '@shared/errors/invalid-email-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-email-error',
+    ],
+    '@shared/errors/invalid-password-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-password-error',
+    ],
     '@in-memory/in-memory-appointments-repository': [
       '<rootDir>/tests/repositories/in-memory-appointments-repository',
     ],

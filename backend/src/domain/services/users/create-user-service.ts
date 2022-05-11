@@ -1,15 +1,16 @@
-import { Either, left, right } from '../../shared/either';
+import { Either, left, right } from '@shared/utils/either';
 
-import InvalidNameError from '@domain/entities/errors/invalid-name-error';
-import InvalidEmailError from '@domain/entities/errors/invalid-email-error';
-import InvalidPasswordError from '@domain/entities/errors/invalid-password-error';
+import InvalidNameError from '@shared/errors/invalid-name-error';
+import InvalidEmailError from '@shared/errors/invalid-email-error';
+import InvalidPasswordError from '@shared/errors/invalid-password-error';
 
 import User from '@entities/user';
-import RefreshToken from '@domain/entities/modules/refresh-token';
+import RefreshToken from '@entities/refresh-token';
+
+import IUserRepository from '@interfaces/i-user-repository';
 
 import IUsersUsecase from '@usecases/models/i-users-usecase';
 
-import IUserRepository from '@interfaces/i-user-repository';
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
 interface ICreateUserServiceRequest {

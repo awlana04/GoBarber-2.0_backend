@@ -47,7 +47,7 @@ describe('Create barber service', () => {
       userId: user.id,
     });
 
-    expect(response).toBeInstanceOf(Barber);
+    expect(response.value).toBeInstanceOf(Barber);
   });
 
   it('should NOT be able to create a new barber with an invalid userId', () => {
