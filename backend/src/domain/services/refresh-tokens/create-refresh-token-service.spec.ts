@@ -1,4 +1,5 @@
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
+import RefreshTokenUsecase from '@usecases/implementations/refresh-tokens-usecase';
 import CreateRefreshTokenService from './create-refresh-token-service';
 
 import User from '@entities/user';
@@ -6,14 +7,19 @@ import RefreshToken from '@entities/refresh-token';
 
 type SutOutput = {
   refreshTokenRepository: InMemoryRefreshTokenRepository;
+  refreshTokensUsecase: RefreshTokenUsecase;
   sut: CreateRefreshTokenService;
 };
 
 const makeSut = (): SutOutput => {
   const refreshTokenRepository = new InMemoryRefreshTokenRepository();
-  const sut = new CreateRefreshTokenService(refreshTokenRepository);
+  const refreshTokensUsecase = new RefreshTokenUsecase(refreshTokenRepository);
+  const sut = new CreateRefreshTokenService(
+    refreshTokenRepository,
+    refreshTokensUsecase
+  );
 
-  return { refreshTokenRepository, sut };
+  return { refreshTokenRepository, refreshTokensUsecase, sut };
 };
 
 describe('Create refresh token service', () => {

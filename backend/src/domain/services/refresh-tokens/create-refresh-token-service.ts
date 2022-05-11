@@ -4,6 +4,8 @@ import IRefreshTokenRepository from '@interfaces/i-refresh-token-repository';
 
 import RefreshToken from '@entities/refresh-token';
 
+import IRefreshTokenUsecase from '@usecases/models/i-refresh-tokens-usecase';
+
 interface CreateRefreshTokenServiceRequest {
   id: string;
   expiresIn: Date;
@@ -11,20 +13,17 @@ interface CreateRefreshTokenServiceRequest {
 }
 
 export default class CreateRefreshTokenService {
-  constructor(private refreshTokenRepository: IRefreshTokenRepository) {}
+  constructor(
+    private readonly refreshTokensRepository: IRefreshTokenRepository,
+    private readonly refreshTokensUsecase: IRefreshTokenUsecase
+  ) {}
 
   public async handle({
     id,
     expiresIn,
     userId,
   }: CreateRefreshTokenServiceRequest): Promise<RefreshToken | string> {
-    const refreshToken = await this.refreshTokenRepository.findByRefreshToken(
-      id
-    );
-
-    if (!refreshToken) {
-      throw new Error('Invalid refresh token');
-    }
+    await this.refreshTokensUsecase.findRefreshToken(id);
 
     const token = crypto.randomUUID();
 
