@@ -20,7 +20,10 @@ export default class UpdateUserService {
     id,
     name,
     password,
-  }: UpdateUserServiceRequest): Promise<User | {}> {
+  }: UpdateUserServiceRequest): Promise<{
+    name?: string;
+    password?: string;
+  }> {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
     const user = User.update(id, {

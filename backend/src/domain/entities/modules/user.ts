@@ -78,7 +78,7 @@ export default class User extends Entity<UserProps | UserValidationProps> {
   public static update(
     id: string,
     props: UpdateUserProps
-  ): Either<InvalidNameError | InvalidPasswordError, User | {}> {
+  ): Either<InvalidNameError | InvalidPasswordError, UpdateUserProps> {
     if (props.name) {
       const nameOrError = Name.create(props.name);
 
@@ -103,6 +103,6 @@ export default class User extends Entity<UserProps | UserValidationProps> {
       User.prototype.password = password;
     }
 
-    return right({ id, props });
+    return right(props);
   }
 }

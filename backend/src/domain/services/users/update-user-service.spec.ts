@@ -33,7 +33,6 @@ describe('Update user service', () => {
   const id = user.id;
   const name = 'John Doe Junior';
   const password = '12345678910';
-  const location = 'Somewhere Over the Sun';
 
   it('should NOT be able to update the user with invalid id', async () => {
     const response = sut.handle({
@@ -70,6 +69,7 @@ describe('Update user service', () => {
       password,
     });
 
-    expect(response).toBeDefined();
+    expect(response.name).toEqual(name);
+    expect(response.password).toEqual(password);
   });
 });
