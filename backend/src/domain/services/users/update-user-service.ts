@@ -8,7 +8,6 @@ interface UpdateUserServiceRequest {
   id: string;
   name?: string;
   password?: string;
-  location?: string;
 }
 
 export default class UpdateUserService {
@@ -21,15 +20,13 @@ export default class UpdateUserService {
     id,
     name,
     password,
-    location,
-  }: UpdateUserServiceRequest): Promise<User> {
+  }: UpdateUserServiceRequest): Promise<User | {}> {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
-    const user = await this.usersRepository.update(id, {
+    const user = User.update(id, {
       name,
       password,
-      location,
-    });
+    }).value;
 
     return user;
   }

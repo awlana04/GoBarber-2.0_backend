@@ -1,6 +1,10 @@
 import Entity from '../shared/entity';
 
-import { UserProps, UserValidationProps } from '../interfaces/user-props';
+import {
+  UserProps,
+  UserValidationProps,
+  UpdateUserProps,
+} from '../interfaces/user-props';
 
 import Name from '../domain/name';
 import Email from '../domain/email';
@@ -13,9 +17,9 @@ import InvalidEmailError from '@shared/errors/invalid-email-error';
 import InvalidPasswordError from '@shared/errors/invalid-password-error';
 
 export default class User extends Entity<UserProps | UserValidationProps> {
-  public readonly name: Name;
+  public name: Name;
   public readonly email: Email;
-  public readonly password: Password;
+  public password: Password;
 
   private constructor(
     props: UserValidationProps,
@@ -69,5 +73,36 @@ export default class User extends Entity<UserProps | UserValidationProps> {
         updatedAt
       )
     );
+  }
+
+  public static update(
+    id: string,
+    props: UpdateUserProps
+  ): Either<InvalidNameError | InvalidPasswordError, User | {}> {
+    if (props.name) {
+      const nameOrError = Name.create(props.name);
+
+      if (nameOrError.isLeft()) {
+        return left(nameOrError.value);
+      }
+
+      const name: Name = nameOrError.value as Name;
+
+      User.prototype.name = name;
+    }
+
+    if (props.password) {
+      const passwordOrError = Password.create(props.password);
+
+      if (passwordOrError.isLeft()) {
+        return left(passwordOrError.value);
+      }
+
+      const password: Password = passwordOrError.value as Password;
+
+      User.prototype.password = password;
+    }
+
+    return right({ id, props });
   }
 }

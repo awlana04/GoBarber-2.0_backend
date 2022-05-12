@@ -99,6 +99,9 @@ export default {
     '@usecases/implementations/appointments-usecase': [
       '<rootDir>/src/domain/usecases/implementations/appointments-usecase',
     ],
+    '@usecases/implementations/refresh-tokens-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/refresh-tokens-usecase',
+    ],
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],

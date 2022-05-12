@@ -23,3 +23,8 @@ export type UserValidationProps = {
   barberId?: string;
   appointmentId?: string[];
 };
+
+export type UpdateUserProps = {
+  name?: string;
+  password?: string;
+};

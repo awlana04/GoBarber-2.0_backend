@@ -40,7 +40,6 @@ describe('Update user service', () => {
       id: 'invalidID',
       name,
       password,
-      location,
     });
 
     expect(response).rejects.toThrowError();
@@ -64,21 +63,11 @@ describe('Update user service', () => {
     expect(response).toBeDefined();
   });
 
-  it('should be able to update the user location', async () => {
-    const response = await sut.handle({
-      id,
-      location,
-    });
-
-    expect(response).toBeDefined();
-  });
-
   it('should be able to update the user', async () => {
     const response = await sut.handle({
       id,
       name,
       password,
-      location,
     });
 
     expect(response).toBeDefined();
