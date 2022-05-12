@@ -69,7 +69,7 @@ describe('Update user service', () => {
       password,
     });
 
-    expect(response.name).toEqual(name);
-    expect(response.password).toEqual(password);
+    expect(response.name.value).toEqual(name);
+    expect(response.password.value).toEqual(password);
   });
 });
