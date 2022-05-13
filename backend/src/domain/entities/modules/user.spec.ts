@@ -107,6 +107,55 @@ describe('User entity', () => {
     expect(response).toBeInstanceOf(User);
   });
 
+  it('should not be able to update the user with invalid name', () => {
+    const invalidName = 'a';
+
+    const response = User.update('id', { name: invalidName }).value as Error;
+
+    expect(response.name).toEqual('InvalidNameError');
+    expect(response.message).toEqual('Invalid name: ' + invalidName + '.');
+  });
+
+  it('should not be able to update the user with invalid password (too few characters)', () => {
+    const invalidPassword = '123';
+
+    const response = User.update('id', { password: invalidPassword })
+      .value as Error;
+
+    expect(response.name).toEqual('InvalidPasswordError');
+    expect(response.message).toEqual(
+      'Invalid password: ' + invalidPassword + '.'
+    );
+  });
+
+  it('should not be able to update the user with invalid password (too many characters)', () => {
+    const invalidPassword = '123'.repeat(128);
+
+    const response = User.update('id', { password: invalidPassword })
+      .value as Error;
+
+    expect(response.name).toEqual('InvalidPasswordError');
+    expect(response.message).toEqual(
+      'Invalid password: ' + invalidPassword + '.'
+    );
+  });
+
+  it('should be able to update the user name', () => {
+    const name = 'John Doe Junior';
+
+    const response = User.update('id', { name }).value as User;
+
+    expect(response.name.value).toEqual(name);
+  });
+
+  it('should be able to update the user password', () => {
+    const password = '12345678910';
+
+    const response = User.update('id', { password }).value as User;
+
+    expect(response.password.value).toEqual(password);
+  });
+
   it('should be able to update the user', () => {
     const name = 'John Doe Junior';
     const password = '12345678910';
