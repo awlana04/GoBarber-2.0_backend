@@ -106,4 +106,14 @@ describe('User entity', () => {
 
     expect(response).toBeInstanceOf(User);
   });
+
+  it('should be able to update the user', () => {
+    const name = 'John Doe Junior';
+    const password = '12345678910';
+
+    const response = User.update('id', { name, password }).value as User;
+
+    expect(response.name.value).toEqual(name);
+    expect(response.password.value).toEqual(password);
+  });
 });

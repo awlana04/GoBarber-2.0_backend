@@ -28,6 +28,8 @@ export default class UpdateUserService {
       password,
     }).value as User;
 
+    await this.usersRepository.update(id, { name, password });
+
     return user;
   }
 }
