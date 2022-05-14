@@ -32,7 +32,7 @@ describe('Barbers usecase', () => {
   }).value as User;
 
   const barber = Barber.create({
-    name: 'Jonh Doe Barber',
+    name: 'John Doe Barber',
     description: 'A Really Good Place',
     location: 'Somewhere Over the Pocket',
     openOnWeekends: true,
@@ -51,6 +51,32 @@ describe('Barbers usecase', () => {
 
   it('should be able to find an user', async () => {
     const response = await sut.checkUserExists(barber.userId);
+
+    expect(response).toBeNull();
+  });
+
+  it('should be able to find a barber name', () => {
+    const response = sut.checkBarberNameAlreadyExists('John Doe Barber');
+
+    expect(response).rejects.toThrowError();
+  });
+
+  it('should not be able to find a barber name', async () => {
+    const response = await sut.checkBarberNameAlreadyExists(
+      'John Doe Barber Junior'
+    );
+
+    expect(response).toBeNull();
+  });
+
+  it('should not be able to find a barber', () => {
+    const response = sut.checkBarberDoesNotExists('InvalidID');
+
+    expect(response).rejects.toThrowError();
+  });
+
+  it('should be able to find a barber', async () => {
+    const response = await sut.checkBarberDoesNotExists(barber.id);
 
     expect(response).toBeNull();
   });
