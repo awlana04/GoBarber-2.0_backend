@@ -46,7 +46,7 @@ export default class InMemoryAppointmentsRepository
   async findByDate(date: Date, barberId: string): Promise<Appointment | null> {
     const appointment = this.appointment.find(
       appointment =>
-        appointment.date !== date && appointment.barberId === barberId
+        appointment.date === date && appointment.barberId === barberId
     );
 
     if (!appointment) {

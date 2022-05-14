@@ -49,6 +49,12 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
       throw new Error('You can not book an appointment in a past date');
     }
 
+    const barber = await this.appointmentsRepository.findBarberId(barberId);
+
+    if (!barber) {
+      throw new Error('Barber does not exists');
+    }
+
     return null;
   }
 
