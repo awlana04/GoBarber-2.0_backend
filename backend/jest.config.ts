@@ -84,11 +84,14 @@ export default {
   moduleNameMapper: {
     '@entities/user': ['<rootDir>/src/domain/entities/modules/user'],
     '@entities/barber': ['<rootDir>/src/domain/entities/modules/barber'],
+    '@entities/appointment': [
+      '<rootDir>/src/domain/entities/modules/appointment',
+    ],
     '@entities/refresh-token': [
       '<rootDir>/src/domain/entities/modules/refresh-token',
     ],
-    '@entities/appointment': [
-      '<rootDir>/src/domain/entities/modules/appointment',
+    '@entities/notification': [
+      '<rootDir>/src/domain/entities/modules/notifications',
     ],
     '@usecases/implementations/users-usecase': [
       '<rootDir>/src/domain/usecases/implementations/users-usecase',
@@ -126,6 +129,9 @@ export default {
     ],
     '@in-memory/in-memory-refresh-tokens-repository': [
       '<rootDir>/tests/repositories/in-memory-refresh-tokens-repository',
+    ],
+    '@in-memory/in-memory-notifications-repository': [
+      '<rootDir>/tests/repositories/in-memory-notifications-repository',
     ],
   },
 

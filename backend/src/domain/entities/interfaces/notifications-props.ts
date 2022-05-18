@@ -1,5 +1,6 @@
 export type NotificationProps = {
   title: string;
-  nesssage: string;
+  message: string;
+  isViewed: boolean;
   userId: string;
 };
