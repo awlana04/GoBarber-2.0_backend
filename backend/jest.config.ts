@@ -105,6 +105,9 @@ export default {
     '@usecases/implementations/refresh-tokens-usecase': [
       '<rootDir>/src/domain/usecases/implementations/refresh-tokens-usecase',
     ],
+    '@usecases/implementations/notifications-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/notifications-usecase',
+    ],
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],

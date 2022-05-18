@@ -1,4 +1,6 @@
-import INotificationsRepository from '@domain/interfaces/i-notifications-repository';
+import INotificationsRepository from '@interfaces/i-notifications-repository';
+
+import INotificationsUsecase from '@usecases/models/i-notifications-usecase';
 
 import Notification from '@entities/notifications';
 
@@ -10,7 +12,10 @@ interface ICreateNotificationServiceRequest {
 }
 
 export default class CreateNotificationService {
-  constructor(private notificationsRepository: INotificationsRepository) {}
+  constructor(
+    private notificationsRepository: INotificationsRepository,
+    private notificationsUsecase: INotificationsUsecase
+  ) {}
 
   public async handle({
     title,
@@ -18,11 +23,7 @@ export default class CreateNotificationService {
     isViewed,
     userId,
   }: ICreateNotificationServiceRequest) {
-    const user = await this.notificationsRepository.findByUserId(userId);
-
-    if (!user) {
-      throw new Error('User does not exists');
-    }
+    await this.notificationsUsecase.checkUserExists(userId);
 
     const notifications = Notification.create({
       title,

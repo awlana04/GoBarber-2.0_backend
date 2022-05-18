@@ -1,19 +1,26 @@
 import InMemoryNotificationsRepository from '@in-memory/in-memory-notifications-repository';
+import NotificationsUsecase from '@usecases/implementations/notifications-usecase';
 import CreateNotificationService from './create-notification-service';
 
 import User from '@entities/user';
-import Notification from '@entities/notifications';
 
 type SutOutput = {
   notificationsRepository: InMemoryNotificationsRepository;
+  notificationsUsecase: NotificationsUsecase;
   sut: CreateNotificationService;
 };
 
 const makeSut = (): SutOutput => {
   const notificationsRepository = new InMemoryNotificationsRepository();
-  const sut = new CreateNotificationService(notificationsRepository);
+  const notificationsUsecase = new NotificationsUsecase(
+    notificationsRepository
+  );
+  const sut = new CreateNotificationService(
+    notificationsRepository,
+    notificationsUsecase
+  );
 
-  return { notificationsRepository, sut };
+  return { notificationsRepository, notificationsUsecase, sut };
 };
 
 describe('Create notification', () => {
