@@ -65,13 +65,33 @@ describe('Barber entity', () => {
     expect(response).toBeInstanceOf(Barber);
   });
 
-  it('should be able to update the barber name', async () => {
-    const updatedName = 'John Doe Barber';
+  it('should not be able to update the barber with invalid name (too few characters)', () => {
+    const invalidName = 'a';
 
-    const response = (await Barber.update({
-      name: updatedName,
-    }).value) as Barber;
+    const response = Barber.update({
+      name: invalidName,
+    }).value as Error;
 
-    expect(response.name.value).toEqual(updatedName);
+    expect(response.name).toEqual('InvalidNameError');
+    expect(response.message).toEqual('Invalid name: ' + invalidName + '.');
+  });
+
+  it('should not be able to update the barber with invalid nane (too many characters)', () => {
+    const invalidName = 'aaa'.repeat(128);
+
+    const response = Barber.update({ name: invalidName }).value as Error;
+
+    expect(response.name).toEqual('InvalidNameError');
+    expect(response.message).toEqual('Invalid name: ' + invalidName + '.');
+  });
+
+  it('should be able to update the barber name', () => {
+    const name = 'John Doe Barber';
+
+    const response = Barber.update({
+      name,
+    }).value as Barber;
+
+    expect(response.name.value).toEqual(name);
   });
 });
