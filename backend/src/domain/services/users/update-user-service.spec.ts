@@ -46,10 +46,10 @@ describe('Update user service', () => {
   it('should be able to update the user name', async () => {
     const response = await sut.handle({
       id,
-      name: 'John Doe Junior',
+      name,
     });
 
-    expect(response).toBeDefined();
+    expect(response.name.value).toEqual(name);
   });
 
   it('should be able to update the user password', async () => {
@@ -58,7 +58,7 @@ describe('Update user service', () => {
       password,
     });
 
-    expect(response).toBeDefined();
+    expect(response.password.value).toEqual(password);
   });
 
   it('should be able to update the user', async () => {

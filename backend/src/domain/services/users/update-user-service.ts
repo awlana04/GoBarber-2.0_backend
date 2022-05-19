@@ -23,7 +23,7 @@ export default class UpdateUserService {
   }: UpdateUserServiceRequest): Promise<User> {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
-    const user = User.update(id, {
+    const user = User.update({
       name,
       password,
     }).value as User;

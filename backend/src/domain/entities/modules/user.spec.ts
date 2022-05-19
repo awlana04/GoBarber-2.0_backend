@@ -110,7 +110,7 @@ describe('User entity', () => {
   it('should not be able to update the user with invalid name', () => {
     const invalidName = 'a';
 
-    const response = User.update('id', { name: invalidName }).value as Error;
+    const response = User.update({ name: invalidName }).value as Error;
 
     expect(response.name).toEqual('InvalidNameError');
     expect(response.message).toEqual('Invalid name: ' + invalidName + '.');
@@ -119,8 +119,7 @@ describe('User entity', () => {
   it('should not be able to update the user with invalid password (too few characters)', () => {
     const invalidPassword = '123';
 
-    const response = User.update('id', { password: invalidPassword })
-      .value as Error;
+    const response = User.update({ password: invalidPassword }).value as Error;
 
     expect(response.name).toEqual('InvalidPasswordError');
     expect(response.message).toEqual(
@@ -131,8 +130,7 @@ describe('User entity', () => {
   it('should not be able to update the user with invalid password (too many characters)', () => {
     const invalidPassword = '123'.repeat(128);
 
-    const response = User.update('id', { password: invalidPassword })
-      .value as Error;
+    const response = User.update({ password: invalidPassword }).value as Error;
 
     expect(response.name).toEqual('InvalidPasswordError');
     expect(response.message).toEqual(
@@ -143,7 +141,7 @@ describe('User entity', () => {
   it('should be able to update the user name', () => {
     const name = 'John Doe Junior';
 
-    const response = User.update('id', { name }).value as User;
+    const response = User.update({ name }).value as User;
 
     expect(response.name.value).toEqual(name);
   });
@@ -151,7 +149,7 @@ describe('User entity', () => {
   it('should be able to update the user password', () => {
     const password = '12345678910';
 
-    const response = User.update('id', { password }).value as User;
+    const response = User.update({ password }).value as User;
 
     expect(response.password.value).toEqual(password);
   });
@@ -160,7 +158,7 @@ describe('User entity', () => {
     const name = 'John Doe Junior';
     const password = '12345678910';
 
-    const response = User.update('id', { name, password }).value as User;
+    const response = User.update({ name, password }).value as User;
 
     expect(response.name.value).toEqual(name);
     expect(response.password.value).toEqual(password);

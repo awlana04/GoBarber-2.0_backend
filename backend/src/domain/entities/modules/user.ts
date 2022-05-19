@@ -76,7 +76,6 @@ export default class User extends Entity<UserProps | UserValidationProps> {
   }
 
   public static update(
-    _id: string,
     props: UpdateUserProps
   ): Either<InvalidNameError | InvalidPasswordError, User> {
     if (props.name) {
