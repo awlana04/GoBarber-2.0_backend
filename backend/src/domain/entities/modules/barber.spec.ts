@@ -64,4 +64,14 @@ describe('Barber entity', () => {
 
     expect(response).toBeInstanceOf(Barber);
   });
+
+  it('should be able to update the barber name', async () => {
+    const updatedName = 'John Doe Barber';
+
+    const response = (await Barber.update({
+      name: updatedName,
+    }).value) as Barber;
+
+    expect(response.name.value).toEqual(updatedName);
+  });
 });

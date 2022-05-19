@@ -1,6 +1,10 @@
 import Entity from '../shared/entity';
 
-import { BarberProps, BarberValidationProps } from '../interfaces/barber-props';
+import {
+  BarberProps,
+  BarberValidationProps,
+  UpdateBarberProps,
+} from '../interfaces/barber-props';
 
 import Name from '../domain/name';
 
@@ -11,7 +15,7 @@ import InvalidNameError from '@shared/errors/invalid-name-error';
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
 > {
-  public readonly name: Name;
+  public name: Name;
 
   private constructor(
     props: BarberValidationProps,
@@ -66,5 +70,35 @@ export default class Barber extends Entity<
         updatedAt
       )
     );
+  }
+
+  public static update(
+    props: UpdateBarberProps
+  ): Either<InvalidNameError, Barber> {
+    if (props.name) {
+      const nameOrError = Name.create(props.name);
+
+      if (nameOrError.isLeft()) {
+        return left(nameOrError.value);
+      }
+
+      const name: Name = nameOrError.value as Name;
+
+      Barber.prototype.name = name;
+    }
+
+    if (props.description) {
+      Barber.prototype.props.description = props.description;
+    }
+
+    if (props.openAtNight) {
+      Barber.prototype.props.openAtNight = props.openAtNight;
+    }
+
+    if (props.openOnWeekends) {
+      Barber.prototype.props.openOnWeekends = props.openOnWeekends;
+    }
+
+    return right(Barber.prototype);
   }
 }

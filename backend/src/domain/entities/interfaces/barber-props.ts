@@ -21,3 +21,10 @@ export type BarberValidationProps = {
   userId: string;
   appointmentId?: string[];
 };
+
+export type UpdateBarberProps = {
+  name?: string;
+  description?: string;
+  openAtNight?: boolean;
+  openOnWeekends?: boolean;
+};
