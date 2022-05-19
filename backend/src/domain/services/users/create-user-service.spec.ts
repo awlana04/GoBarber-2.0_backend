@@ -8,8 +8,6 @@ import User from '@entities/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
-  refreshTokenProvider: RefreshTokenProvider;
-  usersUsecase: UsersUsecase;
   sut: CreateUserService;
 };
 
@@ -24,7 +22,7 @@ const makeSut = (): SutOutput => {
     refreshTokenProvider
   );
 
-  return { sut, refreshTokenProvider, usersUsecase, usersRepository };
+  return { sut, usersRepository };
 };
 
 describe('Create user service', () => {

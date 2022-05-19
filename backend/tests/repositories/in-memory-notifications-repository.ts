@@ -9,16 +9,14 @@ export default class InMemoryNotificationsRepository
   public user: User[] = [];
   public notification: Notification[] = [];
 
-  async findByUserId(userId: string): Promise<Notification | null> {
-    const notification = this.notification.find(
-      notification => notification.props.userId === userId
-    );
+  async findByUserId(userId: string): Promise<Notification | null | any> {
+    const user = this.user.find(user => user.id === userId);
 
-    if (!notification) {
+    if (!user) {
       return null;
     }
 
-    return notification;
+    return user;
   }
 
   async save(notification: Notification): Promise<Notification | any> {

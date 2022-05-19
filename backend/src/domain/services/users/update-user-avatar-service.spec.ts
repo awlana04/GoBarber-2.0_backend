@@ -6,7 +6,6 @@ import User from '@entities/user';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
-  usersUsecase: UsersUsecase;
   sut: UpdateUserAvatarService;
 };
 
@@ -15,7 +14,7 @@ const makeSut = (): SutOutput => {
   const usersUsecase = new UsersUsecase(usersRepository);
   const sut = new UpdateUserAvatarService(usersRepository, usersUsecase);
 
-  return { usersRepository, usersUsecase, sut };
+  return { usersRepository, sut };
 };
 
 describe('Update user avatar service', () => {

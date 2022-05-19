@@ -1,27 +1,22 @@
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import RefreshTokenUsecase from '@usecases/implementations/refresh-tokens-usecase';
-import CreateRefreshTokenService from './create-refresh-token-service';
+import RefreshTokenUsecase from './refresh-tokens-usecase';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';
 
 type SutOutput = {
   refreshTokensRepository: InMemoryRefreshTokenRepository;
-  sut: CreateRefreshTokenService;
+  sut: RefreshTokenUsecase;
 };
 
 const makeSut = (): SutOutput => {
   const refreshTokensRepository = new InMemoryRefreshTokenRepository();
-  const refreshTokensUsecase = new RefreshTokenUsecase(refreshTokensRepository);
-  const sut = new CreateRefreshTokenService(
-    refreshTokensRepository,
-    refreshTokensUsecase
-  );
+  const sut = new RefreshTokenUsecase(refreshTokensRepository);
 
   return { refreshTokensRepository, sut };
 };
 
-describe('Create refresh token service', () => {
+describe('Refresh token usecase', () => {
   const { refreshTokensRepository, sut } = makeSut();
 
   const user = User.create({
@@ -39,13 +34,9 @@ describe('Create refresh token service', () => {
   refreshTokensRepository.user.push(user);
   refreshTokensRepository.refreshToken.push(refreshToken);
 
-  it('should be able to create a new refresh token', async () => {
-    const response = await sut.handle({
-      id: refreshToken.id,
-      expiresIn: Date.UTC(2022, 10) as unknown as Date,
-      userId: user.id,
-    });
+  it('should NOT be able to create a new refresh token with an invalid id', () => {
+    const response = sut.findRefreshToken('invalidID');
 
-    expect(response).toBeDefined();
+    expect(response).rejects.toThrowError();
   });
 });

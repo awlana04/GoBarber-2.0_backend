@@ -1,24 +1,16 @@
 import InMemoryNotificationsRepository from '@in-memory/in-memory-notifications-repository';
-import NotificationsUsecase from '@usecases/implementations/notifications-usecase';
-import CreateNotificationService from './create-notification-service';
+import NotificationsUsecase from './notifications-usecase';
 
 import User from '@entities/user';
 
 type SutOutput = {
   notificationsRepository: InMemoryNotificationsRepository;
-  sut: CreateNotificationService;
+  sut: NotificationsUsecase;
 };
 
 const makeSut = (): SutOutput => {
   const notificationsRepository = new InMemoryNotificationsRepository();
-  const notificationsUsecase = new NotificationsUsecase(
-    notificationsRepository
-  );
-
-  const sut = new CreateNotificationService(
-    notificationsRepository,
-    notificationsUsecase
-  );
+  const sut = new NotificationsUsecase(notificationsRepository);
 
   return { notificationsRepository, sut };
 };
@@ -35,16 +27,9 @@ describe('Create notification', () => {
 
   notificationsRepository.user.push(user);
 
-  it('should be able to find a notification', async () => {
-    console.log(user.id);
+  it('should not be able to find a notification with invalid user id', () => {
+    const response = sut.checkUserExists('invalidID');
 
-    const response = await sut.handle({
-      title: 'Welcome',
-      message: 'Welcome to GoBarber-2.0!',
-      isViewed: false,
-      userId: user.id,
-    });
-
-    expect(response.props.userId).toEqual(user.id);
+    expect(response).rejects.toThrowError();
   });
 });

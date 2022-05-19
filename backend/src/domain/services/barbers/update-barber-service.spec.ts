@@ -9,7 +9,6 @@ import Barber from '@entities/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;
-  barbersUsecase: BarbersUsecase;
   sut: UpdateBarberService;
 };
 
@@ -18,7 +17,7 @@ const makeSut = (): SutOutput => {
   const barbersUsecase = new BarbersUsecase(barberRepository);
   const sut = new UpdateBarberService(barberRepository, barbersUsecase);
 
-  return { barberRepository, barbersUsecase, sut };
+  return { barberRepository, sut };
 };
 
 describe('Update barber service', () => {

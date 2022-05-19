@@ -10,7 +10,6 @@ import Appointment from '@entities/appointment';
 
 type SutOutput = {
   barbersRepository: InMemoryBarberRepository;
-  barbersUsecase: BarbersUsecase;
   sut: DeleteBarberAndAppointmentService;
 };
 
@@ -22,7 +21,7 @@ const makeSut = (): SutOutput => {
     barbersUsecase
   );
 
-  return { barbersRepository, barbersUsecase, sut };
+  return { barbersRepository, sut };
 };
 
 describe('Delete barber and appointment service', () => {

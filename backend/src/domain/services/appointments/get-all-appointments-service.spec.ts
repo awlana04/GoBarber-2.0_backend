@@ -10,7 +10,6 @@ import Appointment from '@entities/appointment';
 
 type SutOutput = {
   appointmentsRepository: InMemoryAppointmentsRepository;
-  appointmentsUsecase: AppointmentsUsecase;
   sut: GetAllAppointmentsService;
 };
 
@@ -22,7 +21,7 @@ const makeSut = (): SutOutput => {
     appointmentsUsecase
   );
 
-  return { appointmentsRepository, appointmentsUsecase, sut };
+  return { appointmentsRepository, sut };
 };
 
 describe('Get all appointments service', () => {

@@ -9,7 +9,6 @@ import Barber from '@entities/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;
-  barbersUsecase: BarbersUsecase;
   sut: CreateBarberService;
 };
 
@@ -20,7 +19,6 @@ const makeSut = (): SutOutput => {
 
   return {
     barberRepository,
-    barbersUsecase,
     sut,
   };
 };
