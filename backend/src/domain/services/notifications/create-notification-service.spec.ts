@@ -36,8 +36,6 @@ describe('Create notification', () => {
   notificationsRepository.user.push(user);
 
   it('should be able to find a notification', async () => {
-    console.log(user.id);
-
     const response = await sut.handle({
       title: 'Welcome',
       message: 'Welcome to GoBarber-2.0!',

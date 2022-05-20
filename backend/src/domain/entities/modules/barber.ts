@@ -11,11 +11,13 @@ import Name from '../domain/name';
 import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
+import Prop from '../domain/prop';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
 > {
   public name: Name;
+  public description: Prop;
 
   private constructor(
     props: BarberValidationProps,
@@ -26,6 +28,7 @@ export default class Barber extends Entity<
     super(props, id, createdAt, updatedAt);
 
     this.name = props.name;
+    this.description = props.description;
   }
 
   get userId() {
@@ -44,9 +47,11 @@ export default class Barber extends Entity<
       return left(nameOrError.value);
     }
 
+    const descriptionOrError = Prop.create(props.description);
+
     const name: Name = nameOrError.value as Name;
     const location = props.location;
-    const description = props.description;
+    const description: Prop = descriptionOrError as Prop;
     const images = props.images;
     const openAtNight = props.openAtNight;
     const openOnWeekends = props.openOnWeekends;
@@ -88,7 +93,11 @@ export default class Barber extends Entity<
     }
 
     if (props.description) {
-      Barber.prototype.props.description = props.description;
+      const descriptionOrError = Prop.create(props.description);
+
+      const description: Prop = descriptionOrError as Prop;
+
+      Barber.prototype.description = description;
     }
 
     if (props.openAtNight) {
