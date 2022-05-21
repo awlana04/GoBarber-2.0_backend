@@ -51,7 +51,7 @@ export default class Barber extends Entity<
 
     const name: Name = nameOrError.value as Name;
     const location = props.location;
-    const description: Prop = descriptionOrError as Prop;
+    const description: Prop = descriptionOrError.value as Prop;
     const images = props.images;
     const openAtNight = props.openAtNight;
     const openOnWeekends = props.openOnWeekends;
@@ -95,7 +95,7 @@ export default class Barber extends Entity<
     if (props.description) {
       const descriptionOrError = Prop.create(props.description);
 
-      const description: Prop = descriptionOrError as Prop;
+      const description: Prop = descriptionOrError.value as Prop;
 
       Barber.prototype.description = description;
     }

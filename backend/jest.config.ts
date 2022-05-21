@@ -121,6 +121,9 @@ export default {
     '@shared/errors/invalid-password-error': [
       '<rootDir>/src/domain/shared/errors/invalid-password-error',
     ],
+    '@shared/errors/invalid-prop-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-prop-error',
+    ],
     '@in-memory/in-memory-appointments-repository': [
       '<rootDir>/tests/repositories/in-memory-appointments-repository',
     ],
