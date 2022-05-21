@@ -7,11 +7,11 @@ import {
 } from '../interfaces/barber-props';
 
 import Name from '../domain/name';
+import Prop from '../domain/prop';
 
 import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
-import Prop from '../domain/prop';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
@@ -98,14 +98,6 @@ export default class Barber extends Entity<
       const description: Prop = descriptionOrError as Prop;
 
       Barber.prototype.description = description;
-    }
-
-    if (props.openAtNight) {
-      Barber.prototype.props.openAtNight = props.openAtNight;
-    }
-
-    if (props.openOnWeekends) {
-      Barber.prototype.props.openOnWeekends = props.openOnWeekends;
     }
 
     return right(Barber.prototype);

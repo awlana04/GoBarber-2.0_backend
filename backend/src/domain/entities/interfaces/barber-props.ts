@@ -1,4 +1,4 @@
-import Create from '../domain/create';
+import Prop from '../domain/prop';
 import Name from '../domain/name';
 
 export type BarberProps = {
@@ -15,7 +15,7 @@ export type BarberProps = {
 export type BarberValidationProps = {
   name: Name;
   location: string;
-  description: Create;
+  description: Prop;
   images?: string[];
   openAtNight: boolean;
   openOnWeekends: boolean;

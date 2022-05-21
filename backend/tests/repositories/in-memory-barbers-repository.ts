@@ -74,7 +74,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
 
     if (data.description) {
       return barber?.description.value.replace(
-        barber.description.value,
+        barber?.description.value,
         data.description
       );
     }

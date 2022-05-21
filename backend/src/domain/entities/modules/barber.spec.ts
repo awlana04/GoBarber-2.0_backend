@@ -100,14 +100,6 @@ describe('Barber entity', () => {
 
     const response = Barber.update({ description }).value as Barber;
 
-    console.log(response);
-
     expect(response.description.value).toEqual(description);
-  });
-
-  it('should be able to update the barber open at night', () => {
-    const response = Barber.update({ openAtNight: false }).value as Barber;
-
-    expect(response.props.openAtNight).toBeFalsy();
   });
 });
