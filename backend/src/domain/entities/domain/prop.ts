@@ -10,6 +10,8 @@ export default class Prop {
   }
 
   public static create(item: string) {
-    return new Prop(item);
+    const prop = new Prop(item);
+
+    return prop;
   }
 }

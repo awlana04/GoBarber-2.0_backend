@@ -18,8 +18,9 @@ import InvalidPasswordError from '@shared/errors/invalid-password-error';
 
 export default class User extends Entity<UserProps | UserValidationProps> {
   public name: Name;
-  public readonly email: Email;
   public password: Password;
+
+  public readonly email: Email;
 
   private constructor(
     props: UserValidationProps,
