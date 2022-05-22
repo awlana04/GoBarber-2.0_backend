@@ -18,6 +18,10 @@ export default class Prop {
       return false;
     }
 
+    if (prop.length < 3 || prop.length > 128) {
+      return false;
+    }
+
     return true;
   }
 
