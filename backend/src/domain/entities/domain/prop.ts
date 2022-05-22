@@ -13,7 +13,7 @@ export default class Prop {
     return this.value;
   }
 
-  public static validate(prop: string): boolean {
+  private static validate(prop: string): boolean {
     if (!prop) {
       return false;
     }

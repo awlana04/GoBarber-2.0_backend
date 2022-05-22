@@ -124,6 +124,9 @@ export default {
     '@shared/errors/invalid-prop-error': [
       '<rootDir>/src/domain/shared/errors/invalid-prop-error',
     ],
+    '@shared/errors/invalid-description-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-description-error',
+    ],
     '@in-memory/in-memory-appointments-repository': [
       '<rootDir>/tests/repositories/in-memory-appointments-repository',
     ],
