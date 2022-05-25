@@ -29,12 +29,6 @@ describe('Delete user service', () => {
 
   usersRepository.item.push(user);
 
-  it('should NOT be able to delete an user with an invalid id', () => {
-    const response = sut.handle('invalidID');
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to delete an user', async () => {
     const response = await sut.handle(user.id);
 

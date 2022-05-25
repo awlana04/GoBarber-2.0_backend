@@ -30,15 +30,6 @@ describe('Update user avatar service', () => {
 
   usersRepository.item.push(user);
 
-  it('should NOT be able to update the user avatar with an invalid id', () => {
-    const response = sut.handle({
-      id: 'invalidID',
-      avatar: 'other-avatar.png',
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to update the user avatar', async () => {
     const response = await sut.handle({
       id: user.id,

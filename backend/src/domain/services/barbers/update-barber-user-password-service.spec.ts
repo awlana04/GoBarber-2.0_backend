@@ -48,26 +48,6 @@ describe('Update barber user password service', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('should NOT be able to update the barber user password with an invalid user id', () => {
-    const response = sut.handle({
-      id,
-      userId: 'invalidID',
-      password: '12345678910',
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
-  it('ahould NOT be able to update the barber user password with an invalid id', () => {
-    const response = sut.handle({
-      id: 'invalidID',
-      userId: user.id,
-      password: '12345678910',
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('ahould be able to update the barber user password', async () => {
     const response = await sut.handle({
       id,

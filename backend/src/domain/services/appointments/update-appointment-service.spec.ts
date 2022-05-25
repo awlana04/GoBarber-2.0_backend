@@ -66,13 +66,4 @@ describe('Update appointment service', () => {
 
     expect(response).toBeDefined();
   });
-
-  it('should NOT be able to update the appointment with an invalid id', () => {
-    const response = sut.handle({
-      id: 'invalidID',
-      date: new Date(),
-    });
-
-    expect(response).rejects.toThrowError();
-  });
 });

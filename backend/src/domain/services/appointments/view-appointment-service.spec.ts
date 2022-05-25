@@ -55,12 +55,6 @@ describe('View appointment service', () => {
   appointmentsRepository.barber.push(barber);
   appointmentsRepository.appointment.push(appointment);
 
-  it('should NOT be able to view an appointment with an invalod id', () => {
-    const response = sut.handle('invalidID');
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to view an appointment', async () => {
     const response = await sut.handle(appointment.id);
 

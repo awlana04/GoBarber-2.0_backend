@@ -33,16 +33,6 @@ describe('Update user service', () => {
   const name = 'John Doe Junior';
   const password = '12345678910';
 
-  it('should NOT be able to update the user with invalid id', async () => {
-    const response = sut.handle({
-      id: 'invalidID',
-      name,
-      password,
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to update the user name', async () => {
     const response = await sut.handle({
       id,

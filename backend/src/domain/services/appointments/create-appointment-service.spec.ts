@@ -53,12 +53,15 @@ describe('Create appointment service', () => {
   appointmentRepository.barber.push(barber);
 
   it('should be able to create a new appointment', async () => {
+    const date = new Date();
+
     const response = await sut.handle({
-      date: new Date(),
+      date,
       userId: user.id,
       barberId: barber.id,
     });
 
+    expect(response.date).toEqual(date);
     expect(response.userId).toEqual(user.id);
     expect(response.barberId).toEqual(barber.id);
 

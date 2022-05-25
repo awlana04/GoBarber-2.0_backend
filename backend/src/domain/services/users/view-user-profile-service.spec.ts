@@ -27,12 +27,6 @@ describe('View user profile service', () => {
 
   usersRepository.item.push(user);
 
-  it('should NOT be able to view the user profile with an invalid id', () => {
-    const response = sut.handle('invalidId');
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to view the user profile', async () => {
     const response = await sut.handle(user.id);
 

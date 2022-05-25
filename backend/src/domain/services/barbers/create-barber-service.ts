@@ -7,6 +7,7 @@ import IBarberRepository from '@interfaces/i-barber-repository';
 import Barber from '@entities/barber';
 
 import IBarberUsecase from '@usecases/models/i-barbers-usecase';
+import InvalidDescriptionError from '@domain/shared/errors/invalid-description-error';
 
 interface ICreateBarberServiceRequest {
   name: string;
@@ -32,11 +33,16 @@ export default class CreateBarberService {
     openAtNight,
     openOnWeekends,
     userId,
-  }: ICreateBarberServiceRequest): Promise<Either<InvalidNameError, Barber>> {
+  }: ICreateBarberServiceRequest): Promise<
+    Either<InvalidNameError | InvalidDescriptionError, Barber>
+  > {
     await this.barbersUsecase.checkUserExists(userId);
     await this.barbersUsecase.checkBarberNameAlreadyExists(name);
 
-    const barberOrError: Either<InvalidNameError, Barber> = Barber.create({
+    const barberOrError: Either<
+      InvalidNameError | InvalidDescriptionError,
+      Barber
+    > = Barber.create({
       name,
       location,
       description,

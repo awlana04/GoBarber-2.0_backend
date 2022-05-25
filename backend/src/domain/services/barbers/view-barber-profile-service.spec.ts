@@ -46,12 +46,6 @@ describe('View barber profile service', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('should NOT be able to view the barber profile with an invalid id', () => {
-    const response = sut.handle('invalidID');
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to view the barber profile', async () => {
     const response = await sut.handle(id);
 

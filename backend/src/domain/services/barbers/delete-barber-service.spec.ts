@@ -45,12 +45,6 @@ describe('Delete barber service', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('should NOT be able to delete a barber with an invalid id', () => {
-    const response = sut.handle('invalidID');
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to delete a barber', async () => {
     const response = await sut.handle(barber.id);
 

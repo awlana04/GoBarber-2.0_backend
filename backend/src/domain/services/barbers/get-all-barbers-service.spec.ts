@@ -44,12 +44,6 @@ describe('Get all barbers service', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('should NOT be abel to get all barbers with an invalid user id', () => {
-    const response = sut.handle('invalidID');
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to get all barbers', async () => {
     const response = await sut.handle(user.id);
 

@@ -34,12 +34,18 @@ describe('Create barber service', () => {
   barberRepository.user.push(user);
 
   it('should be able to create a new barber', async () => {
+    const name = 'John Doe Barber';
+    const location = 'Somewhere Into the Pocket';
+    const description = 'This is a really good place, please believe me :)';
+    const openAtNight = true;
+    const openOnWeekends = true;
+
     const response = await sut.handle({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'This is a really good place, please believe me :)',
-      openAtNight: true,
-      openOnWeekends: true,
+      name,
+      location,
+      description,
+      openAtNight,
+      openOnWeekends,
       userId: user.id,
     });
 

@@ -52,26 +52,6 @@ describe('Update barber user avatar', () => {
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
-  it('should NOT be able to update the barber avatar with an invalid id', () => {
-    const response = sut.handle({
-      id: 'invalidID',
-      userId: user.id,
-      avatar: 'another-avatar.png',
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
-  it('should NOT be able to update the barber avatar with an invalid user id', () => {
-    const response = sut.handle({
-      id,
-      userId: 'invalidID',
-      avatar: 'another-avatar.png',
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
   it('should be able to update the barber avatar', async () => {
     const response = await sut.handle({
       id,
