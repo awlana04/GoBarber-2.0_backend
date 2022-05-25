@@ -33,8 +33,8 @@ describe('Barbers usecase', () => {
 
   const barber = Barber.create({
     name: 'John Doe Barber',
-    description: 'A Really Good Place',
     location: 'Somewhere Over the Pocket',
+    description: 'This is a really good place, please believe me :)',
     openOnWeekends: true,
     openAtNight: true,
     userId: user.id,

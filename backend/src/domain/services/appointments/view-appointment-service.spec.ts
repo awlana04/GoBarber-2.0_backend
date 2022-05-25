@@ -35,7 +35,7 @@ describe('View appointment service', () => {
   const barber = Barber.create({
     name: 'John Doe Barber',
     location: 'Somewhere Into the Pocket',
-    description: 'A really good place',
+    description: 'This is a really good place, please believe me :)',
     openAtNight: true,
     openOnWeekends: true,
     userId: user.id,

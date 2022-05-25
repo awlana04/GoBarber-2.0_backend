@@ -7,17 +7,19 @@ import {
 } from '../interfaces/barber-props';
 
 import Name from '../domain/name';
-import Prop from '../domain/prop';
+import Description from '../domain/description';
+// import Prop from '../domain/prop';
 
 import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
+import InvalidDescriptionError from '@domain/shared/errors/invalid-description-error';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
 > {
   public name: Name;
-  public description: Prop;
+  public description: Description;
 
   private constructor(
     props: BarberValidationProps,
@@ -40,18 +42,22 @@ export default class Barber extends Entity<
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
-  ): Either<InvalidNameError, Barber> {
+  ): Either<InvalidNameError | InvalidDescriptionError, Barber> {
     const nameOrError = Name.create(props.name);
 
     if (nameOrError.isLeft()) {
       return left(nameOrError.value);
     }
 
-    const descriptionOrError = Prop.create(props.description);
+    const descriptionOrError = Description.create(props.description);
+
+    if (descriptionOrError.isLeft()) {
+      return left(descriptionOrError.value);
+    }
 
     const name: Name = nameOrError.value as Name;
     const location = props.location;
-    const description: Prop = descriptionOrError.value as Prop;
+    const description: Description = descriptionOrError.value as Description;
     const images = props.images;
     const openAtNight = props.openAtNight;
     const openOnWeekends = props.openOnWeekends;
@@ -79,7 +85,7 @@ export default class Barber extends Entity<
 
   public static update(
     props: UpdateBarberProps
-  ): Either<InvalidNameError, Barber> {
+  ): Either<InvalidNameError | InvalidDescriptionError, Barber> {
     if (props.name) {
       const nameOrError = Name.create(props.name);
 
@@ -93,9 +99,13 @@ export default class Barber extends Entity<
     }
 
     if (props.description) {
-      const descriptionOrError = Prop.create(props.description);
+      const descriptionOrError = Description.create(props.description);
 
-      const description: Prop = descriptionOrError.value as Prop;
+      if (descriptionOrError.isLeft()) {
+        return left(descriptionOrError.value);
+      }
+
+      const description: Description = descriptionOrError.value as Description;
 
       Barber.prototype.description = description;
     }

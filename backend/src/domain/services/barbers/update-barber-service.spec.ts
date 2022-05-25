@@ -36,7 +36,7 @@ describe('Update barber service', () => {
     {
       name: 'John Doe Barber',
       location: 'Somewhere Into the Pocket',
-      description: 'A really good place',
+      description: 'This is a really good place, please believe me :)',
       openAtNight: true,
       openOnWeekends: true,
       userId: user.id,
@@ -52,9 +52,9 @@ describe('Update barber service', () => {
       id: barber.id,
       name: 'John Doe Junior Barber',
       location: 'Somewhere Out of The Box',
-      description: 'A Really HELLA Good Place',
-      openAtNight: false,
-      openOnWeekends: false,
+      description: 'This is a HELLA really good place, please believe me :)',
+      // openAtNight: false,
+      // openOnWeekends: false,
     });
 
     expect(response).toBeDefined();
@@ -81,40 +81,40 @@ describe('Update barber service', () => {
   it('should be able to update the barber description', async () => {
     const response = await sut.handle({
       id: barber.id,
-      description: 'A really HELLA good place',
+      description: 'This is a HELLA really good place, please believe me :)',
     });
 
     expect(response).toBeDefined();
   });
 
-  it('should be able to update the barber open at night boolean', async () => {
-    const response = await sut.handle({
-      id: barber.id,
-      openAtNight: false,
-    });
+  // it('should be able to update the barber open at night boolean', async () => {
+  //   const response = await sut.handle({
+  //     id: barber.id,
+  //     openAtNight: false,
+  //   });
 
-    expect(response.props.openAtNight).toBeFalsy();
-  });
+  //   expect(response.props.openAtNight).toBeFalsy();
+  // });
 
-  it('should be able to update the barber open on weekends boolean', async () => {
-    barberRepository.barber.push(barber);
+  // it('should be able to update the barber open on weekends boolean', async () => {
+  //   barberRepository.barber.push(barber);
 
-    const response = await sut.handle({
-      id: barber.id,
-      openOnWeekends: false,
-    });
+  //   const response = await sut.handle({
+  //     id: barber.id,
+  //     openOnWeekends: false,
+  //   });
 
-    expect(response.props.openOnWeekends).toBeFalsy();
-  });
+  //   expect(response.props.openOnWeekends).toBeFalsy();
+  // });
 
   it('should NOT be able to update the barber with an invalid id', () => {
     const response = sut.handle({
       id: 'invalidID',
       name: 'John Doe Junior Barber',
       location: 'Somewhere Out of The Box',
-      description: 'A really HELLA good place',
-      openAtNight: false,
-      openOnWeekends: false,
+      description: 'This is a HELLA really good place, please believe me :)',
+      // openAtNight: false,
+      // openOnWeekends: false,
     });
 
     expect(response).rejects.toThrowError();

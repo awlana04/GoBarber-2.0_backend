@@ -5,7 +5,7 @@ import Barber from './barber';
 describe('Barber entity', () => {
   const name = 'John Doe Barber';
   const location = 'Somewhere Into the Pocket';
-  const description = 'A Really Good Place';
+  const description = 'This is a really good place, please believe me :)';
   const openAtNight = true;
   const openOnWeekends = true;
   const userId = crypto.randomUUID();
@@ -96,7 +96,7 @@ describe('Barber entity', () => {
   });
 
   it('should be able to update the barber description', () => {
-    const description = 'A Very Really Good Place';
+    const description = 'This is a really good place, please believe me :)';
 
     const response = Barber.update({ description }).value as Barber;
 

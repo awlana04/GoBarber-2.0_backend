@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import CreateBarberService from './create-barber-service';
@@ -39,54 +37,12 @@ describe('Create barber service', () => {
     const response = await sut.handle({
       name: 'John Doe Barber',
       location: 'Somewhere Into the Pocket',
-      description: 'A really good place',
+      description: 'This is a really good place, please believe me :)',
       openAtNight: true,
       openOnWeekends: true,
       userId: user.id,
     });
 
     expect(response.value).toBeInstanceOf(Barber);
-  });
-
-  it('should NOT be able to create a new barber with an invalid userId', () => {
-    const response = sut.handle({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A really good place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: 'InvalidUUID',
-    });
-
-    expect(response).rejects.toThrowError();
-  });
-
-  it('should NOT be able to create a new barber with an invalid name', () => {
-    const id = crypto.randomUUID();
-
-    const barber = Barber.create(
-      {
-        name: 'John Doe Barber',
-        location: 'Somewhere Into the Pocket',
-        description: 'A really good place',
-        openAtNight: true,
-        openOnWeekends: true,
-        userId: user.id,
-      },
-      id
-    ).value as Barber;
-
-    barberRepository.barber.push(barber);
-
-    const response = sut.handle({
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'A really good place',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    });
-
-    expect(response).rejects.toThrowError();
   });
 });
