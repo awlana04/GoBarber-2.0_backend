@@ -1,5 +1,6 @@
 import Name from '../domain/name';
 import Description from '../domain/description';
+import Prop from '../domain/prop';
 // import Prop from '../domain/prop';
 
 export type BarberProps = {

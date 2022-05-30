@@ -79,9 +79,9 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
       );
     }
 
-    const name = String(barber?.props.name);
+    const name = String(barber?.name.value);
     const location = String(barber?.props.location);
-    const description = String(barber?.props.description);
+    const description = String(barber?.description.value);
     const openAtNight = Boolean(barber?.props.openAtNight);
     const openOnWeekends = Boolean(barber?.props.openOnWeekends);
     const userId = String(barber?.props.userId);

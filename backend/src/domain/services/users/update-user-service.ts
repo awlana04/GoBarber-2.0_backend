@@ -1,5 +1,10 @@
 import IUserRepository from '@interfaces/i-user-repository';
 
+import { Either, left, right } from '@shared/utils/either';
+
+import InvalidNameError from '@shared/errors/invalid-name-error';
+import InvalidPasswordError from '@shared/errors/invalid-password-error';
+
 import User from '@entities/user';
 
 import IUserUsecase from '@usecases/models/i-users-usecase';
@@ -20,16 +25,25 @@ export default class UpdateUserService {
     id,
     name,
     password,
-  }: UpdateUserServiceRequest): Promise<User> {
+  }: UpdateUserServiceRequest): Promise<
+    Either<InvalidNameError | InvalidPasswordError, User>
+  > {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
-    const user = User.update({
-      name,
-      password,
-    }).value as User;
+    const userOrError: Either<InvalidNameError | InvalidPasswordError, User> =
+      User.update({
+        name,
+        password,
+      });
+
+    if (userOrError.isLeft()) {
+      return left(userOrError.value);
+    }
+
+    const user: User = userOrError.value as User;
 
     await this.usersRepository.update(id, { name, password });
 
-    return user;
+    return right(user);
   }
 }

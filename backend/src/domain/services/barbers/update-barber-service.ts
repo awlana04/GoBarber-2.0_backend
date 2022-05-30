@@ -1,5 +1,10 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
 
+import { Either, left, right } from '@shared/utils/either';
+
+import InvalidNameError from '@shared/errors/invalid-name-error';
+import InvalidDescriptionError from '@shared/errors/invalid-description-error';
+
 import Barber from '@entities/barber';
 
 import IBarberUsecase from '@usecases/models/i-barbers-usecase';
@@ -26,10 +31,23 @@ export default class UpdateBarberService {
     description,
     openAtNight,
     openOnWeekends,
-  }: IUpdateBarberServiceRequest): Promise<Barber> {
+  }: IUpdateBarberServiceRequest): Promise<
+    Either<InvalidNameError | InvalidDescriptionError, Barber>
+  > {
     await this.barbersUsecase.checkBarberDoesNotExists(id);
 
-    const barber = await this.barberRepository.update(id, {
+    const barberOrError: Either<
+      InvalidNameError | InvalidDescriptionError,
+      Barber
+    > = Barber.update({ name, description });
+
+    if (barberOrError.isLeft()) {
+      return left(barberOrError.value);
+    }
+
+    const barber: Barber = barberOrError.value as Barber;
+
+    await this.barberRepository.update(id, {
       name,
       location,
       description,
@@ -37,6 +55,6 @@ export default class UpdateBarberService {
       openOnWeekends,
     });
 
-    return barber;
+    return right(barber);
   }
 }

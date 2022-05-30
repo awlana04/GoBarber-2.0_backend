@@ -14,6 +14,7 @@ import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
 import InvalidDescriptionError from '@domain/shared/errors/invalid-description-error';
+import Prop from '../domain/prop';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
