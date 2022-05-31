@@ -2,7 +2,7 @@ import Barber from '../entities/modules/barber';
 import User from '../entities/modules/user';
 import Appointment from '@entities/appointment';
 
-import IUpdateBarberDTO from '../dtos/IUpdateBarberDTO';
+import IUpdateBarberDTO from '../dtos/i-update-barber-dto';
 
 export default interface IBarberRepository {
   findById(id: string): Promise<Barber | null>;

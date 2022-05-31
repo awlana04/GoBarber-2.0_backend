@@ -13,7 +13,7 @@ describe('Description entity domain', () => {
   });
 
   it('should not be able to create a new description with invalid description (too many characters)', () => {
-    const descripton = 'a'.repeat(257);
+    const descripton = 'a'.repeat(513);
 
     const response = Description.create(descripton).value as Error;
 

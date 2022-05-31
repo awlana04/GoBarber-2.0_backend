@@ -14,7 +14,7 @@ export default class Description {
       return false;
     }
 
-    if (description.length < 32 || description.length > 256) {
+    if (description.length < 32 || description.length > 512) {
       return false;
     }
 

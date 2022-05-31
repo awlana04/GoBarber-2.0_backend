@@ -24,7 +24,7 @@ export default class Appointment extends Entity<AppointmentProps> {
     return this.props.date;
   }
 
-  static create(
+  public static create(
     props: AppointmentProps,
     id?: string,
     createdAt?: Date,
