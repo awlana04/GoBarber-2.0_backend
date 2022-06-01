@@ -23,7 +23,7 @@ describe('Comment value object', () => {
     const comment =
       'A very good place, this is my fifth time comming back here. A really peace and profissioanl barber.';
 
-    const response = Comment.create(comment);
+    const response = Comment.create(comment).value as Comment;
 
     expect(response.value).toEqual(comment);
     expect(response).toBeInstanceOf(Comment);

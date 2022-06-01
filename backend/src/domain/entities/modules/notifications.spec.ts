@@ -1,8 +1,8 @@
 import Notification from './notifications';
 
 describe('Notification entity', () => {
-  it('should be able to create a notification', async () => {
-    const response = await Notification.create({
+  it('should be able to create a notification', () => {
+    const response = Notification.create({
       title: 'Welcome to GoBarber-2.0!',
       message: 'You are welcome to join us!',
       isViewed: false,

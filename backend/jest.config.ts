@@ -127,6 +127,9 @@ export default {
     '@shared/errors/invalid-description-error': [
       '<rootDir>/src/domain/shared/errors/invalid-description-error',
     ],
+    '@shared/errors/invalid-comment-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-comment-error',
+    ],
     '@in-memory/in-memory-appointments-repository': [
       '<rootDir>/tests/repositories/in-memory-appointments-repository',
     ],

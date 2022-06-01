@@ -1,15 +1,27 @@
 import Entity from '../shared/entity';
 
-import { RatingProps } from '../interfaces/rating-props';
+import { RatingProps, RatingValidationProps } from '../interfaces/rating-props';
 
-export default class Rating extends Entity<RatingProps> {
-  constructor(
-    props: RatingProps,
+import { Either, left, right } from '@shared/utils/either';
+
+import InvalidCommentError from '@shared/errors/invalid-comment-error';
+
+import Comment from '../domain/comment';
+
+export default class Rating extends Entity<
+  RatingProps | RatingValidationProps
+> {
+  public readonly comment: Comment;
+
+  private constructor(
+    props: RatingValidationProps,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
   ) {
     super(props, id, createdAt, updatedAt);
+
+    this.comment = props.comment;
   }
 
   public static create(
@@ -17,9 +29,25 @@ export default class Rating extends Entity<RatingProps> {
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
-  ) {
-    const rating = new Rating(props, id, createdAt, updatedAt);
+  ): Either<InvalidCommentError, Rating> {
+    const commentOrError = Comment.create(props.comment);
 
-    return rating;
+    if (commentOrError.isLeft()) {
+      return left(commentOrError.value);
+    }
+
+    const rating = props.rating;
+    const comment: Comment = commentOrError.value as Comment;
+    const barberId = props.barberId;
+    const userId = props.userId;
+
+    return right(
+      new Rating(
+        { rating, comment, barberId, userId },
+        id,
+        createdAt,
+        updatedAt
+      )
+    );
   }
 }
