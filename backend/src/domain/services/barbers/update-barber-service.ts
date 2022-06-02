@@ -4,6 +4,7 @@ import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
 import InvalidDescriptionError from '@shared/errors/invalid-description-error';
+import InvalidPropError from '@shared/errors/invalid-prop-error';
 
 import Barber from '@entities/barber';
 
@@ -32,14 +33,23 @@ export default class UpdateBarberService {
     openAtNight,
     openOnWeekends,
   }: IUpdateBarberServiceRequest): Promise<
-    Either<InvalidNameError | InvalidDescriptionError, Barber>
+    Either<
+      InvalidNameError | InvalidDescriptionError | InvalidPropError,
+      Barber
+    >
   > {
     await this.barbersUsecase.checkBarberDoesNotExists(id);
 
     const barberOrError: Either<
-      InvalidNameError | InvalidDescriptionError,
+      InvalidNameError | InvalidDescriptionError | InvalidPropError,
       Barber
-    > = Barber.update({ name, description });
+    > = Barber.update({
+      name,
+      description,
+      location,
+      openAtNight,
+      openOnWeekends,
+    });
 
     if (barberOrError.isLeft()) {
       return left(barberOrError.value);

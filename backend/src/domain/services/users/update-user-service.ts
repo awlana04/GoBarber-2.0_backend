@@ -4,6 +4,7 @@ import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
 import InvalidPasswordError from '@shared/errors/invalid-password-error';
+import InvalidPropError from '@shared/errors/invalid-prop-error';
 
 import User from '@entities/user';
 
@@ -13,6 +14,7 @@ interface UpdateUserServiceRequest {
   id: string;
   name?: string;
   password?: string;
+  location?: string;
 }
 
 export default class UpdateUserService {
@@ -25,16 +27,20 @@ export default class UpdateUserService {
     id,
     name,
     password,
+    location,
   }: UpdateUserServiceRequest): Promise<
-    Either<InvalidNameError | InvalidPasswordError, User>
+    Either<InvalidNameError | InvalidPasswordError | InvalidPropError, User>
   > {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
-    const userOrError: Either<InvalidNameError | InvalidPasswordError, User> =
-      User.update({
-        name,
-        password,
-      });
+    const userOrError: Either<
+      InvalidNameError | InvalidPasswordError | InvalidPropError,
+      User
+    > = User.update({
+      name,
+      password,
+      location,
+    });
 
     if (userOrError.isLeft()) {
       return left(userOrError.value);
@@ -42,7 +48,7 @@ export default class UpdateUserService {
 
     const user: User = userOrError.value as User;
 
-    await this.usersRepository.update(id, { name, password });
+    await this.usersRepository.update(id, { name, password, location });
 
     return right(user);
   }

@@ -66,8 +66,8 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     }
 
     if (data.location) {
-      return barber?.props.location.replace(
-        barber.props.location,
+      return barber?.location.value.replace(
+        barber.location.value,
         data.location
       );
     }

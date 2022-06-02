@@ -3,6 +3,7 @@ import { Either, left, right } from '@shared/utils/either';
 import InvalidNameError from '@shared/errors/invalid-name-error';
 import InvalidEmailError from '@shared/errors/invalid-email-error';
 import InvalidPasswordError from '@shared/errors/invalid-password-error';
+import InvalidPropError from '@shared/errors/invalid-prop-error';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';
@@ -36,7 +37,10 @@ export default class CreateUserService {
     avatar,
   }: ICreateUserServiceRequest): Promise<
     Either<
-      InvalidNameError | InvalidEmailError | InvalidPasswordError,
+      | InvalidNameError
+      | InvalidEmailError
+      | InvalidPasswordError
+      | InvalidPropError,
       {
         user: User;
         refreshToken: RefreshToken;
@@ -46,7 +50,10 @@ export default class CreateUserService {
     await this.usersUsecase.checkUserAlreadyExists(email);
 
     const userOrError: Either<
-      InvalidNameError | InvalidEmailError | InvalidPasswordError,
+      | InvalidNameError
+      | InvalidEmailError
+      | InvalidPasswordError
+      | InvalidPropError,
       User
     > = User.create({ name, email, password, location, avatar });
 

@@ -40,6 +40,10 @@ export default class InMemoryUsersRepository implements IUserRepository {
     if (data.password) {
       return user?.password.value.replace(user.password.value, data.password);
     }
+
+    if (data.location) {
+      return user?.location.value.replace(user.location.value, data.location);
+    }
   }
 
   async updateAvatar(id: string, avatar: string): Promise<User | any> {

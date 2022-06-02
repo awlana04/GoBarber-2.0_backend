@@ -32,6 +32,7 @@ describe('Update user service', () => {
   const id = user.id;
   const name = 'John Doe Junior';
   const password = '12345678910';
+  const location = 'Somewhere Out of the Box';
 
   // it('should be able to update the user name', async () => {
   //   const response = await sut.handle({
@@ -56,6 +57,7 @@ describe('Update user service', () => {
       id,
       name,
       password,
+      location,
     });
 
     expect(response.value).toBeDefined();
