@@ -18,7 +18,7 @@ describe('Barber entity', () => {
 
     const response = Barber.update({ location }).value as Barber;
 
-    expect(response.location).toEqual(location);
+    expect(response.location.value).toEqual(location);
   });
 
   it('should be able to update the barber description', () => {
@@ -63,7 +63,7 @@ describe('Barber entity', () => {
     }).value as Barber;
 
     expect(response.name.value).toEqual(name);
-    expect(response.location).toEqual(location);
+    expect(response.location.value).toEqual(location);
     expect(response.description.value).toEqual(description);
     expect(response.openAtNight).toEqual(openAtNight);
     expect(response.openOnWeekends).toEqual(openOnWeekends);
@@ -87,7 +87,7 @@ describe('Barber entity', () => {
     }).value as Barber;
 
     expect(response.name.value).toEqual(name);
-    expect(response.props.location).toEqual(location);
+    expect(response.location.value).toEqual(location);
     expect(response.description.value).toEqual(description);
     expect(response.props.openAtNight).toEqual(openAtNight);
     expect(response.props.openOnWeekends).toEqual(openOnWeekends);

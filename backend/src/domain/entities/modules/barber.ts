@@ -8,19 +8,19 @@ import {
 
 import Name from '../domain/name';
 import Description from '../domain/description';
-// import Prop from '../domain/prop';
+import Prop from '../domain/prop';
 
 import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
 import InvalidDescriptionError from '@domain/shared/errors/invalid-description-error';
-import Prop from '../domain/prop';
+import InvalidPropError from '@domain/shared/errors/invalid-prop-error';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
 > {
   public name: Name;
-  public location: string;
+  public location: Prop;
   public description: Description;
   public openAtNight: boolean;
   public openOnWeekends: boolean;
@@ -49,7 +49,10 @@ export default class Barber extends Entity<
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
-  ): Either<InvalidNameError | InvalidDescriptionError, Barber> {
+  ): Either<
+    InvalidNameError | InvalidDescriptionError | InvalidPropError,
+    Barber
+  > {
     const nameOrError = Name.create(props.name);
 
     if (nameOrError.isLeft()) {
@@ -62,8 +65,14 @@ export default class Barber extends Entity<
       return left(descriptionOrError.value);
     }
 
+    const locationOrError = Prop.create(props.location);
+
+    if (locationOrError.isLeft()) {
+      return left(locationOrError.value);
+    }
+
     const name: Name = nameOrError.value as Name;
-    const location = props.location;
+    const location: Prop = locationOrError.value as Prop;
     const description: Description = descriptionOrError.value as Description;
     const images = props.images;
     const openAtNight = props.openAtNight;
@@ -92,7 +101,10 @@ export default class Barber extends Entity<
 
   public static update(
     props: UpdateBarberProps
-  ): Either<InvalidNameError | InvalidDescriptionError, Barber> {
+  ): Either<
+    InvalidNameError | InvalidDescriptionError | InvalidPropError,
+    Barber
+  > {
     if (props.name) {
       const nameOrError = Name.create(props.name);
 
@@ -106,7 +118,13 @@ export default class Barber extends Entity<
     }
 
     if (props.location) {
-      const location = props.location;
+      const locationOrError = Prop.create(props.location);
+
+      if (locationOrError.isLeft()) {
+        return left(locationOrError.value);
+      }
+
+      const location: Prop = locationOrError.value as Prop;
 
       Barber.prototype.location = location;
     }

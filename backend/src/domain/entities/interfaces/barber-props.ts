@@ -1,7 +1,6 @@
 import Name from '../domain/name';
 import Description from '../domain/description';
 import Prop from '../domain/prop';
-// import Prop from '../domain/prop';
 
 export type BarberProps = {
   name: string;
@@ -16,7 +15,7 @@ export type BarberProps = {
 
 export type BarberValidationProps = {
   name: Name;
-  location: string;
+  location: Prop;
   description: Description;
   images?: string[];
   openAtNight: boolean;
