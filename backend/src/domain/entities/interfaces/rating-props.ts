@@ -13,3 +13,8 @@ export type RatingValidationProps = {
   barberId: string;
   userId: string;
 };
+
+export type UpdateRatingProps = {
+  rating: number;
+  comment: string;
+};
