@@ -17,14 +17,24 @@ describe('User entity', () => {
     expect(response.password.value).toEqual(password);
   });
 
+  it('should be able to update the user location', () => {
+    const location = 'Somewhere Out of the Box';
+
+    const response = User.update({ location }).value as User;
+
+    expect(response.location.value).toEqual(location);
+  });
+
   it('should be able to update the user', () => {
     const name = 'John Doe Junior';
     const password = '12345678910';
+    const location = 'Somewhere Out of the Box';
 
-    const response = User.update({ name, password }).value as User;
+    const response = User.update({ name, password, location }).value as User;
 
     expect(response.name.value).toEqual(name);
     expect(response.password.value).toEqual(password);
+    expect(response.location.value).toEqual(location);
   });
 
   it('should be able to create a new user', () => {
@@ -45,7 +55,7 @@ describe('User entity', () => {
     expect(response.name.value).toEqual(name);
     expect(response.email.value).toEqual(email);
     expect(response.password.value).toEqual(password);
-    expect(response.props.location).toEqual(location);
+    expect(response.location.value).toEqual(location);
     expect(response.props.avatar).toEqual(avatar);
 
     expect(response).toBeInstanceOf(User);
