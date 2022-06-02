@@ -27,6 +27,7 @@ export type BarberValidationProps = {
 
 export type UpdateBarberProps = {
   name?: string;
+  location?: string;
   description?: string;
   openAtNight?: boolean;
   openOnWeekends?: boolean;

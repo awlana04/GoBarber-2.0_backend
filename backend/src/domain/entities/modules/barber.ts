@@ -20,7 +20,10 @@ export default class Barber extends Entity<
   BarberProps | BarberValidationProps
 > {
   public name: Name;
+  public location: string;
   public description: Description;
+  public openAtNight: boolean;
+  public openOnWeekends: boolean;
 
   private constructor(
     props: BarberValidationProps,
@@ -31,7 +34,10 @@ export default class Barber extends Entity<
     super(props, id, createdAt, updatedAt);
 
     this.name = props.name;
+    this.location = props.location;
     this.description = props.description;
+    this.openAtNight = props.openAtNight;
+    this.openOnWeekends = props.openOnWeekends;
   }
 
   get userId() {
@@ -99,6 +105,12 @@ export default class Barber extends Entity<
       Barber.prototype.name = name;
     }
 
+    if (props.location) {
+      const location = props.location;
+
+      Barber.prototype.location = location;
+    }
+
     if (props.description) {
       const descriptionOrError = Description.create(props.description);
 
@@ -109,6 +121,18 @@ export default class Barber extends Entity<
       const description: Description = descriptionOrError.value as Description;
 
       Barber.prototype.description = description;
+    }
+
+    if (props.openAtNight !== undefined) {
+      const openAtNight = props.openAtNight;
+
+      Barber.prototype.openAtNight = openAtNight;
+    }
+
+    if (props.openOnWeekends !== undefined) {
+      const openOnWeekends = props.openOnWeekends;
+
+      Barber.prototype.openOnWeekends = openOnWeekends;
     }
 
     return right(Barber.prototype);
