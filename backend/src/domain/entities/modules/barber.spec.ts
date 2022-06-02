@@ -37,7 +37,6 @@ describe('Barber entity', () => {
     console.log(response);
 
     expect(response.openAtNight).toEqual(openAtNight);
-    expect(response.openAtNight).toBeFalsy();
   });
 
   it('should be able to update the open on weekends boolean', () => {
@@ -46,7 +45,28 @@ describe('Barber entity', () => {
     const response = Barber.update({ openOnWeekends }).value as Barber;
 
     expect(response.openOnWeekends).toEqual(openOnWeekends);
-    expect(response.openOnWeekends).toBeFalsy();
+  });
+
+  it('should be able to update the barber', () => {
+    const name = 'John Doe Barber';
+    const location = 'Somewhere Over the Heaven';
+    const description = 'This is a really good place, please believe me :)';
+    const openAtNight = false;
+    const openOnWeekends = false;
+
+    const response = Barber.update({
+      name,
+      location,
+      description,
+      openAtNight,
+      openOnWeekends,
+    }).value as Barber;
+
+    expect(response.name.value).toEqual(name);
+    expect(response.location).toEqual(location);
+    expect(response.description.value).toEqual(description);
+    expect(response.openAtNight).toEqual(openAtNight);
+    expect(response.openOnWeekends).toEqual(openOnWeekends);
   });
 
   it('should be able to create a new barber', () => {
