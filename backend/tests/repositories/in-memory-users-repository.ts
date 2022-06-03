@@ -1,6 +1,8 @@
 import IUserRepository from '@interfaces/i-user-repository';
 
 import User from '@entities/user';
+
+import ICreateUserDTO from '@domain/dtos/i-create-user-dto';
 import IUpdateUserDTO from '@domain/dtos/i-update-user-dto';
 
 export default class InMemoryUsersRepository implements IUserRepository {
@@ -26,8 +28,8 @@ export default class InMemoryUsersRepository implements IUserRepository {
     return user;
   }
 
-  async save(user: User): Promise<User | any> {
-    return this.item.push(user);
+  async save(data: ICreateUserDTO): Promise<User | any> {
+    return this.item.push(data as unknown as User);
   }
 
   async update(id: string, data: IUpdateUserDTO): Promise<User | any> {

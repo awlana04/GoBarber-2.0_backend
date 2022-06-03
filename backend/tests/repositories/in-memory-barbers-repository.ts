@@ -4,7 +4,8 @@ import Barber from '@entities/barber';
 import User from '@entities/user';
 import Appointment from '@entities/appointment';
 
-// import IUpdateBarberDTO from '../../src/domain/dtos/IUpdateBarberDTO';
+import ICreateBarberDTO from '@domain/dtos/i-create-barber-dto';
+import IUpdateBarberDTO from '@domain/dtos/i-update-barber-dto';
 
 export default class InMemoryBarbersRepository implements IBarberRepository {
   public user: User[] = [];
@@ -45,20 +46,11 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return this.barber;
   }
 
-  async save(barber: Barber): Promise<Barber | any> {
-    return this.barber.push(barber);
+  async save(barber: ICreateBarberDTO): Promise<Barber | any> {
+    return this.barber.push(barber as unknown as Barber);
   }
 
-  async update(
-    id: string,
-    data: {
-      name: string;
-      location: string;
-      description: string;
-      openAtNight: boolean;
-      openOnWeekends: boolean;
-    }
-  ): Promise<Barber | any> {
+  async update(id: string, data: IUpdateBarberDTO): Promise<Barber | any> {
     const barber = await this.findById(id);
 
     if (data.name) {

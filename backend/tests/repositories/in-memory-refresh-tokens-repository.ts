@@ -3,6 +3,8 @@ import IRefreshTokenRepository from '@interfaces/i-refresh-token-repository';
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';
 
+import ICreateRefreshTokenDTO from '@domain/dtos/i-create-refresh-token-dto';
+
 export default class InMemoryRefreshTokenRepository
   implements IRefreshTokenRepository
 {
@@ -19,8 +21,10 @@ export default class InMemoryRefreshTokenRepository
     return refreshToken;
   }
 
-  async save(refreshToken: RefreshToken): Promise<RefreshToken | any> {
-    return this.refreshToken.push(refreshToken);
+  async save(
+    refreshToken: ICreateRefreshTokenDTO
+  ): Promise<RefreshToken | any> {
+    return this.refreshToken.push(refreshToken as unknown as RefreshToken);
   }
 
   async deletePastRefreshToken(userId: string): Promise<void | any> {
