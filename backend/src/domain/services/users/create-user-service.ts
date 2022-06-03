@@ -63,7 +63,13 @@ export default class CreateUserService {
 
     const user: User = userOrError.value as User;
 
-    await this.usersRepository.save(user);
+    await this.usersRepository.save({
+      name,
+      email,
+      password,
+      location,
+      avatar,
+    });
 
     const refreshToken = await this.refreshTokenProvider.createRefreshToken(
       userOrError.value.id

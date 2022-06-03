@@ -2,6 +2,7 @@ import Barber from '../entities/modules/barber';
 import User from '../entities/modules/user';
 import Appointment from '@entities/appointment';
 
+import ICreateBarberDTO from '../dtos/i-create-barber-dto';
 import IUpdateBarberDTO from '../dtos/i-update-barber-dto';
 
 export default interface IBarberRepository {
@@ -9,7 +10,7 @@ export default interface IBarberRepository {
   findByName(name: string): Promise<Barber | null>;
   findUserId(userId: string): Promise<User | null>;
   getAllBarbers(): Promise<Barber[]>;
-  save(barber: Barber): Promise<Barber>;
+  save(data: ICreateBarberDTO): Promise<Barber>;
   update(id: string, data: IUpdateBarberDTO): Promise<Barber>;
   updatePassword(
     id: string,

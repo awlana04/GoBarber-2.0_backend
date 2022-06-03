@@ -58,7 +58,15 @@ export default class CreateBarberService {
 
     const barber: Barber = barberOrError.value as Barber;
 
-    await this.barberRepository.save(barber);
+    await this.barberRepository.save({
+      name,
+      location,
+      description,
+      images,
+      openAtNight,
+      openOnWeekends,
+      userId,
+    });
 
     return right(barber);
   }

@@ -49,8 +49,6 @@ describe('Create barber service', () => {
       userId: user.id,
     });
 
-    console.log(response.value);
-
     expect(response.value).toBeInstanceOf(Barber);
   });
 });
