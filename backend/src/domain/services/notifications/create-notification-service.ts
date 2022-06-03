@@ -32,7 +32,12 @@ export default class CreateNotificationService {
       userId,
     });
 
-    await this.notificationsRepository.save(notifications);
+    await this.notificationsRepository.save({
+      title,
+      message,
+      isViewed,
+      userId,
+    });
 
     return notifications;
   }

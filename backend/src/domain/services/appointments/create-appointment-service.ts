@@ -27,7 +27,7 @@ export default class CreateAppointmentService {
 
     const appointment = Appointment.create({ date, userId, barberId });
 
-    await this.appointmentRepository.save(appointment);
+    await this.appointmentRepository.save({ date, userId, barberId });
 
     return appointment;
   }

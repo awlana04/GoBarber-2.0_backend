@@ -13,7 +13,7 @@ export default class RefreshTokenProvider implements IRefreshTokenProvider {
 
     const refreshToken = RefreshToken.create({ expiresIn, userId });
 
-    await this.refreshTokenRepository.save(refreshToken);
+    await this.refreshTokenRepository.save({ expiresIn, userId });
 
     return refreshToken;
   }
