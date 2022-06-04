@@ -1,8 +1,7 @@
 import IUserRepository from '@interfaces/i-user-repository';
+import IUsersUsecase from '@usecases/models/i-users-usecase';
 
 import User from '@entities/user';
-
-import IUsersUsecase from '@usecases/models/i-users-usecase';
 
 export default class DeleteUserService {
   constructor(

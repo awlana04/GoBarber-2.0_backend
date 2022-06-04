@@ -1,3 +1,7 @@
+import IUserRepository from '@interfaces/i-user-repository';
+import IUsersUsecase from '@usecases/models/i-users-usecase';
+import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
+
 import { Either, left, right } from '@shared/utils/either';
 
 import InvalidNameError from '@shared/errors/invalid-name-error';
@@ -7,12 +11,6 @@ import InvalidPropError from '@shared/errors/invalid-prop-error';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';
-
-import IUserRepository from '@interfaces/i-user-repository';
-
-import IUsersUsecase from '@usecases/models/i-users-usecase';
-
-import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
 interface ICreateUserServiceRequest {
   name: string;

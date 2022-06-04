@@ -1,4 +1,5 @@
 import IUserRepository from '@interfaces/i-user-repository';
+import IUserUsecase from '@usecases/models/i-users-usecase';
 
 import { Either, left, right } from '@shared/utils/either';
 
@@ -7,8 +8,6 @@ import InvalidPasswordError from '@shared/errors/invalid-password-error';
 import InvalidPropError from '@shared/errors/invalid-prop-error';
 
 import User from '@entities/user';
-
-import IUserUsecase from '@usecases/models/i-users-usecase';
 
 interface UpdateUserServiceRequest {
   id: string;

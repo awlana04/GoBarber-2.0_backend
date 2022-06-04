@@ -1,5 +1,4 @@
 import INotificationsRepository from '@interfaces/i-notifications-repository';
-
 import INotificationsUsecase from '@usecases/models/i-notifications-usecase';
 
 import Notification from '@entities/notifications';

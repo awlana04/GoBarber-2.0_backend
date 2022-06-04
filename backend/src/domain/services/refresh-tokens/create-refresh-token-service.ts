@@ -1,10 +1,9 @@
 import crypto from 'crypto';
 
 import IRefreshTokenRepository from '@interfaces/i-refresh-token-repository';
+import IRefreshTokenUsecase from '@usecases/models/i-refresh-tokens-usecase';
 
 import RefreshToken from '@entities/refresh-token';
-
-import IRefreshTokenUsecase from '@usecases/models/i-refresh-tokens-usecase';
 
 interface CreateRefreshTokenServiceRequest {
   id: string;

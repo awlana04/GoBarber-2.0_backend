@@ -1,6 +1,6 @@
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import RefreshTokenUsecase from '@usecases/implementations/refresh-tokens-usecase';
 import CreateRefreshTokenService from './create-refresh-token-service';
+import RefreshTokenUsecase from '@usecases/implementations/refresh-tokens-usecase';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';

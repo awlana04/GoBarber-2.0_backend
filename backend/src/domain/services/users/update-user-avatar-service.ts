@@ -1,8 +1,7 @@
 import IUserRepository from '@interfaces/i-user-repository';
+import IUserUsecase from '@usecases/models/i-users-usecase';
 
 import User from '@entities/user';
-
-import IUserUsecase from '@usecases/models/i-users-usecase';
 
 interface IUpdateUserAvatarServiceRequest {
   id: string;

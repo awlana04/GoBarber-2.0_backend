@@ -1,6 +1,6 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import UsersUsecase from '@usecases/implementations/users-usecase';
 import UpdateUserService from './update-user-service';
+import UsersUsecase from '@usecases/implementations/users-usecase';
 
 import User from '@entities/user';
 
@@ -34,24 +34,6 @@ describe('Update user service', () => {
   const password = '12345678910';
   const location = 'Somewhere Out of the Box';
 
-  // it('should be able to update the user name', async () => {
-  //   const response = await sut.handle({
-  //     id,
-  //     name,
-  //   });
-
-  //   expect(response.name.value).toEqual(name);
-  // });
-
-  // it('should be able to update the user password', async () => {
-  //   const response = await sut.handle({
-  //     id,
-  //     password,
-  //   });
-
-  //   expect(response.password.value).toEqual(password);
-  // });
-
   it('should be able to update the user', async () => {
     const response = await sut.handle({
       id,
@@ -61,7 +43,5 @@ describe('Update user service', () => {
     });
 
     expect(response.value).toBeDefined();
-    // expect(response.name.value).toEqual(name);
-    // expect(response.password.value).toEqual(password);
   });
 });

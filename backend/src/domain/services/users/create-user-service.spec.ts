@@ -1,10 +1,8 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import UsersUsecase from '@usecases/implementations/users-usecase';
-import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
 import CreateUserService from './create-user-service';
-
-import User from '@entities/user';
+import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
+import UsersUsecase from '@usecases/implementations/users-usecase';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;
@@ -14,8 +12,8 @@ type SutOutput = {
 const makeSut = (): SutOutput => {
   const usersRepository = new InMemoryUsersRepository();
   const refreshTokenRepository = new InMemoryRefreshTokenRepository();
-  const usersUsecase = new UsersUsecase(usersRepository);
   const refreshTokenProvider = new RefreshTokenProvider(refreshTokenRepository);
+  const usersUsecase = new UsersUsecase(usersRepository);
   const sut = new CreateUserService(
     usersRepository,
     usersUsecase,
@@ -26,7 +24,7 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Create user service', () => {
-  const { usersRepository, sut } = makeSut();
+  const { sut } = makeSut();
 
   const name = 'John Doe';
   const email = 'john@doe.com';

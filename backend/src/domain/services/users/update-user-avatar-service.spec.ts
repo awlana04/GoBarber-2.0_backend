@@ -1,6 +1,6 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import UsersUsecase from '@usecases/implementations/users-usecase';
 import UpdateUserAvatarService from './update-user-avatar-service';
+import UsersUsecase from '@usecases/implementations/users-usecase';
 
 import User from '@entities/user';
 
