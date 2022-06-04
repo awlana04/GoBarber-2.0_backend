@@ -29,7 +29,6 @@ describe('View appointment service', () => {
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
-    barberId: id,
   }).value as User;
 
   const barber = Barber.create({
@@ -39,7 +38,6 @@ describe('View appointment service', () => {
     openAtNight: true,
     openOnWeekends: true,
     userId: user.id,
-    appointmentId: [id],
   }).value as Barber;
 
   const appointment = Appointment.create(

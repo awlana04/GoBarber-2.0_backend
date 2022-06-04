@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
-import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 import UpdateAppointmentService from './update-appointment-service';
+import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

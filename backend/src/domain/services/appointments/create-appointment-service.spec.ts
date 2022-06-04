@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
-import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 import CreateAppointmentService from './create-appointment-service';
+import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -34,7 +34,6 @@ describe('Create appointment service', () => {
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
-    barberId: id,
   }).value as User;
 
   const barber = Barber.create(

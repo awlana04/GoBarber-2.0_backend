@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
-import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 import DeleteAppointmentService from './delete-appointment-service';
+import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -34,7 +34,6 @@ describe('Delete appointment service', () => {
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
-    barberId: id,
   }).value as User;
 
   const barber = Barber.create({
@@ -44,7 +43,6 @@ describe('Delete appointment service', () => {
     openAtNight: true,
     openOnWeekends: true,
     userId: user.id,
-    appointmentId: [id],
   }).value as Barber;
 
   const appointment = Appointment.create(
@@ -60,7 +58,7 @@ describe('Delete appointment service', () => {
   appointmentsRepository.barber.push(barber);
   appointmentsRepository.appointment.push(appointment);
 
-  it('should NOT be able to delete an appointment with an invalod id', () => {
+  it('should not be able to delete an appointment with an invalod id', () => {
     const response = sut.handle('invalidID');
 
     expect(response).rejects.toThrowError();

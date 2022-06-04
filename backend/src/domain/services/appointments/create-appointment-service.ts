@@ -1,8 +1,7 @@
 import IAppointmentRepository from '@interfaces/i-appointment-repository';
+import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
 
 import Appointment from '@entities/appointment';
-
-import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
 
 interface ICreateAppointmentServiceRequest {
   date: Date;
