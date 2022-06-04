@@ -80,11 +80,10 @@ export default class User extends Entity<UserProps | UserValidationProps> {
     const password: Password = passwordOrError.value as Password;
     const location: Prop = locationOrError.value as Prop;
     const avatar = props.avatar;
-    const barberId = props.barberId;
 
     return right(
       new User(
-        { name, email, password, location, avatar, barberId },
+        { name, email, password, location, avatar },
         id,
         createdAt,
         updatedAt

@@ -12,16 +12,16 @@ export default class Appointment extends Entity<AppointmentProps> {
     super(props, id, createdAt, updatedAt);
   }
 
+  get date() {
+    return this.props.date;
+  }
+
   get userId() {
     return this.props.userId;
   }
 
   get barberId() {
     return this.props.barberId;
-  }
-
-  get date() {
-    return this.props.date;
   }
 
   public static create(

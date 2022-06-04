@@ -1,6 +1,6 @@
 import Prop from './prop';
 
-describe('Prop entity domain', () => {
+describe('Prop value object', () => {
   it('should not be able to create a new prop with invalid prop (too few characters)', () => {
     const prop = 'a';
 

@@ -1,6 +1,6 @@
 import Description from './description';
 
-describe('Description entity domain', () => {
+describe('Description value object', () => {
   it('should not be able to create a new description with invalid description (too few characters)', () => {
     const description = 'a';
 

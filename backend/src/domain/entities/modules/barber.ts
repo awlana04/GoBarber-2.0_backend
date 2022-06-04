@@ -78,7 +78,6 @@ export default class Barber extends Entity<
     const openAtNight = props.openAtNight;
     const openOnWeekends = props.openOnWeekends;
     const userId = props.userId;
-    const appointmentId = props.appointmentId;
 
     return right(
       new Barber(
@@ -90,7 +89,6 @@ export default class Barber extends Entity<
           openAtNight,
           openOnWeekends,
           userId,
-          appointmentId,
         },
         id,
         createdAt,

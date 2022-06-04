@@ -1,7 +1,7 @@
 import Name from './name';
 
-describe('Name entity domain', () => {
-  it('should NOT be able to create a new name with an invalid name (blank name)', () => {
+describe('Name value object', () => {
+  it('should not be able to create a new name with an invalid name (blank name)', () => {
     const invalidName = '';
 
     const response = Name.create(invalidName).value as Error;
@@ -10,7 +10,7 @@ describe('Name entity domain', () => {
     expect(response.message).toEqual('Invalid name: ' + invalidName + '.');
   });
 
-  it('should NOT be able to create a new name with an invalid name (too few characters)', () => {
+  it('should not be able to create a new name with an invalid name (too few characters)', () => {
     const invalidName = 'a';
 
     const response = Name.create(invalidName).value as Error;
@@ -19,7 +19,7 @@ describe('Name entity domain', () => {
     expect(response.message).toEqual('Invalid name: ' + invalidName + '.');
   });
 
-  it('should NOT be able to create a new name with an invalid name (too many characters)', () => {
+  it('should not be able to create a new name with an invalid name (too many characters)', () => {
     const invalidName = 'a'.repeat(129);
 
     const response = Name.create(invalidName).value as Error;

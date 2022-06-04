@@ -3,9 +3,13 @@ import crypto from 'crypto';
 import Barber from './barber';
 
 describe('Barber entity', () => {
-  it('should be able to update the barber name', () => {
-    const name = 'John Doe Barber';
+  const name = 'John Doe Barber';
+  const location = 'Somewhere Over the Heaven';
+  const description = 'This is a really good place, please believe me :)';
+  const openAtNight = false;
+  const openOnWeekends = false;
 
+  it('should be able to update the barber name', () => {
     const response = Barber.update({
       name,
     }).value as Barber;
@@ -14,46 +18,30 @@ describe('Barber entity', () => {
   });
 
   it('should be able to update the barber location', () => {
-    const location = 'Somewhere Over the Heaven';
-
     const response = Barber.update({ location }).value as Barber;
 
     expect(response.location.value).toEqual(location);
   });
 
   it('should be able to update the barber description', () => {
-    const description = 'This is a really good place, please believe me :)';
-
     const response = Barber.update({ description }).value as Barber;
 
     expect(response.description.value).toEqual(description);
   });
 
   it('should be able to update the barber open at night boolean', () => {
-    const openAtNight = false;
-
     const response = Barber.update({ openAtNight }).value as Barber;
-
-    console.log(response);
 
     expect(response.openAtNight).toEqual(openAtNight);
   });
 
   it('should be able to update the open on weekends boolean', () => {
-    const openOnWeekends = false;
-
     const response = Barber.update({ openOnWeekends }).value as Barber;
 
     expect(response.openOnWeekends).toEqual(openOnWeekends);
   });
 
   it('should be able to update the barber', () => {
-    const name = 'John Doe Barber';
-    const location = 'Somewhere Over the Heaven';
-    const description = 'This is a really good place, please believe me :)';
-    const openAtNight = false;
-    const openOnWeekends = false;
-
     const response = Barber.update({
       name,
       location,

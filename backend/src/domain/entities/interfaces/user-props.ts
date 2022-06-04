@@ -9,9 +9,6 @@ export type UserProps = {
   password: string;
   location: string;
   avatar?: string;
-  refreshTokenId?: string;
-  barberId?: string;
-  appointmentId?: string[];
 };
 
 export type UserValidationProps = {
@@ -20,9 +17,6 @@ export type UserValidationProps = {
   password: Password;
   location: Prop;
   avatar?: string;
-  refreshTokenId?: string;
-  barberId?: string;
-  appointmentId?: string[];
 };
 
 export type UpdateUserProps = {

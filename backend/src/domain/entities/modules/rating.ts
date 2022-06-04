@@ -15,8 +15,8 @@ import Comment from '../domain/comment';
 export default class Rating extends Entity<
   RatingProps | RatingValidationProps
 > {
-  public comment: Comment;
   public rating: number;
+  public comment: Comment;
 
   private constructor(
     props: RatingValidationProps,
@@ -26,8 +26,8 @@ export default class Rating extends Entity<
   ) {
     super(props, id, createdAt, updatedAt);
 
-    this.comment = props.comment;
     this.rating = props.rating;
+    this.comment = props.comment;
   }
 
   public static create(
@@ -58,10 +58,7 @@ export default class Rating extends Entity<
   }
 
   public static update(
-    props: UpdateRatingProps,
-    id?: string,
-    createdAt?: Date,
-    updatedAt?: Date
+    props: UpdateRatingProps
   ): Either<InvalidCommentError, Rating> {
     const rating = props.rating;
 

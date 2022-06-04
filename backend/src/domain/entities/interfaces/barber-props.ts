@@ -10,7 +10,6 @@ export type BarberProps = {
   openAtNight: boolean;
   openOnWeekends: boolean;
   userId: string;
-  appointmentId?: string[];
 };
 
 export type BarberValidationProps = {
@@ -21,7 +20,6 @@ export type BarberValidationProps = {
   openAtNight: boolean;
   openOnWeekends: boolean;
   userId: string;
-  appointmentId?: string[];
 };
 
 export type UpdateBarberProps = {

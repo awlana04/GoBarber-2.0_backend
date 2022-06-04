@@ -1,35 +1,29 @@
 import User from './user';
 
 describe('User entity', () => {
-  it('should be able to update the user name', () => {
-    const name = 'John Doe Junior';
+  const name = 'John Doe Junior';
+  const password = '12345678910';
+  const location = 'Somewhere Out of the Box';
 
+  it('should be able to update the user name', () => {
     const response = User.update({ name }).value as User;
 
     expect(response.name.value).toEqual(name);
   });
 
   it('should be able to update the user password', () => {
-    const password = '12345678910';
-
     const response = User.update({ password }).value as User;
 
     expect(response.password.value).toEqual(password);
   });
 
   it('should be able to update the user location', () => {
-    const location = 'Somewhere Out of the Box';
-
     const response = User.update({ location }).value as User;
 
     expect(response.location.value).toEqual(location);
   });
 
   it('should be able to update the user', () => {
-    const name = 'John Doe Junior';
-    const password = '12345678910';
-    const location = 'Somewhere Out of the Box';
-
     const response = User.update({ name, password, location }).value as User;
 
     expect(response.name.value).toEqual(name);

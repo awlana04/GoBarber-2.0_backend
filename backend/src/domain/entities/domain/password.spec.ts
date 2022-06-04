@@ -1,7 +1,7 @@
 import Password from './password';
 
-describe('Password entity domain', () => {
-  it('should NOT be able to create a new password with an invalid password (blank password)', () => {
+describe('Password value object', () => {
+  it('should not be able to create a new password with an invalid password (blank password)', () => {
     const invalidPassword = '';
 
     const response = Password.create(invalidPassword).value as Error;
@@ -12,7 +12,7 @@ describe('Password entity domain', () => {
     );
   });
 
-  it('should NOT be able to create a new password with an invalid password (too few characters)', () => {
+  it('should not be able to create a new password with an invalid password (too few characters)', () => {
     const invalidPassword = '123';
 
     const response = Password.create(invalidPassword).value as Error;
@@ -23,7 +23,7 @@ describe('Password entity domain', () => {
     );
   });
 
-  it('should NOT be able to create a new password with an invalid password (too many characters)', () => {
+  it('should not be able to create a new password with an invalid password (too many characters)', () => {
     const invalidPassword = '123'.repeat(129);
 
     const response = Password.create(invalidPassword).value as Error;
