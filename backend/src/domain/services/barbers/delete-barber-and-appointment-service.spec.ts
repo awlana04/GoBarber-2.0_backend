@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryBarberRepository from '@in-memory/in-memory-barbers-repository';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import DeleteBarberAndAppointmentService from './delete-barber-and-appointment-service';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -34,7 +34,6 @@ describe('Delete barber and appointment service', () => {
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
-    barberId: id,
   }).value as User;
 
   const barber = Barber.create({
@@ -44,7 +43,6 @@ describe('Delete barber and appointment service', () => {
     openAtNight: true,
     openOnWeekends: true,
     userId: user.id,
-    appointmentId: [id],
   }).value as Barber;
 
   const appointment = Appointment.create(

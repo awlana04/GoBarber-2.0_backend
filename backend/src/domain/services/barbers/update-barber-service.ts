@@ -1,4 +1,5 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
+import IBarberUsecase from '@usecases/models/i-barbers-usecase';
 
 import { Either, left, right } from '@shared/utils/either';
 
@@ -7,8 +8,6 @@ import InvalidDescriptionError from '@shared/errors/invalid-description-error';
 import InvalidPropError from '@shared/errors/invalid-prop-error';
 
 import Barber from '@entities/barber';
-
-import IBarberUsecase from '@usecases/models/i-barbers-usecase';
 
 interface IUpdateBarberServiceRequest {
   id: string;

@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import GetAllBarbersService from './get-all-barbers-service';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

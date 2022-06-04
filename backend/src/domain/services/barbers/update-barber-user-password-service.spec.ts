@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import UpdateBarberUserPassword from './update-barber-user-password-service';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -30,7 +30,6 @@ describe('Update barber user password service', () => {
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
-    barberId: id,
   }).value as User;
 
   const barber = Barber.create(

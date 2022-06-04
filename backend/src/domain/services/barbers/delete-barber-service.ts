@@ -1,8 +1,7 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
+import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
 
 import Barber from '@entities/barber';
-
-import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
 
 export default class DeleteBarberService {
   constructor(

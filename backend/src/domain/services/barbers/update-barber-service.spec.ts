@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 import UpdateBarberService from './update-barber-service';
+import BarbersUsecase from '@usecases/implementations/barbers-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -65,58 +65,5 @@ describe('Update barber service', () => {
     });
 
     expect(response.value).toBeDefined();
-    // expect(response.id).toEqual(barber.id);
-    // expect(response.value.name).toEqual(name);
-    // expect(response.props.location).toEqual(location);
-    // expect(response.value.).toEqual(description);
-    // expect(response.props.openAtNight).toBeFalsy();
-    // expect(response.props.openOnWeekends).toBeFalsy();
   });
-
-  // it('should be able to update the barber name', async () => {
-  //   const response = await sut.handle({
-  //     id: barber.id,
-  //     name: 'John Doe Junior Barber',
-  //   });
-
-  //   expect(response).toBeDefined();
-  // });
-
-  // it('should be able to update the barber location', async () => {
-  //   const response = await sut.handle({
-  //     id: barber.id,
-  //     location: 'Somewhere Out of The Box',
-  //   });
-
-  //   expect(response).toBeDefined();
-  // });
-
-  // it('should be able to update the barber description', async () => {
-  //   const response = await sut.handle({
-  //     id: barber.id,
-  //     description: 'This is a HELLA really good place, please believe me :)',
-  //   });
-
-  //   expect(response).toBeDefined();
-  // });
-
-  // it('should be able to update the barber open at night boolean', async () => {
-  //   const response = await sut.handle({
-  //     id: barber.id,
-  //     openAtNight: false,
-  //   });
-
-  //   expect(response.props.openAtNight).toBeFalsy();
-  // });
-
-  // it('should be able to update the barber open on weekends boolean', async () => {
-  //   barberRepository.barber.push(barber);
-
-  //   const response = await sut.handle({
-  //     id: barber.id,
-  //     openOnWeekends: false,
-  //   });
-
-  //   expect(response.props.openOnWeekends).toBeFalsy();
-  // });
 });

@@ -1,9 +1,8 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
+import IBarberUsecase from '@usecases/models/i-barbers-usecase';
 
 import Barber from '@entities/barber';
 import User from '@entities/user';
-
-import IBarberUsecase from '@usecases/models/i-barbers-usecase';
 
 interface IUpdateBarberUserPasswordServiceRequest {
   id: string;
