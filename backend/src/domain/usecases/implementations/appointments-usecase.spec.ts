@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import AppointmentsUsecase from './appointments-usecase';
 
@@ -22,14 +20,11 @@ const makeSut = (): SutOutput => {
 describe('Appointments usecase', () => {
   const { appointmentsRepository, sut } = makeSut();
 
-  const id = crypto.randomUUID();
-
   const user = User.create({
     name: 'John Doe',
     email: 'john@doe.com',
     password: '12345678',
     location: 'Somewhere Over the Rainbow',
-    barberId: id,
   }).value as User;
 
   const barber = Barber.create({

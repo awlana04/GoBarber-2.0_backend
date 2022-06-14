@@ -1,4 +1,5 @@
 import IAppointmentUsecase from '../models/i-appointments-usecase';
+
 import IAppointmentRepository from '@domain/interfaces/i-appointment-repository';
 
 import User from '@entities/user';

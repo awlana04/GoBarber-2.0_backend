@@ -93,6 +93,7 @@ export default {
     '@entities/notification': [
       '<rootDir>/src/domain/entities/modules/notifications',
     ],
+    '@entities/rating': ['<rootDir>/src/domain/entities/modules/rating'],
     '@usecases/implementations/users-usecase': [
       '<rootDir>/src/domain/usecases/implementations/users-usecase',
     ],
@@ -144,6 +145,9 @@ export default {
     ],
     '@in-memory/in-memory-notifications-repository': [
       '<rootDir>/tests/repositories/in-memory-notifications-repository',
+    ],
+    '@in-memory/in-memory-rating-repository': [
+      '<rootDir>/tests/repositories/in-memory-rating-repository',
     ],
   },
 
