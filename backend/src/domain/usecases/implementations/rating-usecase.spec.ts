@@ -60,4 +60,28 @@ describe('Rating usecase', () => {
 
     expect(response).toBeNull();
   });
+
+  it('should not be able to find a barber', () => {
+    const response = sut.checkBarberExists('invalidID');
+
+    expect(response).rejects.toThrowError();
+  });
+
+  it('should be able to find a barber', async () => {
+    const response = await sut.checkBarberExists(barber.id);
+
+    expect(response).toBeNull();
+  });
+
+  it('should not be able to find a rating', () => {
+    const response = sut.checkRatingExists('invalidID');
+
+    expect(response).rejects.toThrowError();
+  });
+
+  it('should be able to find a rating', async () => {
+    const response = await sut.checkRatingExists(rating.id);
+
+    expect(response).toBeNull();
+  });
 });
