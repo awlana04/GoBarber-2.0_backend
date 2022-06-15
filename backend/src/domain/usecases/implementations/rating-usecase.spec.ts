@@ -38,7 +38,7 @@ describe('Rating usecase', () => {
   }).value as Barber;
 
   const rating = Rating.create({
-    rating: 5,
+    stars: 5,
     comment:
       'A very good place, this is my fifth time comming back here. A really peace and profissioanl barber.',
     userId: user.id,

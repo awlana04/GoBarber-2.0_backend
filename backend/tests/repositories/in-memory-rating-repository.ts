@@ -60,10 +60,10 @@ export default class InMemoryRatingRepository implements IRatingRepository {
     const userId = String(rating?.props.userId);
     const barberId = String(rating?.props.barberId);
 
-    if (data.rating) {
+    if (data.stars) {
       this.rating.pop();
 
-      return Rating.create({ rating: data.rating, comment, userId, barberId })
+      return Rating.create({ stars: data.stars, comment, userId, barberId })
         .value as Rating;
     }
 

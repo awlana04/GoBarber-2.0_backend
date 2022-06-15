@@ -1,5 +1,5 @@
 export default interface ICreateRatingDTO {
-  rating: number;
+  stars: number;
   comment: string;
   userId: string;
   barberId: string;

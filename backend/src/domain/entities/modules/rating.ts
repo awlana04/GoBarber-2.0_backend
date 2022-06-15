@@ -15,7 +15,7 @@ import Comment from '../domain/comment';
 export default class Rating extends Entity<
   RatingProps | RatingValidationProps
 > {
-  public rating: number;
+  public stars: number;
   public comment: Comment;
 
   private constructor(
@@ -26,7 +26,7 @@ export default class Rating extends Entity<
   ) {
     super(props, id, createdAt, updatedAt);
 
-    this.rating = props.rating;
+    this.stars = props.stars;
     this.comment = props.comment;
   }
 
@@ -42,25 +42,20 @@ export default class Rating extends Entity<
       return left(commentOrError.value);
     }
 
-    const rating = props.rating;
+    const stars = props.stars;
     const comment: Comment = commentOrError.value as Comment;
     const barberId = props.barberId;
     const userId = props.userId;
 
     return right(
-      new Rating(
-        { rating, comment, barberId, userId },
-        id,
-        createdAt,
-        updatedAt
-      )
+      new Rating({ stars, comment, barberId, userId }, id, createdAt, updatedAt)
     );
   }
 
   public static update(
     props: UpdateRatingProps
   ): Either<InvalidCommentError, Rating> {
-    const rating = props.rating;
+    const stars = props.stars;
 
     const commentOrError = Comment.create(props.comment);
 
@@ -70,7 +65,7 @@ export default class Rating extends Entity<
 
     const comment: Comment = commentOrError.value as Comment;
 
-    Rating.prototype.rating = rating;
+    Rating.prototype.stars = stars;
     Rating.prototype.comment = comment;
 
     return right(Rating.prototype);
