@@ -1,4 +1,4 @@
 export default interface IUpdateRatingDTO {
-  stars: number;
+  stars?: number;
   comment: string;
 }

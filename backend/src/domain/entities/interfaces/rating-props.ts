@@ -15,6 +15,6 @@ export type RatingValidationProps = {
 };
 
 export type UpdateRatingProps = {
-  stars: number;
+  stars?: number;
   comment: string;
 };

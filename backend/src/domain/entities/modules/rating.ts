@@ -55,7 +55,11 @@ export default class Rating extends Entity<
   public static update(
     props: UpdateRatingProps
   ): Either<InvalidCommentError, Rating> {
-    const stars = props.stars;
+    if (props.stars) {
+      const stars = props.stars;
+
+      Rating.prototype.stars = stars;
+    }
 
     const commentOrError = Comment.create(props.comment);
 
@@ -65,7 +69,6 @@ export default class Rating extends Entity<
 
     const comment: Comment = commentOrError.value as Comment;
 
-    Rating.prototype.stars = stars;
     Rating.prototype.comment = comment;
 
     return right(Rating.prototype);

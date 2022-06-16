@@ -3,6 +3,14 @@ import crypto from 'crypto';
 import Rating from './rating';
 
 describe('Rating entity', () => {
+  it('should be able to update the rating comment', () => {
+    const comment =
+      'It was a good place, but they cut down a tree. They hate the nature. I hated it! But its a good barber.';
+
+    const response = Rating.update({ comment }).value as Rating;
+
+    expect(response.comment.value).toEqual(comment);
+  });
   it('should be able to update the rating', () => {
     const stars = 4;
     const comment =
