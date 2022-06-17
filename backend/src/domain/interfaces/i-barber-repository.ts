@@ -1,5 +1,6 @@
 import Barber from '../entities/modules/barber';
 import User from '../entities/modules/user';
+import Rating from '@entities/rating';
 import Appointment from '@entities/appointment';
 
 import ICreateBarberDTO from '../dtos/i-create-barber-dto';
