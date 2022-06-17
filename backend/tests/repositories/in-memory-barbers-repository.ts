@@ -1,7 +1,7 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
 
-import Barber from '@entities/barber';
 import User from '@entities/user';
+import Barber from '@entities/barber';
 import Appointment from '@entities/appointment';
 
 import ICreateBarberDTO from '@domain/dtos/i-create-barber-dto';

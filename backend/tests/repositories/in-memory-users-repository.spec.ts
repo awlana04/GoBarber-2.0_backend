@@ -3,7 +3,7 @@ import InMemoryUsersRepository from './in-memory-users-repository';
 import User from '@entities/user';
 
 describe('In memory users repository', () => {
-  const usersRepository = new InMemoryUsersRepository();
+  const userRepository = new InMemoryUsersRepository();
 
   const name = 'John Doe';
   const email = 'john@doe.com';
@@ -18,22 +18,22 @@ describe('In memory users repository', () => {
     location,
   }).value as User;
 
-  usersRepository.item.push(user);
+  userRepository.item.push(user);
 
   it('it should be able to find an user by id', async () => {
-    const response = await usersRepository.findById(user.id);
+    const response = await userRepository.findById(user.id);
 
     expect(response!.id).toEqual(user.id);
   });
 
   it('it should be able to find an user by email', async () => {
-    const response = await usersRepository.findByEmail(user.email.value);
+    const response = await userRepository.findByEmail(user.email.value);
 
     expect(response!.email.value).toEqual(user.email.value);
   });
 
   it('should be able to save an user', async () => {
-    const response = await usersRepository.save({
+    const response = await userRepository.save({
       name,
       email,
       password,
@@ -45,7 +45,7 @@ describe('In memory users repository', () => {
   });
 
   it('should be able to update an user', async () => {
-    const response = await usersRepository.update(user.id, {
+    const response = await userRepository.update(user.id, {
       name: 'John Doe Junior',
       password: '12345678910',
       location: 'Somewhere Out of the Box',
@@ -55,7 +55,7 @@ describe('In memory users repository', () => {
   });
 
   it('should be able to update an user avatar', async () => {
-    const response = await usersRepository.updateAvatar(
+    const response = await userRepository.updateAvatar(
       user.id,
       'other-avatar.png'
     );
@@ -64,7 +64,7 @@ describe('In memory users repository', () => {
   });
 
   it('should be able to delete an user', async () => {
-    const response = await usersRepository.delete(user.id);
+    const response = await userRepository.delete(user.id);
 
     expect(response).toBeDefined();
   });
