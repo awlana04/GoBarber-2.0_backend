@@ -57,7 +57,7 @@ export default class InMemoryAppointmentsRepository
     return appointment;
   }
 
-  public findAllAppointments(barberId: string): any {
+  async findAllAppointments(barberId: string): Promise<Appointment[] | any> {
     return this.appointment.find(
       appointment => appointment.barberId.value === barberId
     );

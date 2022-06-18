@@ -23,7 +23,7 @@ export default class User extends Entity<UserProps | UserValidationProps> {
   public password: Password;
   public location: Prop;
 
-  public readonly email: Email;
+  protected readonly email: Email;
 
   private constructor(
     props: UserValidationProps,
