@@ -12,11 +12,11 @@ describe('appointment entity', () => {
       date,
       userId,
       barberId,
-    });
+    }).value as Appointment;
 
     expect(response.props.date).toEqual(date);
-    expect(response.props.userId).toEqual(userId);
-    expect(response.props.barberId).toEqual(barberId);
+    expect(response.userId.value).toEqual(userId);
+    expect(response.barberId.value).toEqual(barberId);
 
     expect(response).toBeInstanceOf(Appointment);
   });
