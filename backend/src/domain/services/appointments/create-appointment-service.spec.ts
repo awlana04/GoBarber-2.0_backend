@@ -6,7 +6,6 @@ import AppointmentsUsecase from '@usecases/implementations/appointments-usecase'
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
-import Appointment from '@entities/appointment';
 
 type SutOutput = {
   appointmentRepository: InMemoryAppointmentsRepository;
@@ -60,10 +59,6 @@ describe('Create appointment service', () => {
       barberId: barber.id,
     });
 
-    expect(response.date).toEqual(date);
-    expect(response.userId).toEqual(user.id);
-    expect(response.barberId).toEqual(barber.id);
-
-    expect(response).toBeInstanceOf(Appointment);
+    expect(response.value).toBeDefined();
   });
 });

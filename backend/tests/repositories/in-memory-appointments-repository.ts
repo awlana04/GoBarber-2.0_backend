@@ -3,6 +3,7 @@ import IAppointmentRepository from '@interfaces/i-appointment-repository';
 import User from '@entities/user';
 import Barber from '@entities/barber';
 import Appointment from '@entities/appointment';
+import ICreateAppointmentDTO from '@domain/dtos/i-create-appointment-dto';
 
 export default class InMemoryAppointmentsRepository
   implements IAppointmentRepository
@@ -46,7 +47,7 @@ export default class InMemoryAppointmentsRepository
   async findByDate(date: Date, barberId: string): Promise<Appointment | null> {
     const appointment = this.appointment.find(
       appointment =>
-        appointment.date === date && appointment.barberId === barberId
+        appointment.date === date && appointment.barberId.value === barberId
     );
 
     if (!appointment) {
@@ -58,12 +59,12 @@ export default class InMemoryAppointmentsRepository
 
   public findAllAppointments(barberId: string): any {
     return this.appointment.find(
-      appointment => appointment.barberId === barberId
+      appointment => appointment.barberId.value === barberId
     );
   }
 
-  async save(appointment: Appointment): Promise<Appointment | any> {
-    return this.appointment.push(appointment);
+  async save(data: ICreateAppointmentDTO): Promise<Appointment | any> {
+    return this.appointment.push(data as unknown as Appointment);
   }
 
   async update(id: string, date: Date): Promise<Appointment | any> {

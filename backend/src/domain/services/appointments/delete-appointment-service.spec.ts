@@ -45,14 +45,11 @@ describe('Delete appointment service', () => {
     userId: user.id,
   }).value as Barber;
 
-  const appointment = Appointment.create(
-    {
-      date: new Date(),
-      userId: user.id,
-      barberId: barber.id,
-    },
-    id
-  );
+  const appointment = Appointment.create({
+    date: new Date(),
+    userId: user.id,
+    barberId: barber.id,
+  }).value as Appointment;
 
   appointmentsRepository.user.push(user);
   appointmentsRepository.barber.push(barber);

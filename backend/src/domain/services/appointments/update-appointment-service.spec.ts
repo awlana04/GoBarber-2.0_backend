@@ -52,7 +52,7 @@ describe('Update appointment service', () => {
     date: new Date(),
     userId: user.id,
     barberId: barber.id,
-  });
+  }).value as Appointment;
 
   appointmentRepository.user.push(user);
   appointmentRepository.barber.push(barber);
