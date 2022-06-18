@@ -1,7 +1,7 @@
-import User from '../entities/modules/user';
+import User from '@entities/user';
 
-import ICreateUserDTO from '../dtos/i-create-user-dto';
-import IUpdateUserDTO from '../dtos/i-update-user-dto';
+import ICreateUserDTO from '@dtos/i-create-user-dto';
+import IUpdateUserDTO from '@dtos/i-update-user-dto';
 
 export default interface IUserRepository {
   findById(id: string): Promise<User | null>;

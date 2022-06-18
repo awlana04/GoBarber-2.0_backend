@@ -2,8 +2,8 @@ import Rating from '@entities/rating';
 import User from '@entities/user';
 import Barber from '@entities/barber';
 
-import ICreateRatingDTO from '@domain/dtos/i-create-rating-dto';
-import IUpdateRatingDTO from '@domain/dtos/i-update-rating-dto';
+import ICreateRatingDTO from '@dtos/i-create-rating-dto';
+import IUpdateRatingDTO from '@dtos/i-update-rating-dto';
 
 export default interface IRatingRepository {
   findById(id: string): Promise<Rating | null>;

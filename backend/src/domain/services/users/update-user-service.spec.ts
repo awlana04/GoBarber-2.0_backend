@@ -29,17 +29,12 @@ describe('Update user service', () => {
 
   usersRepository.item.push(user);
 
-  const id = user.id;
-  const name = 'John Doe Junior';
-  const password = '12345678910';
-  const location = 'Somewhere Out of the Box';
-
   it('should be able to update the user', async () => {
     const response = await sut.handle({
-      id,
-      name,
-      password,
-      location,
+      id: user.id,
+      name: 'John Doe Junior',
+      password: '12345678910',
+      location: 'Somewhere Out of the Box',
     });
 
     expect(response.value).toBeDefined();

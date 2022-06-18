@@ -12,7 +12,7 @@ describe('Refresh token entity', () => {
       userId,
     });
 
-    expect(response.props.expiresIn).toEqual(expiresIn);
+    expect(response.expiresIn).toEqual(expiresIn);
     expect(response.props.userId).toEqual(userId);
 
     expect(response).toBeInstanceOf(RefreshToken);

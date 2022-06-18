@@ -1,16 +1,16 @@
-import Entity from '../shared/entity';
+import Entity from './shared/entity';
 
 import {
   RatingProps,
   RatingValidationProps,
   UpdateRatingProps,
-} from '../interfaces/rating-props';
+} from './interfaces/rating-props';
 
-import { Either, left, right } from '@shared/utils/either';
+import Comment from './modules/comment';
 
-import InvalidCommentError from '@shared/errors/invalid-comment-error';
+import { Either, left, right } from '@shared/either';
 
-import Comment from '../domain/comment';
+import InvalidCommentError from '@errors/invalid-comment-error';
 
 export default class Rating extends Entity<
   RatingProps | RatingValidationProps

@@ -1,6 +1,6 @@
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidNameError from '@shared/errors/invalid-name-error';
+import InvalidNameError from '@errors/invalid-name-error';
 
 export default class Name {
   public readonly value: string;

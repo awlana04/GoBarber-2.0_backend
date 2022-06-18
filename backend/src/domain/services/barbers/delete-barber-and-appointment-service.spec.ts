@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryBarberRepository from '@in-memory/in-memory-barbers-repository';
 import DeleteBarberAndAppointmentService from './delete-barber-and-appointment-service';
 import BarbersUsecase from '@usecases/implementations/barbers-usecase';
@@ -27,8 +25,6 @@ const makeSut = (): SutOutput => {
 describe('Delete barber and appointment service', () => {
   const { barbersRepository, sut } = makeSut();
 
-  const id = crypto.randomUUID();
-
   const user = User.create({
     name: 'John Doe',
     email: 'john@doe.com',
@@ -45,14 +41,11 @@ describe('Delete barber and appointment service', () => {
     userId: user.id,
   }).value as Barber;
 
-  const appointment = Appointment.create(
-    {
-      date: new Date(),
-      userId: user.id,
-      barberId: barber.id,
-    },
-    id
-  );
+  const appointment = Appointment.create({
+    date: new Date(),
+    userId: user.id,
+    barberId: barber.id,
+  }).value as Appointment;
 
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);

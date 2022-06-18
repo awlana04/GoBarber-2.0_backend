@@ -1,7 +1,7 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
 import CreateUserService from './create-user-service';
 import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
+import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
 import UsersUsecase from '@usecases/implementations/users-usecase';
 
 type SutOutput = {
@@ -26,17 +26,12 @@ const makeSut = (): SutOutput => {
 describe('Create user service', () => {
   const { sut } = makeSut();
 
-  const name = 'John Doe';
-  const email = 'john@doe.com';
-  const password = '12345678';
-  const location = 'Somewhere Over the Rainbow';
-
   it('should be able to create a new user', async () => {
     const response = await sut.handle({
-      name,
-      email,
-      password,
-      location,
+      name: 'John Doe',
+      email: 'john@doe.com',
+      password: '12345678',
+      location: 'Somewhere Over the Rainbow',
     });
 
     expect(response.value).toBeDefined();

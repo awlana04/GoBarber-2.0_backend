@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import DeleteAppointmentService from './delete-appointment-service';
 import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
@@ -27,8 +25,6 @@ const makeSut = (): SutOutput => {
 describe('Delete appointment service', () => {
   const { appointmentsRepository, sut } = makeSut();
 
-  const id = crypto.randomUUID();
-
   const user = User.create({
     name: 'John Doe',
     email: 'john@doe.com',
@@ -55,7 +51,7 @@ describe('Delete appointment service', () => {
   appointmentsRepository.barber.push(barber);
   appointmentsRepository.appointment.push(appointment);
 
-  it('should not be able to delete an appointment with an invalod id', () => {
+  it('should not be able to delete an appointment with an invalid id', () => {
     const response = sut.handle('invalidID');
 
     expect(response).rejects.toThrowError();

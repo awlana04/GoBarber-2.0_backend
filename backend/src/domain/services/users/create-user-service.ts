@@ -2,12 +2,12 @@ import IUserRepository from '@interfaces/i-user-repository';
 import IUsersUsecase from '@usecases/models/i-users-usecase';
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidNameError from '@shared/errors/invalid-name-error';
-import InvalidEmailError from '@shared/errors/invalid-email-error';
-import InvalidPasswordError from '@shared/errors/invalid-password-error';
-import InvalidPropError from '@shared/errors/invalid-prop-error';
+import InvalidNameError from '@errors/invalid-name-error';
+import InvalidEmailError from '@errors/invalid-email-error';
+import InvalidPasswordError from '@errors/invalid-password-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';

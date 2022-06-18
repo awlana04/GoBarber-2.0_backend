@@ -51,12 +51,12 @@ describe('Update rating service', () => {
   ratingRepository.rating.push(rating);
 
   it('should be able to update the rating', async () => {
-    const id = rating.id;
-    const stars = 5;
-    const comment =
-      'It was a good place, but they cut down a tree. They hate the nature. I hated it! But its a good barber.';
-
-    const response = await sut.handle({ id, stars, comment });
+    const response = await sut.handle({
+      id: rating.id,
+      stars: 5,
+      comment:
+        'It was a good place, but they cut down a tree. They hate the nature. I hated it! But its a good barber.',
+    });
 
     expect(response.value).toBeDefined();
   });

@@ -36,7 +36,7 @@ describe('Rating entity', () => {
       barberId,
     }).value as Rating;
 
-    expect(response.props.stars).toEqual(stars);
+    expect(response.stars).toEqual(stars);
     expect(response.comment.value).toEqual(comment);
     expect(response.props.userId).toEqual(userId);
     expect(response.props.barberId).toEqual(barberId);

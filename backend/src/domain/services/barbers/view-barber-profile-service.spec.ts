@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import ViewBarberProfileService from './view-barber-profile-service';
 
@@ -21,8 +19,6 @@ const makeSut = (): SutOutput => {
 describe('View barber profile service', () => {
   const { barbersRepository, sut } = makeSut();
 
-  const id = crypto.randomUUID();
-
   const user = User.create({
     name: 'John Doe',
     email: 'john@doe.com',
@@ -30,25 +26,22 @@ describe('View barber profile service', () => {
     location: 'Somewhere Over the Rainbow',
   }).value as User;
 
-  const barber = Barber.create(
-    {
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'This is a really good place, please believe me :)',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    },
-    id
-  ).value as Barber;
+  const barber = Barber.create({
+    name: 'John Doe Barber',
+    location: 'Somewhere Into the Pocket',
+    description: 'This is a really good place, please believe me :)',
+    openAtNight: true,
+    openOnWeekends: true,
+    userId: user.id,
+  }).value as Barber;
 
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
   it('should be able to view the barber profile', async () => {
-    const response = await sut.handle(id);
+    const response = await sut.handle(barber.id);
 
-    expect(response.id).toEqual(id);
+    expect(response.id).toEqual(barber.id);
     expect(response).toEqual(barber);
 
     expect(response).toBeInstanceOf(Barber);

@@ -1,6 +1,6 @@
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidPropError from '@shared/errors/invalid-prop-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 export default class Prop {
   public readonly value: string;

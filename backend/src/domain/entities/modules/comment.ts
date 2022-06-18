@@ -1,6 +1,6 @@
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidCommentError from '@shared/errors/invalid-comment-error';
+import InvalidCommentError from '@errors/invalid-comment-error';
 
 export default class Comment {
   public readonly value: string;

@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import UpdateBarberUserAvatarService from './update-barber-user-avatar-service';
 import BarbersUsecase from '@usecases/implementations/barbers-usecase';
@@ -24,8 +22,6 @@ const makeSut = (): SutOutput => {
 };
 
 describe('Update barber user avatar', () => {
-  const id = crypto.randomUUID();
-
   const { barbersRepository, sut } = makeSut();
 
   const user = User.create({
@@ -36,24 +32,21 @@ describe('Update barber user avatar', () => {
     avatar: 'avatar.png',
   }).value as User;
 
-  const barber = Barber.create(
-    {
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'This is a really good place, please believe me :)',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    },
-    id
-  ).value as Barber;
+  const barber = Barber.create({
+    name: 'John Doe Barber',
+    location: 'Somewhere Into the Pocket',
+    description: 'This is a really good place, please believe me :)',
+    openAtNight: true,
+    openOnWeekends: true,
+    userId: user.id,
+  }).value as Barber;
 
   barbersRepository.user.push(user);
   barbersRepository.barber.push(barber);
 
   it('should be able to update the barber avatar', async () => {
     const response = await sut.handle({
-      id,
+      id: barber.id,
       userId: user.id,
       avatar: 'another-avatar.png',
     });

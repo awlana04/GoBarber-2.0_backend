@@ -14,7 +14,7 @@ describe('appointment entity', () => {
       barberId,
     }).value as Appointment;
 
-    expect(response.props.date).toEqual(date);
+    expect(response.date).toEqual(date);
     expect(response.userId.value).toEqual(userId);
     expect(response.barberId.value).toEqual(barberId);
 

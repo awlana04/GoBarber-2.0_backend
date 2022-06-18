@@ -1,9 +1,9 @@
 import IAppointmentRepository from '@interfaces/i-appointment-repository';
 import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
 
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidPropError from '@shared/errors/invalid-prop-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 import Appointment from '@entities/appointment';
 

@@ -1,29 +1,29 @@
-import Entity from '../shared/entity';
+import Entity from './shared/entity';
 
 import {
   UserProps,
   UserValidationProps,
   UpdateUserProps,
-} from '../interfaces/user-props';
+} from './interfaces/user-props';
 
-import Name from '../domain/name';
-import Email from '../domain/email';
-import Password from '../domain/password';
-import Prop from '../domain/prop';
+import Name from './modules/name';
+import Email from './modules/email';
+import Password from './modules/password';
+import Prop from './modules/prop';
 
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidNameError from '@shared/errors/invalid-name-error';
-import InvalidEmailError from '@shared/errors/invalid-email-error';
-import InvalidPasswordError from '@shared/errors/invalid-password-error';
-import InvalidPropError from '@shared/errors/invalid-prop-error';
+import InvalidNameError from '@errors/invalid-name-error';
+import InvalidEmailError from '@errors/invalid-email-error';
+import InvalidPasswordError from '@errors/invalid-password-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 export default class User extends Entity<UserProps | UserValidationProps> {
   public name: Name;
   public password: Password;
   public location: Prop;
 
-  protected readonly email: Email;
+  public readonly email: Email;
 
   private constructor(
     props: UserValidationProps,

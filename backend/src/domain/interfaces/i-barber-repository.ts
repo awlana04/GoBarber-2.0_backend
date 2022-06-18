@@ -1,10 +1,9 @@
-import Barber from '../entities/modules/barber';
-import User from '../entities/modules/user';
-import Rating from '@entities/rating';
+import Barber from '@entities/barber';
+import User from '@entities/user';
 import Appointment from '@entities/appointment';
 
-import ICreateBarberDTO from '../dtos/i-create-barber-dto';
-import IUpdateBarberDTO from '../dtos/i-update-barber-dto';
+import ICreateBarberDTO from '@dtos/i-create-barber-dto';
+import IUpdateBarberDTO from '@dtos/i-update-barber-dto';
 
 export default interface IBarberRepository {
   findById(id: string): Promise<Barber | null>;

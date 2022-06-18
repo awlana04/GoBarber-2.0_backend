@@ -34,7 +34,7 @@ describe('Refresh token usecase', () => {
   refreshTokensRepository.user.push(user);
   refreshTokensRepository.refreshToken.push(refreshToken);
 
-  it('should NOT be able to create a new refresh token with an invalid id', () => {
+  it('should not be able to create a new refresh token with an invalid id', () => {
     const response = sut.findRefreshToken('invalidID');
 
     expect(response).rejects.toThrowError();

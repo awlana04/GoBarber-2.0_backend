@@ -1,20 +1,20 @@
-import Entity from '../shared/entity';
+import Entity from './shared/entity';
 
 import {
   BarberProps,
   BarberValidationProps,
   UpdateBarberProps,
-} from '../interfaces/barber-props';
+} from './interfaces/barber-props';
 
-import Name from '../domain/name';
-import Description from '../domain/description';
-import Prop from '../domain/prop';
+import Name from './modules/name';
+import Description from './modules/description';
+import Prop from './modules/prop';
 
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidNameError from '@shared/errors/invalid-name-error';
-import InvalidDescriptionError from '@domain/shared/errors/invalid-description-error';
-import InvalidPropError from '@domain/shared/errors/invalid-prop-error';
+import InvalidNameError from '@errors/invalid-name-error';
+import InvalidDescriptionError from '@errors/invalid-description-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps

@@ -82,18 +82,12 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '@entities/user': ['<rootDir>/src/domain/entities/modules/user'],
-    '@entities/barber': ['<rootDir>/src/domain/entities/modules/barber'],
-    '@entities/appointment': [
-      '<rootDir>/src/domain/entities/modules/appointment',
-    ],
-    '@entities/refresh-token': [
-      '<rootDir>/src/domain/entities/modules/refresh-token',
-    ],
-    '@entities/notification': [
-      '<rootDir>/src/domain/entities/modules/notifications',
-    ],
-    '@entities/rating': ['<rootDir>/src/domain/entities/modules/rating'],
+    '@entities/user': ['<rootDir>/src/domain/entities/user'],
+    '@entities/barber': ['<rootDir>/src/domain/entities/barber'],
+    '@entities/appointment': ['<rootDir>/src/domain/entities/appointment'],
+    '@entities/refresh-token': ['<rootDir>/src/domain/entities/refresh-token'],
+    '@entities/notification': ['<rootDir>/src/domain/entities/notifications'],
+    '@entities/rating': ['<rootDir>/src/domain/entities/rating'],
     '@usecases/implementations/users-usecase': [
       '<rootDir>/src/domain/usecases/implementations/users-usecase',
     ],
@@ -115,23 +109,23 @@ export default {
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
-    '@shared/utils/either': ['<rootDir>/src/domain/shared/utils/either'],
-    '@shared/errors/invalid-name-error': [
+    '@shared/either': ['<rootDir>/src/domain/shared/either'],
+    '@errors/invalid-name-error': [
       '<rootDir>/src/domain/shared/errors/invalid-name-error',
     ],
-    '@shared/errors/invalid-email-error': [
+    '@errors/invalid-email-error': [
       '<rootDir>/src/domain/shared/errors/invalid-email-error',
     ],
-    '@shared/errors/invalid-password-error': [
+    '@errors/invalid-password-error': [
       '<rootDir>/src/domain/shared/errors/invalid-password-error',
     ],
-    '@shared/errors/invalid-prop-error': [
+    '@errors/invalid-prop-error': [
       '<rootDir>/src/domain/shared/errors/invalid-prop-error',
     ],
-    '@shared/errors/invalid-description-error': [
+    '@errors/invalid-description-error': [
       '<rootDir>/src/domain/shared/errors/invalid-description-error',
     ],
-    '@shared/errors/invalid-comment-error': [
+    '@errors/invalid-comment-error': [
       '<rootDir>/src/domain/shared/errors/invalid-comment-error',
     ],
     '@in-memory/in-memory-appointments-repository': [

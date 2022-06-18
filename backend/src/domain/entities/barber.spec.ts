@@ -77,9 +77,9 @@ describe('Barber entity', () => {
     expect(response.name.value).toEqual(name);
     expect(response.location.value).toEqual(location);
     expect(response.description.value).toEqual(description);
-    expect(response.props.openAtNight).toEqual(openAtNight);
-    expect(response.props.openOnWeekends).toEqual(openOnWeekends);
-    expect(response.props.userId).toEqual(userId);
+    expect(response.openAtNight).toEqual(openAtNight);
+    expect(response.openOnWeekends).toEqual(openOnWeekends);
+    expect(response.userId).toEqual(userId);
 
     expect(response).toBeInstanceOf(Barber);
   });

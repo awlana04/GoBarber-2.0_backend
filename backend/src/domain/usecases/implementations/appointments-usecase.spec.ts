@@ -40,7 +40,7 @@ describe('Appointments usecase', () => {
     date: new Date(),
     userId: user.id,
     barberId: barber.id,
-  });
+  }).value as Appointment;
 
   appointmentsRepository.user.push(user);
   appointmentsRepository.barber.push(barber);

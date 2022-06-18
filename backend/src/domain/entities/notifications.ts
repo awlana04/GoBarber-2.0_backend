@@ -1,6 +1,6 @@
-import Entity from '../shared/entity';
+import Entity from './shared/entity';
 
-import { NotificationProps } from '../interfaces/notifications-props';
+import { NotificationProps } from './interfaces/notifications-props';
 
 export default class Notification extends Entity<NotificationProps> {
   private constructor(

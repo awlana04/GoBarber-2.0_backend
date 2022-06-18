@@ -1,11 +1,11 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
 import IBarberUsecase from '@usecases/models/i-barbers-usecase';
 
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidNameError from '@shared/errors/invalid-name-error';
-import InvalidDescriptionError from '@shared/errors/invalid-description-error';
-import InvalidPropError from '@shared/errors/invalid-prop-error';
+import InvalidNameError from '@errors/invalid-name-error';
+import InvalidDescriptionError from '@errors/invalid-description-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 import Barber from '@entities/barber';
 

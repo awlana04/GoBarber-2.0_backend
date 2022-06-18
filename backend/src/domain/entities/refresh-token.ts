@@ -1,6 +1,6 @@
-import Entity from '../shared/entity';
+import Entity from './shared/entity';
 
-import { RefreshTokenProps } from '../interfaces/refresh-token-props';
+import { RefreshTokenProps } from './interfaces/refresh-token-props';
 
 export default class RefreshToken extends Entity<RefreshTokenProps> {
   constructor(
@@ -10,6 +10,10 @@ export default class RefreshToken extends Entity<RefreshTokenProps> {
     updatedAt?: Date
   ) {
     super(props, id, createdAt, updatedAt);
+  }
+
+  get expiresIn() {
+    return this.props.expiresIn;
   }
 
   public static create(

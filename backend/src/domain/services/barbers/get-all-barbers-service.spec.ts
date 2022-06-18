@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import GetAllBarbersService from './get-all-barbers-service';
 import BarbersUsecase from '@usecases/implementations/barbers-usecase';
@@ -22,8 +20,6 @@ const makeSut = (): SutOutput => {
 
 describe('Get all barbers service', () => {
   const { barbersRepository, sut } = makeSut();
-
-  const id = crypto.randomUUID();
 
   const user = User.create({
     name: 'John Doe',

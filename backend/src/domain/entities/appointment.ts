@@ -1,15 +1,15 @@
-import Entity from '../shared/entity';
+import Entity from './shared/entity';
 
 import {
   AppointmentProps,
   AppointmentValidationProps,
-} from '../interfaces/appointment-props';
+} from './interfaces/appointment-props';
 
-import Prop from '../domain/prop';
+import Prop from './modules/prop';
 
-import { Either, left, right } from '@shared/utils/either';
+import { Either, left, right } from '@shared/either';
 
-import InvalidPropError from '@shared/errors/invalid-prop-error';
+import InvalidPropError from '@errors/invalid-prop-error';
 
 export default class Appointment extends Entity<
   AppointmentProps | AppointmentValidationProps

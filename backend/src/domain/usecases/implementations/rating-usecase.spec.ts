@@ -1,6 +1,5 @@
-import RatingUsecase from './rating-usecase';
-
 import InMemoryRatingRepository from '@in-memory/in-memory-rating-repository';
+import RatingUsecase from './rating-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

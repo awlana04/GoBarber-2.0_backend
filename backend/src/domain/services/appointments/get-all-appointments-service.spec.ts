@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import GetAllAppointmentsService from './get-all-appointments-service';
 import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
@@ -26,8 +24,6 @@ const makeSut = (): SutOutput => {
 
 describe('Get all appointments service', () => {
   const { appointmentsRepository, sut } = makeSut();
-
-  const id = crypto.randomUUID();
 
   const user = User.create({
     name: 'John Doe',

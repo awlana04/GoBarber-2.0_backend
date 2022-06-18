@@ -1,8 +1,8 @@
-import Appointment from '../entities/modules/appointment';
-import User from '../entities/modules/user';
-import Barber from '../entities/modules/barber';
+import Appointment from '@entities/appointment';
+import User from '@entities//user';
+import Barber from '@entities/barber';
 
-import ICreateAppointmentDTO from '../dtos/i-create-appointment-dto';
+import ICreateAppointmentDTO from '@dtos/i-create-appointment-dto';
 
 export default interface IAppointmentRepository {
   findById(id: string): Promise<Appointment | null>;
