@@ -41,7 +41,7 @@ describe('Update rating service', () => {
   const rating = Rating.create({
     stars: 5,
     comment:
-      'A very good place, this is my fifth time comming back here. A really peace and profissioanl barber.',
+      'A very good place, this is my fifth time comming back here. A really peace and profissional barber.',
     userId: user.id,
     barberId: barber.id,
   }).value as Rating;
