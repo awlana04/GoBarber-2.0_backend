@@ -8,7 +8,7 @@ import IUpdateUserDTO from '@domain/dtos/i-update-user-dto';
 export default class InMemoryUsersRepository implements IUserRepository {
   public item: User[] = [];
 
-  async findById(id: string): Promise<User | null> {
+  async findById(id: string): Promise<User | null | any> {
     const user = this.item.find(user => user.id === id);
 
     if (!user) {
@@ -18,7 +18,7 @@ export default class InMemoryUsersRepository implements IUserRepository {
     return user;
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<User | null | any> {
     const user = this.item.find(user => user.email.value === email);
 
     if (!user) {

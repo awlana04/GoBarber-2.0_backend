@@ -109,6 +109,19 @@ export default {
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
+    '@core/adapters/implementations/hash-adapter': [
+      '<rootDir>/src/core/adapters/implementations/hash-adapter',
+    ],
+    '@core/adapters/implementations/disk-storage-adapter': [
+      '<rootDir>/src/core/adapters/implementations/disk-storage-adapter',
+    ],
+    '@core/adapters/implementations/expires-in-date-adapter': [
+      '<rootDir>/src/core/adapters/implementations/expires-in-date-adapter',
+    ],
+    '@core/adapters/implementations/token-adapter': [
+      '<rootDir>/src/core/adapters/implementations/token-adapter',
+    ],
+    '@core/config/upload': ['<rootDir>/src/core/config/upload'],
     '@shared/either': ['<rootDir>/src/domain/shared/either'],
     '@errors/invalid-name-error': [
       '<rootDir>/src/domain/shared/errors/invalid-name-error',

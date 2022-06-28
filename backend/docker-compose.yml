@@ -11,10 +11,11 @@ services:
       - .:/usr/app
 
   postgres:
-    image: 'postgres:latest'
+    image: postgres:latest
     container_name: 'gobarber-2.0_postgres'
     ports:
       - '5432:5432'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=gobarber-2.0_postgres

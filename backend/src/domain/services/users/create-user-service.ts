@@ -1,5 +1,8 @@
 import IUserRepository from '@interfaces/i-user-repository';
 import IUsersUsecase from '@usecases/models/i-users-usecase';
+import IHastAdapter from '@adapters/models/i-hash-adapter';
+import IDiskStorageAdapter from '@adapters/models/i-disk-storage-adapter';
+import ITokenAdapter from '@adapters/models/i-token-adapter';
 import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-provider';
 
 import { Either, left, right } from '@shared/either';
@@ -9,8 +12,10 @@ import InvalidEmailError from '@errors/invalid-email-error';
 import InvalidPasswordError from '@errors/invalid-password-error';
 import InvalidPropError from '@errors/invalid-prop-error';
 
+import IUser from '@core/interfaces/i-user';
+import IRefreshToken from '@core/interfaces/i-refresh-token';
+
 import User from '@entities/user';
-import RefreshToken from '@entities/refresh-token';
 
 interface ICreateUserServiceRequest {
   name: string;
@@ -24,6 +29,9 @@ export default class CreateUserService {
   constructor(
     private readonly usersRepository: IUserRepository,
     private readonly usersUsecase: IUsersUsecase,
+    private readonly hashAdapter: IHastAdapter,
+    private readonly diskStorageAdapter: IDiskStorageAdapter,
+    private readonly tokenAdapter: ITokenAdapter,
     private readonly refreshTokenProvider: IRefreshTokenProvider
   ) {}
 
@@ -40,8 +48,9 @@ export default class CreateUserService {
       | InvalidPasswordError
       | InvalidPropError,
       {
-        user: User;
-        refreshToken: RefreshToken;
+        user: IUser;
+        token: string;
+        refreshToken: IRefreshToken;
       }
     >
   > {
@@ -59,20 +68,26 @@ export default class CreateUserService {
       return left(userOrError.value);
     }
 
-    const user: User = userOrError.value as User;
+    const hashedPassword = await this.hashAdapter.generateHash(password);
 
-    await this.usersRepository.save({
+    const filename = await this.diskStorageAdapter.saveFile(avatar);
+
+    const user = await this.usersRepository.save({
       name,
       email,
-      password,
+      password: hashedPassword,
       location,
-      avatar,
+      avatar: filename,
     });
 
+    const token = await this.tokenAdapter.createToken(user.id);
+
     const refreshToken = await this.refreshTokenProvider.createRefreshToken(
-      userOrError.value.id
+      user.id
     );
 
-    return right({ user, refreshToken });
+    delete user.password;
+
+    return right({ user, token, refreshToken });
   }
 }

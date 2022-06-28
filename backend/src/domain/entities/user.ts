@@ -11,12 +11,12 @@ import Email from './modules/email';
 import Password from './modules/password';
 import Prop from './modules/prop';
 
-import { Either, left, right } from '@shared/either';
+import { Either, left, right } from '../shared/either';
 
-import InvalidNameError from '@errors/invalid-name-error';
-import InvalidEmailError from '@errors/invalid-email-error';
-import InvalidPasswordError from '@errors/invalid-password-error';
-import InvalidPropError from '@errors/invalid-prop-error';
+import InvalidNameError from '../shared/errors/invalid-name-error';
+import InvalidEmailError from '../shared/errors/invalid-email-error';
+import InvalidPasswordError from '../shared/errors/invalid-password-error';
+import InvalidPropError from '../shared/errors/invalid-prop-error';
 
 export default class User extends Entity<UserProps | UserValidationProps> {
   public name: Name;

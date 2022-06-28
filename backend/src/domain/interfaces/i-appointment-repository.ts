@@ -1,5 +1,5 @@
 import Appointment from '@entities/appointment';
-import User from '@entities//user';
+import User from '@entities/user';
 import Barber from '@entities/barber';
 
 import ICreateAppointmentDTO from '@dtos/i-create-appointment-dto';

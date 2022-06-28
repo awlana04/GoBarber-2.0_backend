@@ -1,6 +1,6 @@
-import Name from '../domain/name';
-import Description from '../domain/description';
-import Prop from '../domain/prop';
+import Name from '../modules/name';
+import Description from '../modules/description';
+import Prop from '../modules/prop';
 
 export type BarberProps = {
   name: string;

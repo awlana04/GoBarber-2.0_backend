@@ -1,5 +1,5 @@
-import RefreshToken from '@entities/refresh-token';
+import IRefreshToken from '@core/interfaces/i-refresh-token';
 
 export default interface IRefreshTokenProvider {
-  createRefreshToken(userId: string): Promise<RefreshToken>;
+  createRefreshToken(userId: string): Promise<IRefreshToken>;
 }

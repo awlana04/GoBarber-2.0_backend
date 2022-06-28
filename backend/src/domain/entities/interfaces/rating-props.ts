@@ -1,4 +1,4 @@
-import Comment from '../domain/comment';
+import Comment from '../modules/comment';
 
 export type RatingProps = {
   stars: number;

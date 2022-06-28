@@ -1,12 +1,16 @@
 import 'dotenv/config';
+import cors from 'cors';
 
 import express from 'express';
 
+import routes from './infra/http/routes';
+import uploadConfig from '@core/config/upload';
+
 const app = express();
 
-const host = process.env.HOST;
-const port = process.env.PORT;
+app.use(express.json());
+app.use(cors());
+app.use(routes);
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 
-app.listen({ host, port }, () =>
-  console.log(`🚀 Server running at port: ${port}`)
-);
+export default app;

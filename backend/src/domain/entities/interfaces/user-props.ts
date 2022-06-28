@@ -1,7 +1,7 @@
-import Name from '../domain/name';
-import Email from '../domain/email';
-import Password from '../domain/password';
-import Prop from '../domain/prop';
+import Name from '../modules/name';
+import Email from '../modules/email';
+import Password from '../modules/password';
+import Prop from '../modules/prop';
 
 export type UserProps = {
   name: string;

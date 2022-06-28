@@ -1,4 +1,4 @@
-import Prop from '../domain/prop';
+import Prop from '../modules/prop';
 
 export type AppointmentProps = {
   date: Date;

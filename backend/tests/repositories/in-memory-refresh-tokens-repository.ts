@@ -11,7 +11,7 @@ export default class InMemoryRefreshTokenRepository
   public user: User[] = [];
   public refreshToken: RefreshToken[] = [];
 
-  async findByRefreshToken(id: string): Promise<RefreshToken | null> {
+  async findByRefreshToken(id: string): Promise<RefreshToken | null | any> {
     const refreshToken = this.refreshToken.find(token => token.id === id);
 
     if (!refreshToken) {

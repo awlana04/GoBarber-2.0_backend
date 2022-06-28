@@ -1,4 +1,5 @@
 export default interface ICreateRefreshTokenDTO {
-  expiresIn: Date;
+  id?: string;
+  expiresIn: number;
   userId: string;
 }
