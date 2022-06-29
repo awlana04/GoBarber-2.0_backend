@@ -1,12 +1,14 @@
 import HttpRequest from '@ports/http-request';
 import HttpResponse from '@ports/http-response';
+import HttpNextFunction from '@ports/http-next-function';
 
 import CreateUserFactory from '@core/factories/user-factory';
 
 export default class CreateUserController {
   public async execute(
     request: HttpRequest,
-    response: HttpResponse
+    response: HttpResponse,
+    next: HttpNextFunction
   ): Promise<HttpResponse> {
     const createUser = CreateUserFactory();
 
@@ -25,7 +27,7 @@ export default class CreateUserController {
 
       return response.status(201).json(user);
     } catch (error) {
-      return response.json(error);
+      next(error);
     }
   }
 }
