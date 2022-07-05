@@ -2,6 +2,7 @@ import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import UsersUsecase from './users-usecase';
 
 import User from '@entities/user';
+import AppError from '@domain/shared/app-error';
 
 type SutOutput = {
   usersRepository: InMemoryUsersRepository;

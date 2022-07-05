@@ -21,6 +21,7 @@ const CreateUserFactory = () => {
     refreshTokenRepository,
     expiresInDateAdapter
   );
+
   return new CreateUserService(
     userRepository,
     usersUsecase,

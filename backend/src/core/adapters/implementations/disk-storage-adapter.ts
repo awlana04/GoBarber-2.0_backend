@@ -7,6 +7,10 @@ import upload from '@core/config/upload';
 
 export default class DiskStorageProvider implements IDiskStorageAdapter {
   public async saveFile(file: string): Promise<string> {
+    if (process.env.NODE_ENV === 'test') {
+      return file;
+    }
+
     await fs.promises.appendFile(
       path.resolve(upload.tmpFolder, file),
       path.resolve(upload.uploadsFolder, file)

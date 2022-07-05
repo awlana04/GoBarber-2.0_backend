@@ -10,14 +10,32 @@ export default class CreateUserController {
     response: HttpResponse,
     next: HttpNextFunction
   ): Promise<HttpResponse> {
-    const createUser = CreateUserFactory();
+    const createUserService = CreateUserFactory();
+
+    if (process.env.NODE_ENV === 'test') {
+      const { name, email, password, location, avatar } = request.body;
+
+      try {
+        const user = await createUserService.handle({
+          name,
+          email,
+          password,
+          location,
+          avatar,
+        });
+
+        return response.status(201).json(user);
+      } catch (error) {
+        next(error);
+      }
+    }
 
     const { name, email, password, location } = request.body;
 
     const avatar = request.file.filename;
 
     try {
-      const user = await createUser.handle({
+      const user = await createUserService.handle({
         name,
         email,
         password,

@@ -5,8 +5,5 @@ export default class InvalidEmailError extends AppError {
 
   constructor(email: string) {
     super('Invalid email: ' + email + '.');
-    {
-      throw new AppError('Invalid email error');
-    }
   }
 }

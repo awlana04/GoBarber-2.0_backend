@@ -5,8 +5,5 @@ export default class InvalidPasswordError extends AppError {
 
   constructor(password: string) {
     super('Invalid password: ' + password + '.');
-    {
-      throw new AppError('Invalid password error');
-    }
   }
 }

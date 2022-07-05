@@ -3,7 +3,7 @@ import IRefreshTokensUsecase from '../models/i-refresh-tokens-usecase';
 import IRefreshTokenRepository from '@interfaces/i-refresh-token-repository';
 
 import RefreshToken from '@entities/refresh-token';
-import AppError from '@domain/shared/app-error';
+import AppError from '@shared/app-error';
 
 export default class RefreshTokenUsecase implements IRefreshTokensUsecase {
   constructor(

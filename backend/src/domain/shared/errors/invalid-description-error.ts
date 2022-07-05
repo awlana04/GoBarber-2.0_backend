@@ -5,8 +5,5 @@ export default class InvalidDescriptionError extends AppError {
 
   constructor(description: string) {
     super('Invalid description: ' + description + '.');
-    {
-      throw new AppError('Invalid description error');
-    }
   }
 }

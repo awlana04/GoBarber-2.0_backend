@@ -5,8 +5,5 @@ export default class InvalidNameError extends AppError {
 
   constructor(name: string) {
     super('Invalid name: ' + name + '.');
-    {
-      throw new AppError('Invalid name error');
-    }
   }
 }

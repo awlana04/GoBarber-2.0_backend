@@ -5,7 +5,7 @@ import express, { Request, Response, NextFunction } from 'express';
 
 import routes from './infra/http/routes';
 import uploadConfig from '@core/config/upload';
-import AppError from '@domain/shared/app-error';
+import AppError from '@shared/app-error';
 
 const app = express();
 

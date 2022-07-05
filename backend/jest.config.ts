@@ -82,12 +82,17 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    '@app/app': ['<rootDir>/src/app/app'],
+    '@database/index': ['<rootDir>/src/app/infra/database/index'],
     '@entities/user': ['<rootDir>/src/domain/entities/user'],
     '@entities/barber': ['<rootDir>/src/domain/entities/barber'],
     '@entities/appointment': ['<rootDir>/src/domain/entities/appointment'],
     '@entities/refresh-token': ['<rootDir>/src/domain/entities/refresh-token'],
     '@entities/notification': ['<rootDir>/src/domain/entities/notifications'],
     '@entities/rating': ['<rootDir>/src/domain/entities/rating'],
+    '@services/users/create-user-service': [
+      '<rootDir>/src/domain/services/users/create-user-service',
+    ],
     '@usecases/implementations/users-usecase': [
       '<rootDir>/src/domain/usecases/implementations/users-usecase',
     ],
@@ -109,20 +114,33 @@ export default {
     '@domain/providers/implementations/refresh-token-provider': [
       '<rootDir>/src/domain/providers/implementations/refresh-token-provider',
     ],
-    '@core/adapters/implementations/hash-adapter': [
+    '@core/config/upload': ['<rootDir>/src/core/config/upload'],
+    '@core/factories/user-factory': [
+      '<rootDir>/src/core/factories/user-factory',
+    ],
+    '@adapters/implementations/hash-adapter': [
       '<rootDir>/src/core/adapters/implementations/hash-adapter',
     ],
-    '@core/adapters/implementations/disk-storage-adapter': [
+    '@adapters/implementations/disk-storage-adapter': [
       '<rootDir>/src/core/adapters/implementations/disk-storage-adapter',
     ],
-    '@core/adapters/implementations/expires-in-date-adapter': [
+    '@adapters/implementations/expires-in-date-adapter': [
       '<rootDir>/src/core/adapters/implementations/expires-in-date-adapter',
     ],
-    '@core/adapters/implementations/token-adapter': [
+    '@adapters/implementations/token-adapter': [
       '<rootDir>/src/core/adapters/implementations/token-adapter',
     ],
-    '@core/config/upload': ['<rootDir>/src/core/config/upload'],
+    '@controllers/users/create-user-controller': [
+      '<rootDir>/src/core/controllers/users/create-user-controller',
+    ],
+    '@repositories/user-repository': [
+      '<rootDir>/src/core/repositories/user-repository',
+    ],
+    '@repositories/refresh-token-repository': [
+      '<rootDir>/src/core/repositories/refresh-token-repository',
+    ],
     '@shared/either': ['<rootDir>/src/domain/shared/either'],
+    '@shared/app-error': ['<rootDir>/src/domain/shared/app-error'],
     '@errors/invalid-name-error': [
       '<rootDir>/src/domain/shared/errors/invalid-name-error',
     ],
