@@ -6,7 +6,8 @@
   "scripts": {
     "app": "ts-node-dev --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/app/server.ts",
     "dev": "docker-compose up",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "jest --config jest-e2e.config.ts"
   },
   "devDependencies": {
     "@swc/core": "^1.2.171",

@@ -1,12 +1,8 @@
-/**
- * @jest-environment ./prisma/prisma-test-environment.ts
- */
-
 import request from 'supertest';
 
-import app from '@app/app';
+import app from './app';
 
-describe('Create user controller', () => {
+describe('[E2E] Test the whole application functionalities', () => {
   it('should be able to create a new user', async () => {
     const response = await request(app).post('/users').send({
       name: 'Awlana Costa',

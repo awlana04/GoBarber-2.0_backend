@@ -5,5 +5,11 @@ export default class InvalidEmailError extends AppError {
 
   constructor(email: string) {
     super('Invalid email: ' + email + '.');
+
+    if (process.env.NODE_ENV !== 'test') {
+      {
+        throw new AppError('Invalid Email Error');
+      }
+    }
   }
 }
