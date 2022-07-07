@@ -5,5 +5,9 @@ export default class InvalidPasswordError extends AppError {
 
   constructor(password: string) {
     super('Invalid password: ' + password + '.');
+
+    if (process.env.NODE_ENV !== 'test') {
+      throw new AppError('Invalid Password Error');
+    }
   }
 }

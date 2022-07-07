@@ -5,5 +5,9 @@ export default class InvalidDescriptionError extends AppError {
 
   constructor(description: string) {
     super('Invalid description: ' + description + '.');
+
+    if (process.env.NODE_ENV !== 'test') {
+      throw new AppError('Invalid Description Error');
+    }
   }
 }

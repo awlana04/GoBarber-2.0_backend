@@ -5,5 +5,9 @@ export default class InvalidCommentError extends AppError {
 
   constructor(comment: string) {
     super('Invalid comment: ' + comment + '.');
+
+    if (process.env.NODE_ENV !== 'test') {
+      throw new AppError('Invalid Comment Error');
+    }
   }
 }

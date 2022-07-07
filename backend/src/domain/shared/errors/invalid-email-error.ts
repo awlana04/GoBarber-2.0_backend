@@ -7,9 +7,7 @@ export default class InvalidEmailError extends AppError {
     super('Invalid email: ' + email + '.');
 
     if (process.env.NODE_ENV !== 'test') {
-      {
-        throw new AppError('Invalid Email Error');
-      }
+      throw new AppError('Invalid Email Error');
     }
   }
 }
