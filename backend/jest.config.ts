@@ -96,6 +96,9 @@ export default {
     '@services/barbers/create-barber-service': [
       '<rootDir>/src/domain/services/barbers/create-barber-service',
     ],
+    '@services/refresh-tokens/create-refresh-token-service': [
+      '<rootDir>/src/domain/services/refresh-tokens/create-refresh-token-service',
+    ],
     '@usecases/implementations/users-usecase': [
       '<rootDir>/src/domain/usecases/implementations/users-usecase',
     ],
@@ -124,9 +127,10 @@ export default {
     '@core/factories/barber-factory': [
       '<rootDir>/src/core/factories/barber-factory',
     ],
-    '@core/controllers/barbers/create-barber-controller': [
-      '<rootDir>/src/core/controllers/barbers/create-barber-controller',
+    '@core/factories/refresh-token-factory': [
+      '<rootDir>/src/core/factories/refresh-token-factory',
     ],
+
     '@adapters/implementations/hash-adapter': [
       '<rootDir>/src/core/adapters/implementations/hash-adapter',
     ],
@@ -141,6 +145,12 @@ export default {
     ],
     '@controllers/users/create-user-controller': [
       '<rootDir>/src/core/controllers/users/create-user-controller',
+    ],
+    '@controllers/barbers/create-barber-controller': [
+      '<rootDir>/src/core/controllers/barbers/create-barber-controller',
+    ],
+    '@controllers/refresh-tokens/create-refresh-token-controller': [
+      '<rootDir>/src/core/controllers/refresh-tokens/create-refresh-token-controller',
     ],
     '@repositories/user-repository': [
       '<rootDir>/src/core/repositories/user-repository',

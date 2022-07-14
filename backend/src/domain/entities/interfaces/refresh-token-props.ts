@@ -1,4 +1,4 @@
 export type RefreshTokenProps = {
-  expiresIn: Date;
+  expiresIn: number;
   userId: string;
 };

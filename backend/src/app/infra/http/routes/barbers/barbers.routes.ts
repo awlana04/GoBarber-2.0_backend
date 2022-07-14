@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import CreateBarberController from '@core/controllers/barbers/create-barber-controller';
+import CreateBarberController from '@controllers/barbers/create-barber-controller';
 
 import ensureAuthenticated from '../../middlewares/ensure-authenticated';
 
