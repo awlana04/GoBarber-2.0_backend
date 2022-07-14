@@ -43,7 +43,6 @@ describe('Update barber user password service', () => {
   it('ahould be able to update the barber user password', async () => {
     const response = await sut.handle({
       id: barber.id,
-      userId: user.id,
       password: '12345678910',
     });
 

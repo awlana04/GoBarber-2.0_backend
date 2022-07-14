@@ -10,4 +10,12 @@ export default class TokenAdapter implements ITokenAdapter {
 
     return jwt.sign({ payload }, process.env.SECRET, { expiresIn: '15m' });
   }
+
+  public async verifyToken(token: string): Promise<any> {
+    if (process.env.NODE_ENV === 'test') {
+      return jwt.verify(token, 'gobarber-2.0');
+    }
+
+    return jwt.verify(token, process.env.SECRET);
+  }
 }

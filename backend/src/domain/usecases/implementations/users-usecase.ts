@@ -2,6 +2,7 @@ import IUsersUsecase from '../models/i-users-usecase';
 import IUserRepository from '@interfaces/i-user-repository';
 
 import User from '@entities/user';
+
 import AppError from '@shared/app-error';
 
 export default class UsersUsecase implements IUsersUsecase {

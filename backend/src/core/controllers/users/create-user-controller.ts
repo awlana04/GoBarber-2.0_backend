@@ -12,7 +12,7 @@ export default class CreateUserController {
   ): Promise<HttpResponse> {
     const createUserService = CreateUserFactory();
 
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'e2e') {
       const { name, email, password, location, avatar } = request.body;
 
       try {
@@ -30,22 +30,24 @@ export default class CreateUserController {
       }
     }
 
-    const { name, email, password, location } = request.body;
+    if (process.env.NODE_ENV === 'dev') {
+      const { name, email, password, location } = request.body;
 
-    const avatar = request.file.filename;
+      const avatar = request.file.filename;
 
-    try {
-      const user = await createUserService.handle({
-        name,
-        email,
-        password,
-        location,
-        avatar,
-      });
+      try {
+        const user = await createUserService.handle({
+          name,
+          email,
+          password,
+          location,
+          avatar,
+        });
 
-      return response.status(201).json(user);
-    } catch (error) {
-      next(error);
+        return response.status(201).json(user);
+      } catch (error) {
+        next(error);
+      }
     }
   }
 }

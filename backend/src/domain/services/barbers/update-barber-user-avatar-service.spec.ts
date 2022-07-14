@@ -47,7 +47,6 @@ describe('Update barber user avatar', () => {
   it('should be able to update the barber avatar', async () => {
     const response = await sut.handle({
       id: barber.id,
-      userId: user.id,
       avatar: 'another-avatar.png',
     });
 

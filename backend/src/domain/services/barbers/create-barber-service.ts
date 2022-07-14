@@ -7,6 +7,8 @@ import InvalidNameError from '@errors/invalid-name-error';
 import InvalidDescriptionError from '@errors/invalid-description-error';
 import InvalidPropError from '@errors/invalid-prop-error';
 
+import IBarber from '@core/interfaces/i-barber';
+
 import Barber from '@entities/barber';
 
 interface ICreateBarberServiceRequest {
@@ -22,7 +24,7 @@ interface ICreateBarberServiceRequest {
 export default class CreateBarberService {
   constructor(
     private readonly barberRepository: IBarberRepository,
-    private readonly barbersUsecase: IBarberUsecase
+    private readonly barberUsecase: IBarberUsecase
   ) {}
 
   public async handle({
@@ -36,11 +38,11 @@ export default class CreateBarberService {
   }: ICreateBarberServiceRequest): Promise<
     Either<
       InvalidNameError | InvalidDescriptionError | InvalidPropError,
-      Barber
+      IBarber
     >
   > {
-    await this.barbersUsecase.checkUserExists(userId);
-    await this.barbersUsecase.checkBarberNameAlreadyExists(name);
+    await this.barberUsecase.checkUserExists(userId);
+    await this.barberUsecase.checkBarberNameAlreadyExists(name);
 
     const barberOrError: Either<
       InvalidNameError | InvalidDescriptionError | InvalidPropError,
@@ -59,9 +61,7 @@ export default class CreateBarberService {
       return left(barberOrError.value);
     }
 
-    const barber: Barber = barberOrError.value as Barber;
-
-    await this.barberRepository.save({
+    const barber = await this.barberRepository.save({
       name,
       location,
       description,

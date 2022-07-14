@@ -12,7 +12,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
   public barber: Barber[] = [];
   public appointment: Appointment[] = [];
 
-  async findById(id: string): Promise<Barber | null> {
+  async findById(id: string): Promise<Barber | null | any> {
     const barber = this.barber.find(barber => barber.id === id);
 
     if (!barber) {
@@ -22,7 +22,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return barber;
   }
 
-  async findUserId(userId: string): Promise<User | null> {
+  async findUserId(userId: string): Promise<User | null | any> {
     const user = this.user.find(user => user.id === userId);
 
     if (!user) {
@@ -32,7 +32,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return user;
   }
 
-  async findByName(name: string): Promise<Barber | null> {
+  async findByName(name: string): Promise<Barber | null | any> {
     const barber = this.barber.find(barber => barber.name.value === name);
 
     if (!barber) {
@@ -42,7 +42,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return barber;
   }
 
-  async getAllBarbers(): Promise<Barber[]> {
+  async getAllBarbers(): Promise<Barber[] | any> {
     return this.barber;
   }
 
@@ -131,11 +131,10 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
 
   async updatePassword(
     id: string,
-    userId: string,
     password: string
   ): Promise<(Barber & User) | any> {
-    await this.findById(id);
-    const user = await this.findUserId(userId);
+    const barber = await this.findById(id);
+    const user = await this.findUserId(barber.userId);
 
     user?.password.value.replace(user.password.value, password);
 
@@ -144,11 +143,10 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
 
   async updateAvatar(
     id: string,
-    userId: string,
     avatar: string
   ): Promise<(Barber & User) | any> {
-    await this.findById(id);
-    const user = await this.findUserId(userId);
+    const barber = await this.findById(id);
+    const user = await this.findUserId(barber.userId);
 
     user?.props.avatar?.replace(user.props.avatar, avatar);
 

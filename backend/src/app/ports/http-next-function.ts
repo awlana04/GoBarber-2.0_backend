@@ -1,5 +1,5 @@
 type HttpNextFunction = {
-  (err: any): any;
+  (err?: any): any;
 };
 
 export default HttpNextFunction;

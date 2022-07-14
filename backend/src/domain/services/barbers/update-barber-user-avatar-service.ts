@@ -1,11 +1,10 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
 import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
 
-import Barber from '@entities/barber';
+import IBarber from '@core/interfaces/i-barber';
 
 interface IUpdateBarberUserServiceRequest {
   id: string;
-  userId: string;
   avatar: string;
 }
 
@@ -17,17 +16,11 @@ export default class UpdateBarberUserAvatarService {
 
   public async handle({
     id,
-    userId,
     avatar,
-  }: IUpdateBarberUserServiceRequest): Promise<Barber> {
-    await this.barbersUsecase.checkUserExists(userId);
+  }: IUpdateBarberUserServiceRequest): Promise<IBarber> {
     await this.barbersUsecase.checkBarberDoesNotExists(id);
 
-    const barber = await this.barbersRepository.updateAvatar(
-      id,
-      userId,
-      avatar
-    );
+    const barber = await this.barbersRepository.updateAvatar(id, avatar);
 
     return barber;
   }

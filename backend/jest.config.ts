@@ -93,6 +93,9 @@ export default {
     '@services/users/create-user-service': [
       '<rootDir>/src/domain/services/users/create-user-service',
     ],
+    '@services/barbers/create-barber-service': [
+      '<rootDir>/src/domain/services/barbers/create-barber-service',
+    ],
     '@usecases/implementations/users-usecase': [
       '<rootDir>/src/domain/usecases/implementations/users-usecase',
     ],
@@ -118,6 +121,12 @@ export default {
     '@core/factories/user-factory': [
       '<rootDir>/src/core/factories/user-factory',
     ],
+    '@core/factories/barber-factory': [
+      '<rootDir>/src/core/factories/barber-factory',
+    ],
+    '@core/controllers/barbers/create-barber-controller': [
+      '<rootDir>/src/core/controllers/barbers/create-barber-controller',
+    ],
     '@adapters/implementations/hash-adapter': [
       '<rootDir>/src/core/adapters/implementations/hash-adapter',
     ],
@@ -138,6 +147,9 @@ export default {
     ],
     '@repositories/refresh-token-repository': [
       '<rootDir>/src/core/repositories/refresh-token-repository',
+    ],
+    '@repositories/barber-repository': [
+      '<rootDir>/src/core/repositories/barber-repository',
     ],
     '@shared/either': ['<rootDir>/src/domain/shared/either'],
     '@shared/app-error': ['<rootDir>/src/domain/shared/app-error'],

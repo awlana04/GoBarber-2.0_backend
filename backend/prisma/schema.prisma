@@ -24,6 +24,7 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   refresh_token RefreshToken?
+  barber        Barber?
 
   @@map("users")
 }
@@ -40,4 +41,23 @@ model RefreshToken {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("refresh_token")
+}
+
+model Barber {
+  id String @id @default(uuid())
+
+  name           String   @unique
+  location       String
+  description    String
+  images         String[]
+  openAtNight    Boolean  @map("open_at_night")
+  openOnWeekends Boolean  @map("open_on_weekends")
+
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("barbers")
 }
