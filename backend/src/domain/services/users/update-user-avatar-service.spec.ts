@@ -1,24 +1,24 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import UpdateUserAvatarService from './update-user-avatar-service';
-import UsersUsecase from '@usecases/implementations/users-usecase';
+import UsersUsecase from '@usecases/implementations/user-usecase';
 
 import User from '@entities/user';
 
 type SutOutput = {
-  usersRepository: InMemoryUsersRepository;
+  userRepository: InMemoryUsersRepository;
   sut: UpdateUserAvatarService;
 };
 
 const makeSut = (): SutOutput => {
-  const usersRepository = new InMemoryUsersRepository();
-  const usersUsecase = new UsersUsecase(usersRepository);
-  const sut = new UpdateUserAvatarService(usersRepository, usersUsecase);
+  const userRepository = new InMemoryUsersRepository();
+  const usersUsecase = new UsersUsecase(userRepository);
+  const sut = new UpdateUserAvatarService(userRepository, usersUsecase);
 
-  return { usersRepository, sut };
+  return { userRepository, sut };
 };
 
 describe('Update user avatar service', () => {
-  const { usersRepository, sut } = makeSut();
+  const { userRepository, sut } = makeSut();
 
   const user = User.create({
     name: 'John Doe',
@@ -28,7 +28,7 @@ describe('Update user avatar service', () => {
     avatar: 'avatar.png',
   }).value as User;
 
-  usersRepository.item.push(user);
+  userRepository.item.push(user);
 
   it('should be able to update the user avatar', async () => {
     const response = await sut.handle({

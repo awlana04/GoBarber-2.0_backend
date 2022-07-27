@@ -1,7 +1,7 @@
 import IUserRepository from '@interfaces/i-user-repository';
 import IUsersUsecase from '@usecases/models/i-users-usecase';
 
-import User from '@entities/user';
+import IUser from '@core/interfaces/i-user';
 
 export default class DeleteUserService {
   constructor(
@@ -9,7 +9,7 @@ export default class DeleteUserService {
     private readonly usersUsecase: IUsersUsecase
   ) {}
 
-  public async handle(id: string): Promise<User> {
+  public async handle(id: string): Promise<IUser> {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
     const user = await this.usersRepository.delete(id);

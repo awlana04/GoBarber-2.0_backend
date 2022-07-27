@@ -99,20 +99,20 @@ export default {
     '@services/refresh-tokens/create-refresh-token-service': [
       '<rootDir>/src/domain/services/refresh-tokens/create-refresh-token-service',
     ],
-    '@usecases/implementations/users-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/users-usecase',
+    '@usecases/implementations/user-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/user-usecase',
     ],
-    '@usecases/implementations/barbers-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/barbers-usecase',
+    '@usecases/implementations/barber-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/barber-usecase',
     ],
-    '@usecases/implementations/appointments-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/appointments-usecase',
+    '@usecases/implementations/appointment-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/appointment-usecase',
     ],
-    '@usecases/implementations/refresh-tokens-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/refresh-tokens-usecase',
+    '@usecases/implementations/refresh-token-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/refresh-token-usecase',
     ],
-    '@usecases/implementations/notifications-usecase': [
-      '<rootDir>/src/domain/usecases/implementations/notifications-usecase',
+    '@usecases/implementations/notification-usecase': [
+      '<rootDir>/src/domain/usecases/implementations/notification-usecase',
     ],
     '@usecases/implementations/rating-usecase': [
       '<rootDir>/src/domain/usecases/implementations/rating-usecase',

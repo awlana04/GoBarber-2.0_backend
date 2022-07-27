@@ -1,24 +1,24 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import DeleteUserService from './delete-user-service';
-import UsersUsecase from '@usecases/implementations/users-usecase';
+import UsersUsecase from '@usecases/implementations/user-usecase';
 
 import User from '@entities/user';
 
 type SutOutput = {
-  usersRepository: InMemoryUsersRepository;
+  userRepository: InMemoryUsersRepository;
   sut: DeleteUserService;
 };
 
 const makeSut = (): SutOutput => {
-  const usersRepository = new InMemoryUsersRepository();
-  const usersUsecase = new UsersUsecase(usersRepository);
-  const sut = new DeleteUserService(usersRepository, usersUsecase);
+  const userRepository = new InMemoryUsersRepository();
+  const userUsecase = new UsersUsecase(userRepository);
+  const sut = new DeleteUserService(userRepository, userUsecase);
 
-  return { usersRepository, sut };
+  return { userRepository, sut };
 };
 
 describe('Delete user service', () => {
-  const { usersRepository, sut } = makeSut();
+  const { userRepository, sut } = makeSut();
 
   const user = User.create({
     name: 'John Doe',
@@ -27,7 +27,7 @@ describe('Delete user service', () => {
     location: 'Somewhere Over the Rainbow',
   }).value as User;
 
-  usersRepository.item.push(user);
+  userRepository.item.push(user);
 
   it('should be able to delete an user', async () => {
     const response = await sut.handle(user.id);

@@ -1,5 +1,5 @@
 import BarberRepository from '@repositories/barber-repository';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
+import BarbersUsecase from '@usecases/implementations/barber-usecase';
 
 import CreateBarberService from '@services/barbers/create-barber-service';
 

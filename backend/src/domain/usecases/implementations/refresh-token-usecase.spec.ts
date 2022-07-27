@@ -1,5 +1,5 @@
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import RefreshTokenUsecase from './refresh-tokens-usecase';
+import RefreshTokenUsecase from './refresh-token-usecase';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';
@@ -27,7 +27,7 @@ describe('Refresh token usecase', () => {
   }).value as User;
 
   const refreshToken = RefreshToken.create({
-    expiresIn: Date.UTC(2022, 10) as unknown as Date,
+    expiresIn: Date.UTC(2022, 10) as unknown as number,
     userId: user.id,
   });
 

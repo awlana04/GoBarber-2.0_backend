@@ -1,20 +1,19 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import CreateUserService from './create-user-service';
+import UserUsecase from '@usecases/implementations/user-usecase';
 import HashAdapter from '@adapters/implementations/hash-adapter';
 import DiskStorageAdapter from '@adapters/implementations/disk-storage-adapter';
 import TokenAdapter from '@adapters/implementations/token-adapter';
-import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
-import ExpiresInDateAdapter from '@adapters/implementations/expires-in-date-adapter';
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import UsersUsecase from '@usecases/implementations/users-usecase';
+import ExpiresInDateAdapter from '@adapters/implementations/expires-in-date-adapter';
+import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
+import CreateUserService from './create-user-service';
 
 type SutOutput = {
-  usersRepository: InMemoryUsersRepository;
   sut: CreateUserService;
 };
 
 const makeSut = (): SutOutput => {
-  const usersRepository = new InMemoryUsersRepository();
+  const userRepository = new InMemoryUsersRepository();
   const refreshTokenRepository = new InMemoryRefreshTokenRepository();
   const hashAdapter = new HashAdapter();
   const diskStorageAdapter = new DiskStorageAdapter();
@@ -24,9 +23,9 @@ const makeSut = (): SutOutput => {
     refreshTokenRepository,
     expiresInDateAdapter
   );
-  const usersUsecase = new UsersUsecase(usersRepository);
+  const usersUsecase = new UserUsecase(userRepository);
   const sut = new CreateUserService(
-    usersRepository,
+    userRepository,
     usersUsecase,
     hashAdapter,
     diskStorageAdapter,
@@ -34,7 +33,7 @@ const makeSut = (): SutOutput => {
     refreshTokenProvider
   );
 
-  return { sut, usersRepository };
+  return { sut };
 };
 
 describe('Create user service', () => {
@@ -47,7 +46,7 @@ describe('Create user service', () => {
       password: '12345678',
       location: 'Somewhere Over the Rainbow',
     });
-    console.log(response);
+
     expect(response.value).toBeDefined();
   });
 });

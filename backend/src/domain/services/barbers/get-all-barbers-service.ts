@@ -1,7 +1,7 @@
 import IBarberRepository from '@interfaces/i-barber-repository';
 import IBarbersUsecase from '@usecases/models/i-barbers-usecase';
 
-import Barber from '@entities/barber';
+import IBarber from '@core/interfaces/i-barber';
 
 export default class GetAllBarbersService {
   constructor(
@@ -9,7 +9,7 @@ export default class GetAllBarbersService {
     private readonly barbersUsecase: IBarbersUsecase
   ) {}
 
-  public async handle(userId: string): Promise<Barber[]> {
+  public async handle(userId: string): Promise<IBarber[]> {
     await this.barbersUsecase.checkUserExists(userId);
 
     const barber = await this.barbersRepository.getAllBarbers();

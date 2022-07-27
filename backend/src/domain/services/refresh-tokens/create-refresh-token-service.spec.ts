@@ -1,5 +1,5 @@
 import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
-import RefreshTokenUsecase from '@usecases/implementations/refresh-tokens-usecase';
+import RefreshTokenUsecase from '@usecases/implementations/refresh-token-usecase';
 import TokenAdapter from '@adapters/implementations/token-adapter';
 import ExpiresInDateAdapter from '@adapters/implementations/expires-in-date-adapter';
 import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';

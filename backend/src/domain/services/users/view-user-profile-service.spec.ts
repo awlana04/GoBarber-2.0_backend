@@ -4,19 +4,19 @@ import ViewUserProfileService from './view-user-profile-service';
 import User from '@entities/user';
 
 type SutOutput = {
-  usersRepository: InMemoryUsersRepository;
+  userRepository: InMemoryUsersRepository;
   sut: ViewUserProfileService;
 };
 
 const makeSut = (): SutOutput => {
-  const usersRepository = new InMemoryUsersRepository();
-  const sut = new ViewUserProfileService(usersRepository);
+  const userRepository = new InMemoryUsersRepository();
+  const sut = new ViewUserProfileService(userRepository);
 
-  return { usersRepository, sut };
+  return { userRepository, sut };
 };
 
 describe('View user profile service', () => {
-  const { usersRepository, sut } = makeSut();
+  const { userRepository, sut } = makeSut();
 
   const user = User.create({
     name: 'John Doe',
@@ -25,7 +25,7 @@ describe('View user profile service', () => {
     location: 'Somewhere Over the Rainbow',
   }).value as User;
 
-  usersRepository.item.push(user);
+  userRepository.item.push(user);
 
   it('should be able to view the user profile', async () => {
     const response = await sut.handle(user.id);

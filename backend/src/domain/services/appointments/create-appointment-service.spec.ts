@@ -2,7 +2,7 @@ import crypto from 'crypto';
 
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import CreateAppointmentService from './create-appointment-service';
-import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
+import AppointmentsUsecase from '@usecases/implementations/appointment-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

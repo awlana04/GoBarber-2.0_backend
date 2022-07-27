@@ -1,6 +1,6 @@
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import GetAllAppointmentsService from './get-all-appointments-service';
-import AppointmentsUsecase from '@usecases/implementations/appointments-usecase';
+import AppointmentsUsecase from '@usecases/implementations/appointment-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

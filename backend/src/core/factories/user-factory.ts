@@ -1,5 +1,5 @@
 import UserRepository from '@repositories/user-repository';
-import UsersUsecase from '@usecases/implementations/users-usecase';
+import UsersUsecase from '@usecases/implementations/user-usecase';
 import HashAdapter from '@adapters/implementations/hash-adapter';
 import DiskStorageAdapter from '@adapters/implementations/disk-storage-adapter';
 import TokenAdapter from '@adapters/implementations/token-adapter';

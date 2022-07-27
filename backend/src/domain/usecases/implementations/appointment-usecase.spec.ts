@@ -1,5 +1,5 @@
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
-import AppointmentsUsecase from './appointments-usecase';
+import AppointmentsUsecase from './appointment-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

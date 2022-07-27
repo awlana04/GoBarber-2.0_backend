@@ -1,9 +1,8 @@
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import CreateBarberService from './create-barber-service';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
+import BarbersUsecase from '@usecases/implementations/barber-usecase';
 
 import User from '@entities/user';
-import Barber from '@entities/barber';
 
 type SutOutput = {
   barberRepository: InMemoryBarbersRepository;
@@ -49,6 +48,6 @@ describe('Create barber service', () => {
       userId: user.id,
     });
 
-    expect(response.value).toBeInstanceOf(Barber);
+    expect(response.value).toBeDefined();
   });
 });

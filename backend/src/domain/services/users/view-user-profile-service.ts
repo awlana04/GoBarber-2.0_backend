@@ -1,11 +1,11 @@
 import IUserRepository from '@interfaces/i-user-repository';
 
-import User from '@entities/user';
+import IUser from '@core/interfaces/i-user';
 
 export default class ViewUserProfileService {
   constructor(private readonly usersRepository: IUserRepository) {}
 
-  public async handle(id: string): Promise<User> {
+  public async handle(id: string): Promise<IUser> {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {

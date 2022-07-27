@@ -4,7 +4,9 @@ import ICreateRefreshTokenDTO from '@dtos/i-create-refresh-token-dto';
 
 import prisma from '@database/index';
 
-import BatchPayload from '@ports/batch-payload';
+type BatchPayload = {
+  count: number;
+};
 
 export default class RefreshTokenRepository implements IRefreshTokenRepository {
   public async findByRefreshToken(id: string): Promise<IRefreshToken> {

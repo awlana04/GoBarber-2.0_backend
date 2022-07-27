@@ -1,5 +1,5 @@
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
-import BarbersUsecase from './barbers-usecase';
+import BarbersUsecase from './barber-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

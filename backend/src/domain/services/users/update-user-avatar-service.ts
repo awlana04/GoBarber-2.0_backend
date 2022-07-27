@@ -1,7 +1,7 @@
 import IUserRepository from '@interfaces/i-user-repository';
 import IUserUsecase from '@usecases/models/i-users-usecase';
 
-import User from '@entities/user';
+import IUser from '@core/interfaces/i-user';
 
 interface IUpdateUserAvatarServiceRequest {
   id: string;
@@ -17,7 +17,7 @@ export default class UpdateUserAvatarService {
   public async handle({
     id,
     avatar,
-  }: IUpdateUserAvatarServiceRequest): Promise<User> {
+  }: IUpdateUserAvatarServiceRequest): Promise<IUser> {
     await this.usersUsecase.checkUserDoesNotExists(id);
 
     const user = await this.usersRepository.updateAvatar(id, avatar);

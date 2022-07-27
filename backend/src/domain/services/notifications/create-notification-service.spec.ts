@@ -1,6 +1,6 @@
 import InMemoryNotificationsRepository from '@in-memory/in-memory-notifications-repository';
 import CreateNotificationService from './create-notification-service';
-import NotificationsUsecase from '@usecases/implementations/notifications-usecase';
+import NotificationsUsecase from '@usecases/implementations/notification-usecase';
 
 import User from '@entities/user';
 

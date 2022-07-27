@@ -1,6 +1,6 @@
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import DeleteBarberService from './delete-barber-service';
-import BarbersUsecase from '@usecases/implementations/barbers-usecase';
+import BarbersUsecase from '@usecases/implementations/barber-usecase';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

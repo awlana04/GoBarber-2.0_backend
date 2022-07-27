@@ -1,8 +1,9 @@
 import RefreshTokenRepository from '@repositories/refresh-token-repository';
-import RefreshTokenUsecase from '@usecases/implementations/refresh-tokens-usecase';
+import RefreshTokenUsecase from '@usecases/implementations/refresh-token-usecase';
 import TokenAdapter from '@adapters/implementations/token-adapter';
 import ExpiresInDateAdapter from '@adapters/implementations/expires-in-date-adapter';
 import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
+
 import CreateRefreshTokenService from '@services/refresh-tokens/create-refresh-token-service';
 
 const CreateRefreshToken = () => {

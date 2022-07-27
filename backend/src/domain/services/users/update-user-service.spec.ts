@@ -1,24 +1,24 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import UpdateUserService from './update-user-service';
-import UsersUsecase from '@usecases/implementations/users-usecase';
+import UserUsecase from '@usecases/implementations/user-usecase';
 
 import User from '@entities/user';
 
 type SutOutupt = {
-  usersRepository: InMemoryUsersRepository;
+  userRepository: InMemoryUsersRepository;
   sut: UpdateUserService;
 };
 
 const makeSut = (): SutOutupt => {
-  const usersRepository = new InMemoryUsersRepository();
-  const usersUsecase = new UsersUsecase(usersRepository);
-  const sut = new UpdateUserService(usersRepository, usersUsecase);
+  const userRepository = new InMemoryUsersRepository();
+  const usersUsecase = new UserUsecase(userRepository);
+  const sut = new UpdateUserService(userRepository, usersUsecase);
 
-  return { usersRepository, sut };
+  return { userRepository, sut };
 };
 
 describe('Update user service', () => {
-  const { usersRepository, sut } = makeSut();
+  const { userRepository, sut } = makeSut();
 
   const user = User.create({
     name: 'John Doe',
@@ -27,7 +27,7 @@ describe('Update user service', () => {
     location: 'Somewhere Over the Rainbow',
   }).value as User;
 
-  usersRepository.item.push(user);
+  userRepository.item.push(user);
 
   it('should be able to update the user', async () => {
     const response = await sut.handle({
