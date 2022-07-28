@@ -1,14 +1,15 @@
 import IUsersUsecase from '../models/i-users-usecase';
 import IUserRepository from '@interfaces/i-user-repository';
 
-import User from '@entities/user';
+import IUser from '@core/interfaces/i-user';
+// import User from '@entities/user';
 
 import AppError from '@shared/app-error';
 
 export default class UsersUsecase implements IUsersUsecase {
   constructor(private usersRepository: IUserRepository) {}
 
-  public async checkUserAlreadyExists(email: string): Promise<User | null> {
+  public async checkUserAlreadyExists(email: string): Promise<IUser | null> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
@@ -18,7 +19,7 @@ export default class UsersUsecase implements IUsersUsecase {
     return null;
   }
 
-  public async checkUserDoesNotExists(id: string): Promise<User | null> {
+  public async checkUserDoesNotExists(id: string): Promise<IUser | null> {
     const checkUserExists = await this.usersRepository.findById(id);
 
     if (!checkUserExists) {

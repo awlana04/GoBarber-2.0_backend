@@ -1,6 +1,6 @@
-import User from '@entities/user';
+import IUser from '@core/interfaces/i-user';
 
 export default interface IUsersUsecase {
-  checkUserAlreadyExists(email: string): Promise<User | null>;
-  checkUserDoesNotExists(id: string): Promise<User | null>;
+  checkUserAlreadyExists(email: string): Promise<IUser | null>;
+  checkUserDoesNotExists(id: string): Promise<IUser | null>;
 }
