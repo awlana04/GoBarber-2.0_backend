@@ -7,6 +7,7 @@ import RefreshTokenRepository from '@repositories/refresh-token-repository';
 import ExpiresInDateAdapter from '@adapters/implementations/expires-in-date-adapter';
 import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
 
+import AuthenticateUserService from '@services/users/authenticate-user-service';
 import CreateUserService from '@services/users/create-user-service';
 
 const CreateUserFactory = () => {
@@ -22,7 +23,14 @@ const CreateUserFactory = () => {
     expiresInDateAdapter
   );
 
-  return new CreateUserService(
+  const authenticateUserService = new AuthenticateUserService(
+    userRepository,
+    hashAdapter,
+    tokenAdapter,
+    refreshTokenProvider
+  );
+
+  const createUserService = new CreateUserService(
     userRepository,
     usersUsecase,
     hashAdapter,
@@ -30,6 +38,8 @@ const CreateUserFactory = () => {
     tokenAdapter,
     refreshTokenProvider
   );
+
+  return { authenticateUserService, createUserService };
 };
 
 export default CreateUserFactory;

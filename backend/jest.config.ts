@@ -90,6 +90,9 @@ export default {
     '@entities/refresh-token': ['<rootDir>/src/domain/entities/refresh-token'],
     '@entities/notification': ['<rootDir>/src/domain/entities/notifications'],
     '@entities/rating': ['<rootDir>/src/domain/entities/rating'],
+    '@services/users/authenticate-user-service': [
+      '<rootDir>/src/domain/services/users/authenticate-user-service',
+    ],
     '@services/users/create-user-service': [
       '<rootDir>/src/domain/services/users/create-user-service',
     ],
@@ -148,6 +151,9 @@ export default {
     ],
     '@controllers/barbers/create-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/create-barber-controller',
+    ],
+    '@controllers/users/authenticate-user-controller': [
+      '<rootDir>/src/core/controllers/users/authenticate-user-controller',
     ],
     '@controllers/refresh-tokens/create-refresh-token-controller': [
       '<rootDir>/src/core/controllers/refresh-tokens/create-refresh-token-controller',

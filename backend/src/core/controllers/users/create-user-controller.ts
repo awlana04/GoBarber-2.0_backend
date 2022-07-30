@@ -10,7 +10,7 @@ export default class CreateUserController {
     response: HttpResponse,
     next: HttpNextFunction
   ): Promise<HttpResponse> {
-    const createUserService = CreateUserFactory();
+    const { createUserService } = CreateUserFactory();
 
     if (process.env.NODE_ENV === 'test') {
       const { name, email, password, location, avatar } = request.body;
