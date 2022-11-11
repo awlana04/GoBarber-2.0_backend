@@ -11,3 +11,7 @@ export type AppointmentValidationProps = {
   userId: Prop;
   barberId: Prop;
 };
+
+export type UpdateAppointmentProps = {
+  date: Date;
+};

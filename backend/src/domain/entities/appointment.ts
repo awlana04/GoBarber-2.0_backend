@@ -3,6 +3,7 @@ import Entity from './shared/entity';
 import {
   AppointmentProps,
   AppointmentValidationProps,
+  UpdateAppointmentProps,
 } from './interfaces/appointment-props';
 
 import Prop from './modules/prop';
@@ -14,6 +15,7 @@ import InvalidPropError from '@errors/invalid-prop-error';
 export default class Appointment extends Entity<
   AppointmentProps | AppointmentValidationProps
 > {
+  public date: Date;
   public userId: Prop;
   public barberId: Prop;
 
@@ -25,13 +27,14 @@ export default class Appointment extends Entity<
   ) {
     super(props, id, createdAt, updatedAt);
 
+    this.date = props.date;
     this.userId = props.userId;
     this.barberId = props.barberId;
   }
 
-  get date() {
-    return this.props.date;
-  }
+  // get date() {
+  //   return this.props.date;
+  // }
 
   public static create(
     props: AppointmentProps,
@@ -58,5 +61,15 @@ export default class Appointment extends Entity<
     return right(
       new Appointment({ date, userId, barberId }, id, createdAt, updatedAt)
     );
+  }
+
+  public static update(
+    props: UpdateAppointmentProps
+  ): Either<InvalidPropError, Appointment> {
+    const date = props.date;
+
+    Appointment.prototype.date = date;
+
+    return right(Appointment.prototype);
   }
 }

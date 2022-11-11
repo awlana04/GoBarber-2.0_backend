@@ -1,5 +1,4 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
-import UserUsecase from '@usecases/implementations/user-usecase';
 import HashAdapter from '@adapters/implementations/hash-adapter';
 import TokenAdapter from '@adapters/implementations/token-adapter';
 import RefreshTokenRepository from '@repositories/refresh-token-repository';
