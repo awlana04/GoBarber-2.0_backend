@@ -32,17 +32,18 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
 
-    // await execSync(
+    // execSync(
     //   `docker run --name ${process.env.DATABASE_NAME} -p ${process.env.DATABASE_PORT}:${process.env.DATABASE_PORT} -e POSTGRES_PASSWORD=${process.env.DATABASE_PASS} -d postgres`
     // );
+
     execSync(`${prismaBinary} migrate deploy`);
 
     return super.setup();
   }
 
   async teardown() {
-    // exec(`docker stop ${process.env.DATABASE_NAME}`);
-    // exec(`docker rm ${process.env.DATABASE_NAME}`);
+    // execSync(`docker stop ${process.env.DATABASE_NAME}`);
+    // execSync(`docker rm ${process.env.DATABASE_NAME}`);
 
     const client = new Client({
       connectionString: this.connectionString,
@@ -50,6 +51,7 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
 
     await client.connect();
     await client.query(`DROP SCHEMA IF EXISTS "${this.schema}" CASCADE`);
+
     await client.end();
   }
 }
