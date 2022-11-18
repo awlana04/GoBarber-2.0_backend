@@ -102,6 +102,9 @@ export default {
     '@services/refresh-tokens/create-refresh-token-service': [
       '<rootDir>/src/domain/services/refresh-tokens/create-refresh-token-service',
     ],
+    '@services/appointments/create-appointment-service': [
+      '<rootDir>/src/domain/services/appointments/create-appointment-service',
+    ],
     '@usecases/implementations/user-usecase': [
       '<rootDir>/src/domain/usecases/implementations/user-usecase',
     ],
@@ -133,7 +136,9 @@ export default {
     '@core/factories/refresh-token-factory': [
       '<rootDir>/src/core/factories/refresh-token-factory',
     ],
-
+    '@core/factories/appointment-factory': [
+      '<rootDir>/src/core/factories/appointment-factory',
+    ],
     '@adapters/implementations/hash-adapter': [
       '<rootDir>/src/core/adapters/implementations/hash-adapter',
     ],
@@ -152,6 +157,9 @@ export default {
     '@controllers/barbers/create-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/create-barber-controller',
     ],
+    '@controllers/appointments/create-appointment-controller': [
+      '<rootDir>/src/core/controllers/appointments/create-appointment-controller',
+    ],
     '@controllers/users/authenticate-user-controller': [
       '<rootDir>/src/core/controllers/users/authenticate-user-controller',
     ],
@@ -167,10 +175,16 @@ export default {
     '@repositories/barber-repository': [
       '<rootDir>/src/core/repositories/barber-repository',
     ],
+    '@repositories/appointment-repository': [
+      '<rootDir>/src/core/repositories/appointment-repository',
+    ],
     '@shared/either': ['<rootDir>/src/domain/shared/either'],
     '@shared/app-error': ['<rootDir>/src/domain/shared/app-error'],
     '@errors/invalid-name-error': [
       '<rootDir>/src/domain/shared/errors/invalid-name-error',
+    ],
+    '@errors/invalid-datetime-error': [
+      '<rootDir>/src/domain/shared/errors/invalid-datetime-error',
     ],
     '@errors/invalid-email-error': [
       '<rootDir>/src/domain/shared/errors/invalid-email-error',

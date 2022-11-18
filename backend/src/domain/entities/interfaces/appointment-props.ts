@@ -1,3 +1,4 @@
+import Datetime from '../modules/datetime';
 import Prop from '../modules/prop';
 
 export type AppointmentProps = {
@@ -7,7 +8,7 @@ export type AppointmentProps = {
 };
 
 export type AppointmentValidationProps = {
-  date: Date;
+  date: Datetime;
   userId: Prop;
   barberId: Prop;
 };

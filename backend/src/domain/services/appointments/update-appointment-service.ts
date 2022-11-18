@@ -1,6 +1,10 @@
 import IAppointmentRepository from '@interfaces/i-appointment-repository';
 import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
 
+import { Either, left, right } from '@shared/either';
+
+import InvalidDatetimeError from '@errors/invalid-datetime-error';
+
 import Appointment from '@entities/appointment';
 
 interface IUpdateAppointmentServiceRequest {
@@ -17,11 +21,22 @@ export default class UpdateAppointmentService {
   public async handle({
     id,
     date,
-  }: IUpdateAppointmentServiceRequest): Promise<Appointment> {
+  }: IUpdateAppointmentServiceRequest): Promise<
+    Either<InvalidDatetimeError, Appointment>
+  > {
     await this.appointmentsUsecase.checkAppointmentExists(id);
 
-    const appointment = await this.appointmentRepository.update(id, date);
+    const appointmentOrError: Either<InvalidDatetimeError, Appointment> =
+      Appointment.update({ date });
 
-    return appointment;
+    if (appointmentOrError.isLeft()) {
+      return left(appointmentOrError.value);
+    }
+
+    const appointment: Appointment = appointmentOrError.value as Appointment;
+
+    await this.appointmentRepository.update(id, date);
+
+    return right(appointment);
   }
 }

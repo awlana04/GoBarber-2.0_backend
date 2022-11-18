@@ -23,7 +23,7 @@ export default class AppointmentRepository implements IAppointmentRepository {
   public async findUserId(
     userId: string
   ): Promise<(IUser & { appointment: IAppointment }) | null> {
-    return await prisma.user.findUnique({
+    return await prisma.user.findFirst({
       where: { id: userId },
       include: { appointment: true },
     });
@@ -32,7 +32,7 @@ export default class AppointmentRepository implements IAppointmentRepository {
   public async findBarberId(
     barberId: string
   ): Promise<(IBarber & { appointment: IAppointment }) | null> {
-    return await prisma.barber.findUnique({
+    return await prisma.barber.findFirst({
       where: { id: barberId },
       include: { appointment: true },
     });

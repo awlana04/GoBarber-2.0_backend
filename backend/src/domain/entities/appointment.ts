@@ -6,16 +6,18 @@ import {
   UpdateAppointmentProps,
 } from './interfaces/appointment-props';
 
+import Datetime from './modules/datetime';
 import Prop from './modules/prop';
 
 import { Either, left, right } from '@shared/either';
 
 import InvalidPropError from '@errors/invalid-prop-error';
+import InvalidDatetimeError from '@errors/invalid-datetime-error';
 
 export default class Appointment extends Entity<
   AppointmentProps | AppointmentValidationProps
 > {
-  public date: Date;
+  public date: Datetime;
   public userId: Prop;
   public barberId: Prop;
 
@@ -41,7 +43,13 @@ export default class Appointment extends Entity<
     id?: string,
     createdAt?: Date,
     updatedAt?: Date
-  ): Either<InvalidPropError, Appointment> {
+  ): Either<InvalidDatetimeError | InvalidPropError, Appointment> {
+    const dateOrError = Datetime.create(props.date);
+
+    if (dateOrError.isLeft()) {
+      return left(dateOrError.value);
+    }
+
     const userIdOrError = Prop.create(props.userId);
 
     if (userIdOrError.isLeft()) {
@@ -54,7 +62,7 @@ export default class Appointment extends Entity<
       return left(barberIdOrError.value);
     }
 
-    const date = props.date;
+    const date: Datetime = dateOrError.value as Datetime;
     const userId: Prop = userIdOrError.value as Prop;
     const barberId: Prop = barberIdOrError.value as Prop;
 
@@ -65,8 +73,14 @@ export default class Appointment extends Entity<
 
   public static update(
     props: UpdateAppointmentProps
-  ): Either<InvalidPropError, Appointment> {
-    const date = props.date;
+  ): Either<InvalidDatetimeError, Appointment> {
+    const dateOrError = Datetime.create(props.date);
+
+    if (dateOrError.isLeft()) {
+      return left(dateOrError.value);
+    }
+
+    const date: Datetime = dateOrError.value as Datetime;
 
     Appointment.prototype.date = date;
 

@@ -1,7 +1,7 @@
 import IAppointmentRepository from '@interfaces/i-appointment-repository';
 import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
 
-import Appointment from '@entities/appointment';
+import IAppointment from '@core/interfaces/i-appointment';
 
 export default class DeleteAppointmentService {
   constructor(
@@ -9,7 +9,7 @@ export default class DeleteAppointmentService {
     private readonly appointmentsUsecase: IAppointmentUsecase
   ) {}
 
-  public async handle(id: string): Promise<Appointment> {
+  public async handle(id: string): Promise<IAppointment> {
     await this.appointmentsUsecase.checkAppointmentExists(id);
 
     const appointment = await this.appointmentsRepository.delete(id);

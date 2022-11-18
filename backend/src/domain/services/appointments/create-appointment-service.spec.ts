@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import CreateAppointmentService from './create-appointment-service';
 import AppointmentsUsecase from '@usecases/implementations/appointment-usecase';
@@ -26,8 +24,6 @@ const makeSut = (): SutOutput => {
 describe('Create appointment service', () => {
   const { appointmentRepository, sut } = makeSut();
 
-  const id = crypto.randomUUID();
-
   const user = User.create({
     name: 'John Doe',
     email: 'john@doe.com',
@@ -35,17 +31,14 @@ describe('Create appointment service', () => {
     location: 'Somewhere Over the Rainbow',
   }).value as User;
 
-  const barber = Barber.create(
-    {
-      name: 'John Doe Barber',
-      location: 'Somewhere Into the Pocket',
-      description: 'This is a really good place, please believe me :)',
-      openAtNight: true,
-      openOnWeekends: true,
-      userId: user.id,
-    },
-    id
-  ).value as Barber;
+  const barber = Barber.create({
+    name: 'John Doe Barber',
+    location: 'Somewhere Into the Pocket',
+    description: 'This is a really good place, please believe me :)',
+    openAtNight: true,
+    openOnWeekends: true,
+    userId: user.id,
+  }).value as Barber;
 
   appointmentRepository.user.push(user);
   appointmentRepository.barber.push(barber);

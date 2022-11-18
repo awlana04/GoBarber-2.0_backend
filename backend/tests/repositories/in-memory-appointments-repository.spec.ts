@@ -54,7 +54,7 @@ describe('In memory appointment repository', () => {
 
   it('should be able to find an appointment by date', async () => {
     const response = await appointmentRepository.findByDate(
-      appointment.date,
+      appointment.date as unknown as Date,
       barber.id
     );
 

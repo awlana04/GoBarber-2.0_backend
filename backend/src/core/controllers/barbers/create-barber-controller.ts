@@ -12,15 +12,10 @@ export default class CreateBarberController {
   ): Promise<HttpResponse> {
     const createBarberFactory = CreateBarberFactory();
 
-    const {
-      name,
-      location,
-      description,
-      images,
-      openAtNight,
-      openOnWeekends,
-      userId,
-    } = request.body;
+    const { id: userId } = request.params;
+
+    const { name, location, description, images, openAtNight, openOnWeekends } =
+      request.body;
 
     try {
       const barber = await createBarberFactory.handle({

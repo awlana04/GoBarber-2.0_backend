@@ -12,7 +12,7 @@ export default class InMemoryAppointmentsRepository
   public barber: Barber[] = [];
   public appointment: Appointment[] = [];
 
-  async findById(id: string): Promise<Appointment | null> {
+  async findById(id: string): Promise<Appointment | null | any> {
     const appointment = this.appointment.find(
       appointment => appointment.id === id
     );
@@ -24,7 +24,7 @@ export default class InMemoryAppointmentsRepository
     return appointment;
   }
 
-  async findUserId(userId: string): Promise<User | null> {
+  async findUserId(userId: string): Promise<User | null | any> {
     const user = this.user.find(user => user.id === userId);
 
     if (!user) {
@@ -34,7 +34,7 @@ export default class InMemoryAppointmentsRepository
     return user;
   }
 
-  async findBarberId(barberId: string): Promise<Barber | null> {
+  async findBarberId(barberId: string): Promise<Barber | null | any> {
     const barber = this.barber.find(barber => barber.id === barberId);
 
     if (!barber) {
@@ -44,10 +44,14 @@ export default class InMemoryAppointmentsRepository
     return barber;
   }
 
-  async findByDate(date: Date, barberId: string): Promise<Appointment | null> {
+  async findByDate(
+    date: Date,
+    barberId: string
+  ): Promise<Appointment | null | any> {
     const appointment = this.appointment.find(
       appointment =>
-        appointment.date === date && appointment.barberId.value === barberId
+        (appointment.date as unknown as Date) === date &&
+        appointment.barberId.value === barberId
     );
 
     if (!appointment) {
@@ -70,7 +74,7 @@ export default class InMemoryAppointmentsRepository
   async update(id: string, date: Date): Promise<Appointment | any> {
     const appointment = await this.findById(id);
 
-    appointment?.props.date.setDate(Number(date));
+    appointment?.date.value.setDate(date);
 
     return appointment;
   }
