@@ -71,7 +71,10 @@ describe('Appointments usecase', () => {
   });
 
   it('should not be able to make a new appointment (appointment already booked)', () => {
-    const response = sut.checkIsValidDate(appointment.date, barber.id);
+    const response = sut.checkIsValidDate(
+      appointment.date as unknown as Date,
+      barber.id
+    );
 
     expect(response).rejects.toThrowError();
   });

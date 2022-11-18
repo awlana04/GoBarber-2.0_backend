@@ -6,6 +6,8 @@ import User from '@entities/user';
 import Barber from '@entities/barber';
 import Appointment from '@entities/appointment';
 
+import AppError from '@shared/app-error';
+
 export default class AppointmentsUsecase implements IAppointmentUsecase {
   constructor(private appointmentsRepository: IAppointmentRepository) {}
 
@@ -15,7 +17,7 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
     );
 
     if (!checkUserExists) {
-      throw new Error('User does not exists');
+      throw new AppError('User does not exists', 404);
     }
 
     return null;
@@ -27,7 +29,7 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
     );
 
     if (!checkBarberExists) {
-      throw new Error('Barber does not exists');
+      throw new AppError('Barber does not exists', 404);
     }
 
     return null;
@@ -43,17 +45,11 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
     );
 
     if (checkDateAlreadyExists) {
-      throw new Error('This date is already booked');
+      throw new AppError('This date is already booked', 406);
     }
 
     if (date < new Date()) {
-      throw new Error('You can not book an appointment in a past date');
-    }
-
-    const barber = await this.appointmentsRepository.findBarberId(barberId);
-
-    if (!barber) {
-      throw new Error('Barber does not exists');
+      throw new AppError('You can not book an appointment in a past date', 406);
     }
 
     return null;
