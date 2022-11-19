@@ -1,5 +1,6 @@
 import IAppointmentRepository from '@interfaces/i-appointment-repository';
 import IAppointmentUsecase from '@usecases/models/i-appointments-usecase';
+import IBookedInAPastDateAdapter from '@adapters/models/i-booked-in-a-past-date-adapter';
 
 import { Either, left, right } from '@shared/either';
 
@@ -19,7 +20,8 @@ interface ICreateAppointmentServiceRequest {
 export default class CreateAppointmentService {
   constructor(
     private readonly appointmentRepository: IAppointmentRepository,
-    private readonly appointmentsUsecase: IAppointmentUsecase
+    private readonly appointmentsUsecase: IAppointmentUsecase,
+    private readonly bookedInAPastDateAdapter: IBookedInAPastDateAdapter
   ) {}
 
   public async handle({
@@ -32,6 +34,8 @@ export default class CreateAppointmentService {
     await this.appointmentsUsecase.checkUserExists(userId);
     await this.appointmentsUsecase.checkBarberExists(barberId);
     await this.appointmentsUsecase.checkIsValidDate(date, barberId);
+
+    await this.bookedInAPastDateAdapter.checkDate(date);
 
     const appointmentOrError: Either<
       InvalidDatetimeError | InvalidPropError,

@@ -151,6 +151,9 @@ export default {
     '@adapters/implementations/token-adapter': [
       '<rootDir>/src/core/adapters/implementations/token-adapter',
     ],
+    '@adapters/implementations/booked-in-a-past-date-adapter': [
+      '<rootDir>/src/core/adapters/implementations/booked-in-a-past-date-adapter',
+    ],
     '@controllers/users/create-user-controller': [
       '<rootDir>/src/core/controllers/users/create-user-controller',
     ],

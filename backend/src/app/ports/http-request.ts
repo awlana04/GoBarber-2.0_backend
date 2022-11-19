@@ -5,7 +5,7 @@ type HttpRequest = {
   file?: {
     filename?: string;
   };
-  userId: string;
+  userId?: string;
 };
 
 export default HttpRequest;

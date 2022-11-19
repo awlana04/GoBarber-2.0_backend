@@ -48,10 +48,6 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
       throw new AppError('This date is already booked', 406);
     }
 
-    if (date < new Date()) {
-      throw new AppError('You can not book an appointment in a past date', 406);
-    }
-
     return null;
   }
 

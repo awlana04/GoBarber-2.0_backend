@@ -1,6 +1,7 @@
 import InMemoryAppointmentsRepository from '@in-memory/in-memory-appointments-repository';
 import CreateAppointmentService from './create-appointment-service';
 import AppointmentsUsecase from '@usecases/implementations/appointment-usecase';
+import BookedInAPastDateAdapter from '@adapters/implementations/booked-in-a-past-date-adapter';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -13,9 +14,12 @@ type SutOutput = {
 const makeSut = (): SutOutput => {
   const appointmentRepository = new InMemoryAppointmentsRepository();
   const appointmentsUsecase = new AppointmentsUsecase(appointmentRepository);
+  const bookedInAPastDateAdapter = new BookedInAPastDateAdapter();
+
   const sut = new CreateAppointmentService(
     appointmentRepository,
-    appointmentsUsecase
+    appointmentsUsecase,
+    bookedInAPastDateAdapter
   );
 
   return { appointmentRepository, sut };

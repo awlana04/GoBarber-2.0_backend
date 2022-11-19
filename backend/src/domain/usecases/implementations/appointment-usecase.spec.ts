@@ -79,20 +79,14 @@ describe('Appointments usecase', () => {
     expect(response).rejects.toThrowError();
   });
 
-  it('should not be able to make a new appointment (past date)', () => {
-    const response = sut.checkIsValidDate(
-      Date.UTC(2022, 3) as unknown as Date,
-      barber.id
-    );
+  // it('should not be able to make a new appointment (past date)', () => {
+  //   const response = sut.checkIsValidDate(
+  //     Date.UTC(2022, 3) as unknown as Date,
+  //     barber.id
+  //   );
 
-    expect(response).rejects.toThrowError();
-  });
-
-  it('should not be able to make a new appointemnt (barber does not exists)', () => {
-    const response = sut.checkIsValidDate(new Date(), 'invalidID');
-
-    expect(response).rejects.toThrowError();
-  });
+  //   expect(response).rejects.toThrowError();
+  // });
 
   it('should be able to make a new appointment', async () => {
     const response = await sut.checkIsValidDate(
