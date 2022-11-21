@@ -1,6 +1,5 @@
 import IBarber from '@core/interfaces/i-barber';
 import IUser from '@core/interfaces/i-user';
-import Appointment from '@entities/appointment';
 
 import ICreateBarberDTO from '@dtos/i-create-barber-dto';
 import IUpdateBarberDTO from '@dtos/i-update-barber-dto';

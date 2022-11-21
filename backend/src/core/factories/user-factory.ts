@@ -9,6 +9,7 @@ import RefreshTokenProvider from '@domain/providers/implementations/refresh-toke
 
 import AuthenticateUserService from '@services/users/authenticate-user-service';
 import CreateUserService from '@services/users/create-user-service';
+import ViewUserProfileService from '@services/users/view-user-profile-service';
 
 const CreateUserFactory = () => {
   const userRepository = new UserRepository();
@@ -39,7 +40,9 @@ const CreateUserFactory = () => {
     refreshTokenProvider
   );
 
-  return { authenticateUserService, createUserService };
+  const viewUserProfileService = new ViewUserProfileService(userRepository);
+
+  return { authenticateUserService, createUserService, viewUserProfileService };
 };
 
 export default CreateUserFactory;

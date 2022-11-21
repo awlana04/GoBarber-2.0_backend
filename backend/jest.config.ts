@@ -96,6 +96,9 @@ export default {
     '@services/users/create-user-service': [
       '<rootDir>/src/domain/services/users/create-user-service',
     ],
+    '@services/users/view-user-profile-service': [
+      '<rootDir>/src/domain/services/users/view-user-profile-service',
+    ],
     '@services/barbers/create-barber-service': [
       '<rootDir>/src/domain/services/barbers/create-barber-service',
     ],
@@ -162,6 +165,9 @@ export default {
     ],
     '@controllers/appointments/create-appointment-controller': [
       '<rootDir>/src/core/controllers/appointments/create-appointment-controller',
+    ],
+    '@controllers/users/view-user-profile-controller': [
+      '<rootDir>/src/core/controllers/users/view-user-profile-controller',
     ],
     '@controllers/users/authenticate-user-controller': [
       '<rootDir>/src/core/controllers/users/authenticate-user-controller',

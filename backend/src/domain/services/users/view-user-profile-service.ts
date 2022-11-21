@@ -12,6 +12,8 @@ export default class ViewUserProfileService {
       throw new Error('User does not exists');
     }
 
+    delete user.password;
+
     return user;
   }
 }
