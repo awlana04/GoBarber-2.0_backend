@@ -10,7 +10,7 @@ export default class CreateBarberController {
     response: HttpResponse,
     next: HttpNextFunction
   ): Promise<HttpResponse> {
-    const createBarberFactory = CreateBarberFactory();
+    const { createBarberService } = CreateBarberFactory();
 
     const { id: userId } = request.params;
 
@@ -18,7 +18,7 @@ export default class CreateBarberController {
       request.body;
 
     try {
-      const barber = await createBarberFactory.handle({
+      const barber = await createBarberService.handle({
         name,
         location,
         description,

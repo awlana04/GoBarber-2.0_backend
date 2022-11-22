@@ -108,6 +108,9 @@ export default {
     '@services/barbers/create-barber-service': [
       '<rootDir>/src/domain/services/barbers/create-barber-service',
     ],
+    '@services/barbers/view-barber-profile-service': [
+      '<rootDir>/src/domain/services/barbers/view-barber-profile-service',
+    ],
     '@services/users/delete-user-service': [
       '<rootDir>/src/domain/services/users/delete-user-service',
     ],
@@ -177,6 +180,9 @@ export default {
     ],
     '@controllers/barbers/create-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/create-barber-controller',
+    ],
+    '@controllers/barbers/view-barber-profile-controller': [
+      '<rootDir>/src/core/controllers/barbers/view-barber-profile-controller',
     ],
     '@controllers/users/delete-user-controller': [
       '<rootDir>/src/core/controllers/users/update-user-controller',
