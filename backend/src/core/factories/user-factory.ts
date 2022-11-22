@@ -10,6 +10,8 @@ import RefreshTokenProvider from '@domain/providers/implementations/refresh-toke
 import AuthenticateUserService from '@services/users/authenticate-user-service';
 import CreateUserService from '@services/users/create-user-service';
 import ViewUserProfileService from '@services/users/view-user-profile-service';
+import UpdateUserService from '@services/users/update-user-service';
+import UpdateUserAvatarService from '@services/users/update-user-avatar-service';
 
 const CreateUserFactory = () => {
   const userRepository = new UserRepository();
@@ -42,7 +44,24 @@ const CreateUserFactory = () => {
 
   const viewUserProfileService = new ViewUserProfileService(userRepository);
 
-  return { authenticateUserService, createUserService, viewUserProfileService };
+  const updateUserService = new UpdateUserService(
+    userRepository,
+    usersUsecase,
+    hashAdapter
+  );
+
+  const updateUserAvatarService = new UpdateUserAvatarService(
+    userRepository,
+    usersUsecase
+  );
+
+  return {
+    authenticateUserService,
+    createUserService,
+    viewUserProfileService,
+    updateUserService,
+    updateUserAvatarService,
+  };
 };
 
 export default CreateUserFactory;

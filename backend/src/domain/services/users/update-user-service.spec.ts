@@ -1,6 +1,7 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import UpdateUserService from './update-user-service';
 import UserUsecase from '@usecases/implementations/user-usecase';
+import HashAdapter from '@adapters/implementations/hash-adapter';
 
 import User from '@entities/user';
 
@@ -12,7 +13,9 @@ type SutOutupt = {
 const makeSut = (): SutOutupt => {
   const userRepository = new InMemoryUsersRepository();
   const usersUsecase = new UserUsecase(userRepository);
-  const sut = new UpdateUserService(userRepository, usersUsecase);
+  const hashAdapter = new HashAdapter();
+
+  const sut = new UpdateUserService(userRepository, usersUsecase, hashAdapter);
 
   return { userRepository, sut };
 };

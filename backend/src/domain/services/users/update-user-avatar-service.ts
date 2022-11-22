@@ -22,6 +22,8 @@ export default class UpdateUserAvatarService {
 
     const user = await this.usersRepository.updateAvatar(id, avatar);
 
+    delete user.password;
+
     return user;
   }
 }

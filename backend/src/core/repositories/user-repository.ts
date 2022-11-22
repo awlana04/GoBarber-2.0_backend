@@ -24,6 +24,10 @@ export default class UserRepository implements IUserRepository {
     return await prisma.user.update({ where: { id }, data });
   }
 
+  public async updatePassword(id: string, password: string): Promise<IUser> {
+    return await prisma.user.update({ where: { id }, data: { password } });
+  }
+
   public async updateAvatar(id: string, avatar: string): Promise<IUser> {
     return await prisma.user.update({ where: { id }, data: { avatar } });
   }

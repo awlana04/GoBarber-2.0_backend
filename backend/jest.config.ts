@@ -99,6 +99,12 @@ export default {
     '@services/users/view-user-profile-service': [
       '<rootDir>/src/domain/services/users/view-user-profile-service',
     ],
+    '@services/users/update-user-service': [
+      '<rootDir>/src/domain/services/users/update-user-service',
+    ],
+    '@services/users/update-user-avatar-service': [
+      '<rootDir>/src/domain/services/users/update-user-avatar-service',
+    ],
     '@services/barbers/create-barber-service': [
       '<rootDir>/src/domain/services/barbers/create-barber-service',
     ],
@@ -159,6 +165,12 @@ export default {
     ],
     '@controllers/users/create-user-controller': [
       '<rootDir>/src/core/controllers/users/create-user-controller',
+    ],
+    '@controllers/users/update-user-controller': [
+      '<rootDir>/src/core/controllers/users/update-user-controller',
+    ],
+    '@controllers/users/update-user-avatar-controller': [
+      '<rootDir>/src/core/controllers/users/update-user-avatar-controller',
     ],
     '@controllers/barbers/create-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/create-barber-controller',

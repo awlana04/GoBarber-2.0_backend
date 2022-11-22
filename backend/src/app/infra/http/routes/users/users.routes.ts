@@ -5,6 +5,8 @@ import ViewUserProfileController from '@controllers/users/view-user-profile-cont
 import CreateUserController from '@controllers/users/create-user-controller';
 import AuthenticateUserController from '@controllers/users/authenticate-user-controller';
 
+import { profileRouter } from './profile.routes';
+
 import uploadConfig from '@core/config/upload';
 
 import ensureAuthenticated from '../../middlewares/ensure-authenticated';
@@ -15,6 +17,8 @@ const upload = multer(uploadConfig.multer);
 const viewUserProfileController = new ViewUserProfileController();
 const createUserController = new CreateUserController();
 const authenticaUserController = new AuthenticateUserController();
+
+userRouter.use('/profile', ensureAuthenticated, profileRouter);
 
 userRouter.get('/:id', ensureAuthenticated, viewUserProfileController.execute);
 userRouter.post('/', upload.single('avatar'), createUserController.execute);

@@ -1,5 +1,6 @@
 import IUserRepository from '@interfaces/i-user-repository';
 import IUserUsecase from '@usecases/models/i-users-usecase';
+import IHashAdapter from '@adapters/models/i-hash-adapter';
 
 import { Either, left, right } from '@shared/either';
 
@@ -19,7 +20,8 @@ interface UpdateUserServiceRequest {
 export default class UpdateUserService {
   constructor(
     private readonly usersRepository: IUserRepository,
-    private readonly usersUsecase: IUserUsecase
+    private readonly usersUsecase: IUserUsecase,
+    private readonly hashAdapter: IHashAdapter
   ) {}
 
   public async handle({
@@ -47,7 +49,15 @@ export default class UpdateUserService {
 
     const user: User = userOrError.value as User;
 
-    await this.usersRepository.update(id, { name, password, location });
+    await this.usersRepository.update(id, { name, location });
+
+    if (password) {
+      const hashedPassword = await this.hashAdapter.generateHash(password);
+
+      await this.usersRepository.updatePassword(id, hashedPassword);
+
+      delete user.password;
+    }
 
     return right(user);
   }
