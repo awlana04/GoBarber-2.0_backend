@@ -14,6 +14,8 @@ export default class DeleteUserService {
 
     const user = await this.usersRepository.delete(id);
 
+    delete user.password;
+
     return user;
   }
 }

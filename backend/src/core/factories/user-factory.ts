@@ -12,6 +12,7 @@ import CreateUserService from '@services/users/create-user-service';
 import ViewUserProfileService from '@services/users/view-user-profile-service';
 import UpdateUserService from '@services/users/update-user-service';
 import UpdateUserAvatarService from '@services/users/update-user-avatar-service';
+import DeleteUserService from '@services/users/delete-user-service';
 
 const CreateUserFactory = () => {
   const userRepository = new UserRepository();
@@ -55,12 +56,15 @@ const CreateUserFactory = () => {
     usersUsecase
   );
 
+  const deleteUserService = new DeleteUserService(userRepository, usersUsecase);
+
   return {
     authenticateUserService,
     createUserService,
     viewUserProfileService,
     updateUserService,
     updateUserAvatarService,
+    deleteUserService,
   };
 };
 

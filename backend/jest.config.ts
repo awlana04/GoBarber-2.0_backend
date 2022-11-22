@@ -108,6 +108,9 @@ export default {
     '@services/barbers/create-barber-service': [
       '<rootDir>/src/domain/services/barbers/create-barber-service',
     ],
+    '@services/users/delete-user-service': [
+      '<rootDir>/src/domain/services/users/delete-user-service',
+    ],
     '@services/refresh-tokens/create-refresh-token-service': [
       '<rootDir>/src/domain/services/refresh-tokens/create-refresh-token-service',
     ],
@@ -174,6 +177,9 @@ export default {
     ],
     '@controllers/barbers/create-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/create-barber-controller',
+    ],
+    '@controllers/users/delete-user-controller': [
+      '<rootDir>/src/core/controllers/users/update-user-controller',
     ],
     '@controllers/appointments/create-appointment-controller': [
       '<rootDir>/src/core/controllers/appointments/create-appointment-controller',
