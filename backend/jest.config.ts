@@ -117,6 +117,9 @@ export default {
     '@services/barbers/update-barber-service': [
       '<rootDir>/src/domain/services/barbers/update-barber-service',
     ],
+    '@services/barbers/update-barber-user-password-service': [
+      '<rootDir>/src/domain/services/barbers/update-barber-user-password-service',
+    ],
     '@services/users/delete-user-service': [
       '<rootDir>/src/domain/services/users/delete-user-service',
     ],
@@ -195,6 +198,9 @@ export default {
     ],
     '@controllers/barbers/update-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/update-barber-controller',
+    ],
+    '@controllers/barbers/update-barber-user-password-controller': [
+      '<rootDir>/src/core/controllers/barbers/update-barber-user-password-controller',
     ],
     '@controllers/users/delete-user-controller': [
       '<rootDir>/src/core/controllers/users/update-user-controller',

@@ -5,6 +5,7 @@ import CreateBarberService from '@services/barbers/create-barber-service';
 import ViewBarberProfileService from '@services/barbers/view-barber-profile-service';
 import GetAllBarbersService from '@services/barbers/get-all-barbers-service';
 import UpdateBarberService from '@services/barbers/update-barber-service';
+import UpdateBarberUserPasswordService from '@services/barbers/update-barber-user-password-service';
 
 const CreateBarberFactory = () => {
   const barberRepository = new BarberRepository();
@@ -29,11 +30,17 @@ const CreateBarberFactory = () => {
     barberUsecase
   );
 
+  const updateBarberUserPasswordService = new UpdateBarberUserPasswordService(
+    barberRepository,
+    barberUsecase
+  );
+
   return {
     createBarberService,
     viewBarberProfileService,
     getAllBarbersService,
     updateBarberService,
+    updateBarberUserPasswordService,
   };
 };
 

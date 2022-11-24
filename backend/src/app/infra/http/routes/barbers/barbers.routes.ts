@@ -4,6 +4,7 @@ import ViewBarberProfileController from '@controllers/barbers/view-barber-profil
 import GetAllBarbersController from '@controllers/barbers/get-all-barbers-controller';
 import CreateBarberController from '@controllers/barbers/create-barber-controller';
 import UpdateBarberController from '@controllers/barbers/update-barber-controller';
+import UpdateBarberUserPasswordController from '@controllers/barbers/update-barber-user-password-controller';
 
 import ensureAuthenticated from '../../middlewares/ensure-authenticated';
 
@@ -13,6 +14,8 @@ const viewBarberProfileController = new ViewBarberProfileController();
 const getAllBarbersController = new GetAllBarbersController();
 const createBarberController = new CreateBarberController();
 const updateBarberController = new UpdateBarberController();
+const updateBarberUserPasswordController =
+  new UpdateBarberUserPasswordController();
 
 barbersRouter.get(
   '/:id',
@@ -26,5 +29,10 @@ barbersRouter.get(
 );
 barbersRouter.post('/:id', ensureAuthenticated, createBarberController.execute);
 barbersRouter.put('/:id', ensureAuthenticated, updateBarberController.execute);
+barbersRouter.put(
+  '/users/:id',
+  ensureAuthenticated,
+  updateBarberUserPasswordController.execute
+);
 
 export default barbersRouter;
