@@ -3,6 +3,8 @@ import BarbersUsecase from '@usecases/implementations/barber-usecase';
 
 import CreateBarberService from '@services/barbers/create-barber-service';
 import ViewBarberProfileService from '@services/barbers/view-barber-profile-service';
+import GetAllBarbersService from '@services/barbers/get-all-barbers-service';
+import UpdateBarberService from '@services/barbers/update-barber-service';
 
 const CreateBarberFactory = () => {
   const barberRepository = new BarberRepository();
@@ -17,7 +19,22 @@ const CreateBarberFactory = () => {
     barberRepository
   );
 
-  return { createBarberService, viewBarberProfileService };
+  const getAllBarbersService = new GetAllBarbersService(
+    barberRepository,
+    barberUsecase
+  );
+
+  const updateBarberService = new UpdateBarberService(
+    barberRepository,
+    barberUsecase
+  );
+
+  return {
+    createBarberService,
+    viewBarberProfileService,
+    getAllBarbersService,
+    updateBarberService,
+  };
 };
 
 export default CreateBarberFactory;
