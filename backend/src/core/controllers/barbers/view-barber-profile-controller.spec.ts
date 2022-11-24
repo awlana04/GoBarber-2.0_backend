@@ -29,7 +29,7 @@ describe('View barber profile controller', () => {
       });
 
     const response = await request(app)
-      .get(`/barbers/${barber.body.value.id}`)
+      .get(`/barbers/profile/${barber.body.value.id}`)
       .set('Authorization', `Bearer ${user.body.value.token}`);
 
     expect(response.status).toBe(200);

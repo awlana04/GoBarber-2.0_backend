@@ -28,7 +28,7 @@ describe('Update barber user password controller', () => {
       });
 
     const response = await request(app)
-      .put(`/barbers/users/${barber.body.value.id}`)
+      .put(`/barbers/profile/password/${barber.body.value.id}`)
       .set('Authorization', `Bearer ${user.body.value.token}`)
       .send({
         password: '123123123',
