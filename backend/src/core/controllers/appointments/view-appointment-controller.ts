@@ -4,26 +4,20 @@ import HttpNextFunction from '@ports/http-next-function';
 
 import CreateAppointmentFactory from '@core/factories/appointment-factory';
 
-export default class CreateAppointmentController {
+export default class ViewAppointmentController {
   public async execute(
     request: HttpRequest,
     response: HttpResponse,
     next: HttpNextFunction
   ): Promise<HttpResponse> {
-    const { createAppointmentService } = CreateAppointmentFactory();
+    const { viewAppointmentService } = CreateAppointmentFactory();
 
-    const { id: userId } = request.params;
-
-    const { date, barberId } = request.body;
+    const { id } = request.params;
 
     try {
-      const appointment = await createAppointmentService.handle({
-        date,
-        userId,
-        barberId,
-      });
+      const appointment = await viewAppointmentService.handle(id);
 
-      return response.status(201).json(appointment);
+      return response.json(appointment);
     } catch (error) {
       next(error);
     }
