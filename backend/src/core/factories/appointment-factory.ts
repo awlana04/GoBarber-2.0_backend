@@ -5,6 +5,7 @@ import BookedInAPastDateAdapter from '@adapters/implementations/booked-in-a-past
 import CreateAppointmentService from '@services/appointments/create-appointment-service';
 import ViewAppointmentService from '@services/appointments/view-appointment-service';
 import GetAllAppointmentsService from '@services/appointments/get-all-appointments-service';
+import DeleteAppointmentService from '@services/appointments/delete-appointment-service';
 
 const CreateAppointmentFactory = () => {
   const appointmentRepository = new AppointmentRepository();
@@ -26,10 +27,16 @@ const CreateAppointmentFactory = () => {
     appointmentUsecase
   );
 
+  const deleteAppointmentService = new DeleteAppointmentService(
+    appointmentRepository,
+    appointmentUsecase
+  );
+
   return {
     createAppointmentService,
     viewAppointmentService,
     getAllAppointmentsService,
+    deleteAppointmentService,
   };
 };
 
