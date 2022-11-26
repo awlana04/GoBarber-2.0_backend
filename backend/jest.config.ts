@@ -141,6 +141,9 @@ export default {
     '@services/appointments/get-all-appointments-service': [
       '<rootDir>/src/domain/services/appointments/get-all-appointments-service',
     ],
+    '@services/appointments/update-appointment-service': [
+      '<rootDir>/src/domain/services/appointments/update-appointment-service',
+    ],
     '@services/appointments/delete-appointment-service': [
       '<rootDir>/src/domain/services/appointments/delete-appointment-service',
     ],
@@ -234,6 +237,9 @@ export default {
     ],
     '@controllers/appointments/get-all-appointments-controller': [
       '<rootDir>/src/core/controllers/appointments/get-all-appointments-controller',
+    ],
+    '@controllers/appointments/update-appointment-controller': [
+      '<rootDir>/src/core/controllers/appointments/update-appointment-controller',
     ],
     '@controllers/appointments/delete-appointment-controller': [
       '<rootDir>/src/core/controllers/appointments/delete-appointment-controller',

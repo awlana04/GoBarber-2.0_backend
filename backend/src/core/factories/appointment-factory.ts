@@ -6,6 +6,7 @@ import CreateAppointmentService from '@services/appointments/create-appointment-
 import ViewAppointmentService from '@services/appointments/view-appointment-service';
 import GetAllAppointmentsService from '@services/appointments/get-all-appointments-service';
 import DeleteAppointmentService from '@services/appointments/delete-appointment-service';
+import UpdateAppointmentService from '@services/appointments/update-appointment-service';
 
 const CreateAppointmentFactory = () => {
   const appointmentRepository = new AppointmentRepository();
@@ -32,11 +33,17 @@ const CreateAppointmentFactory = () => {
     appointmentUsecase
   );
 
+  const updateAppointmentService = new UpdateAppointmentService(
+    appointmentRepository,
+    appointmentUsecase
+  );
+
   return {
     createAppointmentService,
     viewAppointmentService,
     getAllAppointmentsService,
     deleteAppointmentService,
+    updateAppointmentService,
   };
 };
 

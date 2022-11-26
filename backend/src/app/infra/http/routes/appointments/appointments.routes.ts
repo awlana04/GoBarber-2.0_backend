@@ -4,6 +4,7 @@ import CreateAppointmentController from '@controllers/appointments/create-appoin
 import ViewAppointmentController from '@controllers/appointments/view-appointment-controller';
 import GetAllAppointmentsController from '@controllers/appointments/get-all-appointments-controller';
 import DeleteAppointmentController from '@controllers/appointments/delete-appointment-controller';
+import UpdateAppointmentController from '@controllers/appointments/update-appointment-controller';
 
 import ensureAuthenticated from '../../middlewares/ensure-authenticated';
 
@@ -13,6 +14,7 @@ const createAppointmentController = new CreateAppointmentController();
 const viewAppointmentController = new ViewAppointmentController();
 const getAllAppointmentsController = new GetAllAppointmentsController();
 const deleteAppointmentController = new DeleteAppointmentController();
+const updateAppointmentController = new UpdateAppointmentController();
 
 appointmentsRouter.get(
   '/:id',
@@ -28,6 +30,11 @@ appointmentsRouter.post(
   '/:id',
   ensureAuthenticated,
   createAppointmentController.execute
+);
+appointmentsRouter.put(
+  '/:id',
+  ensureAuthenticated,
+  updateAppointmentController.execute
 );
 appointmentsRouter.delete(
   '/:id',
