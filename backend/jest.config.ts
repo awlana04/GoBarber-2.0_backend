@@ -138,6 +138,9 @@ export default {
     '@services/appointments/view-appointment-service': [
       '<rootDir>/src/domain/services/appointments/view-appointment-service',
     ],
+    '@services/appointments/get-all-appointments-service': [
+      '<rootDir>/src/domain/services/appointments/get-all-appointments-service',
+    ],
     '@usecases/implementations/user-usecase': [
       '<rootDir>/src/domain/usecases/implementations/user-usecase',
     ],
@@ -225,6 +228,9 @@ export default {
     ],
     '@controllers/appointments/view-appointment-controller': [
       '<rootDir>/src/core/controllers/appointments/view-appointment-controller',
+    ],
+    '@controllers/appointments/get-all-appointments-controller': [
+      '<rootDir>/src/core/controllers/appointments/get-all-appointments-controller',
     ],
     '@controllers/users/view-user-profile-controller': [
       '<rootDir>/src/core/controllers/users/view-user-profile-controller',

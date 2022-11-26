@@ -4,15 +4,16 @@ import BookedInAPastDateAdapter from '@adapters/implementations/booked-in-a-past
 
 import CreateAppointmentService from '@services/appointments/create-appointment-service';
 import ViewAppointmentService from '@services/appointments/view-appointment-service';
+import GetAllAppointmentsService from '@services/appointments/get-all-appointments-service';
 
 const CreateAppointmentFactory = () => {
   const appointmentRepository = new AppointmentRepository();
-  const appointmentService = new AppointmentsUsecase(appointmentRepository);
+  const appointmentUsecase = new AppointmentsUsecase(appointmentRepository);
   const bookedInAPastDateAdapter = new BookedInAPastDateAdapter();
 
   const createAppointmentService = new CreateAppointmentService(
     appointmentRepository,
-    appointmentService,
+    appointmentUsecase,
     bookedInAPastDateAdapter
   );
 
@@ -20,9 +21,15 @@ const CreateAppointmentFactory = () => {
     appointmentRepository
   );
 
+  const getAllAppointmentsService = new GetAllAppointmentsService(
+    appointmentRepository,
+    appointmentUsecase
+  );
+
   return {
     createAppointmentService,
     viewAppointmentService,
+    getAllAppointmentsService,
   };
 };
 
