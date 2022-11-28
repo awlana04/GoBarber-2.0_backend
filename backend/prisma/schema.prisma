@@ -55,7 +55,7 @@ model Barber {
   openOnWeekends Boolean  @map("open_on_weekends")
 
   userId String @unique @map("user_id")
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -73,7 +73,7 @@ model Appointment {
   userId   String @map("user_id")
   user     User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   barberId String @map("barber_id")
-  barber   Barber @relation(fields: [barberId], references: [id], onUpdate: Cascade)
+  barber   Barber @relation(fields: [barberId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
