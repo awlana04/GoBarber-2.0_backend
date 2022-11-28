@@ -1,5 +1,7 @@
 import BarberRepository from '@repositories/barber-repository';
 import BarbersUsecase from '@usecases/implementations/barber-usecase';
+import HashAdapter from '@adapters/implementations/hash-adapter';
+import DiskStorageAdapter from '@adapters/implementations/disk-storage-adapter';
 
 import CreateBarberService from '@services/barbers/create-barber-service';
 import ViewBarberProfileService from '@services/barbers/view-barber-profile-service';
@@ -12,6 +14,8 @@ import DeleteBarberService from '@services/barbers/delete-barber-service';
 const CreateBarberFactory = () => {
   const barberRepository = new BarberRepository();
   const barberUsecase = new BarbersUsecase(barberRepository);
+  const hashAdapter = new HashAdapter();
+  const diskStorageAdapter = new DiskStorageAdapter();
 
   const createBarberService = new CreateBarberService(
     barberRepository,
@@ -34,12 +38,14 @@ const CreateBarberFactory = () => {
 
   const updateBarberUserPasswordService = new UpdateBarberUserPasswordService(
     barberRepository,
-    barberUsecase
+    barberUsecase,
+    hashAdapter
   );
 
   const updateBarberUserAvatarService = new UpdateBarberUserAvatarService(
     barberRepository,
-    barberUsecase
+    barberUsecase,
+    diskStorageAdapter
   );
 
   const deleteBarberService = new DeleteBarberService(

@@ -1,6 +1,7 @@
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import UpdateBarberUserPassword from './update-barber-user-password-service';
 import BarbersUsecase from '@usecases/implementations/barber-usecase';
+import HashAdapter from '@adapters/implementations/hash-adapter';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -13,7 +14,13 @@ type SutOutput = {
 const makeSut = (): SutOutput => {
   const barbersRepository = new InMemoryBarbersRepository();
   const barbersUsecase = new BarbersUsecase(barbersRepository);
-  const sut = new UpdateBarberUserPassword(barbersRepository, barbersUsecase);
+  const hashAdapter = new HashAdapter();
+
+  const sut = new UpdateBarberUserPassword(
+    barbersRepository,
+    barbersUsecase,
+    hashAdapter
+  );
 
   return { barbersRepository, sut };
 };

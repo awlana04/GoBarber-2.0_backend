@@ -1,6 +1,7 @@
 import InMemoryBarbersRepository from '@in-memory/in-memory-barbers-repository';
 import UpdateBarberUserAvatarService from './update-barber-user-avatar-service';
 import BarbersUsecase from '@usecases/implementations/barber-usecase';
+import DiskStorageAdapter from '@adapters/implementations/disk-storage-adapter';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -13,9 +14,12 @@ type SutOutput = {
 const makeSut = (): SutOutput => {
   const barbersRepository = new InMemoryBarbersRepository();
   const barbersUsecase = new BarbersUsecase(barbersRepository);
+  const diskStorageAdapter = new DiskStorageAdapter();
+
   const sut = new UpdateBarberUserAvatarService(
     barbersRepository,
-    barbersUsecase
+    barbersUsecase,
+    diskStorageAdapter
   );
 
   return { barbersRepository, sut };
