@@ -59,8 +59,4 @@ export default class BarberRepository implements IBarberRepository {
   public async delete(id: string): Promise<IBarber> {
     return await prisma.barber.delete({ where: { id } });
   }
-
-  public async deleteBarberAndAppointments(id: string): Promise<IBarber> {
-    return await prisma.barber.delete({ where: { id } });
-  }
 }
