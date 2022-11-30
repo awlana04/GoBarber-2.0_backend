@@ -4,17 +4,20 @@ import {
   BarberProps,
   BarberValidationProps,
   UpdateBarberProps,
+  UpdateBarberPassword,
 } from './interfaces/barber-props';
 
 import Name from './modules/name';
 import Description from './modules/description';
 import Prop from './modules/prop';
+import Password from './modules/password';
 
 import { Either, left, right } from '@shared/either';
 
 import InvalidNameError from '@errors/invalid-name-error';
 import InvalidDescriptionError from '@errors/invalid-description-error';
 import InvalidPropError from '@errors/invalid-prop-error';
+import InvalidPasswordError from '@domain/shared/errors/invalid-password-error';
 
 export default class Barber extends Entity<
   BarberProps | BarberValidationProps
@@ -24,6 +27,7 @@ export default class Barber extends Entity<
   public description: Description;
   public openAtNight: boolean;
   public openOnWeekends: boolean;
+  public password: Password;
 
   private constructor(
     props: BarberValidationProps,
@@ -150,6 +154,22 @@ export default class Barber extends Entity<
 
       Barber.prototype.openOnWeekends = openOnWeekends;
     }
+
+    return right(Barber.prototype);
+  }
+
+  public static updatePassword(
+    props: UpdateBarberPassword
+  ): Either<InvalidPasswordError, Barber> {
+    const passwordOrError = Password.create(props.password);
+
+    if (passwordOrError.isLeft()) {
+      return left(passwordOrError.value);
+    }
+
+    const password: Password = passwordOrError.value as Password;
+
+    Barber.prototype.password = password;
 
     return right(Barber.prototype);
   }

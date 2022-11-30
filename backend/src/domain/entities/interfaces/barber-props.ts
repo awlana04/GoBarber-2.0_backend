@@ -29,3 +29,7 @@ export type UpdateBarberProps = {
   openAtNight?: boolean;
   openOnWeekends?: boolean;
 };
+
+export type UpdateBarberPassword = {
+  password: string;
+};

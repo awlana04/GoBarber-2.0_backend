@@ -44,7 +44,6 @@ export default class BarberRepository implements IBarberRepository {
     return await prisma.barber.update({
       where: { id },
       data: { user: { update: { password } } },
-      include: { user: true },
     });
   }
 
@@ -52,7 +51,6 @@ export default class BarberRepository implements IBarberRepository {
     return await prisma.barber.update({
       where: { id },
       data: { user: { update: { avatar } } },
-      include: { user: true },
     });
   }
 
