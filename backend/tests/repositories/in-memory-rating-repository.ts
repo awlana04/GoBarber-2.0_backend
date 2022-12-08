@@ -42,6 +42,10 @@ export default class InMemoryRatingRepository implements IRatingRepository {
     return barber;
   }
 
+  public async getAllRatings(barberId: string): Promise<Rating[] | null> {
+    return this.rating;
+  }
+
   public async save(data: ICreateRatingDTO): Promise<Rating | any> {
     return this.rating.push(data as unknown as Rating);
   }

@@ -79,7 +79,6 @@ describe('In memory barbers repository', () => {
   it('should be able to update the user password of a barber', async () => {
     const response = await barberRepository.updatePassword(
       barber.id,
-      user.id,
       '12345678910'
     );
 
@@ -89,7 +88,6 @@ describe('In memory barbers repository', () => {
   it('should be able to update the user avatar of a barber', async () => {
     const response = await barberRepository.updateAvatar(
       barber.id,
-      user.id,
       'other-avatar.png'
     );
 
