@@ -13,7 +13,7 @@ describe('Update barber controller', () => {
       password: '12345678',
       location: 'Somewhere Over the Rainbow',
       avatar: 'avatar.png',
-    });
+    }); 
 
     const barber = await request(app)
       .post(`/barbers/${user.body.value.user.id}`)
