@@ -1,4 +1,6 @@
-import { startOfHour } from 'date-fns';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import IBookedInAPastDateAdapter from '../models/i-booked-in-a-past-date-adapter';
 
@@ -8,9 +10,13 @@ export default class BookedInAPastDateAdapter
   implements IBookedInAPastDateAdapter
 {
   public async checkDate(date: Date): Promise<any> {
-    const bookedInAPastDate = startOfHour(Date.now());
+    dayjs.extend(utc);
+    dayjs.extend(isSameOrBefore);
 
-    if (bookedInAPastDate > date) {
+    const today = dayjs().utc().format() as unknown as Date;
+    const parsedDate = dayjs(date).isSameOrBefore(today, 'hours');
+
+    if (today > date && parsedDate) {
       throw new AppError('You can not book an appointment in a past date', 406);
     }
 
