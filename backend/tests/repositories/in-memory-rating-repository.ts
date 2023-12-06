@@ -42,6 +42,16 @@ export default class InMemoryRatingRepository implements IRatingRepository {
     return barber;
   }
 
+  public async findUserRatings(userId: string): Promise<Rating[] | null | any> {
+    const rating = this.rating.find(rating => rating.props.userId === userId);
+
+    if (!rating) {
+      return null;
+    }
+
+    return rating;
+  }
+
   public async getAllRatings(barberId: string): Promise<Rating[] | null> {
     return this.rating;
   }
@@ -52,7 +62,7 @@ export default class InMemoryRatingRepository implements IRatingRepository {
 
   public async update(
     id: string,
-    data: iUpdateRatingDto
+    data: iUpdateRatingDto,
   ): Promise<Rating | any> {
     const rating = this.rating.find(rating => rating.id === id);
 

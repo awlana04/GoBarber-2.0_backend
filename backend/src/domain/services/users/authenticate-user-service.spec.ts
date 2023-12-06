@@ -16,13 +16,14 @@ const makeSut = () => {
   const expiresInDateAdapter = new ExpiresInDateAdapter();
   const refreshTokenProvider = new RefreshTokenProvider(
     refreshTokenRepository,
-    expiresInDateAdapter
+    expiresInDateAdapter,
   );
+
   const sut = new AuthenticateUserService(
     userRepository,
     hashAdapter,
     tokenAdapter,
-    refreshTokenProvider
+    refreshTokenProvider,
   );
 
   return { sut, userRepository };

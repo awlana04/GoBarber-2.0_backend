@@ -9,6 +9,7 @@ export default interface IRatingRepository {
   findById(id: string): Promise<Rating | null>;
   findUserId(userId: string): Promise<User | null>;
   findBarberId(barberId: string): Promise<Barber | null>;
+  findUserRatings(userId: string): Promise<Rating[] | null>;
   getAllRatings(barberId: string): Promise<Rating[] | null>;
   save(data: ICreateRatingDTO): Promise<Rating>;
   update(id: string, data: IUpdateRatingDTO): Promise<Rating>;
