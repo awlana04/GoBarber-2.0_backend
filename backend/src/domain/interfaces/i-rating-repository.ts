@@ -1,17 +1,17 @@
-import Rating from '@entities/rating';
-import User from '@entities/user';
-import Barber from '@entities/barber';
+import IRating from '@core/interfaces/i-rating';
+import IUser from '@core/interfaces/i-user';
+import IBarber from '@core/interfaces/i-barber';
 
 import ICreateRatingDTO from '@dtos/i-create-rating-dto';
 import IUpdateRatingDTO from '@dtos/i-update-rating-dto';
 
 export default interface IRatingRepository {
-  findById(id: string): Promise<Rating | null>;
-  findUserId(userId: string): Promise<User | null>;
-  findBarberId(barberId: string): Promise<Barber | null>;
-  findUserRatings(userId: string): Promise<Rating[] | null>;
-  getAllRatings(barberId: string): Promise<Rating[] | null>;
-  save(data: ICreateRatingDTO): Promise<Rating>;
-  update(id: string, data: IUpdateRatingDTO): Promise<Rating>;
-  delete(id: string): Promise<Rating>;
+  findById(id: string): Promise<IRating | null>;
+  findUserId(userId: string): Promise<IUser | null>;
+  findBarberId(barberId: string): Promise<IBarber | null>;
+  findUserRatings(userId: string): Promise<IRating[] | null>;
+  getAllRatings(barberId: string): Promise<IRating[] | null>;
+  save(data: ICreateRatingDTO): Promise<IRating>;
+  update(id: string, data: IUpdateRatingDTO): Promise<IRating>;
+  delete(id: string): Promise<IRating>;
 }
