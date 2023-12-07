@@ -1,4 +1,4 @@
-import IRefreshTokenRepository from '@interfaces/i-refresh-token-repository';
+import IRefreshTokenRepository from '@domain/dtos/interfaces/i-refresh-token-repository';
 
 import User from '@entities/user';
 import RefreshToken from '@entities/refresh-token';
@@ -22,7 +22,7 @@ export default class InMemoryRefreshTokenRepository
   }
 
   async save(
-    refreshToken: ICreateRefreshTokenDTO
+    refreshToken: ICreateRefreshTokenDTO,
   ): Promise<RefreshToken | any> {
     return this.refreshToken.push(refreshToken as unknown as RefreshToken);
   }

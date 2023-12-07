@@ -1,6 +1,6 @@
 import IRefreshTokenProvider from '../models/i-refresh-token-provider';
 
-import IRefreshTokenRepository from '@interfaces/i-refresh-token-repository';
+import IRefreshTokenRepository from '@domain/dtos/interfaces/i-refresh-token-repository';
 import IExpiresInDateAdapter from '@adapters/models/i-expires-in-date-adapter';
 
 import IRefreshToken from '@core/interfaces/i-refresh-token';
@@ -8,7 +8,7 @@ import IRefreshToken from '@core/interfaces/i-refresh-token';
 export default class RefreshTokenProvider implements IRefreshTokenProvider {
   constructor(
     private readonly refreshTokenRepository: IRefreshTokenRepository,
-    private readonly expiresInDateAdapter: IExpiresInDateAdapter
+    private readonly expiresInDateAdapter: IExpiresInDateAdapter,
   ) {}
 
   public async createRefreshToken(userId: string): Promise<IRefreshToken> {

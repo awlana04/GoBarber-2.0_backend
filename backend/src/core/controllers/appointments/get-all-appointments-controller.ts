@@ -8,7 +8,7 @@ export default class GetAllAppointmentsController {
   public async execute(
     request: HttpRequest,
     response: HttpResponse,
-    next: HttpNextFunction
+    next: HttpNextFunction,
   ): Promise<HttpNextFunction> {
     const { getAllAppointmentsService } = CreateAppointmentFactory();
 

@@ -19,7 +19,7 @@ export default class UpdateBarberUserPassword {
   constructor(
     private readonly barbersRepository: IBarberRepository,
     private readonly barbersUsecase: IBarberUsecase,
-    private readonly hashAdapter: IHashAdapter
+    private readonly hashAdapter: IHashAdapter,
   ) {}
 
   public async handle({
@@ -41,7 +41,7 @@ export default class UpdateBarberUserPassword {
 
     const barber = await this.barbersRepository.updatePassword(
       id,
-      hashedPassword
+      hashedPassword,
     );
 
     return right(barber);

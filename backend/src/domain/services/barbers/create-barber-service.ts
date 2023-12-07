@@ -24,7 +24,7 @@ interface ICreateBarberServiceRequest {
 export default class CreateBarberService {
   constructor(
     private readonly barberRepository: IBarberRepository,
-    private readonly barberUsecase: IBarberUsecase
+    private readonly barberUsecase: IBarberUsecase,
   ) {}
 
   public async handle({

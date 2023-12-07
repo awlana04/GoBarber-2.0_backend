@@ -6,7 +6,7 @@ import IAppointment from '@core/interfaces/i-appointment';
 export default class DeleteAppointmentService {
   constructor(
     private readonly appointmentsRepository: IAppointmentRepository,
-    private readonly appointmentsUsecase: IAppointmentUsecase
+    private readonly appointmentsUsecase: IAppointmentUsecase,
   ) {}
 
   public async handle(id: string): Promise<IAppointment> {

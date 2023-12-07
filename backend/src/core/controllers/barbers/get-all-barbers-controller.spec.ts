@@ -22,7 +22,7 @@ describe('Get all barbers controller', () => {
         name: 'John Doe Barber',
         location: 'Hell Street',
         description: 'A really good place to be aaaaaaaaaaaaaaaaaaa',
-        images: 'barber.png',
+        images: ['barber.png'],
         openAtNight: true,
         openOnWeekends: true,
       });

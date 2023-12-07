@@ -18,7 +18,7 @@ export default class BarberRepository implements IBarberRepository {
   }
 
   public async findUserId(
-    userId: string
+    userId: string,
   ): Promise<(IUser & { barber: IBarber }) | null> {
     return await prisma.user.findFirst({
       where: { id: userId },

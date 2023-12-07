@@ -31,16 +31,18 @@ describe('Create appointment controller', () => {
         name: 'John Doe Barber',
         location: 'Somewhere Over the Pocket',
         description: 'This is a really good place, please believe me :)',
-        images: 'image01.png',
+        images: ['image01.png'],
         openAtNight: true,
         openOnWeekends: true,
+        userId: user.body.value.user.id,
       });
 
     const response = await request(app)
-      .post(`/appointments/${user2.body.value.user.id}`)
+      .post(`/appointments/${barber.body.value.id}`)
       .set('Authorization', `Bearer ${user2.body.value.token}`)
       .send({
         date: new Date(),
+        userId: user2.body.value.user.id,
         barberId: barber.body.value.id,
       });
 

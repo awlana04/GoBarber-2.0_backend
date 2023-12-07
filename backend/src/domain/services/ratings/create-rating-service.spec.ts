@@ -42,7 +42,7 @@ describe('Create rating service', () => {
   ratingRepository.barber.push(barber);
 
   it('should be able to create a new rating', async () => {
-    const response = await sut.hamdle({
+    const response = await sut.handle({
       stars: 5,
       comment:
         'A very good place, this is my fifth time comming back here. A really peace and profissioanl barber.',

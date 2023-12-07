@@ -1,5 +1,5 @@
 import IBarbersUsecase from '../models/i-barbers-usecase';
-import IBarberRepository from '@interfaces/i-barber-repository';
+import IBarberRepository from '@domain/dtos/interfaces/i-barber-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -20,7 +20,7 @@ export default class BarbersUsecase implements IBarbersUsecase {
   }
 
   public async checkBarberNameAlreadyExists(
-    name: string
+    name: string,
   ): Promise<Barber | null> {
     const barber = await this.barbersRepository.findByName(name);
 

@@ -1,6 +1,6 @@
 import INotificationsUsecase from '../models/i-notifications-usecase';
 
-import INotificationsRepository from '@interfaces/i-notifications-repository';
+import INotificationsRepository from '@domain/dtos/interfaces/i-notifications-repository';
 
 import User from '@entities/user';
 

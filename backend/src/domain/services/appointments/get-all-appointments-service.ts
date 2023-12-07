@@ -7,15 +7,14 @@ import IAppointment from '@core/interfaces/i-appointment';
 export default class GetAllAppointmentsService {
   constructor(
     private readonly appointmmentsRepository: IAppointmentRepository,
-    private readonly appointmentsUsecase: IAppointmentUsecase
+    private readonly appointmentsUsecase: IAppointmentUsecase,
   ) {}
 
   public async handle(barberId: string): Promise<IBarber | IAppointment[]> {
     await this.appointmentsUsecase.checkBarberExists(barberId);
 
-    const appointments = await this.appointmmentsRepository.findAllAppointments(
-      barberId
-    );
+    const appointments =
+      await this.appointmmentsRepository.findAllAppointments(barberId);
 
     return appointments;
   }

@@ -19,7 +19,7 @@ export default class AuthenticateUserService {
 
     private hashAdapter: IHastAdapter,
     private tokenAdapter: ITokenAdapter,
-    private refreshTokenProvider: IRefreshTokenProvider
+    private refreshTokenProvider: IRefreshTokenProvider,
   ) {}
 
   public async handle({
@@ -39,7 +39,7 @@ export default class AuthenticateUserService {
     if (process.env.NODE_ENV !== 'test') {
       const isValidPassword = await this.hashAdapter.compareHash(
         password,
-        user.password
+        user.password,
       );
 
       if (!isValidPassword) {
@@ -50,7 +50,7 @@ export default class AuthenticateUserService {
     const token = await this.tokenAdapter.createToken(user.id);
 
     const refreshToken = await this.refreshTokenProvider.createRefreshToken(
-      user.id
+      user.id,
     );
 
     delete user.password;

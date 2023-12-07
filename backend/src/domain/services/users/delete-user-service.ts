@@ -6,7 +6,7 @@ import IUser from '@core/interfaces/i-user';
 export default class DeleteUserService {
   constructor(
     private readonly usersRepository: IUserRepository,
-    private readonly usersUsecase: IUsersUsecase
+    private readonly usersUsecase: IUsersUsecase,
   ) {}
 
   public async handle(id: string): Promise<IUser> {

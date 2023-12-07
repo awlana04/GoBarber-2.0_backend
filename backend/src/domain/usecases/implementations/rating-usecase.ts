@@ -1,6 +1,6 @@
 import IRatingUsecase from '../models/i-ratings-usecase';
 
-import IRatingRepository from '@interfaces/i-rating-repository';
+import IRatingRepository from '@domain/dtos/interfaces/i-rating-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';

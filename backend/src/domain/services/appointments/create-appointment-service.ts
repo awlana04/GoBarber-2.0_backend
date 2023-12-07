@@ -21,7 +21,7 @@ export default class CreateAppointmentService {
   constructor(
     private readonly appointmentRepository: IAppointmentRepository,
     private readonly appointmentsUsecase: IAppointmentUsecase,
-    private readonly bookedInAPastDateAdapter: IBookedInAPastDateAdapter
+    private readonly bookedInAPastDateAdapter: IBookedInAPastDateAdapter,
   ) {}
 
   public async handle({

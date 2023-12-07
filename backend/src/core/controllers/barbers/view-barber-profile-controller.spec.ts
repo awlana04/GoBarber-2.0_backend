@@ -23,7 +23,7 @@ describe('View barber profile controller', () => {
         name: 'John Doe Barber',
         location: 'Hell street',
         description: 'A really good place to be aaaaaaaaaaaaaaaaaaa',
-        images: 'barber.png',
+        images: ['barber.png'],
         openAtNight: true,
         openOnWeekends: true,
       });

@@ -1,4 +1,4 @@
-import IAppointmentRepository from '@domain/interfaces/i-appointment-repository';
+import IAppointmentRepository from '@interfaces/i-appointment-repository';
 
 import IUser from '../interfaces/i-user';
 import IBarber from '../interfaces/i-barber';
@@ -15,13 +15,13 @@ export default class AppointmentRepository implements IAppointmentRepository {
 
   public async findByDate(
     date: Date,
-    barberId: string
+    barberId: string,
   ): Promise<IAppointment | null> {
     return await prisma.appointment.findFirst({ where: { date, barberId } });
   }
 
   public async findUserId(
-    userId: string
+    userId: string,
   ): Promise<(IUser & { appointment: IAppointment[] }) | null> {
     return await prisma.user.findFirst({
       where: { id: userId },
@@ -30,7 +30,7 @@ export default class AppointmentRepository implements IAppointmentRepository {
   }
 
   public async findBarberId(
-    barberId: string
+    barberId: string,
   ): Promise<(IBarber & { appointment: IAppointment[] }) | null> {
     return await prisma.barber.findFirst({
       where: { id: barberId },
@@ -39,7 +39,7 @@ export default class AppointmentRepository implements IAppointmentRepository {
   }
 
   public async findAllAppointments(
-    barberId: string
+    barberId: string,
   ): Promise<IBarber | IAppointment[]> {
     return await prisma.barber.findUnique({
       where: { id: barberId },

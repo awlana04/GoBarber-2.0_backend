@@ -1,4 +1,4 @@
-import IAppointmentRepository from '@interfaces/i-appointment-repository';
+import IAppointmentRepository from '@domain/dtos/interfaces/i-appointment-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -14,7 +14,7 @@ export default class InMemoryAppointmentsRepository
 
   async findById(id: string): Promise<Appointment | null | any> {
     const appointment = this.appointment.find(
-      appointment => appointment.id === id
+      appointment => appointment.id === id,
     );
 
     if (!appointment) {
@@ -46,12 +46,12 @@ export default class InMemoryAppointmentsRepository
 
   async findByDate(
     date: Date,
-    barberId: string
+    barberId: string,
   ): Promise<Appointment | null | any> {
     const appointment = this.appointment.find(
       appointment =>
         (appointment.date as unknown as Date) === date &&
-        appointment.barberId.value === barberId
+        appointment.barberId.value === barberId,
     );
 
     if (!appointment) {
@@ -63,7 +63,7 @@ export default class InMemoryAppointmentsRepository
 
   async findAllAppointments(barberId: string): Promise<Appointment[] | any> {
     return this.appointment.find(
-      appointment => appointment.barberId.value === barberId
+      appointment => appointment.barberId.value === barberId,
     );
   }
 

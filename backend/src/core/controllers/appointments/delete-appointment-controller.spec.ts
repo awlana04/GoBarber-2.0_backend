@@ -31,22 +31,24 @@ describe('Delete appointment controller', () => {
         name: 'John Doe Barber',
         location: 'Somewhere Over the Pocket',
         description: 'This is a really good place, please believe me :)',
-        images: 'image01.png',
+        images: ['image01.png'],
         openAtNight: true,
         openOnWeekends: true,
+        userId: user.body.value.user.id,
       });
 
     const appointment = await request(app)
-      .post(`/appointments/${user2.body.value.user.id}`)
+      .post(`/appointments/${barber.body.value.id}`)
       .set('Authorization', `Bearer ${user2.body.value.token}`)
       .send({
         date: new Date(),
+        userId: user2.body.value.user.id,
         barberId: barber.body.value.id,
       });
 
     const response = await request(app)
       .delete(`/appointments/${appointment.body.value.id}`)
-      .set('Authorization', `Bearer ${user.body.value.token}`);
+      .set('Authorization', `Bearer ${user2.body.value.token}`);
 
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();

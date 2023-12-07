@@ -6,7 +6,7 @@ import IBarber from '@core/interfaces/i-barber';
 export default class GetAllBarbersService {
   constructor(
     private readonly barbersRepository: IBarberRepository,
-    private readonly barbersUsecase: IBarbersUsecase
+    private readonly barbersUsecase: IBarbersUsecase,
   ) {}
 
   public async handle(userId: string): Promise<IBarber[]> {

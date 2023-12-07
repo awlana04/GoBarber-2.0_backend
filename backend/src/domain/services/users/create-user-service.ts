@@ -32,7 +32,7 @@ export default class CreateUserService {
     private readonly hashAdapter: IHastAdapter,
     private readonly diskStorageAdapter: IDiskStorageAdapter,
     private readonly tokenAdapter: ITokenAdapter,
-    private readonly refreshTokenProvider: IRefreshTokenProvider
+    private readonly refreshTokenProvider: IRefreshTokenProvider,
   ) {}
 
   public async handle({
@@ -83,7 +83,7 @@ export default class CreateUserService {
     const token = await this.tokenAdapter.createToken(user.id);
 
     const refreshToken = await this.refreshTokenProvider.createRefreshToken(
-      user.id
+      user.id,
     );
 
     delete user.password;

@@ -4,7 +4,7 @@ import IAppointment from '@core/interfaces/i-appointment';
 
 export default class ViewAppointmentService {
   constructor(
-    private readonly appointmentsRepository: IAppointmentRepository
+    private readonly appointmentsRepository: IAppointmentRepository,
   ) {}
 
   public async handle(id: string): Promise<IAppointment> {

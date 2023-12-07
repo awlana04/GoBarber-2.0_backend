@@ -13,7 +13,7 @@ export default class UpdateBarberUserAvatarService {
   constructor(
     private readonly barbersRepository: IBarberRepository,
     private readonly barbersUsecase: IBarbersUsecase,
-    private readonly diskStorageAdapter: IDiskStorageAdapter
+    private readonly diskStorageAdapter: IDiskStorageAdapter,
   ) {}
 
   public async handle({

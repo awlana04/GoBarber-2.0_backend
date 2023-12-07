@@ -1,6 +1,6 @@
 import IAppointmentUsecase from '../models/i-appointments-usecase';
 
-import IAppointmentRepository from '@domain/interfaces/i-appointment-repository';
+import IAppointmentRepository from '@interfaces/i-appointment-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -12,9 +12,8 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
   constructor(private appointmentsRepository: IAppointmentRepository) {}
 
   public async checkUserExists(userId: string): Promise<User | null> {
-    const checkUserExists = await this.appointmentsRepository.findUserId(
-      userId
-    );
+    const checkUserExists =
+      await this.appointmentsRepository.findUserId(userId);
 
     if (!checkUserExists) {
       throw new AppError('User does not exists', 404);
@@ -24,9 +23,8 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
   }
 
   public async checkBarberExists(barberId: string): Promise<Barber | null> {
-    const checkBarberExists = await this.appointmentsRepository.findBarberId(
-      barberId
-    );
+    const checkBarberExists =
+      await this.appointmentsRepository.findBarberId(barberId);
 
     if (!checkBarberExists) {
       throw new AppError('Barber does not exists', 404);
@@ -37,11 +35,11 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
 
   public async checkIsValidDate(
     date: Date,
-    barberId: string
+    barberId: string,
   ): Promise<Appointment | null> {
     const checkDateAlreadyExists = await this.appointmentsRepository.findByDate(
       date,
-      barberId
+      barberId,
     );
 
     if (checkDateAlreadyExists) {
@@ -52,9 +50,8 @@ export default class AppointmentsUsecase implements IAppointmentUsecase {
   }
 
   public async checkAppointmentExists(id: string): Promise<Appointment | null> {
-    const checkAppointmentExists = await this.appointmentsRepository.findById(
-      id
-    );
+    const checkAppointmentExists =
+      await this.appointmentsRepository.findById(id);
 
     if (!checkAppointmentExists) {
       throw new Error('Appointment does not exists');

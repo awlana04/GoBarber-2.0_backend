@@ -1,4 +1,4 @@
-import IBarberRepository from '@interfaces/i-barber-repository';
+import IBarberRepository from '@domain/dtos/interfaces/i-barber-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -60,14 +60,14 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     if (data.location) {
       return barber?.location.value.replace(
         barber.location.value,
-        data.location
+        data.location,
       );
     }
 
     if (data.description) {
       return barber?.description.value.replace(
         barber?.description.value,
-        data.description
+        data.description,
       );
     }
 
@@ -90,7 +90,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
           openOnWeekends,
           userId,
         },
-        id
+        id,
       ).value as Barber;
     }
 
@@ -106,7 +106,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
           openOnWeekends: data.openOnWeekends,
           userId,
         },
-        id
+        id,
       ).value as Barber;
     }
 
@@ -122,7 +122,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
           openOnWeekends: data.openOnWeekends,
           userId,
         },
-        id
+        id,
       ).value as Barber;
     }
 
@@ -131,7 +131,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
 
   async updatePassword(
     id: string,
-    password: string
+    password: string,
   ): Promise<(Barber & User) | any> {
     const barber = await this.findById(id);
     const user = await this.findUserId(barber.userId);
@@ -143,7 +143,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
 
   async updateAvatar(
     id: string,
-    avatar: string
+    avatar: string,
   ): Promise<(Barber & User) | any> {
     const barber = await this.findById(id);
     const user = await this.findUserId(barber.userId);
@@ -163,7 +163,7 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
   }
 
   async deleteBarberAndAppointments(
-    id: string
+    id: string,
   ): Promise<Barber | Appointment | any> {
     const barber = await this.findById(id);
 

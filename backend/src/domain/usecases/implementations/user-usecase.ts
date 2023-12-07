@@ -1,5 +1,5 @@
 import IUsersUsecase from '../models/i-users-usecase';
-import IUserRepository from '@interfaces/i-user-repository';
+import IUserRepository from '@domain/dtos/interfaces/i-user-repository';
 
 import IUser from '@core/interfaces/i-user';
 // import User from '@entities/user';

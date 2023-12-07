@@ -1,4 +1,4 @@
-import INotificationsRepository from '@domain/interfaces/i-notifications-repository';
+import INotificationsRepository from '@domain/dtos/interfaces/i-notifications-repository';
 
 import User from '@entities/user';
 import Notification from '@entities/notifications';
@@ -22,7 +22,7 @@ export default class InMemoryNotificationsRepository
   }
 
   async save(
-    notification: ICreateNotificationDTO
+    notification: ICreateNotificationDTO,
   ): Promise<Notification | any> {
     return this.notification.push(notification as unknown as Notification);
   }

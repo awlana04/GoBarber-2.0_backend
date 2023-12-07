@@ -147,6 +147,24 @@ export default {
     '@services/appointments/delete-appointment-service': [
       '<rootDir>/src/domain/services/appointments/delete-appointment-service',
     ],
+    '@services/ratings/delete-rating-service': [
+      '<rootDir>/src/domain/services/appointments/delete-appointment-service',
+    ],
+    '@services/ratings/create-rating-service': [
+      '<rootDir>/src/domain/services/ratings/create-rating-service',
+    ],
+    '@services/ratings/update-rating-service': [
+      '<rootDir>/src/domain/services/ratings/update-rating-service',
+    ],
+    '@services/ratings/view-rating-service': [
+      '<rootDir>/src/domain/services/ratings/view-rating-service',
+    ],
+    '@services/ratings/get-all-ratings-service': [
+      '<rootDir>/src/domain/services/ratings/get-all-ratings-service',
+    ],
+    '@services/ratings/view-user-ratings-service': [
+      '<rootDir>/src/domain/services/ratings/view-user-ratings-service',
+    ],
     '@usecases/implementations/user-usecase': [
       '<rootDir>/src/domain/usecases/implementations/user-usecase',
     ],
@@ -180,6 +198,9 @@ export default {
     ],
     '@core/factories/appointment-factory': [
       '<rootDir>/src/core/factories/appointment-factory',
+    ],
+    '@core/factories/rating-factory': [
+      '<rootDir>/src/core/factories/rating-factory',
     ],
     '@adapters/implementations/hash-adapter': [
       '<rootDir>/src/core/adapters/implementations/hash-adapter',
@@ -253,6 +274,24 @@ export default {
     '@controllers/refresh-tokens/create-refresh-token-controller': [
       '<rootDir>/src/core/controllers/refresh-tokens/create-refresh-token-controller',
     ],
+    '@controllers/ratings/create-rating-controller': [
+      '<rootDir>/src/core/controllers/ratings/create-rating-controller',
+    ],
+    '@controllers/ratings/update-rating-controller': [
+      '<rootDir>/src/core/controllers/ratings/update-rating-controller',
+    ],
+    '@controllers/ratings/delete-rating-controller': [
+      '<rootDir>/src/core/controllers/ratings/delete-rating-controller',
+    ],
+    '@controllers/ratings/get-all-ratings-controller': [
+      '<rootDir>/src/core/controllers/ratings/get-all-ratings-controller',
+    ],
+    '@controllers/ratings/view-rating-controller': [
+      '<rootDir>/src/core/controllers/ratings/view-rating-controller',
+    ],
+    '@controllers/ratings/view-user-ratings-controller': [
+      '<rootDir>/src/core/controllers/ratings/view-user-ratings-controller',
+    ],
     '@repositories/user-repository': [
       '<rootDir>/src/core/repositories/user-repository',
     ],
@@ -264,6 +303,9 @@ export default {
     ],
     '@repositories/appointment-repository': [
       '<rootDir>/src/core/repositories/appointment-repository',
+    ],
+    '@repositories/rating-repository': [
+      '<rootDir>/src/core/repositories/rating-repository',
     ],
     '@shared/either': ['<rootDir>/src/domain/shared/either'],
     '@shared/app-error': ['<rootDir>/src/domain/shared/app-error'],

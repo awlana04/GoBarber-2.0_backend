@@ -22,7 +22,7 @@ describe('Delete barber controller', () => {
         name: 'John Doe Barber',
         location: 'Somewhere Over the Pocket',
         description: 'This is a really good place, please believe me :)',
-        images: 'image01.png',
+        images: ['image01.png'],
         openAtNight: true,
         openOnWeekends: true,
         userId: user.body.value.user.id,

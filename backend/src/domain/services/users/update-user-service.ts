@@ -21,7 +21,7 @@ export default class UpdateUserService {
   constructor(
     private readonly usersRepository: IUserRepository,
     private readonly usersUsecase: IUserUsecase,
-    private readonly hashAdapter: IHashAdapter
+    private readonly hashAdapter: IHashAdapter,
   ) {}
 
   public async handle({

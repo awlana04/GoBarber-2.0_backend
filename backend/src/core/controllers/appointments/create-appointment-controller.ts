@@ -8,13 +8,13 @@ export default class CreateAppointmentController {
   public async execute(
     request: HttpRequest,
     response: HttpResponse,
-    next: HttpNextFunction
+    next: HttpNextFunction,
   ): Promise<HttpResponse> {
     const { createAppointmentService } = CreateAppointmentFactory();
 
-    const { id: userId } = request.params;
+    const { id: barberId } = request.params;
 
-    const { date, barberId } = request.body;
+    const { date, userId } = request.body;
 
     try {
       const appointment = await createAppointmentService.handle({

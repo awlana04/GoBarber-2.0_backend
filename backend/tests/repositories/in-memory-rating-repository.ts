@@ -1,4 +1,4 @@
-import IRatingRepository from '@interfaces/i-rating-repository';
+import IRatingRepository from '@domain/dtos/interfaces/i-rating-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -12,7 +12,7 @@ export default class InMemoryRatingRepository implements IRatingRepository {
   public barber: Barber[] = [];
   public rating: Rating[] = [];
 
-  public async findById(id: string): Promise<Rating | null> {
+  public async findById(id: string): Promise<Rating | null | any> {
     const rating = this.rating.find(rating => rating.id === id);
 
     if (!rating) {
@@ -22,7 +22,7 @@ export default class InMemoryRatingRepository implements IRatingRepository {
     return rating;
   }
 
-  public async findUserId(userId: string): Promise<User | null> {
+  public async findUserId(userId: string): Promise<User | null | any> {
     const user = this.user.find(user => user.id === userId);
 
     if (!user) {
@@ -32,7 +32,7 @@ export default class InMemoryRatingRepository implements IRatingRepository {
     return user;
   }
 
-  public async findBarberId(barberId: string): Promise<Barber | null> {
+  public async findBarberId(barberId: string): Promise<Barber | null | any> {
     const barber = this.barber.find(barber => barber.id === barberId);
 
     if (!barber) {
@@ -52,7 +52,7 @@ export default class InMemoryRatingRepository implements IRatingRepository {
     return rating;
   }
 
-  public async getAllRatings(barberId: string): Promise<Rating[] | null> {
+  public async getAllRatings(barberId: string): Promise<Rating[] | null | any> {
     return this.rating;
   }
 

@@ -13,7 +13,7 @@ interface ICreateNotificationServiceRequest {
 export default class CreateNotificationService {
   constructor(
     private notificationsRepository: INotificationsRepository,
-    private notificationsUsecase: INotificationsUsecase
+    private notificationsUsecase: INotificationsUsecase,
   ) {}
 
   public async handle({

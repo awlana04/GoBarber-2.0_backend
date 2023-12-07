@@ -15,7 +15,7 @@ interface IUpdateAppointmentServiceRequest {
 export default class UpdateAppointmentService {
   constructor(
     private readonly appointmentRepository: IAppointmentRepository,
-    private readonly appointmentsUsecase: IAppointmentUsecase
+    private readonly appointmentsUsecase: IAppointmentUsecase,
   ) {}
 
   public async handle({

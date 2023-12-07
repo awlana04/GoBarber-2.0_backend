@@ -1,4 +1,4 @@
-import IUserRepository from '@interfaces/i-user-repository';
+import IUserRepository from '@domain/dtos/interfaces/i-user-repository';
 
 import User from '@entities/user';
 

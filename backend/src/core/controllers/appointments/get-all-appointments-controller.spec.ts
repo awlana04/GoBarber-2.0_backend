@@ -30,22 +30,28 @@ describe('Get all appointments controller', () => {
         name: 'John Doe Barber',
         location: 'Hell Street',
         description: 'This is a really good place, please believe me :)',
-        images: 'barber.png',
+        images: ['barber.png'],
         openAtNight: true,
         openOnWeekends: true,
+        userId: user.body.value.user.id,
       });
 
     const appointment = await request(app)
-      .post(`/appointments/${user2.body.value.user.id}`)
+      .post(`/appointments/${barber.body.value.id}`)
       .set('Authorization', `Bearer ${user2.body.value.token}`)
       .send({
         date: new Date(),
+        userId: user2.body.value.user.id,
         barberId: barber.body.value.id,
       });
+
+    console.log(barber.body.value, appointment.body.value);
 
     const response = await request(app)
       .get(`/appointments/all/${barber.body.value.id}`)
       .set('Authorization', `Bearer ${user.body.value.token}`);
+
+    console.log(response.body.value);
 
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
