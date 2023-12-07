@@ -9,6 +9,7 @@ import GetAllBarbersService from '@services/barbers/get-all-barbers-service';
 import UpdateBarberService from '@services/barbers/update-barber-service';
 import UpdateBarberUserPasswordService from '@services/barbers/update-barber-user-password-service';
 import UpdateBarberUserAvatarService from '@services/barbers/update-barber-user-avatar-service';
+import UpdateBarberImageService from '@services/barbers/update-barber-image-service';
 import DeleteBarberService from '@services/barbers/delete-barber-service';
 
 const CreateBarberFactory = () => {
@@ -19,38 +20,44 @@ const CreateBarberFactory = () => {
 
   const createBarberService = new CreateBarberService(
     barberRepository,
-    barberUsecase
+    barberUsecase,
   );
 
   const viewBarberProfileService = new ViewBarberProfileService(
-    barberRepository
+    barberRepository,
   );
 
   const getAllBarbersService = new GetAllBarbersService(
     barberRepository,
-    barberUsecase
+    barberUsecase,
   );
 
   const updateBarberService = new UpdateBarberService(
     barberRepository,
-    barberUsecase
+    barberUsecase,
   );
 
   const updateBarberUserPasswordService = new UpdateBarberUserPasswordService(
     barberRepository,
     barberUsecase,
-    hashAdapter
+    hashAdapter,
   );
 
   const updateBarberUserAvatarService = new UpdateBarberUserAvatarService(
     barberRepository,
     barberUsecase,
-    diskStorageAdapter
+    diskStorageAdapter,
+  );
+
+  const updateBarberImageService = new UpdateBarberImageService(
+    barberRepository,
+    barberUsecase,
+    diskStorageAdapter,
   );
 
   const deleteBarberService = new DeleteBarberService(
     barberRepository,
-    barberUsecase
+    barberUsecase,
   );
 
   return {
@@ -60,6 +67,7 @@ const CreateBarberFactory = () => {
     updateBarberService,
     updateBarberUserPasswordService,
     updateBarberUserAvatarService,
+    updateBarberImageService,
     deleteBarberService,
   };
 };

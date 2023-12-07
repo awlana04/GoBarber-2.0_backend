@@ -54,6 +54,10 @@ export default class BarberRepository implements IBarberRepository {
     });
   }
 
+  public async updateImages(id: string, images: string[]): Promise<IBarber> {
+    return await prisma.barber.update({ where: { id }, data: { images } });
+  }
+
   public async delete(id: string): Promise<IBarber> {
     return await prisma.barber.delete({ where: { id } });
   }

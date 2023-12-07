@@ -13,5 +13,6 @@ export default interface IBarberRepository {
   update(id: string, data: IUpdateBarberDTO): Promise<IBarber>;
   updatePassword(id: string, password: string): Promise<IBarber>;
   updateAvatar(id: string, avatar: string): Promise<IBarber>;
+  updateImages(id: string, images: string[]): Promise<IBarber>;
   delete(id: string): Promise<IBarber>;
 }

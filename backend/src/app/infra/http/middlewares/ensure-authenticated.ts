@@ -1,6 +1,6 @@
-import HttpRequest from '@app/ports/http-request';
-import HttpResponse from '@app/ports/http-response';
-import HttpNextFunction from '@app/ports/http-next-function';
+import HttpRequest from '@ports/http-request';
+import HttpResponse from '@ports/http-response';
+import HttpNextFunction from '@ports/http-next-function';
 
 import TokenAdapter from '@adapters/implementations/token-adapter';
 
@@ -13,7 +13,7 @@ interface TokenPayload {
 export default async function ensureAuthenticated(
   request: HttpRequest,
   response: HttpResponse,
-  next: HttpNextFunction
+  next: HttpNextFunction,
 ) {
   try {
     const tokenAdapter = new TokenAdapter();

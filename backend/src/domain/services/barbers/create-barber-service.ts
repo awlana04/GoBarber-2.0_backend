@@ -15,7 +15,6 @@ interface ICreateBarberServiceRequest {
   name: string;
   location: string;
   description: string;
-  images?: string[];
   openAtNight: boolean;
   openOnWeekends: boolean;
   userId: string;
@@ -31,7 +30,6 @@ export default class CreateBarberService {
     name,
     location,
     description,
-    images,
     openAtNight,
     openOnWeekends,
     userId,
@@ -51,7 +49,6 @@ export default class CreateBarberService {
       name,
       location,
       description,
-      images,
       openAtNight,
       openOnWeekends,
       userId,
@@ -65,7 +62,6 @@ export default class CreateBarberService {
       name,
       location,
       description,
-      images,
       openAtNight,
       openOnWeekends,
       userId,
