@@ -5,7 +5,7 @@ type HttpRequest = {
   file?: {
     filename?: string;
   };
-  files?: String[];
+  files?: string[] | any;
   userId?: string;
 };
 

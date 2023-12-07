@@ -123,6 +123,9 @@ export default {
     '@services/barbers/update-barber-user-avatar-service': [
       '<rootDir>/src/domain/services/barbers/update-barber-user-avatar-service',
     ],
+    '@services/barbers/update-barber-image-service': [
+      '<rootDir>/src/domain/services/barbers/update-barber-image-service',
+    ],
     '@services/barbers/delete-barber-service': [
       '<rootDir>/src/domain/services/barbers/delete-barber-service',
     ],
@@ -243,6 +246,9 @@ export default {
     ],
     '@controllers/barbers/update-barber-user-avatar-controller': [
       '<rootDir>/src/core/controllers/barbers/update-barber-user-avatar-controller',
+    ],
+    '@controllers/barbers/update-barber-image-controller': [
+      '<rootDir>/src/core/controllers/barbers/update-barber-image-controller',
     ],
     '@controllers/barbers/delete-barber-controller': [
       '<rootDir>/src/core/controllers/barbers/delete-barber-controller',

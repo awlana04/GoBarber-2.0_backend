@@ -15,11 +15,26 @@ export default class updateBarberImageController {
 
     const { id } = request.params;
 
-    const requestImages = request.files as unknown as Express.Multer.File[];
+    if (process.env.NODE_ENV !== 'test') {
+      const requestImages = request.files as unknown as Express.Multer.File[];
 
-    const images = requestImages.map(image => {
-      return image.filename;
-    });
+      const images = requestImages.map(image => {
+        return image.filename;
+      });
+
+      try {
+        const barber = await updateBarberImageService.handle({
+          id,
+          images,
+        });
+
+        return response.json(barber);
+      } catch (error) {
+        next(error);
+      }
+    }
+
+    const { images } = request.body;
 
     try {
       const barber = await updateBarberImageService.handle({
@@ -27,7 +42,7 @@ export default class updateBarberImageController {
         images,
       });
 
-      return response.status(201).json(barber);
+      return response.json(barber);
     } catch (error) {
       next(error);
     }

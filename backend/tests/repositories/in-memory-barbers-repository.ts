@@ -1,4 +1,4 @@
-import IBarberRepository from '@domain/dtos/interfaces/i-barber-repository';
+import IBarberRepository from '@interfaces/i-barber-repository';
 
 import User from '@entities/user';
 import Barber from '@entities/barber';
@@ -153,21 +153,15 @@ export default class InMemoryBarbersRepository implements IBarberRepository {
     return user;
   }
 
-  async delete(id: string): Promise<Barber | any> {
+  async updateImages(id: string, images: string[]): Promise<Barber | any> {
     const barber = await this.findById(id);
-
-    this.barber.pop();
-    this.user.pop();
 
     return barber;
   }
 
-  async deleteBarberAndAppointments(
-    id: string,
-  ): Promise<Barber | Appointment | any> {
+  async delete(id: string): Promise<Barber | any> {
     const barber = await this.findById(id);
 
-    this.appointment.pop();
     this.barber.pop();
     this.user.pop();
 
