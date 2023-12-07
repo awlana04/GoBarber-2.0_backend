@@ -1,6 +1,6 @@
 type IRating = {
   id: string;
-  star: number;
+  stars: number;
   comment: string;
   createdAt: Date;
   updatedAt: Date;

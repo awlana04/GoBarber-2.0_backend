@@ -86,7 +86,7 @@ model Appointment {
 model Rating {
   id String @id @default(uuid())
 
-  star    Int
+  stars   Int
   comment String
 
   userId   String @map("user_id")
