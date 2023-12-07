@@ -1,7 +1,7 @@
 import InMemoryUsersRepository from '@in-memory/in-memory-users-repository';
 import HashAdapter from '@adapters/implementations/hash-adapter';
 import TokenAdapter from '@adapters/implementations/token-adapter';
-import RefreshTokenRepository from '@repositories/refresh-token-repository';
+import InMemoryRefreshTokenRepository from '@in-memory/in-memory-refresh-tokens-repository';
 import ExpiresInDateAdapter from '@adapters/implementations/expires-in-date-adapter';
 import RefreshTokenProvider from '@domain/providers/implementations/refresh-token-provider';
 import AuthenticateUserService from './authenticate-user-service';
@@ -12,10 +12,10 @@ const makeSut = () => {
   const userRepository = new InMemoryUsersRepository();
   const hashAdapter = new HashAdapter();
   const tokenAdapter = new TokenAdapter();
-  const refreshTokenRepository = new RefreshTokenRepository();
+  const inMemoryRefreshTokenRepository = new InMemoryRefreshTokenRepository();
   const expiresInDateAdapter = new ExpiresInDateAdapter();
   const refreshTokenProvider = new RefreshTokenProvider(
-    refreshTokenRepository,
+    inMemoryRefreshTokenRepository,
     expiresInDateAdapter,
   );
 
