@@ -17,10 +17,10 @@ interface ICreateRatingServiceRequest {
 export default class CreateRatingService {
   constructor(
     private ratingRepository: IRatingRepository,
-    private ratingUsecase: IRatingUsecase
+    private ratingUsecase: IRatingUsecase,
   ) {}
 
-  public async hamdle({
+  public async handle({
     stars,
     comment,
     userId,

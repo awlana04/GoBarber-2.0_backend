@@ -22,7 +22,7 @@ export default class Rating extends Entity<
     props: RatingValidationProps,
     id?: string,
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
   ) {
     super(props, id, createdAt, updatedAt);
 
@@ -34,7 +34,7 @@ export default class Rating extends Entity<
     props: RatingProps,
     id?: string,
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
   ): Either<InvalidCommentError, Rating> {
     const commentOrError = Comment.create(props.comment);
 
@@ -48,12 +48,17 @@ export default class Rating extends Entity<
     const userId = props.userId;
 
     return right(
-      new Rating({ stars, comment, barberId, userId }, id, createdAt, updatedAt)
+      new Rating(
+        { stars, comment, barberId, userId },
+        id,
+        createdAt,
+        updatedAt,
+      ),
     );
   }
 
   public static update(
-    props: UpdateRatingProps
+    props: UpdateRatingProps,
   ): Either<InvalidCommentError, Rating> {
     if (props.stars) {
       const stars = props.stars;
@@ -61,15 +66,17 @@ export default class Rating extends Entity<
       Rating.prototype.stars = stars;
     }
 
-    const commentOrError = Comment.create(props.comment);
+    if (props.comment) {
+      const commentOrError = Comment.create(props.comment);
 
-    if (commentOrError.isLeft()) {
-      return left(commentOrError.value);
+      if (commentOrError.isLeft()) {
+        return left(commentOrError.value);
+      }
+
+      const comment: Comment = commentOrError.value as Comment;
+
+      Rating.prototype.comment = comment;
     }
-
-    const comment: Comment = commentOrError.value as Comment;
-
-    Rating.prototype.comment = comment;
 
     return right(Rating.prototype);
   }

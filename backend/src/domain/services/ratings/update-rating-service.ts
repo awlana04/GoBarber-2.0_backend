@@ -10,13 +10,13 @@ import Rating from '@entities/rating';
 interface UpdateRatingServiceRequest {
   id: string;
   stars?: number;
-  comment: string;
+  comment?: string;
 }
 
 export default class UpdateRatingService {
   constructor(
     private ratingRepository: IRatingRepository,
-    private ratingUsecase: IRatingUsecase
+    private ratingUsecase: IRatingUsecase,
   ) {}
 
   public async handle({
