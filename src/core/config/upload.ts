@@ -13,7 +13,7 @@ interface IUploadConfig {
 
 export default {
   tmpFolder,
-  uploadsFolder: path.resolve(tmpFolder, 'uploads'),
+  uploadsFolder: path.resolve(tmpFolder),
 
   multer: {
     storage: multer.diskStorage({
