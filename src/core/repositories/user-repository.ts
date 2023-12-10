@@ -1,6 +1,7 @@
 import IUserRepository from '@interfaces/i-user-repository';
 
 import IUser from '../interfaces/i-user';
+import IBarber from '../interfaces/i-barber';
 
 import prisma from '@database/index';
 
@@ -12,8 +13,13 @@ export default class UserRepository implements IUserRepository {
     return await prisma.user.findUnique({ where: { id } });
   }
 
-  public async findByEmail(email: string): Promise<IUser | null> {
-    return await prisma.user.findUnique({ where: { email } });
+  public async findByEmail(
+    email: string,
+  ): Promise<(IUser & { barber: IBarber }) | null> {
+    return await prisma.user.findUnique({
+      where: { email },
+      include: { barber: true },
+    });
   }
 
   public async save(data: ICreateUserDTO): Promise<IUser> {

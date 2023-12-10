@@ -6,6 +6,7 @@ import IRefreshTokenProvider from '@domain/providers/models/i-refresh-token-prov
 import AppError from '@shared/app-error';
 
 import IUser from '@core/interfaces/i-user';
+import IBarber from '@core/interfaces/i-barber';
 import IRefreshToken from '@core/interfaces/i-refresh-token';
 
 interface IAuthenticateUserServiceRequest {
@@ -16,7 +17,6 @@ interface IAuthenticateUserServiceRequest {
 export default class AuthenticateUserService {
   constructor(
     private userRepository: IUserRepository,
-
     private hashAdapter: IHastAdapter,
     private tokenAdapter: ITokenAdapter,
     private refreshTokenProvider: IRefreshTokenProvider,
@@ -29,6 +29,7 @@ export default class AuthenticateUserService {
     user: IUser;
     token: string;
     refreshToken: IRefreshToken;
+    barber: IBarber;
   }> {
     const user = await this.userRepository.findByEmail(email);
 
@@ -53,8 +54,10 @@ export default class AuthenticateUserService {
       user.id,
     );
 
+    const barber = user.barber;
+
     delete user.password;
 
-    return { user, token, refreshToken };
+    return { user, token, refreshToken, barber };
   }
 }
